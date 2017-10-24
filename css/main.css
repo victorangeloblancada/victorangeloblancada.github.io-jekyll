@@ -19,9 +19,11 @@ a {
 a:hover {
     text-decoration: underline;
 }
+h1, h2{
+    font-family:'Oswald','Helvetica', 'Arial', 'Sans-Serif';
+}
 h1 {
     font-size: 3em;
-    font-family:'Oswald','Helvetica', 'Arial', 'Sans-Serif';
 }
 p {
     font-family:'EB Garamond', 'Garamond', 'Times', 'Times New Roman', 'Serif';
