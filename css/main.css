@@ -21,14 +21,15 @@ a:hover {
 }
 h1, h2{
     font-family:'Oswald','Helvetica', 'Arial', 'Sans-Serif';
+    font-weight: normal;
 }
 h1 {
     font-size: 3em;
 }
 p {
     font-family:'EB Garamond', 'Garamond', 'Times', 'Times New Roman', 'Serif';
-    font-size: 1.5em;
-    line-height: 1.4em;
+    font-size: 1.2em;
+    line-height: 1.3em;
     color: #333;
 }
 footer {
