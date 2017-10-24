@@ -12,16 +12,16 @@ It is no surprise, therefore, that the economy has turned to mathematics to make
 
 It has been said that there are three kinds of lies: lies, damned lies, and statistics. While a little extreme, there is some basis to this assertion. Too often, mathematics has been misused to promote one's agenda, obscure the truth, or outright spread lies. This is done on purpose by cherrypicking numbers that support one's claim, but the more common, and arguably more dangerous, case is when this is done unintentionally. Take, for example, the four datasets shown below:
 
-![alt text](https://github.com/naturalproblemsolver/naturalproblemsolver.github.io/blob/master/_images/anscombes_quartet.png "Anscombe's Quartet")
+![alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Anscombe%27s_quartet_3.svg/1280px-Anscombe%27s_quartet_3.svg.png "Anscombe's Quartet")
 
 The above datasets give almost exact values for:
-  *Mean of x: 9
-  *Sample variance of x: 11
-  *Mean of y: 7.5
-  *Sample variance of y: 4.125
-  *Correlation between x and y: 0.816
-  *Linear regression line: y = 3 + 0.5x
-  *Coefficient of determination of the linear regression: 0.67
+  * Mean of x: 9
+  * Sample variance of x: 11
+  * Mean of y: 7.5
+  * Sample variance of y: 4.125
+  * Correlation between x and y: 0.816
+  * Linear regression line: y = 3 + 0.5x
+  * Coefficient of determination of the linear regression: 0.67
 
 These four datasets were constructed by the statistician Francis Anscombe to demonstrate the effect of outliers on statistical properties. While these datasets are purely academic, this is representative of a deeper problem with blind trust in descriptive statistics without a solid background in the underlying numerical theory. In our example, the data was for illustrative purposes only, but imagine what would happen if the charts above were the results of a medical study on the safety of a new drug or an economic report meant to guide national fiscal policy. 
 
