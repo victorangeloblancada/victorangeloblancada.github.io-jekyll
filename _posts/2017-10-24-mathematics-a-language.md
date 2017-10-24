@@ -4,7 +4,7 @@ title: "Mathematics, a Language"
 date: 2017-10-24
 ---
 
-The philosopher Ludwig Wittgenstein once said, "The limits of my language means the limits of my world." As explored by in George Orwell's dystopian novel **Nineteen Eighty-Four** through the constructed language Newspeak, language not only empowers us to communicate ideas but can also be used to constrain thought. To think and reason is to debate with oneself and how else does one debate ideas but through language? Language is more than communication, it is how we encode, store, and process information. Language is how we think.
+The philosopher Ludwig Wittgenstein once said, "The limits of my language means the limits of my world." As explored by in George Orwell's dystopian novel *Nineteen Eighty-Four* through the constructed language Newspeak, language not only empowers us to communicate ideas but can also be used to constrain thought. To think and reason is to debate with oneself and how else does one debate ideas but through language? Language is more than communication, it is how we encode, store, and process information. Language is how we think.
 
 Mathematics has been called the language of science. The empiricism of natural philosophy calls for a language that is simultaneously concise and unambiguous, and mathematics, with its reducible equations and formal proofs, is well-suited to the task. The properties of mathematics have allowed scientists such as Albert Einstein to predict natural phenomenon well before the technology to conduct experiments to verify these predictions were even invented. This prompted Einstein to ask, "How can it be that mathematics, being after all a product of human thought which is independent of experience, is so admirably appropriate to the objects of reality?"
 
@@ -12,7 +12,7 @@ It is no surprise, therefore, that the economy has turned to mathematics to make
 
 It has been said that there are three kinds of lies: lies, damned lies, and statistics. While a little extreme, there is some basis to this assertion. Too often, mathematics has been misused to promote one's agenda, obscure the truth, or outright spread lies. This is done on purpose by cherrypicking numbers that support one's claim, but the more common, and arguably more dangerous, case is when this is done unintentionally. Take, for example, the four datasets shown below:
 
-![alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Anscombe%27s_quartet_3.svg/1280px-Anscombe%27s_quartet_3.svg.png "Anscombe's Quartet")
+![alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Anscombe%27s_quartet_3.svg/1280px-Anscombe%27s_quartet_3.svg.png=600 "Anscombe's Quartet")
 
 The above datasets give almost exact values for:
   * Mean of x: 9
