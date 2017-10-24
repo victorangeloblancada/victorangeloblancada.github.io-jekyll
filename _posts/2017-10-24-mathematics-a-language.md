@@ -12,7 +12,7 @@ It is no surprise, therefore, that the economy has turned to mathematics to make
 
 It has been said that there are three kinds of lies: lies, damned lies, and statistics. While a little extreme, there is some basis to this assertion. Too often, mathematics has been misused to promote one's agenda, obscure the truth, or outright spread lies. This is done on purpose by cherrypicking numbers that support one's claim, but the more common, and arguably more dangerous, case is when this is done unintentionally. Take, for example, the four datasets shown below:
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Anscombe%27s_quartet_3.svg/1280px-Anscombe%27s_quartet_3.svg.png" alt="Anscombe's Quartet" style="width: 600px;"/>
+![Anscombe's Quartet](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Anscombe%27s_quartet_3.svg/1280px-Anscombe%27s_quartet_3.svg.png){:width="600px"}
 
 The above datasets give almost exact values for:
   * Mean of x: 9
