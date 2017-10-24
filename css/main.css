@@ -26,7 +26,7 @@ h1, h2, h3 {
 h1 {
     font-size: 3em;
 }
-p, ul, ol {
+p, li {
     font-family:'EB Garamond', 'Garamond', 'Times', 'Times New Roman', 'Serif';
     font-size: 1.2em;
     line-height: 1.3em;
