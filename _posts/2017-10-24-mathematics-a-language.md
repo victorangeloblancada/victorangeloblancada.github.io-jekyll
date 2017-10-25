@@ -38,4 +38,4 @@ The short term solution for most organizations would be to hire a data scientist
 
 A more forward-thinking solution would be to increase data literacy within the organization. This approach requires the expertise of a good data scientist even more - the best organizations deserve to learn from the best - but empowers the entire organization. To succeed in creating a data-literate organization, data must be placed front and center with experts given authority to implement positive change within the company. Otherwise, an organization runs the risk of grossly misunderstanding the new mathematical language of business and those mistakes can be costly.
 
-*Victor Blancada is a data scientist. Visit his LinkedIn page [here](https://www.linkedin.com/in/geloblancada/)* 
+*Victor Blancada is a data scientist. Visit his LinkedIn page [here](https://www.linkedin.com/in/geloblancada/).* 
