@@ -47,6 +47,6 @@ ul.posts li {
     list-style: none;
 }
 
-table {
+td, tr {
     font-family:'Oswald','Helvetica', 'Arial', 'Sans-Serif';
 }
