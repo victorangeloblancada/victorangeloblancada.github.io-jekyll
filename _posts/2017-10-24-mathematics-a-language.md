@@ -6,6 +6,8 @@ date: 2017-10-24
 
 It was the philosopher Ludwig Wittgenstein who said, "The limits of my language means the limits of my world." As explored by in George Orwell's dystopian novel *Nineteen Eighty-Four* through the constructed language Newspeak, language not only empowers us to communicate ideas but can also be used to constrain thought. To think and reason is to debate with oneself and how else does one debate ideas but through language? Language is more than communication, it is how we encode, store, and process information. Language is how we think.
 
+> Language is more than communication, it is how we encode, store, and process information.
+
 Mathematics has been called the language of science. The empiricism of natural philosophy calls for a language that is simultaneously concise and unambiguous, and mathematics, with its reducible equations and formal proofs, is well-suited to the task. The properties of mathematics have allowed scientists such as the famous Albert Einstein to predict natural phenomenon well before the technology to conduct experiments to verify these predictions were even invented. This once prompted Einstein to ask, "How can it be that mathematics, being after all a product of human thought which is independent of experience, is so admirably appropriate to the objects of reality?"
 
 It is no surprise, therefore, that the economy has turned to mathematics to make sense of the deluge of data that has resulted from the dawn of the information age. Mathematics provides an unbiased way of representing reality. By applying mathematical thinking to real-life problems, complex cause and effect relationships in the real world can be modeled in simpler yet equavalent terms. This makes the solution easy to arrive at, if not wholly obvious. That is the theory, at least.
@@ -31,6 +33,8 @@ Not only do the four distinctly different datasets share the almost the same cor
 | Coefficient of determination of the linear regression | 0.67           |
 
 These four datasets were constructed by the statistician Francis Anscombe to demonstrate the effect of outliers on statistical properties. While these datasets are purely academic, this is representative of a deeper problem with blind trust in descriptive statistics without a solid background in the underlying numerical theory. In our example, the data was for illustrative purposes only, but imagine what would happen if the data in the charts above were the results of a medical study on the safety of a new drug or an economic report meant to guide national fiscal policy. 
+
+> A true thing, poorly expressed, is a lie.
 
 Stephen Fry once said, "A true thing, poorly expressed, is a lie." Mathematics is a language, but like all languages, it rests on us to master the language to avoid making mistakes, because with mathematics, mistakes rarely stay on a spreadsheet but instead form the basis for decisions that affect us all. 
 
