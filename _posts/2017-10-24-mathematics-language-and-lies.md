@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Mathematics, a Language"
+title: "Mathematics, Language, and Lies"
 date: 2017-10-24
 ---
 
