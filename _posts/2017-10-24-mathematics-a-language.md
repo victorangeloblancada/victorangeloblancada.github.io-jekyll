@@ -20,6 +20,7 @@ Now, try to solve for the correlation between x and y for each dataset. What do 
 
 Not only do the four distinctly different datasets share the almost the same correlations and means of x and y, but the table below shows that even the linear regression equation that estimates the relationship between x and y are also very similar across all four datasets: 
 
+<p align='center'>
 | Statistic                                             | Value (Similar)|
 |:-----------------------------------------------------:|:--------------:|
 | Mean of x                                             | 9              |
@@ -29,6 +30,7 @@ Not only do the four distinctly different datasets share the almost the same cor
 | Correlation between x and y                           | 0.816          |
 | Linear regression line                                | y = 3 + 0.5x   |
 | Coefficient of determination of the linear regression | 0.67           |
+</p>
 
 These four datasets were constructed by the statistician Francis Anscombe to demonstrate the effect of outliers on statistical properties. While these datasets are purely academic, this is representative of a deeper problem with blind trust in descriptive statistics without a solid background in the underlying numerical theory. In our example, the data was for illustrative purposes only, but imagine what would happen if the data in the charts above were the results of a medical study on the safety of a new drug or an economic report meant to guide national fiscal policy. 
 
