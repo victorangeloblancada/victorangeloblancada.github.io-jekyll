@@ -18,6 +18,7 @@ a {
 }
 a:hover {
     text-decoration: underline;
+    color: #333;
 }
 h1, h2, h3 {
     font-family:'Oswald','Helvetica', 'Arial', 'Sans-Serif';
@@ -27,6 +28,10 @@ h1 {
     font-size: 3em;
 }
 h2 {
+    font-size: 2.75em;
+    color: #f2f2f2;
+}
+h3 {
     font-size: 2.5em;
     color: #999;
 }
@@ -52,6 +57,7 @@ ul.posts li {
 table {
     font-family:'Oswald','Helvetica', 'Arial', 'Sans-Serif';
     margin: 0 auto;
+    border-collapse: collapse;
 }
 
 th {
