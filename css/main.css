@@ -23,6 +23,13 @@ h1, h2, h3 {
     font-family:'Oswald','Helvetica', 'Arial', 'Sans-Serif';
     font-weight: normal;
 }
+h1 {
+    font-size: 3em;
+}
+h2 {
+    font-size: 2.5em;
+    color: #999;
+}
 p, li {
     font-family:'EB Garamond', 'Garamond', 'Times', 'Times New Roman', 'Serif';
     line-height: 1.25em;
