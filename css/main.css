@@ -65,3 +65,10 @@ img {
     margin: auto;
     width: 60%;
 }
+
+
+blockquote {
+    font-style: italic;
+    font-size: 3em;
+    color: #999;
+}
