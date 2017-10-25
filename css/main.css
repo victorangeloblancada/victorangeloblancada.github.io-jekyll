@@ -68,12 +68,13 @@ img {
 
 
 blockquote {
-    font-family:'Oswald','Helvetica', 'Arial', 'Sans-Serif';
     font-style: italic;
     font-size: 1.4em;
-    border-left: 3px solid #CCC;
+    border-top: 3px solid #CCC;
+    border-bottom: 3px solid #CCC;
 }
 
 blockquote p {
+    font-family:'Oswald','Helvetica', 'Arial', 'Sans-Serif';
     color: #999;
 }
