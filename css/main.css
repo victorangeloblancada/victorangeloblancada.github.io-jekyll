@@ -28,8 +28,8 @@ h1 {
 }
 p, li {
     font-family:'EB Garamond', 'Garamond', 'Times', 'Times New Roman', 'Serif';
-    font-size: 1.2em;
-    line-height: 1.3em;
+    font-size: 1.1em;
+    line-height: 1.25em;
     color: #333;
 }
 footer {
@@ -68,9 +68,10 @@ img {
 
 
 blockquote {
+    font-family:'Oswald','Helvetica', 'Arial', 'Sans-Serif';
     font-style: italic;
-    font-size: 1.5em;
-    border-left: 3px solid #ccc;
+    font-size: 1.4em;
+    border-left: 3px solid #CCC;
 }
 
 blockquote p {
