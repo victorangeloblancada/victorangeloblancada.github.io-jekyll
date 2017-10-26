@@ -12,7 +12,7 @@ Scientists and mathematicians alike share this pursuit of simplicity without ove
 
 A prime example of mathematical elegance is Euler's identity:
 
-$$ e^{i\pi} = -1 $$
+$$e^{i\pi} = -1$$
 
 The five constants are zero, one, pi, Euler's number, and the imaginary unit. These are all numbers that feature in countless other formulas that underpin entire fields of science and mathematics, and combining all five in such a short and simple equation reveals deep relationships between seemingly disparate fields. Euler's identity demonstrates that an idea doesn't have to be complicated to be meaningful, and yet to arrive at such a powerful insight requires sophisticated knowledge of mathematics spanning across several disciplines. It is through this sophistication we glean simplicity from complexity.
 
