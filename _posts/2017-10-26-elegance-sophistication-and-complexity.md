@@ -4,6 +4,10 @@ title: "Elegance, Sophistication, and Complexity"
 date: 2017-10-26
 ---
 
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
 The saying, "Everything should be made as simple as possible, but no simpler," is widely attributed to Albert Einstein, yet there is no evidence that he actually said this, or at least that he used those specific words. Scholars hypothesize that this misquotation stemmed from a lecture Einstein delivered at Oxford where he actually said, "It can scarcely be denied that the supreme goal of all theory is to make the irreducible basic elements as simple and as few as possible without having to surrender the adequate representation of a single datum of experience." Apparently, Einstein's fans took his words' meaning to heart, if not the words themselves.
 
 Lexical minutiae aside, one cannot deny the twin perils of unnecessary complexity and oversimplification. The world is teeming with people who either obscure bad reasoning behind a veil of complexity or arrive at skewed conclusions via a grossly oversimplified view of reality. Like most things, information complexity nicely obeys the Aristotelian concept of the golden mean - any deficiency and any excess in the delivery of the truth is tantamount to a lie.
