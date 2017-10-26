@@ -77,8 +77,8 @@ div.post table {
 div.post img {
     display: block;
     margin: auto;
+    width: 100%;
 }
-
 
 blockquote {
     font-style: italic;
