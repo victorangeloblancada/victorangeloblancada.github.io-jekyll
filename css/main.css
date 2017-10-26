@@ -20,7 +20,7 @@ a:hover {
     text-decoration: underline;
     color: #333;
 }
-h1, h2, h3 {
+h1, h2, h3, h4, h5, h6 {
     font-family:'Oswald','Helvetica', 'Arial', 'Sans-Serif';
     font-weight: normal;
 }
@@ -70,11 +70,11 @@ tr:nth-child(even) {
     background-color: #f2f2f2
 }
 
-div.posts table {
+div.post table {
     margin: 0 auto;
 }
 
-div.posts img {
+div.post img {
     display: block;
     margin: auto;
     width: 60%;
