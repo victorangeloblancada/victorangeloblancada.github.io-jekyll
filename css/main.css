@@ -35,10 +35,12 @@ h3 {
     font-size: 2.5em;
     color: #999;
 }
-p, li {
+p {
     font-family:'EB Garamond', 'Garamond', 'Times', 'Times New Roman', 'Serif';
     line-height: 1.25em;
     color: #333;
+    text-align: justify;
+    text-justify: inter-word;
 }
 footer {
     border-top: 1px solid #d5d5d5;
@@ -51,6 +53,7 @@ ul.posts {
 }
 
 ul.posts li {
+    font-family:'EB Garamond', 'Garamond', 'Times', 'Times New Roman', 'Serif';
     list-style: none;
 }
 
@@ -68,7 +71,7 @@ tr:nth-child(even) {
     background-color: #f2f2f2
 }
 
-img {
+img.posts {
     display: block;
     margin: auto;
     width: 60%;
