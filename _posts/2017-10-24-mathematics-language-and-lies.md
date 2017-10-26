@@ -14,7 +14,7 @@ It is no surprise, therefore, that the economy has turned to mathematics to make
 
 It has been said that there are three kinds of lies: lies, damned lies, and statistics. While a little extreme, there is some basis to this assertion. Too often, mathematics has been misused to promote one's agenda, obscure the truth, or spread outright lies. This is done on purpose by cherrypicking numbers that support one's claim, but the more common, and arguably more dangerous, case is when this is done unintentionally. Take, for example, the four datasets shown below:
 
-![Anscombe's Quartet](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Anscombe%27s_quartet_3.svg/1280px-Anscombe%27s_quartet_3.svg.png){:width="600px"}
+![Anscombe's Quartet](https://raw.githubusercontent.com/naturalproblemsolver/naturalproblemsolver.github.io/master/_images/anscombes_quartet.png){:width="600px"}
 
 At this point, I want to introduce the concept of correlation. The correlation is a measure of mutual interdependence of factors. A correlation coefficient, the computation of which is detailed [here](http://www.stat.yale.edu/Courses/1997-98/101/correl.htm), gives a percentage score of this interdependence where a correlation coefficient of 100% implies that all changes in x coincide with changes in y, and vice versa. If this looks complicated, novices can easily compute the correlation coefficient in Excel, detailed [here](https://support.office.com/en-us/article/CORREL-function-995dcef7-0c0a-4bed-a3fb-239d7b68ca92). All good?
 
