@@ -1,52 +1,26 @@
 <html>
+    <head>
+        <title>Test</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
     <body>
         <p>Click the button to get your coordinates.</p>
         <button onclick="getLocation()">Try It</button>
         <p id="demo"></p>
         <script>
-            var x = document.getElementById("demo");
-            function getLocation() {
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(showPosition);
-                } else { 
-                    x.innerHTML = "Geolocation is not supported by this browser.";
-                }
-            }
-            function showPosition(position) {
-                alert('Button Clicked!');
-                x.innerHTML = 'Text changed';
-                var geocoder = new google.maps.Geocoder();
-                geocoder.geocode({'latLng': position}, function(results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        if (results[0]) {
-                            var loc = getCountry(results);
-                        }
-                    }
-                });
-                x.innerHTML = x.innerHTML + loc;
-                //x.innerHTML = "Latitude: " + position.coords.latitude + 
-                //"<br>Longitude: " + position.coords.longitude;
-            }
-            function getCountry(results){
-                for (var i = 0; i < results[0].address_components.length; i++){
-                    var shortname = results[0].address_components[i].short_name;
-                    var longname = results[0].address_components[i].long_name;
-                    var type = results[0].address_components[i].types;
-                    if (type.indexOf("country") != -1){
-                        if (!isNullOrWhitespace(shortname)){
-                            return shortname;
-                        } else {
-                        return longname;
-                        }
-                    }
-                }
-            }
-            function isNullOrWhitespace(text) {
-                if (text == null) {
-                    return true;
-                }
-                return text.replace(/\s/gi, '').length < 1;
-            }
+            var requestUrl = "http://ip-api.com/json";
+			$.ajax({
+			  url: requestUrl,
+			  type: 'GET',
+			  success: function(json)
+			  {
+				alert("My country is: " + json.country);
+			  },
+			  error: function(err)
+			  {
+				alert("Request failed, error= " + err);
+			  }
+			});
         </script>
     </body>
 </html>
