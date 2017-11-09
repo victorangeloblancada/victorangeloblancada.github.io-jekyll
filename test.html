@@ -16,7 +16,7 @@
                 alert('Button Clicked!');
                 x.innerHTML = 'Text changed';
                 var geocoder = new google.maps.Geocoder();
-                geocoder.geocode({'latLng': position.coords}, function(results, status) {
+                geocoder.geocode({'latLng': position}, function(results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         if (results[0]) {
                             var loc = getCountry(results);
