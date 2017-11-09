@@ -1,6 +1,10 @@
 <html>
 	<head>
 		<title></title>
+	</head>
+	<body>
+		<button onclick='generateRect()'>Click!</button>
+		<svg id='mainSVG' width=500 height=500></svg>
 		<script>
 			var editedSVG=document.getElementById('mainSVG');
 			function generateRect(){
@@ -8,9 +12,5 @@
 				editedSVG.innerHTML=editedSVG.innerHTML+"<rect width="+(Math.random()*500)+" height="+(Math.random()*500)+" style='fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)'/>"
 			}
 		</script>
-	</head>
-	<body>
-		<button onclick='generateRect()'>Click!</button>
-		<svg id='mainSVG' width=500 height=500></svg>
 	</body>
 </html>
