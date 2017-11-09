@@ -1,26 +1,15 @@
 <html>
-    <head>
-        <title>Test</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    </head>
-    <body>
-        <p>Click the button to get your coordinates.</p>
-        <button onclick="getLocation()">Try It</button>
-        <p id="demo"></p>
-        <script>
-            var requestUrl = "http://ip-api.com/json";
-			$.ajax({
-			  url: requestUrl,
-			  type: 'GET',
-			  success: function(json)
-			  {
-				alert("My country is: " + json.country);
-			  },
-			  error: function(err)
-			  {
-				alert("Request failed, error= " + err);
-			  }
-			});
-        </script>
-    </body>
+	<head>
+		<title></title>
+		<script>
+			var editedSVG=document.getElementById('mainSVG');
+			function generateRect(){
+				editedSVG.innerHTML=editedSVG.innerHTML+"<rect width="+(Math.random()*500)+" height="+(Math.random()*500)+" style='fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)'/>"
+			}
+		</script>
+	</head>
+	<body>
+		<button onclick='generateRect()'></button>
+		<svg id='mainSVG' width=500 height=500></svg>
+	</body>
 </html>
