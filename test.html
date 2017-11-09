@@ -13,6 +13,8 @@
                 }
             }
             function showPosition(position) {
+                alert('Button Clicked!');
+                x.innerHTML = 'Text changed';
                 var geocoder = new google.maps.Geocoder();
                 geocoder.geocode({'latLng': position.coords}, function(results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
@@ -21,8 +23,6 @@
                         }
                     }
                 });
-                alert('Button Clicked!');
-                x.innerHTML = 'Text changed';
                 x.innerHTML = x.innerHTML + loc;
                 //x.innerHTML = "Latitude: " + position.coords.latitude + 
                 //"<br>Longitude: " + position.coords.longitude;
