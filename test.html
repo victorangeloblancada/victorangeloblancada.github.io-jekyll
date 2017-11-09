@@ -8,7 +8,7 @@
 		<script>
 			var editedSVG=document.getElementById('mainSVG');
 			function generateRect(){
-				alert('Clicked!')
+				alert(editedSVG.innerHTML)
 				editedSVG.innerHTML=editedSVG.innerHTML+"<rect width="+(Math.random()*500)+" height="+(Math.random()*500)+" style='fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)'/>"
 			}
 		</script>
