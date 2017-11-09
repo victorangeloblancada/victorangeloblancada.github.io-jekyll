@@ -1,5 +1,11 @@
 <html>
   <head>
+    <title>Get Location</title>
+  </head>
+  <body>
+    <h1>Test</h1>
+    <p id="demo"></p>
+    <button onclick="showPosition()">Get Location</button>
     <script>
       var x = document.getElementById("demo");
       function getLocation() {
@@ -13,10 +19,5 @@
         x.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude; 
       }
     </script>
-  </head>
-  <body>
-    <h1>Test</h1>
-    <div id="demo"></div>
-    <button onclick="showPosition()">Get Location</button>
   </body>
 </html>
