@@ -2,7 +2,45 @@
 layout: default
 title: Natural Problem Solver
 ---
+
 <div class="blurb">
 	<h1>Victor Blancada</h1>
 	<p>Management consultant. Data scientist. Developer.</p>
-</div><!-- /.blurb -->
+</div>
+
+<p>Reach out on <a href="https://www.linkedin.com/in/geloblancada/">LinkedIn</a> or via <a href="mailto:naturalproblemsolver@gmail.com">Email</a>.</p>
+
+<h3 style="margin: 0; padding: 0; display: block;">Latest stories:</h3>
+
+<table>
+	<colgroup>
+		<col style="width: 33%" />
+		<col style="width: 33%" />
+		<col style="width: 33%" />
+	</colgroup>
+	<tr>
+		<td colspan=3>
+			<div class="stories">
+				{% for post in site.posts limit:1 %}
+					{% if post.featured-img %} 
+						<div style='height: 9em; background-image: url("{{post.featured-img}}"); background-position: center; background-repeat: no-repeat; background-size: cover;'>
+					{% endif %}
+						<h1><a class="invert_color" href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h1>
+					{% if post.featured-img %} 
+						</div>
+					{% endif %}
+					<p>{{ post.content | split:'<!--break-->'|first }}</p>   
+					{% if post.content contains '<!--break-->' %}
+						<p><a href="{{ post.url }}">read more</a></p>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</td>
+		<!--
+		<td>
+		
+		</td>
+		-->
+	</tr>
+</table>
+

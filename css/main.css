@@ -11,6 +11,13 @@ nav ul li, footer ul li {
     display: inline;
     margin-right: 20px;
 }
+.invert_color{
+	color:	#ffffff;
+	padding: 15px;
+}
+a.invert_color:hover{
+	color:	#ffffff;
+}
 a {
     text-decoration: none;
     color: #999;
@@ -60,57 +67,53 @@ p {
     text-align: justify;
     text-justify: inter-word;
 }
-/*
-header {
-    border-bottom: 1px solid #d5d5d5;
-    position:fixed;
+div.header_image {
+	height: 20vh;
+	width: 100%;
+	overflow: hidden;
 }
-*/
+
+div.header_image img{
+	max-height:auto; 
+	width:100%;
+}
+
 footer {
     border-top: 1px solid #d5d5d5;
     font-size: 0.8em;
 }
-
 ul.posts { 
     font-family:'EB Garamond', 'Garamond', 'Times', 'Times New Roman', 'Serif';
     margin: 20px auto 40px; 
 }
-
 ul.posts li {
     font-family:'EB Garamond', 'Garamond', 'Times', 'Times New Roman', 'Serif';
     list-style: none;
 }
-
 table {
-    font-family:'Oswald','Helvetica', 'Arial', 'Sans-Serif';
     border-collapse: collapse;
 }
-
-th {
+div.post th {
     background-color: #999
 }
-
-tr:nth-child(even) {
+div.post tr:nth-child(even) {
     background-color: #f2f2f2
 }
-
 div.post table {
+    font-family:'Oswald','Helvetica', 'Arial', 'Sans-Serif';
     margin: 0 auto;
 }
-
 div.post img {
     display: block;
     margin: auto;
-    width: 100%;
+    max-width: 100%;
 }
-
 blockquote {
     font-style: italic;
     font-size: 1.4em;
     border-top: 3px solid #CCC;
     border-bottom: 3px solid #CCC;
 }
-
 blockquote p {
     font-family:'Oswald','Helvetica', 'Arial', 'Sans-Serif';
     color: #999;

@@ -1,14 +1,13 @@
 ---
 layout: post
-title: "A Network Expansion Case Study"
+title: "A Network Expansion Strategy Case Study"
 date: 2017-11-16
+featured-img: https://www.technobuffalo.com/wp-content/uploads/2013/08/internet-usage.jpg
 ---
-
-## The Short
 
 In 2014, I was part of a six person team that developed a big data optimization to guide the $400MM USD fiber network infrastructure expansion project of a North American telecommunications company.
 
-## The Long
+<!--break-->
 
 The ubiquity and intangibility of the Internet makes it easy to forget that the information superhighway exists physically as a network of cables running beneath our cities and across oceans. This physical infrastructure is responsible for Internet access speed, with data sent over fiber optic cables being significantly faster than packets sent through the older (and currently more common) copper wires. The United States ranks behind countries such as South Korea because the American Internet infrastructure is still in the midst of transitioning to fiber Internet.
 
