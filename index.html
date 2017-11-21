@@ -1,46 +1,116 @@
 ---
 layout: default
-title: Natural Problem Solver
+title: Victor Angelo Blancada
 ---
-
-<div class="blurb">
-	<h1>Victor Blancada</h1>
-	<p>Management consultant. Data scientist. Developer.</p>
+<div class="screen">
+	<table align="center">
+		<tr>
+			<td></td>
+			<td rowspan=3><img src="https://raw.githubusercontent.com/naturalproblemsolver/naturalproblemsolver.github.io/master/_images/bracket.png" height=350></td>
+			<td><h1><a href="#DataScientist">Data Scientist</a></h1></td>
+		</tr>
+		
+		<tr>
+			<td><h1>Victor Angelo Blancada is a </h1></td>
+			<td><h1><a href="#StrategyConsultant">Strategy Consultant</a></h1></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><h1><a href="#Developer">Developer</a></h1></td>
+		</tr>
+		<tr>
+			<td colspan=3><h2>Do you want to collaborate with Victor? Reach out on <a href="https://www.linkedin.com/in/geloblancada/">LinkedIn</a> or via <a href="mailto:naturalproblemsolver@gmail.com">Email</a>.</h2></td>
+		</tr>
+	</table>
 </div>
 
-<p>Reach out on <a href="https://www.linkedin.com/in/geloblancada/">LinkedIn</a> or via <a href="mailto:naturalproblemsolver@gmail.com">Email</a>.</p>
-
-<h3 style="margin: 0; padding: 0; display: block;">Latest stories:</h3>
-
-<table>
-	<colgroup>
-		<col style="width: 33%" />
-		<col style="width: 33%" />
-		<col style="width: 33%" />
-	</colgroup>
-	<tr>
-		<td colspan=3>
-			<div class="stories">
-				{% for post in site.posts limit:1 %}
-					{% if post.featured-img %} 
-						<div style='height: 9em; background-image: url("{{post.featured-img}}"); background-position: center; background-repeat: no-repeat; background-size: cover;'>
-					{% endif %}
-						<h1><a class="invert_color" href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h1>
-					{% if post.featured-img %} 
-						</div>
-					{% endif %}
-					<p>{{ post.content | split:'<!--break-->'|first }}</p>   
-					{% if post.content contains '<!--break-->' %}
-						<p><a href="{{ post.url }}">read more</a></p>
-					{% endif %}
-				{% endfor %}
-			</div>
-		</td>
+<div id="DataScientist" class="screen_parallax" style='background-image: url("https://raw.githubusercontent.com/naturalproblemsolver/naturalproblemsolver.github.io/master/_images/DataScienceBG.jpg");'>
+	<div class="paper">
+		<h1>Data Scientist</h1>
 		<!--
-		<td>
-		
-		</td>
+		<p>We live in the golden age of data. It is estimated that 90% of all data in the world today was created in the last two years alone.</p>
+		<p>This simultaneously represents an opportunity and a threat.</p>
+		<p>There is a massive opportunity to leverage big data to improve decision making. As more data is collected on how organizations run their businesses and how their consumers behave, driving the bottom line can be reduced to an engineering problem, with mathematical models accurately predicting what the consequences of each decision will be and informing management of the optimal course of action.</p>
+		<p>With new data rapidly becoming available, it is easy to get lost in the numbers and mistake the forest for the trees. Without a data scientist to guide them, companies run the risk of either missing the obvious or coming up with misleading conclusions, both of which can be costly.</p>
 		-->
-	</tr>
-</table>
+		<p>Victor has a proven track record of applying predictive modeling and mathematical optimization concepts to come up with actionable solutions to real life problems, helping organizations take advantage of the opportunities opened up by the rise of the data age.</p>
+		<p>Victor's achievements include:</p>
+		<ul class="paragraph">
+			<li>Launching and managing the Asian analytics hub to handle the data management, statistical modeling, and mathematical optimization needs of a global media conglomerate across its agencies worldwide.</li>
+			<li>Guiding the $400MM USD network expansion of a regional North American telecommunications provider by running a Monte Carlo optimization which identified the optimal network layout that would maximize profits based on a customer lifetime value model.</li>
+			<li>Driving client sales lift of up to 13% by developing and executing automated media optimization algorithms.</li>
+			<li>Successfully predicting the winner of the 2016 Philippine presidential elections using an econometric model six months before the election.</li>
+			<li>Developing an automated flu tracker to guide the Australian marketing campaign schedule for a leading FMCG company's cough and flu medication.</li>
+		</ul>
+		<p>Reach out on <a href="https://www.linkedin.com/in/geloblancada/">LinkedIn</a> or via <a href="mailto:naturalproblemsolver@gmail.com">Email</a> to partner with Victor today.</p>
+	</div>
+</div>
 
+<div id="StrategyConsultant" class="screen_parallax" style='background-image: url("https://raw.githubusercontent.com/naturalproblemsolver/naturalproblemsolver.github.io/master/_images/ConsultingBG.jpg");'>
+	<div class="paper">
+		<h1>Strategy Consultant</h1>
+		<p>Victor has worked closely with C-level executives on strategy and business transformation projects.</p>
+		<p>Victor's achievements include:</p>
+		<ul class="paragraph">
+			<li>Guiding the $400MM USD network expansion of a regional North American telecommunications provider by running a Monte Carlo optimization which identified the optimal network layout that would maximize profits based on a customer lifetime value model.</li>
+			<li>Generating $9MM USD in cost savings for a US manufacturing company through on-site strategic sourcing and vendor contract renegotiation.</li>
+			<li>Driving client sales lift of up to 13% by developing and executing automated media optimization algorithms.</li>
+		</ul>
+		<p>Reach out on <a href="https://www.linkedin.com/in/geloblancada/">LinkedIn</a> or via <a href="mailto:naturalproblemsolver@gmail.com">Email</a> to partner with Victor today.</p>
+	</div>
+</div>
+
+<div id="Developer" class="screen_parallax" style='background-image: url("https://raw.githubusercontent.com/naturalproblemsolver/naturalproblemsolver.github.io/master/_images/DevelopmentBG.jpg");'>
+	<div class="paper">
+		<h1>Developer</h1>
+		<p>Victor is a full stack developer who has overseen projects to completion. He specializes in data science and machine learning using Python, R, and C but is also knowledgable in Java and web development. He is equally comfortable as an individual contributor or as a project manager.</p>
+		<p>Victor's achievements include:</p>
+		<ul class="paragraph">
+			<li>Reaching the national finals of the Trend Micro Big Data Programming competition by creating a Natural Language Processing bot that takes in text, summarizes the general ideas, and identifies logical and factual inconsistencies.</li>
+			<li>Developing an automated flu tracker to guide the Australian marketing campaign schedule for a leading FMCG company's cough and flu medication.</li>
+			<li>Driving client sales lift of up to 13% by developing and executing automated media optimization algorithms.</li>
+		</ul>
+		<p>Reach out on <a href="https://www.linkedin.com/in/geloblancada/">LinkedIn</a> or via <a href="mailto:naturalproblemsolver@gmail.com">Email</a> to partner with Victor today.</p>
+	</div>
+</div>
+
+<div class="screen">
+	<h1>Victor Blancada</h1>
+	<p>Data scientist. Strategy consultant. Developer.</p>
+
+	<p>Reach out on <a href="https://www.linkedin.com/in/geloblancada/">LinkedIn</a> or via <a href="mailto:naturalproblemsolver@gmail.com">Email</a>.</p>
+
+	<h3 style="margin: 0; padding: 0; display: block;">Latest stories:</h3>
+
+	<table>
+		<colgroup>
+			<col style="width: 33%" />
+			<col style="width: 33%" />
+			<col style="width: 33%" />
+		</colgroup>
+		<tr>
+			<td colspan=3>
+				<div class="stories">
+					{% for post in site.posts limit:1 %}
+						{% if post.featured-img %} 
+							<div style='height: 9em; background-image: url("{{post.featured-img}}"); background-position: center; background-repeat: no-repeat; background-size: cover;'>
+						{% endif %}
+							<h1><a class="invert_color" href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h1>
+						{% if post.featured-img %} 
+							</div>
+						{% endif %}
+						<p>{{ post.content | split:'<!--break-->'|first }}</p>   
+						{% if post.content contains '<!--break-->' %}
+							<p><a href="{{ post.url }}">read more</a></p>
+						{% endif %}
+					{% endfor %}
+				</div>
+			</td>
+			<!--
+			<td>
+			
+			</td>
+			-->
+		</tr>
+	</table>
+</div>

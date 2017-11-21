@@ -3,6 +3,7 @@ layout: post
 title: "A Network Expansion Strategy Case Study"
 date: 2017-11-16
 featured-img: https://www.technobuffalo.com/wp-content/uploads/2013/08/internet-usage.jpg
+category: portfolio
 ---
 
 In 2014, I was part of a six person team that developed a big data optimization to guide the $400MM USD fiber network infrastructure expansion project of a North American telecommunications company.

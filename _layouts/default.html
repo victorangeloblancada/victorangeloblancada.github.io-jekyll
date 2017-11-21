@@ -6,33 +6,51 @@
 			<!-- link to main stylesheet -->
 			<link href="https://fonts.googleapis.com/css?family=EB+Garamond|Oswald:200,400" rel="stylesheet">
 			<link rel="stylesheet" type="text/css" href="/css/main.css">
-
 		</head>
 		<body>
-			<nav>
-				<ul>
-					<li><a href="/">Home</a></li>
-					<li><a href="/about">About</a></li>
-					<li><a href="/cv">CV</a></li>
-					<!--
-					<li><a href="/portfolio">Portfolio</a></li>
-					-->
-					<li><a href="/blog">Blog</a></li>
-				</ul>
-			</nav>
-			<div class="container">
-			
-			{{ content }}
-			
-			</div><!-- /.container -->
-			<footer>
-	    		<ul>
-	        		<li><a href="mailto:naturalproblemsolver@gmail.com">Email</a></li>
-	        		<li><a href="https://www.linkedin.com/in/geloblancada/">LinkedIn</a></li>
-	        		<li><a href="https://github.com/naturalproblemsolver">GitHub</a></li>
-				</ul>
-				<p>Copyright © 2017 Victor Blancada. All Rights Reserved.</p>
-			</footer>
+			<script>
+				function resizeHeaderOnScroll() {
+				  const distanceY = window.pageYOffset || document.documentElement.scrollTop,
+				  shrinkOn = 100,
+				  headerEl = document.getElementById('js-header');
+				  
+				  if (distanceY > shrinkOn) {
+					headerEl.classList.add("smaller");
+				  } else {
+					headerEl.classList.remove("smaller");
+				  }
+				}
+				window.addEventListener('scroll', resizeHeaderOnScroll);
+			</script>
+			<div id="container">
+				<header id="js-header">
+					<h1 id="logo"><img src="https://raw.githubusercontent.com/naturalproblemsolver/naturalproblemsolver.github.io/master/_images/profile_pic.fw.png" style="height:1em">Victor Angelo Blancada</h1>
+					<nav>
+						<ul>
+							<li><a href="/">Home</a></li>
+							<li><a href="/about">About</a></li>
+							<li><a href="/cv">CV</a></li>
+							<!--
+							<li><a href="/portfolio">Portfolio</a></li>
+							-->
+							<li><a href="/blog">Blog</a></li>
+						</ul>
+					</nav>
+				</header>
+				<div id="body">
+				
+				{{ content }}
+				
+				</div><!-- /.container -->
+				<footer>
+					<ul>
+						<li><a href="mailto:naturalproblemsolver@gmail.com">Email</a></li>
+						<li><a href="https://www.linkedin.com/in/geloblancada/">LinkedIn</a></li>
+						<li><a href="https://github.com/naturalproblemsolver">GitHub</a></li>
+					</ul>
+					<p>Copyright © 2017 Victor Blancada. All Rights Reserved.</p>
+				</footer>
+			</div>
 			{% include analytics.html %}
 		</body>
 	</html>

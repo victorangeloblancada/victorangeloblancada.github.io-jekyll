@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="793.7007874015749" height="1122.5196850393702" xmlns="http://www.w3.org/2000/svg">
+ <title>Curly Brackets</title>
+
+ <g>
+  <title>Layer 1</title>
+  <g id="layer1">
+   <text font-size="757.6131" font-style="normal" font-weight="normal" fill="#000000" stroke-width="1px" font-family="Bitstream Vera Sans" text-anchor="start" y="631.9251" xml:space="preserve" x="69.487312" transform="translate(10, 4) scale(0.731372, 1.36729)" id="text1312">
+    <tspan y="613.64081" x="-4.346526" id="tspan1314">{</tspan>
+   </text>
+   <text font-size="757.61365" font-style="normal" font-weight="normal" fill="#000000" stroke-width="1px" font-family="Bitstream Vera Sans" text-anchor="start" y="631.28215" xml:space="preserve" x="-1092.168337" transform="translate(10, 4) scale(-0.731372, 1.36729)" id="text1316">
+    <tspan y="612.99786" x="-1018.3345" id="tspan1318">{</tspan>
+   </text>
+  </g>
+ </g>
+</svg>
