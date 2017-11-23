@@ -27,7 +27,7 @@ header {
 }
 div #body {
 	padding-top: 120px;
-	padding-bottom: 60px;
+	padding-bottom: 120px;
 }
 header.smaller {
 	top: -38px;
@@ -52,7 +52,7 @@ header.smaller h1#logo {
 }
 header nav {
 	margin: 10px;
-	font-size: 34px;
+	font-size: 30px;
 }
 footer {
 	margin: 0 auto;
@@ -60,9 +60,9 @@ footer {
 	width: 100%;
 	left: 0px;
 	bottom: 0px;
-	height: 60px;
+	height: 80px;
     border-top: 1px solid #d5d5d5;
-    font-size: 0.8em;
+	font-size: 15px;
 }
 
 div.screen {
@@ -91,7 +91,7 @@ nav ul, footer ul {
     list-style: none;
 }
 nav ul li, footer ul li {
-    display: inline;
+    display: inline-block;
     margin-right: 20px;
 }
 .invert_color{
@@ -149,6 +149,7 @@ p, ul.paragraph, ol.paragraph {
     color: #333;
     text-align: justify;
     text-justify: inter-word;
+	font-size: 2.5vh;
 }
 div.header_image {
 	height: 20vh;
@@ -162,10 +163,12 @@ div.header_image img{
 }
 ul.posts { 
     font-family:'EB Garamond', 'Garamond', 'Times', 'Times New Roman', 'Serif';
+	font-size: 2.5vh;
     margin: 20px auto 40px; 
 }
 ul.posts li {
     font-family:'EB Garamond', 'Garamond', 'Times', 'Times New Roman', 'Serif';
+	font-size: 2.5vh;
     list-style: none;
 }
 table {
