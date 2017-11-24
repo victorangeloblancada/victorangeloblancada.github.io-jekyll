@@ -78,6 +78,8 @@ div.screen_parallax {
 }
 
 div.paper {
+	max-height: 100vh;
+	overflow: scroll;
 	margin: 0 auto;
 	padding: 25px;
 	background-color: #ffffff;
