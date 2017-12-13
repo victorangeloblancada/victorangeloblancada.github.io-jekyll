@@ -6,7 +6,7 @@ featured-img: https://media.licdn.com/media/AAIABADGAAoAAQAAAAAAAA6gAAAAJDYzNmI2
 ---
 ## Have Tech Consumers Lost Their Power?
 
-*This post was written in response to Andrew Brown's well-written and well-received post entitled, ["Has the Tech World Lost its Mojo?"](https://www.linkedin.com/pulse/has-tech-world-lost-its-mojo-andrew-brown/?trk=eml-email_feed_ecosystem_digest_01-recommended_articles-16-Unknown&midToken=AQG-qRTgNVKohA&fromEmail=fromEmail&ut=2do6KCHMEGPU01). While the article was correct in pointing out that most consumer electronics nowadays are interchangeable in terms of features and specs, this is hardly a sign that the tech industry is stagnating.*
+*This post was written in response to Andrew Brown's well-written and well-received post entitled, ["Has the Tech World Lost its Mojo?"](https://www.linkedin.com/pulse/has-tech-world-lost-its-mojo-andrew-brown/?trk=eml-email_feed_ecosystem_digest_01-recommended_articles-16-Unknown&midToken=AQG-qRTgNVKohA&fromEmail=fromEmail&ut=2do6KCHMEGPU01).<!--break--> While the article was correct in pointing out that most consumer electronics nowadays are interchangeable in terms of features and specs, this is hardly a sign that the tech industry is stagnating.*
 
 ## Homogeneity Is a Sign of Competition
 
