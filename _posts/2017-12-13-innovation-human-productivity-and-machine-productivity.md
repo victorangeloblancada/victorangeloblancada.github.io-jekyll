@@ -1,16 +1,14 @@
 ---
 layout: post
-title: "Innovation, Human Productivity, and Machine Productivity"
+title: "Innovation, Human Productivity, & Machine Productivity"
 date: 2017-12-13
 featured-img: https://media.licdn.com/media/AAIABADGAAoAAQAAAAAAAA6gAAAAJDYzNmI2YzNkLTljN2QtNDNmNS1hNDBjLTljOTFkNGNiNmRiYw.png
 ---
-# Have Tech Consumers Lost Their Power?
+## Have Tech Consumers Lost Their Power?
 
-This post appeared originally on my website, victorangeloblancada.github.io.
+*This post was written in response to Andrew Brown's well-written and well-received post entitled, ["Has the Tech World Lost its Mojo?"](https://www.linkedin.com/pulse/has-tech-world-lost-its-mojo-andrew-brown/?trk=eml-email_feed_ecosystem_digest_01-recommended_articles-16-Unknown&midToken=AQG-qRTgNVKohA&fromEmail=fromEmail&ut=2do6KCHMEGPU01). While the article was correct in pointing out that most consumer electronics nowadays are interchangeable in terms of features and specs, this is hardly a sign that the tech industry is stagnating.*
 
-This post was written in response to Andrew Brown's well-written and well-received post entitled, "Has the Tech World Lost its Mojo?". While the article was correct in pointing out that most consumer electronics nowadays are interchangeable in terms of features and specs, this is hardly a sign that the tech industry is stagnating.
-
-# Homogeneity Is a Sign of Competition
+## Homogeneity Is a Sign of Competition
 
 Economic theory states that competition arises when more than one producer is trying to sell similar, almost interchangeable, products, thus leaving price as the only differentiator. This allows consumers to select products based on price, thereby giving an incentive for companies to optimize their production and bring prices down.
 
@@ -18,7 +16,7 @@ The Model T is well-remembered because of how affordable Henry Ford's assembly l
 
 Progress happens not when a new product hits the market but when products become exponentially cheaper. Having tech companies benchmark their products against each other is good news for the consumer as they are no longer forced to stay loyal to a single manufacturer. 
 
-# Why Are New Phones So Expensive?
+## Why Are New Phones So Expensive?
 
 If smartphones are homogenizing due to competition, why then have they become so expensive recently?
 
@@ -26,7 +24,7 @@ There are a number of factors, but let's start with the thing most people intera
 
 The other big reason why phones are so expensive are the consumers themselves. To call Apple a tech company is an oversimplification: Apple is more of a luxury lifestyle brand, so much so that a number of key Apple executives were poached from fashion brands including ex-Burberry CEO Angela Ahrendts who is now the SVP for Retail at Apple. Because Apple is seen as a luxury brand, people buy the iPhone as a status symbol, which means that iPhones are somewhat price inelastic, approaching the behavior of a Veblen good (a product whose demand is driven by people's desire to show off what the economist Thorstein Veblen described as "conspicuous consumption"). Meanwhile, other tech companies see themselves as Apple competitors and, as a result, they tend to price their flagship phones only slightly cheaper than the iPhone to maximize profits.
 
-# Smartphones: Going The Way of The Laptop and The Desktop Before It
+## Smartphones: Going The Way of The Laptop and The Desktop Before It
 
 Like Howard Riley said in his comment on the original article from Andrew Brown, the hardware of consumer electronics, specifically phones, is not a good measure of technological progress. 
 
@@ -34,7 +32,7 @@ Smartphones have, much like laptops before them, plateaued simply because the fu
 
 With such hardware requirements in place, the next stage of mobile computing is being fought over in the realm of software code. If you want to see truly cutting edge technology, look for augmented reality projects on GitHub and you will see loads of software being developed by research teams at Google, Amazon, and Facebook. 
 
-# Tech Nowadays Is About Selling an Ecosystem
+## Tech Nowadays Is About Selling an Ecosystem
 
 Going back to the iPhone, I would also argue that the true "game changer" for Apple was when they introduced the App Store. Up until then, most users were stuck with the features that their phones had when they were shipped - until Apple found a way for users to easily extend their phones' functionality with new apps while creating an entirely new industry of smartphone app development. The iPhone itself was not groundbreaking in a vacuum - what truly set it apart was the ability to tailor the experience on a user level so that no two iPhones are exactly alike after its users have begun setting it up by installing their choice of apps. 
 
@@ -48,7 +46,7 @@ On the other hand, Amazon's diversification into groceries and pharmacies is par
 
 For tech companies, a big positive effect of this focus on the ecosystem is that consumers are more loyal to the tech brands they initially chose. On the flipside, gaining new consumers is significantly harder: just ask any iPhone user who has spent a not insignificant amount on apps and in-app purchases. To gain new customers in this world of ecosystems, tech companies must continually introduce innovative features while making the transition as easy as possible for new users by incorporating as many aspects of their competitors' ecosystems into their own. This inevitably leads to competing ecosystems with very similar features, leading to a negation of the former as new unique features quickly become commonplace making some people complain that the tech world has "lost its mojo". Tech companies are just doing what all companies aim to do: turn a profit.
 
-# Users Are The Product
+## Users Are The Product
 
 To expect tech companies to bend to the will of a captured market is business naiveté. Tech companies do not exist to delight consumers with groundbreaking features, their purpose is to earn profits, no matter what lofty ideals their mission statement contains.
 
@@ -64,7 +62,7 @@ For Google and Amazon, a big part of why they offer all these additional service
 
 This makes comparing the Google Home and Amazon Echo to the Apple HomePod difficult - the former two are a means to an end for Google and Amazon while the latter is Apple's attempt to prevent user churn by replicating the convenience of a smart speaker for those in the Apple ecosystem. Not to diss on Apple, but this has been the case for a few years now, with facial recognition and wireless charging debuting on Google's Nexus phones two full years before Samsung phones and a whopping six years(!) before the iPhone X. Funnily enough, in the case of Google's Goggles feature, which gives Nexus (and later, Pixel) users contextual information based on camera images, Google saw it fit to relaunch the exact same feature they already had under the new name Google Lens, in time for Samsung's launch of their Bixby assistant which had similar capabilities.
 
-# Innovation, Human Productivity, and Machine Productivity
+## Innovation, Human Productivity, & Machine Productivity
 
 The original article argued that technological benchmarking across industry leaders has led to stagnation, contrasting today's devices with the "groundbreaking" iPhone which the author credits with an increase of human productivity. First of all, if getting a first-generation iPhone led to an increase of productivity that a person did not have with existing smartphones circa 2007 such as the BlackBerry and Microsoft phones which both had email and a working graphical browser, then that person is simply not doing productivity right. As I have stated earlier, the iPhone shipped with the exact same feature set as its competitors and, until the introduction of the App Store, did not have any advantages apart from snazzy marketing and claims of being user-friendly and having a "cool" UI that showcased the tech industry's "mojo". I, for one, did not look at a phone with a music player and think, "the world of technology appears brighter than ever!" But I must digress.
 
