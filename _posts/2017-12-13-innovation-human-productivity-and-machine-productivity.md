@@ -84,6 +84,6 @@ There is a reason why Elon Musk thinks that AI is such a big threat to humanity 
 
 Why then do Google and Amazon go out of their way to come up with products like the Pixel and the Echo? As I have addressed this is the previous section: the answer is data. Data to optimize their core businesses of advertising and e-commerce respectively, and data for machine learning to enhance productivity more than the Pixel and Echo can on their own.
 
->Data...when used for machine learning, will improve productivity and human prosperity more than the iPhone ever did back in 2007.
+> Data...when used for machine learning, will improve productivity and human prosperity more than the iPhone ever did back in 2007.
 
 While looking at smartphones and smart speakers alone make it seem like the tech industry has stagnated and "lost its mojo", one needs to look at why Google and Amazon released these devices in the first place: to collect data. Data, that, in the long run, when used for machine learning, will improve productivity and human prosperity more than the iPhone ever did back in 2007.
