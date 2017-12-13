@@ -80,6 +80,7 @@ Indeed, if one follows the machine learning community, one can see that the tech
 1. Google created an AI that taught itself to beat the top ranked Go player by playing against itself thousands of times;
 2. Stanford researchers have developed an AI that can make more accurate diagnoses from X-rays than practicing radiologists; and 
 3. Google's AutoML project succeeded in creating an AI that can create other AIs. 
+
 There is a reason why Elon Musk thinks that AI is such a big threat to humanity - it is just that powerful. (For a deeper discussion on how to implement machine learning for your business, feel free to reach out to me on [LinkedIn](https://www.linkedin.com/in/geloblancada/).) 
 
 Why then do Google and Amazon go out of their way to come up with products like the Pixel and the Echo? As I have addressed this is the previous section: the answer is data. Data to optimize their core businesses of advertising and e-commerce respectively, and data for machine learning to enhance productivity more than the Pixel and Echo can on their own.
