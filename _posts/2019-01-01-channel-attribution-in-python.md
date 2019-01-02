@@ -22,5 +22,7 @@ Data-driven attribution is calculated by measuring the removal effect. The remov
 The full notebook with Python code may be found on Colab [here](https://colab.research.google.com/drive/1m_SMStJUN0Q08eaNhIa0R2dkQS6HAewT).
 
 Sources:
+
 Anderl, E., Becker, I., Wangenheim, F. V., & Schumann, J. H. (2014). Mapping the customer journey: A graph-based framework for online attribution modeling. Available at SSRN: http://ssrn.com/abstract=2343077 or http://dx.doi.org/10.2139/ssrn.2343077
+
 Bryl, S. (2018). Marketing Multi-Channel Attribution model with R (part 1: Markov chains concept) - AnalyzeCore by Sergey Bryl' - data is beautiful, data is a story. [online] AnalyzeCore by Sergey Bryl' - data is beautiful, data is a story. Available at: https://analyzecore.com/2016/08/03/attribution-model-r-part-1/ [Accessed 23 Oct. 2018].
