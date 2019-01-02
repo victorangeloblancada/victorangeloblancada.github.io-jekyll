@@ -7,6 +7,8 @@ featured-img: https://cdn-image.travelandleisure.com/sites/default/files/styles/
 
 Attribution refers to the set of rules that determine which ad gets credit for a sale or a conversion. The rise of the Internet allowed marketers to track user interactions throughout the entire customer journey but most advertisers still attribute 100% of conversions to the last touch channel or the last ad that the user clicked before converting.
 
+<!--break-->
+
 To more accurately depict the contribution of each touchpoint to the conversion, a more mathematically robust method of attribution must be applied. One way is to use a Markov chain model to represent the possible customer journeys. Markov chains show the possible touchpoint transitions as probabilities based on the current touchpoint. Markov chains also make it easier to compute the probability of conversion from the start of the journey by summing the probabilities of conversion across all possible paths.
 
 Sergey Bril discussed how to run data-driven attribution analysis using R on his website (https://analyzecore.com/2016/08/03/attribution-model-r-part-1/), but this article aims to implement data-driven attribution in Python without relying on specialized libraries. For illustrative purposes we will reuse the sample problem presented in Sergey Bril's original article. The sample Markov chain representing possible customer journeys is shown below:
