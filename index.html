@@ -116,7 +116,7 @@ title: Victor Angelo Blancada
 		<tr>
 			<td colspan=3>
 				<div class="stories">
-					{% for post in site.posts limit:1 %}
+					{% for post in site.categories['portfolio'] limit:1 %}
 						{% if post.featured-img %} 
 							<div style='height: 9em; background-image: url("{{post.featured-img}}"); background-position: center; background-repeat: no-repeat; background-size: cover;'>
 						{% endif %}
