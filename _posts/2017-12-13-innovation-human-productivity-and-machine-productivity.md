@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Innovation, Human Productivity, & Machine Productivity"
+featured-img: https://cdn.maximumyield.com/images/uploads/fiber-lighting-flora-plant-grass.jpg
 date: 2017-12-13
 ---
 
