@@ -2,7 +2,7 @@
 layout: post
 title: "A Network Expansion Strategy Case Study"
 date: 2017-11-16
-featured-img: https://cdn.maximumyield.com/images/uploads/fiber-lighting-flora-plant-grass.jpg
+featured-img: https://cdn-images-1.medium.com/max/2600/1*YPk4N6ce8muZbHFc27Wwkw.jpeg
 category: portfolio
 ---
 
