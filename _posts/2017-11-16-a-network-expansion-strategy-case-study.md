@@ -2,7 +2,7 @@
 layout: post
 title: "A Network Expansion Strategy Case Study"
 date: 2017-11-16
-featured-img: https://www.technobuffalo.com/wp-content/uploads/2013/08/internet-usage.jpg
+featured-img: http://techrasa.com/wp-content/uploads/2017/04/High-Speed-Internet-and-Fiber-Optic-Networks-Around-Iran.jpg
 category: portfolio
 ---
 
