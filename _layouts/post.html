@@ -1,26 +1,54 @@
----
-layout: default
----
-<div class="post">
-<h1>{{ page.title }}</h1>
-<p class="meta">{{ page.date | date_to_string }}</p>
-</div>
-{% if page.featured-img %}
-<style>
-	.parallax {
-		/* The image used */
-		background-image: url("{{page.featured-img}}");
-		/* Set a specific height */
-		height: 65vh; 
-		/* Create the parallax scrolling effect */
-		background-attachment: fixed;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
-	}
-</style>
-<div class="parallax"></div>
-{% endif %}
-<div class="post">
-  {{ content }}
-</div>
+<!doctype html>
+<html>
+	<head>
+		{% include gtm_head.html %}
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{{ page.title }}</title>
+		{% seo %}
+		{% include styles.html %}
+	</head>
+	<body>
+		{% include gtm_body.html %}
+		<div class="wrapper">
+			<!--
+			<header>
+			</header>
+			-->
+			{% include navigation.html %}
+			<div class="hero-img" {% if page.featured-img %} style="background-image:  url( {{ page.featured-img }} );" {% endif %} >
+				<div class="center-content">
+					<span class="on-bg">
+						<h1>{{ page.header }}</h1>
+						<!--
+						<p>{{ page.date | date_to_string }}</p>
+						-->
+						<a href="#start">
+							<div style="-webkit-animation-name: pulse; -webkit-animation-duration: 2s; animation-name: pulse;animation-duration: 2s; animation-direction: alternate;">
+								{% octicon arrow-down width:50 height:50 fill:white aria-label:down %}
+							</div>
+						</a>
+					</span>
+				</div>
+			</div>
+			<div id="start"></div>
+			<div class="content">
+				<div class="article">
+					{{ content }}
+				</div>
+			</div>
+			<footer>
+				<hr>
+				© 2019 Victor Blancada. All Rights Reserved.
+			</footer>
+			<div class="spacer">
+			</div>
+		</div>
+		<!--
+		<footer>
+			Copyright © 2019 Victor Blancada. All Rights Reserved.
+		</footer>
+		-->
+	</body>
+</html>
+

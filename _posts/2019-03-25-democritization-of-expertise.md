@@ -1,6 +1,9 @@
 ---
 layout: post
 title: "10,000 Hours, Artificial Intelligence, and the Democratization of Expertise"
+header: "10,000 Hours, Artificial Intelligence, and the Democratization of Expertise"
+category: blog
+tags: ai artificial intelligence expert expertise training featured	
 featured-img: https://cdn-images-1.medium.com/max/1000/1*APsnucR3MshWw5JVYBo6uA.png
 date: 2019-03-25
 ---
@@ -13,6 +16,8 @@ What do Bill Gates and the Beatles have in common? Apart from being extremely su
 Apart from making Bill Gates the richest man in the world for a significant part of the past few decades, computers have brought on many changes since they were introduced. While Bill Gates and numerous other programmers have long had to give very specific instructions to computers to automate tasks, software development has evolved such that computers may be programmed to learn how to do tasks instead of being explicitly programmed. It’s clichéd, but machine learning truly has brought an entirely new paradigm to software development and it is set to change our relationship with knowledge and practice altogether.
 
 Computers have a history of beating humans at games, from Deep Blue defeating Garry Kasparov around two decades ago to AlphaGo beating Lee Sedol and AlphaGo Master besting Ke Jie in more recent years. The illustration that accompanies this article was not painted by a human but was created using a technique called neural style transfer where a computer “paints” an image based on the style of a reference image. This is even before going into the ubiquitous use of artificial intelligence in more “mundane” fields such as natural language processing and image recognition.
+
+> Machines are more suited to the rigorous and time-consuming training that has traditionally been linked with success.
 
 This phenomenon does not disprove the idea that prolonged training (or in Malcolm Gladwell’s words, er, numbers, 10,000 hours) leads to the skill necessary for success but instead validates it as artificial intelligence is fueled by machine learning which literally translates to machines spending hours training using data to solve problems. This only shows that machines are more suited to the rigorous and time-consuming training that has traditionally been linked with success.
 

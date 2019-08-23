@@ -1,0 +1,35 @@
+<script src="/assets/js/nav.js" type="text/javascript"></script>
+<div class="navbar transition" id="navbar">
+	<nav>
+		<a onClick="expand('navbar')">
+			{% octicon search width:50 height:50 aria-label:search %}
+			<p>Search</p>
+		</a>
+		{% for item in site.data.navigation %}
+			<a href="{{ item.link }}" {% if page.url == item.link %}class="selected"{% endif %}>
+				{% octicon {{ item.icon }} width:50 height:50 aria-label:{{ item.icon }} %}
+				<p>{{ item.name }}</p>
+			</a>
+		{% endfor %}
+	</nav>
+
+	<!-- Html Elements for Search -->
+	<div id="search-container" class="search-container">
+		<center>
+			Search site: <input type="text" id="search-input" placeholder="AI...Data Science...">
+			<ol id="results-container"></ol>
+		</center>
+	</div>
+
+	<!-- Script pointing to search.js -->
+	<script src="/assets/js/search.js" type="text/javascript"></script>
+
+	<!-- Configuration -->
+	<script>
+	SimpleJekyllSearch({
+	  searchInput: document.getElementById('search-input'),
+	  resultsContainer: document.getElementById('results-container'),
+	  json: '/search.json'
+	})
+	</script>
+</div>

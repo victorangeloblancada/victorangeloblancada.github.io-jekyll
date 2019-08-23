@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+	<head>
+		{% include gtm_head.html %}
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{{ page.title }}</title>
+		{% seo %}
+		{% include styles.html %}
+	</head>
+	<body>
+		{% include gtm_body.html %}
+		<div class="wrapper">
+			<header>
+			</header>
+			{% include navigation.html %}
+			{{ content }}
+			<footer>
+				<hr>
+				© 2019 Victor Blancada. All Rights Reserved.
+			</footer>
+			<div class="spacer">
+			</div>
+		</div>
+		<!--
+		-->
+	</body>
+</html>

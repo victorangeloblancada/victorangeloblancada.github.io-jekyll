@@ -1,0 +1,22 @@
+---
+layout: default-full
+title: Blog
+---
+<center>
+	<h1>Latest Posts</h1>
+</center>
+<div class="flex-container">
+	{% for post in site.posts %}
+		{% if post.category == 'blog' %}
+			<a href="{{ post.url }}">
+				<div class="square-img transition" {% if post.featured-img %} style="background-image:  url( {{ post.featured-img }} );" {% endif %} >
+					<div class="center-content">
+						<span class="on-bg">
+							<h3>{{ post.header }}</h3>
+						</span>
+					</div>
+				</div>
+			</a>
+		{% endif %}
+	{% endfor %}
+</div>

@@ -1,0 +1,344 @@
+@font-face {
+  font-family: Fanwood;
+  src: url("/assets/fonts/fanwood_text-webfont.woff"); }
+@font-face {
+  font-family: Fanwood;
+  font-style: italic;
+  src: url("/assets/fonts/fanwood_text_italic-webfont.woff"); }
+@font-face {
+  font-family: Avenir;
+  font-style: normal;
+  src: url("/assets/fonts/AvenirNextLTPro-Regular.woff"); }
+@font-face {
+  font-family: Avenir;
+  font-style: italic;
+  src: url("/assets/fonts/AvenirNextLTPro-Italic.woff"); }
+@font-face {
+  font-family: Merriweather;
+  src: url("/assets/fonts/Merriweather-Regular.woff"); }
+@font-face {
+  font-family: Merriweather;
+  font-style: italic;
+  src: url("/assets/fonts/Merriweather-RegularItalic.woff"); }
+@font-face {
+  font-family: Merriweather;
+  font-weight: bold;
+  src: url("/assets/fonts/Merriweather-Bold.woff"); }
+@font-face {
+  font-family: Merriweather;
+  font-style: italic;
+  font-weight: bold;
+  src: url("/assets/fonts/Merriweather-BoldItalic.woff"); }
+@font-face {
+  font-family: Oswald;
+  font-weight: 400;
+  src: url("/assets/fonts/Oswald-Regular.woff"); }
+@font-face {
+  font-family: Oswald;
+  src: url("/assets/fonts/Oswald-Regular.woff"); }
+@font-face {
+  font-family: Oswald;
+  font-weight: 700;
+  src: url("/assets/fonts/Oswald-Bold.woff"); }
+@font-face {
+  font-family: Oswald;
+  font-weight: 300;
+  src: url("/assets/fonts/Oswald-Light.woff"); }
+html {
+  scroll-behavior: smooth; }
+
+body {
+  font-family: Merriweather, Georgia, Garamond, serif;
+  font-size: 16px;
+  line-height: 28px;
+  background-color: #FFF;
+  color: #22181C; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Oswald, Bahnschrift, Impact, serif;
+  line-height: 1.5em; }
+
+h3 {
+  font-weight: 400; }
+
+h4, h5, h6 {
+  font-weight: 300; }
+
+@media screen and (min-width: 320px) {
+  body {
+    font-size: 2.2vmax; }
+
+  h1 {
+    font-size: 5vmax; }
+
+  h2 {
+    font-size: 3.33vmax; }
+
+  h3 {
+    font-size: 2.93vmax; }
+
+  h4 {
+    font-size: 2.5vmax; }
+
+  h5 {
+    font-size: 2.08vmax; }
+
+  h6 {
+    font-size: 1.68vmax; }
+
+  blockquote {
+    font-size: 5vmax; } }
+@media screen and (min-width: 1000px) {
+  body {
+    font-size: 16px; }
+
+  h1 {
+    font-size: 50px; }
+
+  h2 {
+    font-size: 34px; }
+
+  h3 {
+    font-size: 30px; }
+
+  h4 {
+    font-size: 25px; }
+
+  h5 {
+    font-size: 21px; }
+
+  h6 {
+    font-size: 17px; }
+
+  blockquote {
+    font-size: 34px; } }
+a {
+  color: #084887;
+  fill: #084887; }
+
+a:hover {
+  color: #F58A07;
+  fill: #F58A07; }
+
+blockquote {
+  font-family: Fanwood, Garamond, Georgia, serif;
+  line-height: 40px;
+  font-style: italic;
+  padding: 3px;
+  border-left: 3px solid #87B38D; }
+
+.large {
+  font-size: 10vmin;
+  line-height: 11vmin; }
+
+.quote {
+  font-family: Fanwood, Garamond, Georgia, serif;
+  font-weight: normal; }
+
+.highlight {
+  color: #F58A07;
+  fill: #F58A07; }
+
+hr {
+  border: 0.5px solid #22181C; }
+
+li {
+  margin-top: 10px;
+  margin-bottom: 10px; }
+
+.transition {
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease; }
+
+div.navbar {
+  z-index: 2;
+  position: fixed;
+  width: 100%;
+  background-color: #FFF;
+  box-shadow: 0 10px 20px -4px rgba(0, 0, 0, 0.1);
+  left: 0px;
+  right: 0px;
+  overflow: hidden;
+  scroll: no;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  line-height: 8px; }
+
+div.navbar.expand {
+  height: auto;
+  max-height: 80vh;
+  scroll: auto;
+  overflow-y: auto; }
+
+nav a {
+  float: left;
+  display: block;
+  text-align: center;
+  font-family: Avenir, Futura, "Century Gothic", sans-serif;
+  text-decoration: none;
+  width: 20%; }
+
+div.search-container {
+  display: block;
+  height: auto;
+  width: 80vw;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 30px; }
+
+input[type=text] {
+  border: none;
+  border-bottom: 2px solid #87B38D;
+  font-family: Avenir, Futura, "Century Gothic", sans-serif;
+  line-height: 30px;
+  background-color: #FFF;
+  color: #22181C; }
+
+input[type=text]:focus {
+  outline: none; }
+
+div.wrapper {
+  min-height: 100vh; }
+
+div.content {
+  display: block;
+  height: auto;
+  width: 80vw;
+  margin-left: auto;
+  margin-right: auto; }
+
+div.article {
+  text-align: justify; }
+  div.article table, div.article th, div.article tr, div.article td {
+    border: 1px solid #22181C;
+    border-collapse: collapse;
+    padding: 10px; }
+  div.article table {
+    margin-left: auto;
+    margin-right: auto; }
+
+/*
+div.article::first-letter {
+	display: block;
+	font-size: 100px;
+	line-height: 84px;
+	text-transform: uppercase;
+	float: left;
+	position: relative;
+	top: 0;
+	margin-right: 10px;
+	color: #222;
+	font-weight: 600;
+} 
+*/
+div.article img {
+  max-width: 100%;
+  max-height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block; }
+
+div.paper {
+  background-color: #FFF;
+  box-shadow: 0 10px 20px -4px rgba(0, 0, 0, 0.5);
+  padding: 50px; }
+
+div.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; }
+
+div.spacer {
+  min-height: 80px; }
+
+footer {
+  bottom: 0px;
+  height: 80px;
+  padding: 10px;
+  text-align: center; }
+
+div.hero-img {
+  height: 100vh;
+  line-height: 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #22181C;
+  top: 0px;
+  left: 0px;
+  align-items: center; }
+
+div.square-img {
+  height: 320px;
+  width: 320px;
+  line-height: 320px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #22181C;
+  top: 0px;
+  left: 0px;
+  z-index: 0;
+  margin: 18px;
+  align-items: center; }
+
+div.square-img:hover {
+  box-shadow: 0 15px 25px -4px rgba(0, 0, 0, 0.7);
+  transform: scale(1.1);
+  z-index: 1; }
+
+.center-content {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  line-height: 1.5em;
+  width: 100%; }
+
+.on-bg {
+  line-height: 1.5em;
+  color: #FFF;
+  padding: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.9)); }
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes pulse {
+  from {
+    fill: #FFF; }
+  to {
+    fill: #084887; } }
+/* Standard syntax */
+@keyframes pulse {
+  from {
+    fill: #FFF; }
+  to {
+    fill: #084887; } }
+@media only screen and (max-width: 600px) {
+  div.navbar {
+    z-index: 2;
+    height: 80px;
+    bottom: 0px;
+    background-color: #FFF;
+    box-shadow: 0 -1px 20px -4px rgba(0, 0, 0, 0.1); }
+
+  div.hero-img {
+    background-attachment: scroll; } }
+@media (min-width: 600px) {
+  div.navbar {
+    height: 50px;
+    top: 0px; }
+
+  nav svg {
+    height: 20px;
+    width: 20px; }
+
+  header {
+    min-height: 50px; }
+
+  div #start {
+    height: 50px; } }

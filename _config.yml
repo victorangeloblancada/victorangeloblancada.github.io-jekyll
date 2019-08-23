@@ -1,5 +1,3 @@
-name: Natural Problem Solver
-markdown: kramdown
-permalink: /blog/:year/:month/:day/:title
-future: true
-repository: naturalproblemsolver/naturalproblemsolver.github.io
+plugins:
+  - jekyll-octicons
+  - jekyll-seo-tag

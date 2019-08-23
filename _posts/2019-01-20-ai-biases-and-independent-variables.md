@@ -1,6 +1,9 @@
 ---
 layout: post
 title: "AI Biases and Independent Variables"
+header: "AI Biases and Independent Variables"
+category: blog
+tags: artificial intelligence ai statistics mathematics
 featured-img: https://cdn-images-1.medium.com/max/1000/1*2xdYJn8yXgCkDMXytLOujQ.png
 date: 2019-01-20
 ---
@@ -22,5 +25,7 @@ One example used in the original article to prove the argument against binary sy
 However, a machine learning model is only as good as its data. The author of the original article correctly points out the racial and sexual biases that existed during the time of Aristotle and live on even in the age of artificial intelligence. The answer does not lie in replacing the binary system but in being more careful with independent variables. If the binary flags for two features which are proven to be independent are not conflated into a single feature, then the purported bias in the binary system disappears. Yes, it is unfair that men have historically been seen as superior to women, but on the other hand, it is also fair to say that a female athlete is likely to be better at sports than a man who has not exercised in a while because the second argument measures athletic ability without being misled by conflating athleticism with gender.
 
 Funnily enough, this idea of independence between variables is one of the driving ideas behind the Cartesian coordinate system — one of the many contributions of Rene Descartes, to whom the original article lays the blame for the proliferation of bias through the binary system. The Cartesian coordinate system plots measurements across two perpendicular axes so as to visually confirm or debunk any dependent relationships. By definition, measurements along perpendicular axes are independent — one cannot move left by only moving up. Rene Descartes realized the importance of treating variables independently and many novice machine learning practitioners would do well to follow in his example.
+
+> Rene Descartes realized the importance of treating variables independently and many novice machine learning practitioners would do well to follow in his example.
 
 While the original article ended with the firm (if unfounded) conclusion that the binary system is at fault for bias in artificial intelligence, this article takes some of the original author’s valid ideas and will not judge the original article as entirely without merit. The truth is somewhere in between — the article managed to highlight key social issues, yes, but the conclusion is not fully valid, no. This judgment only serves to show that the binary system is no less effective in terms of retaining and communicating information than alternatives, by acknowledging that the article can be correct in some points but not all. Until quantum computing allows for qubits to relay and process data more efficiently than bits, the binary system is still the best solution we have today.

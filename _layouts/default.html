@@ -1,62 +1,6 @@
-<!DOCTYPE html>
-	<html>
-		<head>
-			
-			{% include gtm_head.html %}
-			<title>{{ page.title }}</title>
-			{% seo %}
-			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<!-- link to main stylesheet -->
-			<link href="https://fonts.googleapis.com/css?family=EB+Garamond|Oswald:200,400" rel="stylesheet">
-			<link rel="stylesheet" type="text/css" href="/css/main.css">
-		</head>
-		<body>
-			{% include gtm_body.html %}
-			<script>
-				function resizeHeaderOnScroll() {
-				  const distanceY = window.pageYOffset || document.documentElement.scrollTop,
-				  shrinkOn = 80,
-				  headerEl = document.getElementById('js-header');
-				  
-				  if (distanceY > shrinkOn) {
-					headerEl.classList.add("smaller");
-				  } else {
-					headerEl.classList.remove("smaller");
-				  }
-				}
-				window.addEventListener('scroll', resizeHeaderOnScroll);
-			</script>
-			<div id="container">
-				<header id="js-header">
-					<h1 id="logo"><!--<img src="https://raw.githubusercontent.com/naturalproblemsolver/naturalproblemsolver.github.io/master/_images/profile_pic.fw.png" style="height:1em">-->Victor Angelo Blancada</h1>
-					<nav>
-						<ul style="float:left">
-							<li><a href="/">Home</a></li>
-							<li><a href="/about">About</a></li>
-							<li><a href="/cv">CV</a></li>
-							<!--
-							<li><a href="/portfolio">Portfolio</a></li>
-							-->
-							<li><a href="/blog">Blog</a></li>
-						</ul>
-						<ul style="float:right">
-							<li>Reach out on <a href="https://www.linkedin.com/in/geloblancada/">LinkedIn</a> or via <a href="mailto:naturalproblemsolver@gmail.com">Email</a>.</li>
-						</ul>
-					</nav>
-				</header>
-				<div id="body">
-				
-				{{ content }}
-				
-				</div><!-- /.container -->
-				<footer>
-					<ul>
-						<li><a href="mailto:naturalproblemsolver@gmail.com">Email</a></li>
-						<li><a href="https://www.linkedin.com/in/geloblancada/">LinkedIn</a></li>
-						<li><a href="https://github.com/naturalproblemsolver">GitHub</a></li>
-					</ul>
-					<p>Copyright © 2017 Victor Blancada. All Rights Reserved.</p>
-				</footer>
-			</div>
-		</body>
-	</html>
+---
+layout: default-full
+---
+<div class="content">
+	{{ content }}
+</div>

@@ -1,0 +1,516 @@
+//@import url('https://fonts.googleapis.com/css?family=Lusitana|Fanwood+Text|Karla|Oswald&display=swap');
+//@import url('https://fonts.googleapis.com/css?family=Merriweather|Oswald:200,400,700&display=swap');
+
+@font-face {
+	font-family: Fanwood;
+	src: url("/assets/fonts/fanwood_text-webfont.woff");
+}
+
+@font-face {
+	font-family: Fanwood;
+	font-style: italic; 
+	src: url("/assets/fonts/fanwood_text_italic-webfont.woff");
+}
+
+@font-face {
+	font-family: Avenir;
+	font-style: normal;
+	src: url("/assets/fonts/AvenirNextLTPro-Regular.woff");
+}
+
+@font-face {
+	font-family: Avenir;
+	font-style: italic;
+	src: url("/assets/fonts/AvenirNextLTPro-Italic.woff");
+}
+
+@font-face {
+	font-family: Merriweather;
+	src: url("/assets/fonts/Merriweather-Regular.woff");
+}
+
+@font-face {
+	font-family: Merriweather;
+	font-style: italic;
+	src: url("/assets/fonts/Merriweather-RegularItalic.woff");
+}
+
+@font-face {
+	font-family: Merriweather;
+	font-weight: bold;
+	src: url("/assets/fonts/Merriweather-Bold.woff");
+}
+
+@font-face {
+	font-family: Merriweather;
+	font-style: italic;
+	font-weight: bold;
+	src: url("/assets/fonts/Merriweather-BoldItalic.woff");
+}
+
+@font-face {
+	font-family: Oswald;
+	font-weight: 400;
+	src: url("/assets/fonts/Oswald-Regular.woff");
+}
+
+
+@font-face {
+	font-family: Oswald;
+	src: url("/assets/fonts/Oswald-Regular.woff");
+}
+
+@font-face {
+	font-family: Oswald;
+	font-weight: 700;
+	src: url("/assets/fonts/Oswald-Bold.woff");
+}
+
+
+@font-face {
+	font-family: Oswald;
+	font-weight: 300;
+	src: url("/assets/fonts/Oswald-Light.woff");
+}
+
+$nav-count: 5;
+
+$sans-serif-font: Avenir, Futura, 'Century Gothic', sans-serif;
+$serif-font: Merriweather, Georgia, Garamond, serif;
+$display-font: Oswald, Bahnschrift, Impact, serif;
+$quote-font: Fanwood, Garamond, Georgia, serif;
+//$mono-font: IBM Plex Mono;
+
+$light-color: #FFF;
+$dark-color: #22181C;
+$accent-1-color: #084887;
+$accent-2-color: #F58A07;
+//$accent-3-color: #909CC2;
+$accent-3-color: #87B38D;
+
+$nav-height: 80px;
+$nav-height-desktop: 50px;
+
+html {
+	// for smooth scrolling of anchor links to sections
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: $serif-font;
+	font-size: 16px;
+	line-height: 28px;
+	background-color: $light-color;
+	color: $dark-color;
+}
+
+h1, h2, h3, h4, h5, h6{
+	font-family: $display-font;
+	line-height: 1.5em;
+}
+
+h3 {
+	font-weight: 400;
+}
+
+h4, h5, h6{
+	font-weight: 300;
+}
+
+@media screen and (min-width: 320px) {
+	body {
+		font-size: 2.2vmax;
+	}
+	h1 {
+		font-size: 5vmax;
+	}
+
+	h2 {
+		font-size: 3.33vmax;
+	}
+
+	h3 {
+		font-size: 2.93vmax;
+	}
+
+	h4 {
+		font-size: 2.5vmax;
+	}
+
+	h5 {
+		font-size: 2.08vmax;
+	}
+
+	h6 {
+		font-size: 1.68vmax;
+	}
+
+	blockquote {
+		font-size: 5vmax;
+	}
+}
+
+@media screen and (min-width: 1000px) {
+	body {
+		font-size: 16px;
+	}
+	h1 {
+		font-size: 50px;
+	}
+
+	h2 {
+		font-size: 34px;
+	}
+
+	h3 {
+		font-size: 30px;
+	}
+
+	h4 {
+		font-size: 25px;
+	}
+
+	h5 {
+		font-size: 21px;
+	}
+
+	h6 {
+		font-size: 17px;
+	}
+
+	blockquote {
+		font-size: 34px;
+	}
+}
+
+a {
+	color: $accent-1-color;
+	fill: $accent-1-color;
+
+}
+
+a:hover {
+	color: $accent-2-color;
+	fill: $accent-2-color;
+}
+
+blockquote {
+	font-family: $quote-font;
+	line-height: 40px;
+	font-style: italic;
+	padding: 3px;
+	border-left: 3px solid $accent-3-color;
+}
+
+.large {
+	font-size: 10vmin; 
+	line-height: 11vmin;
+}
+
+.quote {
+	font-family: $quote-font;
+	font-weight: normal;
+}
+
+.highlight {
+	color: $accent-2-color;
+	fill: $accent-2-color;
+}
+
+hr {
+	border: 0.5px solid $dark-color;
+}
+
+li {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.transition {
+	// CSS transitions
+	transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+}
+
+div.navbar {
+	z-index: 2;
+	position: fixed;
+	//height: $nav-height;
+	width: 100%;
+	background-color: $light-color;
+	box-shadow: 0 10px 20px -4px rgba(0,0,0,0.1);
+	//top: 0px;
+	left: 0px;
+	right: 0px;
+	overflow: hidden;
+	scroll: no;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+	line-height: 8px;
+
+}
+
+
+div.navbar.expand {
+	height: auto;
+	max-height: 80vh;
+	scroll: auto;
+	overflow-y: auto;
+}
+
+nav a {
+	float: left;
+	display: block;
+	text-align: center;
+	font-family: $sans-serif-font;
+	text-decoration: none;
+	width: 100% / $nav-count;
+}
+
+nav img.nav-icon { 
+	//border: solid 1px #F6E8EA;
+	//border-radius: 50%;
+}
+
+nav a.selected {
+	//text-decoration: underline;
+}
+
+div.search-container {
+	display: block;
+	height: auto;
+	width: 80vw;
+	margin-left: auto;
+	margin-right: auto;
+	line-height: 30px;
+}
+
+input[type=text] {
+	border: none;
+	border-bottom: 2px solid $accent-3-color;
+	font-family: $sans-serif-font;
+	line-height: 30px;
+	background-color: $light-color;
+	color: $dark-color;
+}
+
+input[type=text]:focus {
+	outline: none;
+}
+
+div.wrapper {
+	min-height: 100vh;
+}
+
+div.content {
+	display: block;
+	height: auto;
+	width: 80vw;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div.article {
+	text-align: justify;
+	table, th, tr, td {
+		border: 1px solid $dark-color;
+		border-collapse: collapse;
+		padding: 10px;
+	}
+
+	table {
+		margin-left: auto;
+		margin-right: auto;
+	}
+} 
+
+/*
+div.article::first-letter {
+	display: block;
+	font-size: 100px;
+	line-height: 84px;
+	text-transform: uppercase;
+	float: left;
+	position: relative;
+	top: 0;
+	margin-right: 10px;
+	color: #222;
+	font-weight: 600;
+} 
+*/
+
+div.article img {
+	max-width: 100%;
+	max-height: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+div.paper {
+	background-color: $light-color;
+	box-shadow: 0 10px 20px -4px rgba(0,0,0,.5);
+	padding: 50px;
+}
+
+div.flex-container {
+	display: flex; 
+	flex-wrap: wrap; 
+	justify-content: center;
+}
+
+div.spacer {
+	min-height: $nav-height;
+}
+
+
+footer {
+	bottom: 0px;
+	height: $nav-height;
+	//background-color: $dark-color;
+	//color: $light-color;
+	padding: 10px;
+	text-align: center;
+}
+
+
+div.hero-img {
+	// Full height
+	height: 100vh; 
+	line-height: 100vh;
+
+	// Create the parallax scrolling effect
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	// Fall back on gradient if image is not specified
+	//background-image: linear-gradient(to right, $accent-1-color, $accent-2-color);
+	background-color: $dark-color;
+
+	// Other CSS
+	top: 0px;
+	left: 0px;
+
+	align-items: center;
+}
+
+div.square-img {
+	// Square
+	height: 320px; 
+	width: 320px;
+	line-height: 320px;
+
+	// Create the parallax scrolling effect
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	// Fall back on gradient if image is not specified
+	background-color: $dark-color;
+
+	// Other CSS
+	top: 0px;
+	left: 0px;
+	z-index: 0;
+
+	margin: 18px;
+
+	align-items: center;
+}
+
+div.square-img:hover {
+	box-shadow: 0 15px 25px -4px rgba(0,0,0,.7);
+	transform: scale(1.1);
+	z-index: 1;
+}
+
+.center-content {
+	// Center Contents
+	display: inline-block;
+	vertical-align: middle;
+	text-align: center;
+
+	line-height: 1.5em;
+	width: 100%;
+}
+
+.on-bg {
+	line-height: 1.5em;
+	color: $light-color;
+	//text-shadow: 2px 2px $dark-color;
+	padding: 20px;
+	display: inline-block;
+	vertical-align: middle;
+	filter: drop-shadow( 5px 5px 5px rgba(0, 0, 0, .9))
+}
+
+// CSS Animations
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes pulse {
+	from {
+		fill: $light-color;
+	}
+	to {
+		fill: $accent-1-color;
+	}
+}
+
+/* Standard syntax */
+@keyframes pulse {
+	from {
+		fill: $light-color;
+	}
+	to {
+		fill: $accent-1-color;
+	}
+}
+
+// Mobile CSS
+
+@media only screen and (max-width: 600px) {
+	div.navbar {
+		z-index: 2;
+		height: $nav-height;
+		//position: fixed;
+		bottom: 0px;
+		background-color: $light-color;
+		box-shadow: 0 -1px 20px -4px rgba(0,0,0,0.1);
+		//color: $dark-color;
+		//fill: $light-color;
+	}
+	nav a {
+		//color: $light-color;
+	}
+	div.hero-img {
+		background-attachment: scroll;
+	}
+}
+
+// Desktop CSS
+
+@media (min-width: 600px) {
+	div.navbar {
+		//position: fixed;
+		height: $nav-height-desktop;
+		top: 0px;
+		//opacity: 0.9;
+	}
+
+	nav svg {
+		height: 20px;
+		width: 20px;
+	}
+	header {
+		min-height: $nav-height-desktop;
+	}
+
+	div #start{
+		height: $nav-height-desktop;
+	}
+}

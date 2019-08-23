@@ -1,6 +1,9 @@
 ---
 layout: post
 title: "GDPR Day 0: Data-Savvy Marketers Can Still Derive Insights Without Relying on Personal Data"
+header: "GDPR Day 0: Data-Savvy Marketers Can Still Derive Insights Without Relying on Personal Data"
+category: blog
+tags: data science marketing gdpr privacy featured
 featured-img: https://cdn-images-1.medium.com/max/1000/1*XQ-Jm8pc0HAsF_hJw0eFhA.jpeg
 date: 2018-05-25
 ---
@@ -35,6 +38,8 @@ As the Internet simulated human society more and more, data scientists realized 
 
 Noted AI researcher Andrej Karpathy dubbed neural networks as software 2.0: whereas before programmers had to hard code intelligence into machines, data scientists now design programs to learn intelligent behavior from data.
 
+> Before programmers had to hard code intelligence into machines, data scientists now design programs to learn intelligent behavior from data.
+
 Neural networks have since been used in countless artificial intelligence applications, from fraud detection to image recognition to self-driving cars and even automated content generation. In 2017, AlphaGo, an AI that uses an artificial neural network to learn, beat the world number one ranked player in a series of matches of Go, a game so complex that there are more atoms in the universe than there are possible outcomes.
 
 It is therefore no surprise that McKinsey estimates that AI techniques have the potential to create between $3.5 trillion and $5.8 trillion in value annually.
@@ -44,6 +49,8 @@ It is therefore no surprise that McKinsey estimates that AI techniques have the 
 Fast forward a couple of years, and the standard operating procedure for a typical digital marketer today is to rely primarily on cookies to track every single user interaction with a brand and build personalized journeys for each user. Advances in distributed computing mean that hardware has somewhat caught up with the magnitude of consumer data being collected and as a result, the mathematical stopgap of using quantitative models as a proxy for actual customer behavior is generally seen as an undesirable last resort.
 
 This is in sharp contrast to other industries with limited available data such as aerospace engineering where machine learning algorithms are used in lieu of expensive real life experiments. Because of the costs attached to collecting data, data science has developed ways to work around a lack of quality data when generating quantitative models.
+
+> Because of the costs attached to collecting data, data science has developed ways to work around a lack of quality data when generating quantitative models.
 
 In fact, the latest iteration of AlphaGo didn't learn from human Go matches but instead developed its database of moves just from playing against itself.
 

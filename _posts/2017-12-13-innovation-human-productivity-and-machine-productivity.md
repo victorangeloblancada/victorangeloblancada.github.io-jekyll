@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Innovation, Human Productivity, & Machine Productivity"
-featured-img: https://cdn-images-1.medium.com/max/2600/1*YPk4N6ce8muZbHFc27Wwkw.jpeg
+header: "Innovation, Human Productivity, & Machine Productivity"
+category: blog
+tags: technology innovation economy data science
+featured-img: https://miro.medium.com/max/1738/1*ARheISYMgUXTtEDcjN_OfQ.png
 date: 2017-12-13
 ---
-
-![img](https://cdn-images-1.medium.com/max/2600/1*ARheISYMgUXTtEDcjN_OfQ.png)iPhones
 
 ## Have Tech Consumers Lost Their Power?
 
@@ -17,7 +18,9 @@ Economic theory states that competition arises when more than one producer is tr
 
 The Model T is well-remembered because of how affordable Henry Ford’s assembly line produced them (nearly 15 million units sold) while Karl Benz’s Benz Patent-Motorwagen (25 units built) is reduced to the obscure answer to the trivial pursuit question, ‘what is the first car?’. (Karl Benz would later find widespread success with the first Mercedes-Benz after adopting mass production techniques in 1926, mere three years before his death.)
 
-![img](https://cdn-images-1.medium.com/max/2600/1*YPk4N6ce8muZbHFc27Wwkw.jpeg)Ford Model T (credit: Bloomberg)
+![img](https://cdn-images-1.medium.com/max/2600/1*YPk4N6ce8muZbHFc27Wwkw.jpeg)
+
+Ford Model T (credit: Bloomberg)
 
 Progress happens not when a new product hits the market but when products become exponentially cheaper. Having tech companies benchmark their products against each other is good news for the consumer as they are no longer forced to stay loyal to a single manufacturer.
 
@@ -29,7 +32,9 @@ There are a number of factors, but let’s start with the thing most people inte
 
 The other big reason why new flagship phones are so expensive are the consumers themselves. To call Apple a tech company is an oversimplification: Apple is more of a luxury lifestyle brand, so much so that a number of key Apple executives were poached from fashion brands including ex-Burberry CEO Angela Ahrendts who is now the SVP for Retail at Apple. Because Apple is seen as a luxury brand, people buy the iPhone as a status symbol, which means that iPhones are somewhat price inelastic, approaching the behavior of a Veblen good (a product whose demand is driven by people’s desire to show off what the economist Thorstein Veblen described as “conspicuous consumption”). Meanwhile, other tech companies see themselves as Apple competitors and, as a result, they tend to price their flagship phones only slightly cheaper than the iPhone to maximize profits.
 
-![img](https://cdn-images-1.medium.com/max/2600/1*RHVGNQyqP7HANfw0kehzjQ.jpeg)iPhone X Buyers (credit: The National)
+![img](https://cdn-images-1.medium.com/max/2600/1*RHVGNQyqP7HANfw0kehzjQ.jpeg)
+
+iPhone X Buyers (credit: The National)
 
 ## Smartphones: Going The Way of The Laptop and The Desktop Before It
 
@@ -37,7 +42,9 @@ As was said in the comments section of the original article from Andrew Brown, c
 
 Smartphones have, much like laptops before them, plateaued simply because the future of mobile computing is moving elsewhere, specifically augmented reality. All the seemingly useless hardware upgrades we see in smartphones — faster processors, inclusion of NPUs (neural processing units), dual cameras, upgraded sensors — are paving the way towards the introduction of AR apps that call for more interaction between the phone and its environment.
 
-![img](https://cdn-images-1.medium.com/max/1000/1*TNfAdZME2LNaFMeCms5Xrg.gif)Google Tango (credit: [RTP Virtual Reality on Medium](https://medium.com/@rtpvr/project-tango-2093353f0def))
+![img](https://cdn-images-1.medium.com/max/1000/1*TNfAdZME2LNaFMeCms5Xrg.gif)
+
+Google Tango  (credit: [RTP Virtual Reality on Medium](https://medium.com/@rtpvr/project-tango-2093353f0def))
 
 With such hardware requirements in place, the next stage of mobile computing is being fought over in the realm of software code. If you want to see truly cutting edge technology, look for augmented reality projects on GitHub and you will see loads of software being developed by research teams at Google, Amazon, and Facebook.
 
@@ -55,7 +62,9 @@ Google began its Google account service with Gmail but now has an entire suite o
 
 On the other hand, Amazon’s diversification into groceries and pharmacies is part of their bid to be the one stop shop for e-commerce by building an ecosystem of retailers all powered by Amazon technology. Even their failed attempt to enter the smartphone market with the much-maligned Fire Phone was meant to make it easy for users to purchase products from Amazon — a key feature of the Fire Phone was its ability to recognize objects from photos and present the user with an Amazon e-commerce page selling the item from the photo.
 
-![img](https://cdn-images-1.medium.com/max/1000/1*-4I2hS37FJf77QuASe8jlw.jpeg)Amazon Fire Phone (credit: CNET)
+![img](https://cdn-images-1.medium.com/max/1000/1*-4I2hS37FJf77QuASe8jlw.jpeg)
+
+Amazon Fire Phone (credit: CNET)
 
 For tech companies, a big positive effect of this focus on ecosystems is that consumers are more loyal to the tech brands they initially chose. On the flip-side, gaining new consumers is significantly harder: just ask any iPhone user who has spent a not insignificant amount on apps and in-app purchases. To gain new customers in this world of ecosystems, tech companies must continually introduce innovative features while making the transition as easy as possible for new users by incorporating as many aspects of their competitors’ ecosystems into their own. This inevitably leads to competing ecosystems with very similar features, leading to a negation of the former as new unique features quickly become commonplace, thus making some people complain that the tech world has “lost its mojo”. Tech companies are just doing what all companies aim to do: turn a profit.
 
@@ -67,7 +76,9 @@ Apart from the obvious implication of more loyal users = more profits, keeping u
 
 Take the example of Google Photos, Google’s free photo app which comes with unlimited cloud storage. Is this simply a case of Google bundling a free service to attract more users to Android? Surely not, as the Photos app is also free on the iOS App Store, unlimited cloud storage included. Why then is Google giving away what Dropbox charges $25 a month for? To answer this, we must look into Google’s business model.
 
-![img](https://cdn-images-1.medium.com/max/1000/1*nBrAFxG03L9S8YcxUdg26g.jpeg)Google Photos (credit: Wired)
+![img](https://cdn-images-1.medium.com/max/1000/1*nBrAFxG03L9S8YcxUdg26g.jpeg)
+
+Google Photos (credit: Wired)
 
 Though a tech company by nature, Google earns most of its profits from advertising. More users means more data which means better targeting for ads. It’s as simple as that. The users are not the customers; they are the product. An iPhone user who uploads photos to the Google cloud is a win for Google who now knows what ads to target that user based on the contents of their photos.
 
@@ -89,12 +100,15 @@ Imagine a machine that improves human productivity infinitely — what might
 
 This white collar immunity is rapidly diminishing as a new type of automation is gaining traction. Machine learning is a field of computer science specializing in leveraging vast amounts of data to teach computers to be artificially intelligent. At the risk of oversimplification, machine learning is an easy way to use data to create an AI. This means that computers are quickly learning the aforementioned nuances of decision making that protected white collar jobs for so long. Most of the tech industry giants have recognized the productivity potential of machine learning, with Google branding itself as an “AI-first company” (not a “smartphone-first” or “smart speaker first” company).
 
-![img](https://cdn-images-1.medium.com/max/2600/1*EIhS-Fo0Pw1s4MA5XY4fbQ.jpeg)Google’s AlphaGo (credit: Wired)
+![img](https://cdn-images-1.medium.com/max/2600/1*EIhS-Fo0Pw1s4MA5XY4fbQ.jpeg)
+
+Google’s AlphaGo (credit: Wired)
 
 Indeed, if one follows the machine learning community, one can see that the tech industry is far from stagnating as key breakthroughs are made on a nearly daily basis. In this year alone: 
-\1. Google created an AI that taught itself to beat the top ranked Go player by playing against itself thousands of times;
-\2. Stanford researchers have developed an AI that can make more accurate diagnoses from X-rays than practicing radiologists; and 
-\3. Google’s AutoML project succeeded in creating an AI that can create other AIs.
+
+1. Google created an AI that taught itself to beat the top ranked Go player by playing against itself thousands of times;
+2. Stanford researchers have developed an AI that can make more accurate diagnoses from X-rays than practicing radiologists; and 
+3. Google’s AutoML project succeeded in creating an AI that can create other AIs
 
 There is a reason why Elon Musk thinks that AI is such a big threat to humanity — it is just that powerful. (For a deeper discussion on how to implement machine learning for your business, feel free to reach out to me on [LinkedIn](https://www.linkedin.com/in/geloblancada/).)
 
