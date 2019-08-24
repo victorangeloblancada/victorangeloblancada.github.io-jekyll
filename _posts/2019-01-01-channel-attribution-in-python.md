@@ -1,11 +1,11 @@
 ---
 layout: post
 title: "Channel Attribution in Python"
-header: "Channel Attribution in Python"
 category: blog
 tags: python marketing attribution online network markov chain
 date: 2019-01-01
 featured-img: https://cdn-image.travelandleisure.com/sites/default/files/styles/1600x1000/public/1511365953/times-square-new-york-city-TSHOTELADS1117.jpg
+dropcap: True
 ---
 
 Attribution refers to the set of rules that determine which ad gets credit for a sale or a conversion. The rise of the Internet allowed marketers to track user interactions throughout the entire customer journey but most advertisers still attribute 100% of conversions to the last touch channel or the last ad that the user clicked before converting.

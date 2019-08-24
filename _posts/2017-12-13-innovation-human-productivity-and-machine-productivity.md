@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Innovation, Human Productivity, & Machine Productivity"
-header: "Innovation, Human Productivity, & Machine Productivity"
 category: blog
 tags: technology innovation economy data science
 featured-img: https://miro.medium.com/max/1738/1*ARheISYMgUXTtEDcjN_OfQ.png

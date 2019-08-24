@@ -56,9 +56,10 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: Oswald, Bahnschrift, Impact, serif;
-  line-height: 1.5em; }
+  line-height: 1.5em;
+  letter-spacing: 0.0625em; }
 
-h3 {
+h1, h2, h3 {
   font-weight: 400; }
 
 h4, h5, h6 {
@@ -133,7 +134,20 @@ blockquote {
 
 .quote {
   font-family: Fanwood, Garamond, Georgia, serif;
-  font-weight: normal; }
+  font-weight: normal;
+  letter-spacing: normal; }
+
+.dropcap::first-letter {
+  display: block;
+  font-size: 5em;
+  line-height: 1em;
+  text-transform: uppercase;
+  float: left;
+  position: relative;
+  top: 0;
+  margin-right: 10px;
+  color: #F58A07;
+  font-weight: 600; }
 
 .highlight {
   color: #F58A07;

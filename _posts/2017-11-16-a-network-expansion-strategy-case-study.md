@@ -1,12 +1,11 @@
 ---
 layout: post
 title: "A Network Expansion Strategy Case Study"
-header: "A Network Expansion Strategy Case Study"
 category: blog
 tags: case study internet fiber network consulting optimization featured
 date: 2017-11-16
 featured-img: /assets/images/fiber.jpg
-featured: true
+dropcap: false
 ---
 
 In 2014, I was part of a six person team that developed a big data optimization to guide the $400MM USD fiber network infrastructure expansion project of a North American telecommunications company.

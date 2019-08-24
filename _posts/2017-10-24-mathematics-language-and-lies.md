@@ -1,11 +1,11 @@
 ---
 layout: post
 title: "Mathematics, Language, and Lies"
-header: "Mathematics, Language, and Lies"
 category: blog
 tags: math mathematics language data science
 date: 2017-10-24
 featured-img: /assets/images/brain.jpg
+dropcap: True
 ---
 
 It was the philosopher Ludwig Wittgenstein who said, "The limits of my language means the limits of my world." As explored by in George Orwell's dystopian novel *Nineteen Eighty-Four* through the constructed language Newspeak, language not only empowers us to communicate ideas but can also be used to constrain thought. To think and reason is to debate with oneself and how else does one debate ideas but through language? Language is more than communication, it is how we encode, store, and process information. Language is how we think.

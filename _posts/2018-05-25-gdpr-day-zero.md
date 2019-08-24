@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "GDPR Day 0: Data-Savvy Marketers Can Still Derive Insights Without Relying on Personal Data"
-header: "GDPR Day 0: Data-Savvy Marketers Can Still Derive Insights Without Relying on Personal Data"
 category: blog
 tags: data science marketing gdpr privacy featured
 featured-img: https://cdn-images-1.medium.com/max/1000/1*XQ-Jm8pc0HAsF_hJw0eFhA.jpeg

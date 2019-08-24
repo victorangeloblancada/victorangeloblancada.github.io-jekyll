@@ -1,11 +1,11 @@
 ---
 layout: post
 title: "AI Biases and Independent Variables"
-header: "AI Biases and Independent Variables"
 category: blog
 tags: artificial intelligence ai statistics mathematics
 featured-img: https://cdn-images-1.medium.com/max/1000/1*2xdYJn8yXgCkDMXytLOujQ.png
 date: 2019-01-20
+dropcap: True
 ---
 
 Quartz recently published a [thought-provoking article by Twain Liu](https://qz.com/1515889/aristotles-binary-philosophies-created-todays-ai-bias/) that argues that AI bias can be traced all the way back to Aristotle’s philosophy of duality. While the author was correct in acknowledging the existence of human bias and the fact that bias in AI comes from being fed data built by biased human behavior, the argument that machine biases stem from the way machines encode data — in this case, the binary system — is flawed.

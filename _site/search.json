@@ -1,6 +1,14 @@
 [
 	
 		{
+			"title"    : "AI in Medicine",
+			"category" : "blog",
+			"tags"     : "ai, ml, artificial, intelligence, machine, learning, medicine, health",
+			"url"      : "/blog/2019/08/23/ai-in-medicine.html",
+			"date"     : "2019-08-23 00:00:00 +0800"
+    	} ,
+	
+		{
 			"title"    : "CV of Victor Angelo Blancada",
 			"category" : "page",
 			"tags"     : "resume, me, victor, angelo, blancada",

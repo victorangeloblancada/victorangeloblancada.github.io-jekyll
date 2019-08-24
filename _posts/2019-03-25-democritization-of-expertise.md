@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "10,000 Hours, Artificial Intelligence, and the Democratization of Expertise"
-header: "10,000 Hours, Artificial Intelligence, and the Democratization of Expertise"
 category: blog
 tags: ai artificial intelligence expert expertise training featured	
 featured-img: https://cdn-images-1.medium.com/max/1000/1*APsnucR3MshWw5JVYBo6uA.png

@@ -1,11 +1,11 @@
 ---
 layout: post
 title: "Elegance, Sophistication, and Complexity"
-header: "Elegance, Sophistication, and Complexity"
 category: blog
 tags: math mathematics language data science
 date: 2017-10-26
 featured-img: /assets/images/biochemistry.jpg
+dropcap: True
 ---
 
 <script type="text/javascript" async
