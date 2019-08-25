@@ -4,12 +4,12 @@ title: "Elegance, Sophistication, and Complexity"
 category: blog
 tags: math mathematics language data science
 date: 2017-10-26
-featured-img: /assets/images/biochemistry.jpg
+featured-img: /assets/images/abstract-paint.jpg
 dropcap: True
 ---
 
 <script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
 The saying, "Everything should be made as simple as possible, but no simpler," is widely attributed to Albert Einstein, yet there is no evidence that he actually said this, or at least that he used those specific words. Scholars hypothesize that this misquotation stemmed from a lecture Einstein delivered at Oxford where he actually said, "It can scarcely be denied that the supreme goal of all theory is to make the irreducible basic elements as simple and as few as possible without having to surrender the adequate representation of a single datum of experience." Apparently, Einstein's fans took his words' meaning to heart, if not the words themselves.
