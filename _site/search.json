@@ -79,23 +79,7 @@
 			"category" : "",
 			"tags"     : "",
 			"url"      : "/pages/about.html",
-			"date"     : "2019-08-29 14:54:48 +0800"
-		} ,
-	
-		{
-			"title"    : "Victor is an AI Developer",
-			"category" : "profile",
-			"tags"     : "resume, me, victor, angelo, blancada",
-			"url"      : "/pages/ai-developer.html",
-			"date"     : "2019-08-20 00:00:00 +0800"
-		} ,
-	
-		{
-			"title"    : "Blog",
-			"category" : "",
-			"tags"     : "",
-			"url"      : "/pages/blog.html",
-			"date"     : "2019-08-29 14:54:48 +0800"
+			"date"     : "2019-08-29 16:44:54 +0800"
 		} ,
 	
 		{
@@ -104,6 +88,14 @@
 			"tags"     : "resume, me, victor, angelo, blancada",
 			"url"      : "/pages/strategy-consultant.html",
 			"date"     : "2019-08-19 00:00:00 +0800"
+		} ,
+	
+		{
+			"title"    : "Victor is an AI Developer",
+			"category" : "profile",
+			"tags"     : "resume, me, victor, angelo, blancada",
+			"url"      : "/pages/ai-developer.html",
+			"date"     : "2019-08-20 00:00:00 +0800"
 		} ,
 	
 		{
