@@ -39,13 +39,13 @@ title: Hi, I'm Victor Angelo Blancada
 			</center>
 			
 			<div class="flex-container">
-				{% for post in site.posts %}
-					{% if post.category == 'profile' %}
-						<a href="{{ post.url }}">
-							<div class="square-img transition" {% if post.featured-img %} style="background-image:  url( {{ post.featured-img }} );" {% endif %} >
+				{% for page in site.pages %}
+					{% if page.category == 'profile' %}
+						<a href="{{ page.url }}">
+							<div class="square-img transition" {% if page.featured-img %} style="background-image:  url( {{ page.featured-img }} );" {% endif %} >
 								<div class="center-content">
 									<span class="on-bg">
-										<h2>{{ post.header }}</h2>
+										<h2>{{ page.header }}</h2>
 									</span>
 								</div>
 							</div>
@@ -55,7 +55,7 @@ title: Hi, I'm Victor Angelo Blancada
 			</div>
 
 			<center>
-				<p>Learn more by downloading my <a href="/page/2019/08/21/resume-downloads.html">résumé</a> or connecting on <a href="https://www.linkedin.com/in/geloblancada/">LinkedIn</a>.</p>
+				<p>Learn more by downloading my <a href="/pages/resume-downloads.html">résumé</a> or connecting on <a href="https://www.linkedin.com/in/geloblancada/">LinkedIn</a>.</p>
 			</center>
 			
 			<center>
@@ -77,7 +77,7 @@ title: Hi, I'm Victor Angelo Blancada
 			</div>			
 
 			<center>
-				<p>Learn more by downloading my <a href="/page/2019/08/21/resume-downloads.html">résumé</a> or connecting on <a href="https://www.linkedin.com/in/geloblancada/">LinkedIn</a>.</p>
+				<p>Learn more by downloading my <a href="/pages/resume-downloads.html">résumé</a> or connecting on <a href="https://www.linkedin.com/in/geloblancada/">LinkedIn</a>.</p>
 			</center>
 
 			<center>

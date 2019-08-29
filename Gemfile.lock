@@ -251,6 +251,7 @@ DEPENDENCIES
   github-pages
   jekyll
   jekyll-octicons
+  jekyll-sitemap
   wdm (>= 0.1.0)
 
 BUNDLED WITH

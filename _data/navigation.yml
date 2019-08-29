@@ -2,13 +2,13 @@
   link: /
   icon: home
 - name: About
-  link: /about.html
+  link: /pages/about.html
   icon: person
 - name: Blog
-  link: /blog.html
+  link: /pages/blog.html
   icon: book
 - name: Résumé
-  link: /page/2019/08/21/resume-downloads.html
+  link: /pages/resume-downloads.html
   icon: file
 #- name: Mail
 #  link: mailto:naturalproblemsolver@gmail.com
