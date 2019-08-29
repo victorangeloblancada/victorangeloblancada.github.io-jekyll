@@ -5,7 +5,7 @@
   link: /pages/about.html
   icon: person
 - name: Blog
-  link: /pages/blog.html
+  link: /blog.html
   icon: book
 - name: Résumé
   link: /pages/resume-downloads.html
