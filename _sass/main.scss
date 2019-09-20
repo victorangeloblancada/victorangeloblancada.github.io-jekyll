@@ -88,7 +88,7 @@ $accent-2-color: #F58A07;
 //$accent-3-color: #909CC2;
 $accent-3-color: #87B38D;
 
-$nav-height: 80px;
+$nav-height: 100px;
 $nav-height-desktop: 50px;
 
 html {
@@ -222,7 +222,6 @@ blockquote {
 	float: left;
 	position: relative;
 	top: 0;
-	margin-right: 10px;
 	color: $accent-2-color;
 	font-weight: 600;
 }
@@ -416,9 +415,11 @@ div.hero-img {
 
 div.square-img {
 	// Square
-	height: 320px; 
-	width: 320px;
+	height: 85vw; 
+	width: 85vw;
 	line-height: 320px;
+	max-height: 320px;
+	max-width: 320px;
 
 	// Create the parallax scrolling effect
 	background-position: center;
@@ -462,6 +463,12 @@ div.square-img:hover {
 	display: inline-block;
 	vertical-align: middle;
 	filter: drop-shadow( 5px 5px 5px rgba(0, 0, 0, .9))
+}
+
+.on-bg a {
+	color: $light-color;
+	text-decoration: none;
+	font-style: italic;
 }
 
 // CSS Animations

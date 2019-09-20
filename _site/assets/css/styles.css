@@ -145,7 +145,6 @@ blockquote {
   float: left;
   position: relative;
   top: 0;
-  margin-right: 10px;
   color: #F58A07;
   font-weight: 600; }
 
@@ -266,11 +265,11 @@ div.flex-container {
   justify-content: center; }
 
 div.spacer {
-  min-height: 80px; }
+  min-height: 100px; }
 
 footer {
   bottom: 0px;
-  height: 80px;
+  height: 100px;
   padding: 10px;
   text-align: center; }
 
@@ -287,9 +286,11 @@ div.hero-img {
   align-items: center; }
 
 div.square-img {
-  height: 320px;
-  width: 320px;
+  height: 85vw;
+  width: 85vw;
   line-height: 320px;
+  max-height: 320px;
+  max-width: 320px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -320,6 +321,11 @@ div.square-img:hover {
   vertical-align: middle;
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.9)); }
 
+.on-bg a {
+  color: #FFF;
+  text-decoration: none;
+  font-style: italic; }
+
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes pulse {
   from {
@@ -335,7 +341,7 @@ div.square-img:hover {
 @media only screen and (max-width: 600px) {
   div.navbar {
     z-index: 2;
-    height: 80px;
+    height: 100px;
     bottom: 0px;
     background-color: #FFF;
     box-shadow: 0 -1px 20px -4px rgba(0, 0, 0, 0.1); }

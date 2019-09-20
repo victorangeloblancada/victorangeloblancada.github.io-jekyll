@@ -1,121 +1,77 @@
 ---
 title: Hi, I'm Victor Angelo Blancada
+header: Victor Angelo Blancada Creates Value From Data
+layout: post
+featured-img: /assets/images/space-lights.jpg
 ---
-<!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>{{ page.title }}</title>
-		{% include styles.html %}
-	</head>
-	<body>
-		<div class="wrapper">
-			<!--
-			<header>
-			</header>
-			-->
-			{% include navigation.html %}
+<center>
+	<h1 class="large quote">Hi, I'm</h1>
+	<h1 class="large quote highlight">Victor Angelo Blancada</h1>
+</center>
 
-			<div class="hero-img" style="background-image:  url('/assets/images/space-lights.jpg');">
-				<div class="center-content">
-					<span class="on-bg">
-						<h1>
-							Victor Angelo Blancada Creates Value From Data
-						</h1>
-						<a href="#start">
-							<div style="-webkit-animation-name: pulse; -webkit-animation-duration: 2s; animation-name: pulse;animation-duration: 2s; animation-direction: alternate;">
-								{% octicon arrow-down width:50 height:50 fill:white aria-label:down %}
-							</div>
-						</a>
-					</span>
+<div class="flex-container">
+	{% for page in site.pages %}
+		{% if page.category == 'profile' %}
+			<a href="{{ page.url }}">
+				<div class="square-img transition" {% if page.featured-img %} style="background-image:  url( {{ page.featured-img }} );" {% endif %} >
+					<div class="center-content">
+						<span class="on-bg">
+							<h2>{{ page.header }}</h2>
+						</span>
+					</div>
 				</div>
-			</div>
-			<div id="start"></div>
+			</a>
+		{% endif %}
+	{% endfor %}
+</div>
 
-			<center>
-				<h1 class="large quote">Hi, I'm</h1>
-				<h1 class="large quote highlight">Victor Angelo Blancada</h1>
-			</center>
-			
-			<div class="flex-container">
-				{% for page in site.pages %}
-					{% if page.category == 'profile' %}
-						<a href="{{ page.url }}">
-							<div class="square-img transition" {% if page.featured-img %} style="background-image:  url( {{ page.featured-img }} );" {% endif %} >
-								<div class="center-content">
-									<span class="on-bg">
-										<h2>{{ page.header }}</h2>
-									</span>
-								</div>
-							</div>
-						</a>
-					{% endif %}
-				{% endfor %}
-			</div>
+<center>
+	<p>Learn more by downloading my <a href="/pages/resume-downloads.html">résumé</a> or connecting on <a href="https://www.linkedin.com/in/geloblancada/">LinkedIn</a>.</p>
+</center>
 
-			<center>
-				<p>Learn more by downloading my <a href="/pages/resume-downloads.html">résumé</a> or connecting on <a href="https://www.linkedin.com/in/geloblancada/">LinkedIn</a>.</p>
-			</center>
-			
-			<center>
-				<h1 class="quote" style="font-size: 10vmin; line-height: 11vmin;">Here are some of the things I have done...</h1>
-			</center>
+<center>
+	<h1 class="quote" style="font-size: 10vmin; line-height: 11vmin;">Here are some of the things I have done...</h1>
+</center>
 
-			<div class="content">
-				<div class="article">
-					<ul>
-						<li>Directed the $400MM USD network expansion of a North American telecommunications carrier by running a predictive big data simulation that leveraged a terabyte-scale database to forecast sales on the customer level and developed a detailed network plan with specifications down to last-mile connections to customer premises.</li>
-						<li>Generated client sales lift of up to 13% by creating a large-scale media portfolio optimization program that was used across the Asia Pacific. The algorithm used was custom-built to accommodate large and complex problems such as multiple year cross-market and cross-portfolio optimization of media assets at a weekly level.</li>
-						<li>Developed an automated flu-tracker that predicts flu incidence based on variables such as weather and search interest to help schedule marketing campaigns for cold and flu medicine. The flu-tracker was piloted across 5 markets in Australia and was subsequently rolled out to other Asia-Pacific countries.</li>
-						<li>Successfully predicted the winning candidate in the 2016 Philippine national elections months before traditional analysis as part of a competitive analysis for a client political party. Self-developed econometric models used measured the effect of media and non-media factors on candidate popularity.</li> 
-						<li>Improved user interactions in a chat bot app for a multinational insurance company using insights from natural language processing, resulting in an active user count increase of 73%.</li>
-						<li>Spearheaded the data science and data engineering aspect of an analysis of social media user behavior over the Chinese New Year. This was published in the <a href="https://www.scmp.com/magazines/post-magazine/article/2135277/instagram-reveals-hong-kongs-chinese-new-year-winners-and" target="_blank">South China Morning Post.</a></li>
-						<li>Improved the logistics efficiency of leading multinational sportswear brand by developing an SKU-level inventory prediction system for seasonal SKUs. The system uses K-Shape clustering to combine SKUs based on the shapes of their inventory curves before fitting regression models for each cluster.</li>
-					</ul>
+<div class="content">
+	<div class="article">
+		<ul>
+			<li>Directed the $400MM USD network expansion of a North American telecommunications carrier by running a predictive big data simulation that leveraged a terabyte-scale database to forecast sales on the customer level and developed a detailed network plan with specifications down to last-mile connections to customer premises.</li>
+			<li>Generated client sales lift of up to 13% by creating a large-scale media portfolio optimization program that was used across the Asia Pacific. The algorithm used was custom-built to accommodate large and complex problems such as multiple year cross-market and cross-portfolio optimization of media assets at a weekly level.</li>
+			<li>Developed an automated flu-tracker that predicts flu incidence based on variables such as weather and search interest to help schedule marketing campaigns for cold and flu medicine. The flu-tracker was piloted across 5 markets in Australia and was subsequently rolled out to other Asia-Pacific countries.</li>
+			<li>Successfully predicted the winning candidate in the 2016 Philippine national elections months before traditional analysis as part of a competitive analysis for a client political party. Self-developed econometric models used measured the effect of media and non-media factors on candidate popularity.</li> 
+			<li>Improved user interactions in a chat bot app for a multinational insurance company using insights from natural language processing, resulting in an active user count increase of 73%.</li>
+			<li>Spearheaded the data science and data engineering aspect of an analysis of social media user behavior over the Chinese New Year. This was published in the <a href="https://www.scmp.com/magazines/post-magazine/article/2135277/instagram-reveals-hong-kongs-chinese-new-year-winners-and" target="_blank">South China Morning Post.</a></li>
+			<li>Improved the logistics efficiency of leading multinational sportswear brand by developing an SKU-level inventory prediction system for seasonal SKUs. The system uses K-Shape clustering to combine SKUs based on the shapes of their inventory curves before fitting regression models for each cluster.</li>
+		</ul>
+	</div>
+</div>			
+
+<center>
+	<p>Learn more by downloading my <a href="/pages/resume-downloads.html">résumé</a> or connecting on <a href="https://www.linkedin.com/in/geloblancada/">LinkedIn</a>.</p>
+</center>
+
+<center>
+	<h1 class="quote" style="font-size: 10vmin; line-height: 11vmin;">Featured Blog Posts</h1>
+</center>
+<h1></h1>
+
+<div class="flex-container">
+	{% for post in site.posts %}
+		{% if post.tags contains 'featured' %}
+			<a href="{{ post.url }}">
+				<div class="square-img transition" {% if post.featured-img %} style="background-image:  url( {{ post.featured-img }} );" {% endif %} >
+					<div class="center-content">
+						<span class="on-bg">
+							<h3>{% if post.header %} {{ post.header }} {% else %} {{ post.title }} {% endif %}</h3>
+						</span>
+					</div>
 				</div>
-			</div>			
+			</a>
+		{% endif %}
+	{% endfor %}
+</div>
 
-			<center>
-				<p>Learn more by downloading my <a href="/pages/resume-downloads.html">résumé</a> or connecting on <a href="https://www.linkedin.com/in/geloblancada/">LinkedIn</a>.</p>
-			</center>
-
-			<center>
-				<h1 class="quote" style="font-size: 10vmin; line-height: 11vmin;">Featured Blog Posts</h1>
-			</center>
-			<h1></h1>
-
-			<div class="flex-container">
-				{% for post in site.posts %}
-					{% if post.tags contains 'featured' %}
-						<a href="{{ post.url }}">
-							<div class="square-img transition" {% if post.featured-img %} style="background-image:  url( {{ post.featured-img }} );" {% endif %} >
-								<div class="center-content">
-									<span class="on-bg">
-										<h3>{% if post.header %} {{ post.header }} {% else %} {{ post.title }} {% endif %}</h3>
-									</span>
-								</div>
-							</div>
-						</a>
-					{% endif %}
-				{% endfor %}
-			</div>
-
-			<center>
-				<h1 class="quote" style="font-size: 10vmin; line-height: 11vmin;">Reach out to me on <a href="https://www.linkedin.com/in/geloblancada/" style="text-decoration: none;">LinkedIn</a> or via <a href="mailto:naturalproblemsolver@gmail.com" style="text-decoration: none;">Email</a></h1>
-			</center>			
-
-			<footer>
-				<hr>
-				© 2019 Victor Blancada. All Rights Reserved.
-			</footer>
-			<div class="spacer">
-			</div>
-		</div>
-		<!--
-		<footer>
-			Copyright © 2019 Victor Blancada. All Rights Reserved.
-		</footer>
-		-->
-	</body>
-</html>
+<center>
+	<h1 class="quote" style="font-size: 10vmin; line-height: 11vmin;">Reach out to me on <a href="https://www.linkedin.com/in/geloblancada/" style="text-decoration: none;">LinkedIn</a> or via <a href="mailto:naturalproblemsolver@gmail.com" style="text-decoration: none;">Email</a></h1>
+</center>			
