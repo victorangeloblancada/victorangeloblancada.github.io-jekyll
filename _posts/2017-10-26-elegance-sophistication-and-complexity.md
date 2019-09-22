@@ -9,7 +9,7 @@ dropcap: True
 ---
 
 <script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
 </script>
 
 The saying, "Everything should be made as simple as possible, but no simpler," is widely attributed to Albert Einstein, yet there is no evidence that he actually said this, or at least that he used those specific words. Scholars hypothesize that this misquotation stemmed from a lecture Einstein delivered at Oxford where he actually said, "It can scarcely be denied that the supreme goal of all theory is to make the irreducible basic elements as simple and as few as possible without having to surrender the adequate representation of a single datum of experience." Apparently, Einstein's fans took his words' meaning to heart, if not the words themselves.
