@@ -6,10 +6,11 @@ featured-img: /assets/images/space-lights.jpg
 ---
 <center>
 	<h1 class="large quote">Hi, I'm</h1>
-	<h1 class="large quote highlight">Victor Angelo Blancada</h1>
+	<h1 class="large quote emphasized">Victor Angelo Blancada</h1>
 </center>
 
 <div class="flex-container">
+	<!--
 	{% for page in site.pages %}
 		{% if page.category == 'profile' %}
 			<a href="{{ page.url }}">
@@ -22,6 +23,18 @@ featured-img: /assets/images/space-lights.jpg
 				</div>
 			</a>
 		{% endif %}
+	{% endfor %}
+	-->
+	{% for item in site.data.profile %}
+		<a href="{{ item.url }}">
+			<div class="square-img transition" {% if item.featured-img %} style="background-image:  url( {{ item.featured-img }} );" {% endif %} >
+				<div class="center-content">
+					<span class="on-bg">
+						<h2>{{ item.header }}</h2>
+					</span>
+				</div>
+			</div>
+		</a>
 	{% endfor %}
 </div>
 

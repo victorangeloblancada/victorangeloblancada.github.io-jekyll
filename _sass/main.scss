@@ -85,7 +85,7 @@ $light-color: #FFF;
 $dark-color: #22181C;
 $accent-1-color: #084887;
 $accent-2-color: #F58A07;
-$accent-3-color: #87B38D;
+$accent-3-color: #F6F6F6;
 
 $nav-height: 80px;
 $nav-height-desktop: 50px;
@@ -199,7 +199,48 @@ blockquote {
 	line-height: 40px;
 	font-style: italic;
 	padding: 3px;
-	border-left: 3px solid $accent-3-color;
+	border-left: 3px solid $accent-2-color;
+}
+
+/*
+figure.highlight, div.language-python {
+	background-color: $accent-3-color;
+	border-style: solid;
+	border-color: $dark-color;
+	border-radius: 5px;
+	border-width: 1px;
+	padding: 5px;
+	margin: 5px;
+	overflow-x: auto;
+}
+*/
+
+div.highlighter-rouge {
+	overflow-x: auto;
+	margin: 5px;
+	max-width: 80vw;
+}
+
+div.dataframe {
+	font-family: $sans-serif-font;
+	overflow-x: auto;
+	//max-width: 80vw;
+}
+
+table.dataframe th {
+	font-weight: bold;
+	//background-color: $accent-1-color;
+	//color: $light-color;
+}
+
+table.dataframe tr:nth-child(odd) {
+	//background-color: $light-color;
+	//color: $dark-color;
+}
+
+table.dataframe tr:nth-child(even) {
+	//background-color: $accent-2-color;
+	//color: $light-color;
 }
 
 .large {
@@ -225,7 +266,7 @@ blockquote {
 	font-weight: 600;
 }
 
-.highlight {
+.emphasized {
 	color: $accent-2-color;
 	fill: $accent-2-color;
 }
@@ -303,7 +344,7 @@ div.search-container {
 
 input[type=text] {
 	border: none;
-	border-bottom: 2px solid $accent-3-color;
+	border-bottom: 2px solid $accent-2-color;
 	font-family: $sans-serif-font;
 	line-height: 30px;
 	background-color: $light-color;

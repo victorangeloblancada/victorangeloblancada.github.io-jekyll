@@ -126,7 +126,31 @@ blockquote {
   line-height: 40px;
   font-style: italic;
   padding: 3px;
-  border-left: 3px solid #87B38D; }
+  border-left: 3px solid #F58A07; }
+
+/*
+figure.highlight, div.language-python {
+	background-color: $accent-3-color;
+	border-style: solid;
+	border-color: $dark-color;
+	border-radius: 5px;
+	border-width: 1px;
+	padding: 5px;
+	margin: 5px;
+	overflow-x: auto;
+}
+*/
+div.highlighter-rouge {
+  overflow-x: auto;
+  margin: 5px;
+  max-width: 80vw; }
+
+div.dataframe {
+  font-family: Avenir, Futura, "Century Gothic", sans-serif;
+  overflow-x: auto; }
+
+table.dataframe th {
+  font-weight: bold; }
 
 .large {
   font-size: 10vmin;
@@ -148,7 +172,7 @@ blockquote {
   color: #F58A07;
   font-weight: 600; }
 
-.highlight {
+.emphasized {
   color: #F58A07;
   fill: #F58A07; }
 
@@ -204,7 +228,7 @@ div.search-container {
 
 input[type=text] {
   border: none;
-  border-bottom: 2px solid #87B38D;
+  border-bottom: 2px solid #F58A07;
   font-family: Avenir, Futura, "Century Gothic", sans-serif;
   line-height: 30px;
   background-color: #FFF;

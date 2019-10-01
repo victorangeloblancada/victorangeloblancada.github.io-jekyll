@@ -1,11 +1,27 @@
 [
 	
 		{
+			"title"    : "GIFs from Command Line",
+			"category" : "blog",
+			"tags"     : "gif, command, line, coding, gifs, tumblr",
+			"url"      : "/blog/2019/09/20/command-line-gifs.html",
+			"date"     : "2019-09-20 00:00:00 +0800"
+		} ,
+	
+		{
 			"title"    : "AI in Medicine",
 			"category" : "blog",
 			"tags"     : "ai, ml, artificial, intelligence, machine, learning, medicine, health",
 			"url"      : "/blog/2019/08/23/ai-in-medicine.html",
 			"date"     : "2019-08-23 00:00:00 +0800"
+		} ,
+	
+		{
+			"title"    : "Creating a Responsive Website from Scratch for Free",
+			"category" : "blog",
+			"tags"     : "html, web, development, ux, ui, user, experience, interface, ergonomics",
+			"url"      : "/blog/2019/07/01/ergonomic-mobile-site.html",
+			"date"     : "2019-07-01 00:00:00 +0800"
 		} ,
 	
 		{
@@ -87,7 +103,7 @@
 			"category" : "",
 			"tags"     : "",
 			"url"      : "/pages/about.html",
-			"date"     : "2019-09-21 02:42:08 +0800"
+			"date"     : "2019-10-01 22:54:10 +0800"
 		} ,
 	
 		{

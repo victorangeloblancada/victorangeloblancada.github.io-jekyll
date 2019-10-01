@@ -9,15 +9,17 @@ title: Blog
 <div class="flex-container">
 	{% for post in site.posts %}
 		{% if post.category == 'blog' %}
-			<a href="{{ post.url }}">
-				<div class="square-img transition" {% if post.featured-img %} style="background-image:  url( {{ post.featured-img }} );" {% endif %} >
-					<div class="center-content">
-						<span class="on-bg">
-							<h3>{% if post.header %} {{ post.header }} {% else %} {{ post.title }} {% endif %}</h3>
-						</span>
+			{% if post.draft != true %}
+				<a href="{{ post.url }}">
+					<div class="square-img transition" {% if post.featured-img %} style="background-image:  url( {{ post.featured-img }} );" {% endif %} >
+						<div class="center-content">
+							<span class="on-bg">
+								<h3>{% if post.header %} {{ post.header }} {% else %} {{ post.title }} {% endif %}</h3>
+							</span>
+						</div>
 					</div>
-				</div>
-			</a>
+				</a>
+			{% endif %}
 		{% endif %}
 	{% endfor %}
 </div>
