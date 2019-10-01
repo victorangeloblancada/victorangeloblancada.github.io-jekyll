@@ -1,0 +1,9 @@
+- header: "I am a <br> Data Scientist"
+  url: /pages/data-scientist.html
+  featured-img: /assets/images/charts.jpg
+- header: "I am an <br> AI Developer"
+  url: /pages/ai-developer.html
+  featured-img: /assets/images/coding.jpg
+- header: "I am a <br> Strategy Consultant"
+  url: /pages/strategy-consultant.html
+  featured-img: /assets/images/consultant.jpg

@@ -14,6 +14,10 @@ Attribution refers to the set of rules that determine which ad gets credit for a
 
 The full notebook with Python code follows while an interactive version may be found on Colab [here](https://colab.research.google.com/drive/1m_SMStJUN0Q08eaNhIa0R2dkQS6HAewT).
 
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
 ## Data-Driven Attribution
 
 To more accurately depict the contribution of each touchpoint to the conversion, a more mathematically robust method of attribution must be applied. One way is to use a Markov chain model to represent the possible customer journeys. Markov chains show the possible touchpoint transitions as probabilities based on the current touchpoint. Markov chains also make it easier to compute the probability of conversion from the start of the journey by summing the probabilities of conversion across all possible paths.
@@ -519,14 +523,6 @@ journey_id
 tp_data.attribute_removal('c1')
 ```
 
-```
-/usr/local/lib/python3.6/dist-packages/ipykernel_launcher.py:40: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html#indexing-view-versus-copy
-```
-
 
 
 ```python
@@ -620,11 +616,15 @@ The removal effect represents the conversions potentially lost if a touchpoint i
 
 The removal effect can also be used to estimate the number of conversions attributed to each touchpoint. Since we want to base the attribution on the importance of each touchpoint, we distribute the conversions based on each touchpoint's removal effect. For example, to get the conversions attributed to c1, we need to divide the number of conversions by the sum of the removal effects for all touchpoints and then multiply that value by the removal effect for touchpoint c1 - essentially attributing c1 based on its share of removal effect.
 
+<div style="overflow-x: scroll">
+
 $$ conversions_{c1} = \sum conversions \times \frac{removal\ effect_{c1}}{\sum_{i=1}^n removal\ effect_i} $$
 
 $$ conversions_{c1} = 1 \times \frac{50\%}{50\%+100\%+100\%} $$
 
 $$ conversions_{c1} = 0.2 $$
+
+</div>
 
 The full conversion attribution for each touchpoint in the sample problem is given below:
 
