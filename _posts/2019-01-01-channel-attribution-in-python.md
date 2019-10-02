@@ -12,12 +12,6 @@ Attribution refers to the set of rules that determine which ad gets credit for a
 
 <!--break-->
 
-The full notebook with Python code follows while an interactive version may be found on Colab [here](https://colab.research.google.com/drive/1m_SMStJUN0Q08eaNhIa0R2dkQS6HAewT).
-
-<script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
-</script>
-
 ## Data-Driven Attribution
 
 To more accurately depict the contribution of each touchpoint to the conversion, a more mathematically robust method of attribution must be applied. One way is to use a Markov chain model to represent the possible customer journeys. Markov chains show the possible touchpoint transitions as probabilities based on the current touchpoint. Markov chains also make it easier to compute the probability of conversion from the start of the journey by summing the probabilities of conversion across all possible paths.
@@ -32,11 +26,11 @@ Data-driven attribution is calculated by measuring the removal effect. The remov
 
 This notebook uses Python to solve the sample attribution problem which Sergey Bril discussed on his website. This solution does not use specialized libraries and instead implements the mathematics of multi-channel attribution directly onto a Pandas dataframe. The original problem can be found [here](https://analyzecore.com/2016/08/03/attribution-model-r-part-1/).
 
-## Sources:
+The full notebook with Python code follows while an interactive version may be found on Colab [here](https://colab.research.google.com/drive/1m_SMStJUN0Q08eaNhIa0R2dkQS6HAewT).
 
-Anderl, E., Becker, I., Wangenheim, F. V., & Schumann, J. H. (2014). Mapping the customer journey: A graph-based framework for online attribution modeling. Available at SSRN: [link](http://ssrn.com/abstract=2343077) or [link](http://dx.doi.org/10.2139/ssrn.2343077)
-
-Bryl, S. (2018). Marketing Multi-Channel Attribution model with R (part 1: Markov chains concept) - AnalyzeCore by Sergey Bryl' - data is beautiful, data is a story. [online] AnalyzeCore by Sergey Bryl' - data is beautiful, data is a story. Available at: [link](https://analyzecore.com/2016/08/03/attribution-model-r-part-1/) [Accessed 23 Oct. 2018].
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script>
 
 ## Data-Driven Attribution in Python
 
@@ -652,3 +646,9 @@ The full conversion attribution for each touchpoint in the sample problem is giv
     </tr>
   </table>
 </div>
+
+## Sources:
+
+Anderl, E., Becker, I., Wangenheim, F. V., & Schumann, J. H. (2014). Mapping the customer journey: A graph-based framework for online attribution modeling. Available at SSRN: [link](http://ssrn.com/abstract=2343077) or [link](http://dx.doi.org/10.2139/ssrn.2343077)
+
+Bryl, S. (2018). Marketing Multi-Channel Attribution model with R (part 1: Markov chains concept) - AnalyzeCore by Sergey Bryl' - data is beautiful, data is a story. [online] AnalyzeCore by Sergey Bryl' - data is beautiful, data is a story. Available at: [link](https://analyzecore.com/2016/08/03/attribution-model-r-part-1/) [Accessed 23 Oct. 2018].

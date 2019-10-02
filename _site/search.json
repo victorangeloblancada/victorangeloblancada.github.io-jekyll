@@ -1,6 +1,14 @@
 [
 	
 		{
+			"title"    : "Color Palettes Using K-Means Clustering",
+			"category" : "blog",
+			"tags"     : "color, palette, image, processing, kmeans, clustering",
+			"url"      : "/blog/2019/10/01/color-palette-clustering.html",
+			"date"     : "2019-10-01 00:00:00 +0800"
+		} ,
+	
+		{
 			"title"    : "GIFs from Command Line",
 			"category" : "blog",
 			"tags"     : "gif, command, line, coding, gifs, tumblr",
@@ -103,7 +111,7 @@
 			"category" : "",
 			"tags"     : "",
 			"url"      : "/pages/about.html",
-			"date"     : "2019-10-01 23:04:02 +0800"
+			"date"     : "2019-10-02 22:40:39 +0800"
 		} ,
 	
 		{
