@@ -13,7 +13,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Channel Attribution in Python</title>
 		<!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Channel Attribution in Python</title>
+<title>Channel Attribution in Python | Victor Angelo Blancada</title>
 <meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="Channel Attribution in Python" />
 <meta property="og:locale" content="en_US" />
@@ -21,10 +21,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:description" content="Attribution refers to the set of rules that determine which ad gets credit for a sale or a conversion. The rise of the Internet allowed marketers to track user interactions throughout the entire customer journey but most advertisers still attribute 100% of conversions to the last touch channel or the last ad that the user clicked before converting." />
 <link rel="canonical" href="http://localhost:4000/blog/2019/01/01/channel-attribution-in-python.html" />
 <meta property="og:url" content="http://localhost:4000/blog/2019/01/01/channel-attribution-in-python.html" />
+<meta property="og:site_name" content="Victor Angelo Blancada" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-01-01T00:00:00+08:00" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/blog/2019/01/01/channel-attribution-in-python.html","headline":"Channel Attribution in Python","dateModified":"2019-01-01T00:00:00+08:00","datePublished":"2019-01-01T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2019/01/01/channel-attribution-in-python.html"},"description":"Attribution refers to the set of rules that determine which ad gets credit for a sale or a conversion. The rise of the Internet allowed marketers to track user interactions throughout the entire customer journey but most advertisers still attribute 100% of conversions to the last touch channel or the last ad that the user clicked before converting.","@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2019/01/01/channel-attribution-in-python.html"},"url":"http://localhost:4000/blog/2019/01/01/channel-attribution-in-python.html","description":"Attribution refers to the set of rules that determine which ad gets credit for a sale or a conversion. The rise of the Internet allowed marketers to track user interactions throughout the entire customer journey but most advertisers still attribute 100% of conversions to the last touch channel or the last ad that the user clicked before converting.","@type":"BlogPosting","headline":"Channel Attribution in Python","dateModified":"2019-01-01T00:00:00+08:00","datePublished":"2019-01-01T00:00:00+08:00","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 		<link rel="stylesheet" href="https://indestructibletype.com/fonts/Jost.css" type="text/css" charset="utf-8" />
@@ -121,7 +122,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>To more accurately depict the contribution of each touchpoint to the conversion, a more mathematically robust method of attribution must be applied. One way is to use a Markov chain model to represent the possible customer journeys. Markov chains show the possible touchpoint transitions as probabilities based on the current touchpoint. Markov chains also make it easier to compute the probability of conversion from the start of the journey by summing the probabilities of conversion across all possible paths.</p>
 
-<p>Sergey Bril discussed how to run data-driven attribution analysis using R on his <a href="https://analyzecore.com/2016/08/03/attribution-model-r-part-1/">website</a>. For illustrative purposes we will reuse the sample problem presented in Sergey Bril’s original article. The sample Markov chain representing possible customer journeys is shown below:</p>
+<p>Sergey Bril discussed how to run data-driven channel attribution analysis using R on his <a href="https://analyzecore.com/2016/08/03/attribution-model-r-part-1/">website</a>. In this article, I will show how to perform data-driven channel attribution analysis using Python. For illustrative purposes I will reuse the sample problem presented in Sergey Bril’s original article. The sample Markov chain representing possible customer journeys is shown below:</p>
 
 <p><img src="https://i0.wp.com/analyzecore.com/wp-content/uploads/2016/07/Screenshot-2016-07-22-14.26.50.png" alt="Markov Chain" /></p>
 
@@ -129,7 +130,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p><img src="https://i0.wp.com/analyzecore.com/wp-content/uploads/2016/07/Screenshot-2016-07-25-21.26.57.png" alt="Removal Effect" /></p>
 
-<p>This notebook uses Python to solve the sample attribution problem which Sergey Bril discussed on his website. This solution does not use specialized libraries and instead implements the mathematics of multi-channel attribution directly onto a Pandas dataframe. The original problem can be found <a href="https://analyzecore.com/2016/08/03/attribution-model-r-part-1/">here</a>.</p>
+<p>I will use Python to solve the sample attribution problem which Sergey Bril discussed on his website. This solution does not use specialized libraries and instead implements the mathematics of multi-channel attribution directly onto a Pandas dataframe. The original problem can be found <a href="https://analyzecore.com/2016/08/03/attribution-model-r-part-1/">here</a>.</p>
 
 <p>The full notebook with Python code follows while an interactive version may be found on Colab <a href="https://colab.research.google.com/drive/1m_SMStJUN0Q08eaNhIa0R2dkQS6HAewT">here</a>.</p>
 

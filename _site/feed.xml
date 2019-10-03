@@ -1,0 +1,1023 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-03T23:15:20+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with a proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">Color Palettes Using K-Means Clustering</title><link href="http://localhost:4000/blog/2019/10/01/color-palette-clustering.html" rel="alternate" type="text/html" title="Color Palettes Using K-Means Clustering" /><published>2019-10-01T00:00:00+08:00</published><updated>2019-10-01T00:00:00+08:00</updated><id>http://localhost:4000/blog/2019/10/01/color-palette-clustering</id><content type="html" xml:base="http://localhost:4000/blog/2019/10/01/color-palette-clustering.html">&lt;p&gt;K-means clustering is an unsupervised learning technique that groups individual data points by identifying centroids such that each individual data point is assigned a cluster based on which centroid is closest to it in n-dimensional space. The goal of K-means clustering is to find the set of &lt;em&gt;K&lt;/em&gt; centroids such that the difference between individual data points within a cluster is minimized. The cluster centroids therefore serve as the “prototype” of the cluster.&lt;/p&gt;
+
+&lt;p&gt;To illustrate this principle, we will apply K-means clustering to pixel data from an image. Every pixel will be treated as an individual data point with RGB data. By applying K-means clustering on the RGB values of image pixels, the algorithm will determine the cluster centroids which are representative of an image cluster, giving us the color palette of an image.&lt;/p&gt;
+
+&lt;p&gt;The code to implement K-means clustering using scikit-learn follows. An interactive version of this notebook can be found on &lt;a href=&quot;https://colab.research.google.com/drive/1EWcej7Hm2F_tGf7-SB2UX6uJ-5QvCEKb&quot;&gt;Colab&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;matplotlib&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inline&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Import libraries&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pandas&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;matplotlib&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pyplot&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;imageio&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;skimage.transform&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resize&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn.cluster&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KMeans&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;matplotlib.colors&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to_hex&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;To avoid getting different color palettes from different K-means cluster seeds, the random seed is fixed.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Fix random seed&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;seed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Read the image file as 2-D array of RGB values.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Read image file as 2-D array of RGB values&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;filepath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'https://images.unsplash.com/photo-1522410818928-5522dacd5066'&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filepath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Show image&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'off'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/color-palette.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Resize the image to a 200 by 200 pixel image.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Get each pixel as an array of RGB values.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DataFrame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;columns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'R'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'G'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'B'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Cluster the pixels into 5 colors based on the RGB value.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;kmeans&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KMeans&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_clusters&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;random_state&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Fit and assign clusters&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Cluster'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kmeans&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit_predict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Get the color palette from the cluster centers.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;palette&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kmeans&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cluster_centers_&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Convert data to format accepted by imshow&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;palette_list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;color&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;palette&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;palette_list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tuple&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Show the color palette, along with the hexadecimal code for the color.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Show color palette&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;color&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;palette_list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_hex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;figure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;figsize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'off'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#c1a4a9
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/palette-1.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#38293c
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/palette-2.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#f2ebed
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/palette-3.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#df8c18
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/palette-4.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#1565a1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/palette-5.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Recreate the image with using only colors from color palette.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Replace every pixel's color with the color of its cluster centroid&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'R_cluster'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Cluster'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;palette_list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'G_cluster'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Cluster'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;palette_list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'B_cluster'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Cluster'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;palette_list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Convert the dataframe back to a numpy array&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;img_c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'R_cluster'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'G_cluster'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'B_cluster'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Reshape the data back to a 200x200 image&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;img_c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img_c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Resize the image back to the original aspect ratio&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;img_c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img_c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;800&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Display the image&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'off'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img_c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/color-palette-clustered.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Voila!&lt;/p&gt;</content><author><name></name></author><category term="blog" /><category term="color" /><category term="palette" /><category term="image" /><category term="processing" /><category term="kmeans" /><category term="clustering" /><summary type="html">K-means clustering is an unsupervised learning technique that groups individual data points by identifying centroids such that each individual data point is assigned a cluster based on which centroid is closest to it in n-dimensional space. The goal of K-means clustering is to find the set of K centroids such that the difference between individual data points within a cluster is minimized. The cluster centroids therefore serve as the “prototype” of the cluster.</summary></entry><entry><title type="html">AI in Medicine</title><link href="http://localhost:4000/blog/2019/08/23/ai-in-medicine.html" rel="alternate" type="text/html" title="AI in Medicine" /><published>2019-08-23T00:00:00+08:00</published><updated>2019-08-23T00:00:00+08:00</updated><id>http://localhost:4000/blog/2019/08/23/ai-in-medicine</id><content type="html" xml:base="http://localhost:4000/blog/2019/08/23/ai-in-medicine.html">&lt;p&gt;There are few fields where expert knowledge has such a profound effect on human life as medicine. Doctors train for years to gain the skills required to diagnose diseases and recommend the appropriate treatment. While medical knowledge has developed by leaps and bounds in the past century, the lack of trained medical professionals relative to their patients means that the delivery of potentially lifesaving cures is often delayed.&lt;/p&gt;
+
+&lt;p&gt;It is therefore no surprise that experts are turning to artificial intelligence (AI) to increase doctor productivity and thereby improve the efficiency of healthcare. AI builds upon traditional computer automation by introducing algorithms that can learn from data (i.e. machine learning) instead of requiring a programmer to define how a machine should perform a particular action. With recent advances in machine learning, computers are quickly achieving the same level of competence as human doctors in specific tasks, sometimes even exceeding them.&lt;/p&gt;
+
+&lt;p&gt;To give a specific example, the Stanford Machine Learning Group has developed an algorithm called CheXNet that can scan chest X-rays and diagnose pneumonia with accuracy exceeding those of practicing radiologists. This has the potential to save countless lives as chest X-rays are a critical tool for screening, diagnosis, and management of pneumonia, a disease which is responsible for more than 1 million hospitalizations and 50,000 deaths per year in the United States alone. It is estimated that it takes at least thirteen years of education and training after high school to become a radiologist with the skills to accurately interpret chest X-rays, leading to a shortage of experts, with an estimated two thirds of the global population lacking access to radiology diagnostics.&lt;/p&gt;
+
+&lt;p&gt;With the spread of wearable technology, diagnostic tools are no longer limited to hospitals but can now be found in the health sensors of smartwatches. The Apple Watch uses a combination of optical and electrocardiogram sensors built into the watch’s crown and back to record its wearer’s heart rate and predict atrial fibrillation, a leading cause of stroke, with 97% accuracy.&lt;/p&gt;
+
+&lt;p&gt;Wearable devices also extend diagnostic methods to patient monitoring, with patient health data collected 24/7 instead of only during hospital visits, allowing doctors to work with accurate symptom data instead of second-hand information from patient and caregiver interviews. This improvement in both data quality and data quantity makes it more necessary than before for doctors to leverage AI systems to sift through the data for relevant information.&lt;/p&gt;
+
+&lt;p&gt;Beyond diagnosis and monitoring, AI can even be used to automate drug discovery. In 2012, Merck sponsored a drug discovery competition where participants were given a dataset describing the chemical structure of thousands of molecules and were asked to predict which were most likely to lead to new drugs. Remarkably, the winning team had only decided to enter the competition at the last minute with no specific knowledge of biochemistry, instead relying on machine learning to discover relationships between molecular structure and drug efficacy.&lt;/p&gt;
+
+&lt;p&gt;More recently, the United Kingdom has announced plans to pioneer the world’s first fully-automated drug discovery facility at the Rosalind Franklin Institute in Harwell, Oxfordshire. The facility will harness robotics and AI to investigate hundreds or thousands of candidate molecules simultaneously, thereby increasing productivity five to ten times. This is expected to significantly cut down on the time and cost associated with drug research - it often takes over ten years bring a new drug to market with a development cost of approximately USD $2 billion.&lt;/p&gt;
+
+&lt;p&gt;With the high costs associated with healthcare today, AI can make healthcare more accessible by augmenting the expertise of doctors and other medical professionals and scaling services to reach those who need it most.&lt;/p&gt;</content><author><name></name></author><category term="blog" /><category term="ai" /><category term="ml" /><category term="artificial" /><category term="intelligence" /><category term="machine" /><category term="learning" /><category term="medicine" /><category term="health" /><summary type="html">There are few fields where expert knowledge has such a profound effect on human life as medicine. Doctors train for years to gain the skills required to diagnose diseases and recommend the appropriate treatment. While medical knowledge has developed by leaps and bounds in the past century, the lack of trained medical professionals relative to their patients means that the delivery of potentially lifesaving cures is often delayed.</summary></entry><entry><title type="html">10,000 Hours, Artificial Intelligence, and the Democratization of Expertise</title><link href="http://localhost:4000/blog/2019/03/25/democritization-of-expertise.html" rel="alternate" type="text/html" title="10,000 Hours, Artificial Intelligence, and the Democratization of Expertise" /><published>2019-03-25T00:00:00+08:00</published><updated>2019-03-25T00:00:00+08:00</updated><id>http://localhost:4000/blog/2019/03/25/democritization-of-expertise</id><content type="html" xml:base="http://localhost:4000/blog/2019/03/25/democritization-of-expertise.html">&lt;h2 id=&quot;10000-hours-of-training&quot;&gt;10,000 Hours of Training&lt;/h2&gt;
+
+&lt;p&gt;What do Bill Gates and the Beatles have in common? Apart from being extremely successful in their respective fields, both, according to Malcolm Gladwell, have 10,000 hours or even more of practice to thank for their success. In his book, Outliers: The Story of Success, Gladwell attributes the Beatles’ musical success to playing over a thousand overnight shows in Hamburg. Meanwhile, in Gladwell’s interview with Bill Gates, the Microsoft founder says that having access to a high school computer a time when they were not commonplace helped him succeed. Gladwell asserts that this early exposure to computing meant that by the time computers were commonplace, Gates had exceeded the requisite 10,000 hours of practice for success.&lt;/p&gt;
+
+&lt;h2 id=&quot;machine-minds&quot;&gt;Machine Minds&lt;/h2&gt;
+
+&lt;p&gt;Apart from making Bill Gates the richest man in the world for a significant part of the past few decades, computers have brought on many changes since they were introduced. While Bill Gates and numerous other programmers have long had to give very specific instructions to computers to automate tasks, software development has evolved such that computers may be programmed to learn how to do tasks instead of being explicitly programmed. It’s clichéd, but machine learning truly has brought an entirely new paradigm to software development and it is set to change our relationship with knowledge and practice altogether.&lt;/p&gt;
+
+&lt;p&gt;Computers have a history of beating humans at games, from Deep Blue defeating Garry Kasparov around two decades ago to AlphaGo beating Lee Sedol and AlphaGo Master besting Ke Jie in more recent years. The illustration that accompanies this article was not painted by a human but was created using a technique called neural style transfer where a computer “paints” an image based on the style of a reference image. This is even before going into the ubiquitous use of artificial intelligence in more “mundane” fields such as natural language processing and image recognition.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Machines are more suited to the rigorous and time-consuming training that has traditionally been linked with success.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This phenomenon does not disprove the idea that prolonged training (or in Malcolm Gladwell’s words, er, numbers, 10,000 hours) leads to the skill necessary for success but instead validates it as artificial intelligence is fueled by machine learning which literally translates to machines spending hours training using data to solve problems. This only shows that machines are more suited to the rigorous and time-consuming training that has traditionally been linked with success.&lt;/p&gt;
+
+&lt;h2 id=&quot;human-success-in-the-age-of-the-machine&quot;&gt;Human Success in the Age of the Machine&lt;/h2&gt;
+
+&lt;p&gt;What then must we humans do to succeed when practice is something that a machine can invariably do better? Success happens when talent meets opportunity, and there are fortunately still areas where humans can add value and have the opportunity to succeed.&lt;/p&gt;
+
+&lt;p&gt;Having attempted to automate much of his production line, Elon Musk once remarked that “humans are underrated.” There are complex and varied reasons why this statement rings true but it wouldn’t be too much of an oversimplification to say that this is because machines need data to learn. To give a concrete example, a machine that has been programmed or trained to distinguish between Tesla Model 3’s and Model X’s can be trained on a photos of red Model 3’s and white Model X’s and may thus mistake any white object as a Model X. This may seem like a trivial example but several incorrectly trained machines in a fully-automated factory will lead to disaster without human intervention.&lt;/p&gt;
+
+&lt;p&gt;This may be explained as humans gaining an edge over machines not due to our depth of knowledge in a specific field but due to our breadth of knowledge across several fields. Of course, one may argue that as artificial intelligence goes beyond artificial narrow intelligence (ANI) which is can beat humans at specific tasks to artificial general intelligence (AGI) that can show expertise across all fields this statement is invalidated but that time has not come yet.&lt;/p&gt;
+
+&lt;p&gt;For now, the machines are here and they can already practice better than any human and for longer than any human. Fortunately for us, the machines are not necessarily our competitors but are generally at our disposal. Machines have always been here to automate structured and repetitive processes — what has changed is that the task of learning now falls under this realm of processes that can be automated thanks to advances in machine learning.&lt;/p&gt;
+
+&lt;p&gt;The onus therefore lies on us to best utilize machines to increase productivity and improve quality of life. This means that the more tedious parts of the task of learning can be outsourced to machines. This is not to say that the pursuit of knowledge should be abandoned entirely but rather that machines can be leveraged to greatly accelerate this process.&lt;/p&gt;
+
+&lt;p&gt;Artificial intelligence is already being used extensively in the sciences. Astronomers utilize classification algorithms in conjunction with computer vision to quickly process data collected by telescopes and identify patterns. CERN relies heavily on a combination of neural networks and gradient-boosted models to efficiently distinguish between particle signals and background noise in the huge amounts of data generated by experiments using particle accelerators. The alternative would require scientists to spend hours or days or even weeks of precious time to run the analysis manually. The cost of time lost developing artificial intelligence is far less than the price of human effort wasted. Soon, every organization will need to leverage artificial intelligence to stay competitive.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/1000/1*GbBnz4lTLu0sgrp-cj0DcA.jpeg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;With machines doing the heavy lifting, humans are free to focus on other tasks. In the sciences, this may involve brainstorming theories and allowing machines to validate the underlying mathematics. In a business setting, this means that repetitive tasks where performance scales with practice are best passed off to machines while humans do more strategic work in guiding the overall company direction — the worker of tomorrow is not a craftsman but a manager of machines.&lt;/p&gt;
+
+&lt;p&gt;Taking this idea further, one may say that years of experience on the job will no longer matter as heavily as they used to as long as one displays the necessary skills in critical thinking and adaptability that are commonly associated with managerial roles. Previously, employees progressed on the career ladder on the basis of tenure but, with machines gaining work experience on behalf of human workers, the best employees of tomorrow will merit their positions through business savvy and intelligent application of automation.&lt;/p&gt;
+
+&lt;p&gt;In a world where learning itself is increasingly automated, it isn’t just how many hours of effort and work experience that is important but also the skill to identify where effort pays off. The age of craftsmen learning their métier through years of practice is coming to an end but this need not be the end of human productivity and expertise. On the contrary, machine learning has the potential to democratize expertise as long as the data and computing power required is made available.&lt;/p&gt;</content><author><name></name></author><category term="blog" /><category term="ai" /><category term="artificial" /><category term="intelligence" /><category term="expert" /><category term="expertise" /><category term="training" /><category term="featured" /><summary type="html">10,000 Hours of Training</summary></entry><entry><title type="html">AI Biases and Independent Variables</title><link href="http://localhost:4000/blog/2019/01/20/ai-biases-and-independent-variables.html" rel="alternate" type="text/html" title="AI Biases and Independent Variables" /><published>2019-01-20T00:00:00+08:00</published><updated>2019-01-20T00:00:00+08:00</updated><id>http://localhost:4000/blog/2019/01/20/ai-biases-and-independent-variables</id><content type="html" xml:base="http://localhost:4000/blog/2019/01/20/ai-biases-and-independent-variables.html">&lt;p&gt;Quartz recently published a &lt;a href=&quot;https://qz.com/1515889/aristotles-binary-philosophies-created-todays-ai-bias/&quot;&gt;thought-provoking article by Twain Liu&lt;/a&gt; that argues that AI bias can be traced all the way back to Aristotle’s philosophy of duality. While the author was correct in acknowledging the existence of human bias and the fact that bias in AI comes from being fed data built by biased human behavior, the argument that machine biases stem from the way machines encode data — in this case, the binary system — is flawed.&lt;/p&gt;
+
+&lt;p&gt;The author argued that by reducing real life to ones and zeroes, the binary system misrepresents reality. This argument is misleading as it claims that information is lost when real measurements are converted to binary, which is mathematically not the case. Any whole number in base ten may be converted into binary and vice versa — this is true for any numerical base. Among the numerical bases, binary was chosen as the most efficient way to represent information as it can represent any natural number with the least number of unique symbols (called bits).&lt;/p&gt;
+
+&lt;p&gt;However, there is more to the original article’s argument beyond conversion between numerical systems: the author argues that Western philosophy’s focus on duality is what spawned the binary system and that Western philosophy is inherently biased, thus making the binary system itself biased. The argument is that by labeling real-life characteristics with ones and zeroes, the binary system and the concept of duality assign a greater value to one characteristic and a lesser value on its opposite. The example given is Aristotle applying dualism to humans, dividing us into men and women. Like many men from thousands of years ago, Aristotle held very biased views against the fairer sex. The author quotes Aristotle, “The relation of male to female is by nature a relation of superior to inferior and ruler to ruled.”&lt;/p&gt;
+
+&lt;p&gt;While the author is correct in saying that people incorrectly assign value based on binary characteristics — going on to rightly list issues of inequality based on ideas such as race and gender — the idea that replacing the binary system will fix these ills is not properly supported. The argument presented in the article is that the binary system not only assigns a greater value on certain characteristics but also endorses spurious correlations across characteristics. This is not a fault of the binary system but an issue with how people interpret data.&lt;/p&gt;
+
+&lt;p&gt;Logic and reasoning are fueled by a desire to make good decisions based on available data. The idea is that logical rules can be formulated to predict an outcome by looking for relationships between observations. For instance, dark clouds in the sky signal that rain is coming. In many instances of bias, these incorrect interpretations of data result in false relationships being formed and used as a flawed basis for decision-making. Singing out of tune before a thunderstorm does not mean that bad singing causes bad weather. Bringing the conversation back to the societal biases discussed in the original article: a single terrorist from the Middle East does not mean that everyone from the Middle East is a terrorist.&lt;/p&gt;
+
+&lt;p&gt;To correctly use data to arrive at informed decisions, these false relationships must be removed from one’s logical system. The concept of independence among variables is important: while some variables may display a similar trend, this does not immediately imply that one is the cause for another. Correlation does not imply causation, despite anything less logical decision-makers may say. Switching from the binary system to an alternative does not solve the issues with AI bias, but acknowledging the existence of independent variables and building machine learning models that take possible misinterpretations of correlations into account will.&lt;/p&gt;
+
+&lt;p&gt;One example used in the original article to prove the argument against binary systems are tree-based machine learning algorithms. For the uninitiated, tree-based algorithms predict a target feature by repeatedly splitting a sample based on other features to arrive at branches that are more and more homogeneous along the target feature. The author of the original article argues that binary incorrectly classifies entities into two groups when real life characteristics behave closer to a scale. However, the very core logic of tree-based models takes this continuous scale into account — I won’t go into the technical details but the focus of the algorithms that underpin tree-based models is on testing splits across the entire continuum until it arrives at a split that maximizes homogeneity among the resulting branches. Furthermore, some algorithms may repeat splits on the same feature, so the original author’s claim of machine learning algorithms pigeonholing entities that are continuous in real life is incorrect as a tree-based model may continually split on the same feature for as long as it improves the model, thus allowing tree-based models to accurately depict non-binary, continuous reality. This proves that the binary nature of systems does not result in a less accurate representation of reality.&lt;/p&gt;
+
+&lt;p&gt;However, a machine learning model is only as good as its data. The author of the original article correctly points out the racial and sexual biases that existed during the time of Aristotle and live on even in the age of artificial intelligence. The answer does not lie in replacing the binary system but in being more careful with independent variables. If the binary flags for two features which are proven to be independent are not conflated into a single feature, then the purported bias in the binary system disappears. Yes, it is unfair that men have historically been seen as superior to women, but on the other hand, it is also fair to say that a female athlete is likely to be better at sports than a man who has not exercised in a while because the second argument measures athletic ability without being misled by conflating athleticism with gender.&lt;/p&gt;
+
+&lt;p&gt;Funnily enough, this idea of independence between variables is one of the driving ideas behind the Cartesian coordinate system — one of the many contributions of Rene Descartes, to whom the original article lays the blame for the proliferation of bias through the binary system. The Cartesian coordinate system plots measurements across two perpendicular axes so as to visually confirm or debunk any dependent relationships. By definition, measurements along perpendicular axes are independent — one cannot move left by only moving up. Rene Descartes realized the importance of treating variables independently and many novice machine learning practitioners would do well to follow in his example.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Rene Descartes realized the importance of treating variables independently and many novice machine learning practitioners would do well to follow in his example.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;While the original article ended with the firm (if unfounded) conclusion that the binary system is at fault for bias in artificial intelligence, this article takes some of the original author’s valid ideas and will not judge the original article as entirely without merit. The truth is somewhere in between — the article managed to highlight key social issues, yes, but the conclusion is not fully valid, no. This judgment only serves to show that the binary system is no less effective in terms of retaining and communicating information than alternatives, by acknowledging that the article can be correct in some points but not all. Until quantum computing allows for qubits to relay and process data more efficiently than bits, the binary system is still the best solution we have today.&lt;/p&gt;</content><author><name></name></author><category term="blog" /><category term="artificial" /><category term="intelligence" /><category term="ai" /><category term="statistics" /><category term="mathematics" /><summary type="html">Quartz recently published a thought-provoking article by Twain Liu that argues that AI bias can be traced all the way back to Aristotle’s philosophy of duality. While the author was correct in acknowledging the existence of human bias and the fact that bias in AI comes from being fed data built by biased human behavior, the argument that machine biases stem from the way machines encode data — in this case, the binary system — is flawed.</summary></entry><entry><title type="html">Channel Attribution in Python</title><link href="http://localhost:4000/blog/2019/01/01/channel-attribution-in-python.html" rel="alternate" type="text/html" title="Channel Attribution in Python" /><published>2019-01-01T00:00:00+08:00</published><updated>2019-01-01T00:00:00+08:00</updated><id>http://localhost:4000/blog/2019/01/01/channel-attribution-in-python</id><content type="html" xml:base="http://localhost:4000/blog/2019/01/01/channel-attribution-in-python.html">&lt;p&gt;Attribution refers to the set of rules that determine which ad gets credit for a sale or a conversion. The rise of the Internet allowed marketers to track user interactions throughout the entire customer journey but most advertisers still attribute 100% of conversions to the last touch channel or the last ad that the user clicked before converting.&lt;/p&gt;
+
+&lt;!--break--&gt;
+
+&lt;h2 id=&quot;data-driven-attribution&quot;&gt;Data-Driven Attribution&lt;/h2&gt;
+
+&lt;p&gt;To more accurately depict the contribution of each touchpoint to the conversion, a more mathematically robust method of attribution must be applied. One way is to use a Markov chain model to represent the possible customer journeys. Markov chains show the possible touchpoint transitions as probabilities based on the current touchpoint. Markov chains also make it easier to compute the probability of conversion from the start of the journey by summing the probabilities of conversion across all possible paths.&lt;/p&gt;
+
+&lt;p&gt;Sergey Bril discussed how to run data-driven channel attribution analysis using R on his &lt;a href=&quot;https://analyzecore.com/2016/08/03/attribution-model-r-part-1/&quot;&gt;website&lt;/a&gt;. In this article, I will show how to perform data-driven channel attribution analysis using Python. For illustrative purposes I will reuse the sample problem presented in Sergey Bril’s original article. The sample Markov chain representing possible customer journeys is shown below:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i0.wp.com/analyzecore.com/wp-content/uploads/2016/07/Screenshot-2016-07-22-14.26.50.png&quot; alt=&quot;Markov Chain&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Data-driven attribution is calculated by measuring the removal effect. The removal effect for a touchpoint is the decrease in conversion probability if the touchpoint is “removed” or if we assume that all users who visit the removed touchpoint will not convert.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i0.wp.com/analyzecore.com/wp-content/uploads/2016/07/Screenshot-2016-07-25-21.26.57.png&quot; alt=&quot;Removal Effect&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I will use Python to solve the sample attribution problem which Sergey Bril discussed on his website. This solution does not use specialized libraries and instead implements the mathematics of multi-channel attribution directly onto a Pandas dataframe. The original problem can be found &lt;a href=&quot;https://analyzecore.com/2016/08/03/attribution-model-r-part-1/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The full notebook with Python code follows while an interactive version may be found on Colab &lt;a href=&quot;https://colab.research.google.com/drive/1m_SMStJUN0Q08eaNhIa0R2dkQS6HAewT&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML&quot;&gt;
+&lt;/script&gt;
+
+&lt;h2 id=&quot;data-driven-attribution-in-python&quot;&gt;Data-Driven Attribution in Python&lt;/h2&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Import libraries&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pandas&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Define data&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DataFrame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'start'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                              &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'c1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                              &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'c2'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                              &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'c3'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                              &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'purchase'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                              &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'start'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                              &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'c1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                              &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'unsuccessful'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                              &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'start'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                              &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'c2'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                              &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'c3'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                              &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'unsuccessful'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]),&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;columns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'customer_id'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                             &lt;span class=&quot;s&quot;&gt;'touchpoint'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                             &lt;span class=&quot;s&quot;&gt;'time'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                             &lt;span class=&quot;s&quot;&gt;'conversion'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Clean data&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'time'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_numeric&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'time'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;errors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'coerce'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'touchpoint'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'touchpoint'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lower&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Preview data&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;dataframe&quot;&gt;
+&lt;style scoped=&quot;&quot;&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+```
+.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+```
+
+&lt;/style&gt;
+
+&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr style=&quot;text-align: right;&quot;&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;customer_id&lt;/th&gt;
+      &lt;th&gt;touchpoint&lt;/th&gt;
+      &lt;th&gt;time&lt;/th&gt;
+      &lt;th&gt;conversion&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;0&lt;/th&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;start&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1&lt;/th&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;c1&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;2&lt;/th&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;c2&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;3&lt;/th&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;c3&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;4&lt;/th&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;purchase&lt;/td&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;5&lt;/th&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;start&lt;/td&gt;
+      &lt;td&gt;6&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;6&lt;/th&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;c1&lt;/td&gt;
+      &lt;td&gt;7&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;7&lt;/th&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;unsuccessful&lt;/td&gt;
+      &lt;td&gt;8&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;8&lt;/th&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;start&lt;/td&gt;
+      &lt;td&gt;9&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;9&lt;/th&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;c2&lt;/td&gt;
+      &lt;td&gt;10&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;10&lt;/th&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;c3&lt;/td&gt;
+      &lt;td&gt;11&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;11&lt;/th&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;unsuccessful&lt;/td&gt;
+      &lt;td&gt;12&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Sort data and reindex&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sort_values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'time'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reset_index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;dataframe&quot;&gt;
+&lt;style scoped=&quot;&quot;&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+```
+.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+```
+
+&lt;/style&gt;
+
+&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr style=&quot;text-align: right;&quot;&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;index&lt;/th&gt;
+      &lt;th&gt;customer_id&lt;/th&gt;
+      &lt;th&gt;touchpoint&lt;/th&gt;
+      &lt;th&gt;time&lt;/th&gt;
+      &lt;th&gt;conversion&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;0&lt;/th&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;start&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1&lt;/th&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;c1&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;2&lt;/th&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;c2&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;3&lt;/th&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;c3&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;4&lt;/th&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;purchase&lt;/td&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;5&lt;/th&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;start&lt;/td&gt;
+      &lt;td&gt;6&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;6&lt;/th&gt;
+      &lt;td&gt;6&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;c1&lt;/td&gt;
+      &lt;td&gt;7&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;7&lt;/th&gt;
+      &lt;td&gt;7&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;unsuccessful&lt;/td&gt;
+      &lt;td&gt;8&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;8&lt;/th&gt;
+      &lt;td&gt;8&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;start&lt;/td&gt;
+      &lt;td&gt;9&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;9&lt;/th&gt;
+      &lt;td&gt;9&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;c2&lt;/td&gt;
+      &lt;td&gt;10&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;10&lt;/th&gt;
+      &lt;td&gt;10&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;c3&lt;/td&gt;
+      &lt;td&gt;11&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;11&lt;/th&gt;
+      &lt;td&gt;11&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;unsuccessful&lt;/td&gt;
+      &lt;td&gt;12&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;touchpoints&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;touchpoints&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;conversion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nonconversion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_ids&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;# Define variables&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;touchpoints&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;touchpoints&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;start&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conversion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;conversion&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nonconversion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nonconversion&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user_ids&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_ids&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;
+        
+        &lt;span class=&quot;c&quot;&gt;# Sort data and reindex&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sort_values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reset_index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+        &lt;span class=&quot;c&quot;&gt;# Define conversion&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'conversions'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; 
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;touchpoints&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conversion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'conversions'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+        
+        &lt;span class=&quot;c&quot;&gt;# Count conversions&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'conversion_count'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;groupby&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'conversions'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cumcount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'conversions'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'conversion_count'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nan&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'conversion_count'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'conversion_count'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fillna&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'bfill'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'conversion_count'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'conversion_count'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fillna&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'conversion_count'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        
+        &lt;span class=&quot;c&quot;&gt;# Split into conversion journeys&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'journey_id'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;zip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user_ids&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'conversion_count'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt;
+        
+        
+        &lt;span class=&quot;c&quot;&gt;# Initialize dict for temporary transition matrices and removal effects&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp_trans_matrix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp_x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+        
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;attribute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;# Get transitions&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;journeys&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DataFrame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;journey&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'journey_id'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unique&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+            &lt;span class=&quot;c&quot;&gt;# Get transitions for a single user&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;temp_journey&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'journey_id'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;journey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;temp_journey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'next_'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;touchpoints&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp_journey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;touchpoints&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shift&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;journeys&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;journeys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp_journey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;journeys&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;journeys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dropna&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subset&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'next_'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;touchpoints&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+
+        &lt;span class=&quot;c&quot;&gt;# Get transition probabilities&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;states&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;journeys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pivot_table&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;touchpoints&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                                                &lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'journey_id'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                                &lt;span class=&quot;n&quot;&gt;aggfunc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transitions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;journeys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pivot_table&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;touchpoints&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'next_'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;touchpoints&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                                                     &lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'journey_id'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                                     &lt;span class=&quot;n&quot;&gt;aggfunc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transitions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transitions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reset_index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transitions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transitions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;states&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;touchpoints&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rsuffix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'_total'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transitions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'probability'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transitions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'journey_id'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transitions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'journey_id'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'_total'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transitions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transitions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sort_values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'probability'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+        &lt;span class=&quot;c&quot;&gt;# Get transition matrix&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transitions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pivot_table&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;touchpoints&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+                                                         &lt;span class=&quot;n&quot;&gt;columns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'next_'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;touchpoints&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+                                                         &lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'probability'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                                         &lt;span class=&quot;n&quot;&gt;aggfunc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                                         &lt;span class=&quot;n&quot;&gt;fill_value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+        &lt;span class=&quot;c&quot;&gt;# Add missing columns&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;row&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iterrows&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;columns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+    
+        &lt;span class=&quot;c&quot;&gt;# Add missing rows&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;col&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;columns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;col&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;new_row&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Series&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;new_row&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;col&lt;/span&gt;
+                &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new_row&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+        &lt;span class=&quot;c&quot;&gt;# Fill in NAs with zero probabilities&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fillna&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+        &lt;span class=&quot;c&quot;&gt;# Reorder columns to solve as linear equations&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    
+        &lt;span class=&quot;c&quot;&gt;# Make sure probabilities sum to 1 (required for next step)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;row&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iterrows&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+            &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+
+        &lt;span class=&quot;c&quot;&gt;# Set constant term to zero (on RHS)&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RHS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;  
+            
+        &lt;span class=&quot;c&quot;&gt;# Set conversion probability at conversion to 1&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RHS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_loc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conversion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+            
+        &lt;span class=&quot;c&quot;&gt;# Make equations' RHS equal the long-run transition probability of that variable to the conversion then subtract from both sides&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;row&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iterrows&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conversion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nonconversion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+                &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+        
+        &lt;span class=&quot;c&quot;&gt;# Solve system of equations&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;linalg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;solve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RHS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;attribute_removal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;# Copy transition probability table if it exists or create it if it doesn't &lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp_trans_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;except&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attribute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp_trans_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;pass&lt;/span&gt;
+                        
+        &lt;span class=&quot;c&quot;&gt;# Set removed touchpoint probabilities to zero except for unsuccessful&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp_trans_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp_trans_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nonconversion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+        
+        &lt;span class=&quot;c&quot;&gt;# Make equations' RHS for the removed touchpoint equal the long-run transition probability of that variable to the conversion then subtract from both sides&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp_trans_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+        
+        &lt;span class=&quot;c&quot;&gt;# Solve system of equations&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp_x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;linalg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;solve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp_trans_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RHS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;limit_touchpoints&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;limit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;# Limit to top 10 domains&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;touchpoints&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;touchpoints&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;touchpoints&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value_counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;limit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:],&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'Others'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;# Keep conversions&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'conversions'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;touchpoints&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'Conversion'&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;describe_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;temp_data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;temp_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'temp_column'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;temp_data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pivot_table&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'journey_id'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                          &lt;span class=&quot;n&quot;&gt;columns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;touchpoints&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                          &lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'temp_column'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                          &lt;span class=&quot;n&quot;&gt;aggfunc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                          &lt;span class=&quot;n&quot;&gt;fill_value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'There are '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;' unique journeys.'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'There are '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;' unique touchpoints.'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;long_term_transition_probability&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;    
+        &lt;span class=&quot;c&quot;&gt;# Get conversion probability at start&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;conv_prob&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_loc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;conv_prob&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;removal_rate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;    
+        &lt;span class=&quot;c&quot;&gt;# Get conversion probability at start&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;conv_prob&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trans_matrix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_loc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;conv_prob_remove&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp_x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp_trans_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_loc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;removal_rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;conv_prob_remove&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv_prob&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;removal_rate&lt;/span&gt;
+    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;tp_data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;touchpoints&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                      &lt;span class=&quot;n&quot;&gt;touchpoints&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'touchpoint'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                      &lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'start'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                      &lt;span class=&quot;n&quot;&gt;conversion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'purchase'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                      &lt;span class=&quot;n&quot;&gt;nonconversion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'unsuccessful'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                      &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'time'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                      &lt;span class=&quot;n&quot;&gt;user_ids&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'customer_id'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Describe the customer journeys&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;tp_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;describe_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;There are 3 unique journeys.
+There are 6 unique touchpoints.
+touchpoint  c1  c2  c3  purchase  start  unsuccessful
+journey_id                                           
+(1, 1.0)     1   1   1         1      1             0
+(1, 2.0)     1   0   0         0      1             1
+(2, 2.0)     0   1   1         0      1             1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Calculate the removal rate for c1&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;tp_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attribute_removal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'c1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Show the long term transition probability for the entire Markov chain&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;tp_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;long_term_transition_probability&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0.3333333333333333
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Show the removal rate for c1&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;tp_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;removal_rate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'c1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0.5
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Calculate the removal rate for c2 then c3&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;tp_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attribute_removal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'c2'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;tp_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attribute_removal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'c3'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Show the removal rate for c2&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;tp_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;removal_rate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'c2'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1.0
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Show the removal rate for c3&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;tp_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;removal_rate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'c3'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1.0
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;interpretation&quot;&gt;Interpretation&lt;/h2&gt;
+
+&lt;p&gt;The removal effect represents the conversions potentially lost if a touchpoint is removed. This is treated as a measure of the touchpoint’s importance - since both c2 and c3 have removal effects of 100% while c1 has a removal effect of only 50%, we can say that both c2 and c3 are twice as important as c1 since their removal effects are twice as large.&lt;/p&gt;
+
+&lt;div class=&quot;dataframe&quot;&gt;
+  &lt;table&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Channel&lt;/th&gt;
+      &lt;th&gt;Removal Effect&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;c1&lt;/td&gt;
+      &lt;td&gt;50%&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;c2&lt;/td&gt;
+      &lt;td&gt;100%&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;c3&lt;/td&gt;
+      &lt;td&gt;100%&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The removal effect can also be used to estimate the number of conversions attributed to each touchpoint. Since we want to base the attribution on the importance of each touchpoint, we distribute the conversions based on each touchpoint’s removal effect. For example, to get the conversions attributed to c1, we need to divide the number of conversions by the sum of the removal effects for all touchpoints and then multiply that value by the removal effect for touchpoint c1 - essentially attributing c1 based on its share of removal effect.&lt;/p&gt;
+
+&lt;div style=&quot;overflow-x: scroll&quot;&gt;
+
+$$ conversions_{c1} = \sum conversions \times \frac{removal\ effect_{c1}}{\sum_{i=1}^n removal\ effect_i} $$
+
+$$ conversions_{c1} = 1 \times \frac{50\%}{50\%+100\%+100\%} $$
+
+$$ conversions_{c1} = 0.2 $$
+
+&lt;/div&gt;
+
+&lt;p&gt;The full conversion attribution for each touchpoint in the sample problem is given below:&lt;/p&gt;
+
+&lt;div class=&quot;dataframe&quot;&gt;
+  &lt;table&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Channel&lt;/th&gt;
+      &lt;th&gt;Removal Effect&lt;/th&gt;
+      &lt;th&gt;Attributed Conversions&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;c1&lt;/td&gt;
+      &lt;td&gt;50%&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;c2&lt;/td&gt;
+      &lt;td&gt;100%&lt;/td&gt;
+      &lt;td&gt;0.4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;c3&lt;/td&gt;
+      &lt;td&gt;100%&lt;/td&gt;
+      &lt;td&gt;0.4&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;sources&quot;&gt;Sources:&lt;/h2&gt;
+
+&lt;p&gt;Anderl, E., Becker, I., Wangenheim, F. V., &amp;amp; Schumann, J. H. (2014). Mapping the customer journey: A graph-based framework for online attribution modeling. Available at SSRN: &lt;a href=&quot;http://ssrn.com/abstract=2343077&quot;&gt;link&lt;/a&gt; or &lt;a href=&quot;http://dx.doi.org/10.2139/ssrn.2343077&quot;&gt;link&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bryl, S. (2018). Marketing Multi-Channel Attribution model with R (part 1: Markov chains concept) - AnalyzeCore by Sergey Bryl’ - data is beautiful, data is a story. [online] AnalyzeCore by Sergey Bryl’ - data is beautiful, data is a story. Available at: &lt;a href=&quot;https://analyzecore.com/2016/08/03/attribution-model-r-part-1/&quot;&gt;link&lt;/a&gt; [Accessed 23 Oct. 2018].&lt;/p&gt;</content><author><name></name></author><category term="blog" /><category term="python" /><category term="marketing" /><category term="attribution" /><category term="online" /><category term="network" /><category term="markov" /><category term="chain" /><summary type="html">Attribution refers to the set of rules that determine which ad gets credit for a sale or a conversion. The rise of the Internet allowed marketers to track user interactions throughout the entire customer journey but most advertisers still attribute 100% of conversions to the last touch channel or the last ad that the user clicked before converting.</summary></entry><entry><title type="html">GDPR Day 0: Data-Savvy Marketers Can Still Derive Insights Without Relying on Personal Data</title><link href="http://localhost:4000/blog/2018/05/25/gdpr-day-zero.html" rel="alternate" type="text/html" title="GDPR Day 0: Data-Savvy Marketers Can Still Derive Insights Without Relying on Personal Data" /><published>2018-05-25T00:00:00+08:00</published><updated>2018-05-25T00:00:00+08:00</updated><id>http://localhost:4000/blog/2018/05/25/gdpr-day-zero</id><content type="html" xml:base="http://localhost:4000/blog/2018/05/25/gdpr-day-zero.html">&lt;p&gt;&lt;em&gt;TL;DR: Data science has moved beyond relying exclusively on data collection, and the marketing industry can too.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;fueling-digital-marketing&quot;&gt;Fueling Digital Marketing&lt;/h2&gt;
+
+&lt;p&gt;With GDPR set to take effect in the EU in a few days, digital marketers are understandably concerned with how the new law might impact targeted advertising. Under GDPR, user consent is required before any personal data is collected for processing, giving EU citizens greater power over their own data. This puts current data-driven marketing techniques in jeopardy.&lt;/p&gt;
+
+&lt;p&gt;Digital marketing is built on the concept of a single customer view, a combined record of all known interactions of a user with a brand. This allows brands to build one to one relationships with customers through personalized communications. Such high levels of hyper-targeting has drawn controversy in recent months as concerns over privacy have been raised. GDPR was adopted to protect privacy by restricting processing of personal identifiable information - id est, data that can be linked back to a single person - without explicit consent.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/1000/1*mo14GPzUyGnOkLYgSXFjow.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In 2006, Tesco’s Clive Humby called data the new oil. More recently, PageFair’s Johnny Ryan took the metaphor further by likening personal data specifically to fossil fuels, citing the need for better, “cleaner” alternatives.&lt;/p&gt;
+
+&lt;p&gt;There is a clear need for an alternative to large-scale personal data collection that delivers results without infringing on citizens’ right to privacy. To find this alternative, the marketing industry must look back to how its love affair with data began and then turn to other industries to see how else data can transform business.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-brief-history-of-the-data-age&quot;&gt;A Brief History of the Data Age&lt;/h2&gt;
+
+&lt;p&gt;A few years ago, the phrases big data, analytics, data science, and machine learning were all the rage. These buzzwords were overused and were often (mis)used interchangeably as data rose in popularity.&lt;/p&gt;
+
+&lt;p&gt;The rise in importance of data coincided with the rise in Internet usage due to the popularity of social media. As people shared more of their lives online, resourceful marketers grasped at the opportunity to match people with products they will love.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/1000/1*oqyz_nqXGQmoA2x-XhhW2A.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The challenge was making sense of the deluge of data - users were sharing more data than could possibly be analyzed using traditional methods. The mathematics of statistics supplied the solution: quantitative models could be used to summarize large datasets. Good models only record useful characteristics of a dataset and rely on statistical laws to generalize the rest. The digital register of human behavior could be distilled to a mathematical function that could be optimized along a large but finite number of controllable axes. This was the scale of big data meeting the (data) science of machine learning. Mathematics provided a stopgap until hardware could cope with the magnitude of the data.&lt;/p&gt;
+
+&lt;p&gt;As the Internet simulated human society more and more, data scientists realized that machines can be taught how to act with near-human intelligence. A model that could predict human behavior could also be trained to behave like a human. Artificial intelligence paradigms that before had been infeasible due to lack of computational resources and training data came into vogue. While early models such as least squares regression had limited capacity to imitate patterns of human behavior; artificial neural networks - theorized to be universal function estimators - could accurately model the nuances of human decision-making.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/1000/1*jPiusfetzscZAA-HIwN4IQ.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Noted AI researcher Andrej Karpathy dubbed neural networks as software 2.0: whereas before programmers had to hard code intelligence into machines, data scientists now design programs to learn intelligent behavior from data.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Before programmers had to hard code intelligence into machines, data scientists now design programs to learn intelligent behavior from data.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Neural networks have since been used in countless artificial intelligence applications, from fraud detection to image recognition to self-driving cars and even automated content generation. In 2017, AlphaGo, an AI that uses an artificial neural network to learn, beat the world number one ranked player in a series of matches of Go, a game so complex that there are more atoms in the universe than there are possible outcomes.&lt;/p&gt;
+
+&lt;p&gt;It is therefore no surprise that McKinsey estimates that AI techniques have the potential to create between $3.5 trillion and $5.8 trillion in value annually.&lt;/p&gt;
+
+&lt;h2 id=&quot;from-observation-to-inference&quot;&gt;From Observation to Inference&lt;/h2&gt;
+
+&lt;p&gt;Fast forward a couple of years, and the standard operating procedure for a typical digital marketer today is to rely primarily on cookies to track every single user interaction with a brand and build personalized journeys for each user. Advances in distributed computing mean that hardware has somewhat caught up with the magnitude of consumer data being collected and as a result, the mathematical stopgap of using quantitative models as a proxy for actual customer behavior is generally seen as an undesirable last resort.&lt;/p&gt;
+
+&lt;p&gt;This is in sharp contrast to other industries with limited available data such as aerospace engineering where machine learning algorithms are used in lieu of expensive real life experiments. Because of the costs attached to collecting data, data science has developed ways to work around a lack of quality data when generating quantitative models.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Because of the costs attached to collecting data, data science has developed ways to work around a lack of quality data when generating quantitative models.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In fact, the latest iteration of AlphaGo didn’t learn from human Go matches but instead developed its database of moves just from playing against itself.&lt;/p&gt;
+
+&lt;p&gt;And therein lies the answer.&lt;/p&gt;
+
+&lt;p&gt;The mathematics behind machine learning is agnostic to data granularity - it doesn’t care whether data is personal identifiable information or not as long as the raw data is a representative sample of the full population.&lt;/p&gt;
+
+&lt;p&gt;When GDPR comes into effect, digital marketers should move from observation to insight as quality data will be harder to come by. Fortunately, data science has developed techniques of working around a lack of data to glean insights through mathematical modeling.&lt;/p&gt;
+
+&lt;p&gt;Data science has more to offer than just data collection, and, hopefully, so does digital marketing.&lt;/p&gt;</content><author><name></name></author><category term="blog" /><category term="data" /><category term="science" /><category term="marketing" /><category term="gdpr" /><category term="privacy" /><category term="featured" /><summary type="html">TL;DR: Data science has moved beyond relying exclusively on data collection, and the marketing industry can too.</summary></entry><entry><title type="html">Ten Outstanding Students of Makati 2009</title><link href="http://localhost:4000/blog/2018/03/20/ten-outstanding-students-of-makati.html" rel="alternate" type="text/html" title="Ten Outstanding Students of Makati 2009" /><published>2018-03-20T00:00:00+08:00</published><updated>2018-03-20T00:00:00+08:00</updated><id>http://localhost:4000/blog/2018/03/20/ten-outstanding-students-of-makati</id><content type="html" xml:base="http://localhost:4000/blog/2018/03/20/ten-outstanding-students-of-makati.html">&lt;p&gt;The city government of Makati named this year’s Ten Outstanding Students of Makati, who all received plaques of recognition, medallions, and checks worth P15,000 each. I myself was named one of the Ten Outstanding Students of Makati back in 2009. The newspaper article covering the 2009 Ten Outstanding Students of Makati can be found below.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/TOSM.jpg&quot; alt=&quot;TOSM&quot; width=&quot;600px&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><category term="blog" /><category term="victor" /><category term="makati" /><category term="tosm" /><category term="2018" /><summary type="html">The city government of Makati named this year’s Ten Outstanding Students of Makati, who all received plaques of recognition, medallions, and checks worth P15,000 each. I myself was named one of the Ten Outstanding Students of Makati back in 2009. The newspaper article covering the 2009 Ten Outstanding Students of Makati can be found below.</summary></entry><entry><title type="html">Innovation, Human Productivity, &amp;amp; Machine Productivity</title><link href="http://localhost:4000/blog/2017/12/13/innovation-human-productivity-and-machine-productivity.html" rel="alternate" type="text/html" title="Innovation, Human Productivity, &amp; Machine Productivity" /><published>2017-12-13T00:00:00+08:00</published><updated>2017-12-13T00:00:00+08:00</updated><id>http://localhost:4000/blog/2017/12/13/innovation-human-productivity-and-machine-productivity</id><content type="html" xml:base="http://localhost:4000/blog/2017/12/13/innovation-human-productivity-and-machine-productivity.html">&lt;h2 id=&quot;have-tech-consumers-lost-their-power&quot;&gt;Have Tech Consumers Lost Their Power?&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;This post was written in response to Andrew Brown’s well-written and well-received post entitled,&lt;/em&gt; &lt;a href=&quot;https://www.linkedin.com/pulse/has-tech-world-lost-its-mojo-andrew-brown/?trk=eml-email_feed_ecosystem_digest_01-recommended_articles-16-Unknown&amp;amp;midToken=AQG-qRTgNVKohA&amp;amp;fromEmail=fromEmail&amp;amp;ut=2do6KCHMEGPU01&quot;&gt;&lt;em&gt;“Has the Tech World Lost its Mojo?”&lt;/em&gt;&lt;/a&gt;&lt;em&gt;. While the article was correct in pointing out that most consumer electronics nowadays are interchangeable in terms of features and specs, this is hardly a sign that the tech industry is stagnating.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;homogeneity-is-a-sign-of-competition&quot;&gt;Homogeneity Is a Sign of Competition&lt;/h2&gt;
+
+&lt;p&gt;Economic theory states that competition arises when more than one producer is trying to sell similar, almost interchangeable, products, thus leaving price as the only differentiator. This allows consumers to select products based on price, thereby giving an incentive for companies to optimize their production and bring prices down.&lt;/p&gt;
+
+&lt;p&gt;The Model T is well-remembered because of how affordable Henry Ford’s assembly line produced them (nearly 15 million units sold) while Karl Benz’s Benz Patent-Motorwagen (25 units built) is reduced to the obscure answer to the trivial pursuit question, ‘what is the first car?’. (Karl Benz would later find widespread success with the first Mercedes-Benz after adopting mass production techniques in 1926, mere three years before his death.)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/2600/1*YPk4N6ce8muZbHFc27Wwkw.jpeg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Ford Model T (credit: Bloomberg)&lt;/p&gt;
+
+&lt;p&gt;Progress happens not when a new product hits the market but when products become exponentially cheaper. Having tech companies benchmark their products against each other is good news for the consumer as they are no longer forced to stay loyal to a single manufacturer.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-are-new-phones-so-expensive&quot;&gt;Why Are New Phones So Expensive?&lt;/h2&gt;
+
+&lt;p&gt;If smartphones are homogenizing due to competition, why then have they become so expensive recently?&lt;/p&gt;
+
+&lt;p&gt;There are a number of factors, but let’s start with the thing most people interact with on their phones: the screen. Regardless of the brand, nearly 9 out of 10 new smartphones in 2017 have a screen that was built by Samsung. In fact, according to a Wall Street Journal report, Samsung is set to earn around $110 from each iPhone X that Apple sells because Apple buys their smartphone touchscreens from the Galaxy phone maker. The reason for this monopoly is beyond the scope of this post, but suffice it to say that no other screen manufacturer has the resources to reliably provide screens for such high-volume products as the iPhone. Apple and Google are reportedly making significant investments to decrease their dependence on the South Korean tech giant, so we can expect this monopoly to begin to diminish soon and smartphone prices to start to normalize.&lt;/p&gt;
+
+&lt;p&gt;The other big reason why new flagship phones are so expensive are the consumers themselves. To call Apple a tech company is an oversimplification: Apple is more of a luxury lifestyle brand, so much so that a number of key Apple executives were poached from fashion brands including ex-Burberry CEO Angela Ahrendts who is now the SVP for Retail at Apple. Because Apple is seen as a luxury brand, people buy the iPhone as a status symbol, which means that iPhones are somewhat price inelastic, approaching the behavior of a Veblen good (a product whose demand is driven by people’s desire to show off what the economist Thorstein Veblen described as “conspicuous consumption”). Meanwhile, other tech companies see themselves as Apple competitors and, as a result, they tend to price their flagship phones only slightly cheaper than the iPhone to maximize profits.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/2600/1*RHVGNQyqP7HANfw0kehzjQ.jpeg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;iPhone X Buyers (credit: The National)&lt;/p&gt;
+
+&lt;h2 id=&quot;smartphones-going-the-way-of-the-laptop-and-the-desktop-before-it&quot;&gt;Smartphones: Going The Way of The Laptop and The Desktop Before It&lt;/h2&gt;
+
+&lt;p&gt;As was said in the comments section of the original article from Andrew Brown, consumer electronics hardware, specifically phones, is not always a good measure of technological progress.&lt;/p&gt;
+
+&lt;p&gt;Smartphones have, much like laptops before them, plateaued simply because the future of mobile computing is moving elsewhere, specifically augmented reality. All the seemingly useless hardware upgrades we see in smartphones — faster processors, inclusion of NPUs (neural processing units), dual cameras, upgraded sensors — are paving the way towards the introduction of AR apps that call for more interaction between the phone and its environment.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/1000/1*TNfAdZME2LNaFMeCms5Xrg.gif&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Google Tango  (credit: &lt;a href=&quot;https://medium.com/@rtpvr/project-tango-2093353f0def&quot;&gt;RTP Virtual Reality on Medium&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;With such hardware requirements in place, the next stage of mobile computing is being fought over in the realm of software code. If you want to see truly cutting edge technology, look for augmented reality projects on GitHub and you will see loads of software being developed by research teams at Google, Amazon, and Facebook.&lt;/p&gt;
+
+&lt;h2 id=&quot;tech-nowadays-is-about-selling-an-ecosystem&quot;&gt;Tech Nowadays Is About Selling an Ecosystem&lt;/h2&gt;
+
+&lt;p&gt;Going back to the iPhone, I would also argue that the true “game changer” for Apple was when they introduced the App Store. Up until then, most users were stuck with the features that their phones had when they were shipped — until Apple found a way for users to easily extend their phones’ functionality with new apps while creating an entirely new industry of smartphone app development. The iPhone itself was not groundbreaking in a vacuum — what truly set it apart was the ability to tailor the experience on a user level so that no two iPhones are exactly alike after its users have begun setting it up by installing their choice of apps.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The iPhone itself was not groundbreaking in a vacuum — what truly set it apart was the ability to tailor the experience on a user level so that no two iPhones are exactly alike after its users have begun setting it up by installing their choice of apps.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;It is a credit to Steve Jobs’ genius that he redefined the idea of what a smartphone should be while shipping a phone that essentially had the same factory-installed features as most of its more established competitors such as the BlackBerry. One may argue that the iPhone’s user experience and overall design had a massive impact on consumer acceptance but Steve Jobs was merely repeating the trick he did with the iPod years ago: the iPod had little of the high-end audio technology that its competitors possessed but by introducing the iTunes store, Jobs simultaneously made the iPod the de facto music player of the generation and created the world’s largest legal music marketplace in a single masterstroke. With the App Store, the iTunes Store, and new features such as Airdrop, Apple is building an ecosystem that will make it convenient for consumers to use Apple products and Apple products only.&lt;/p&gt;
+
+&lt;p&gt;This strategy has been copied by other tech companies, most notably by Google and Amazon. (For a deeper conversation on business strategy, feel free to contact me on &lt;a href=&quot;https://www.linkedin.com/in/geloblancada/&quot;&gt;LinkedIn&lt;/a&gt;.)&lt;/p&gt;
+
+&lt;p&gt;Google began its Google account service with Gmail but now has an entire suite of services that you can access using your Google account including their own Google Play Store. Having a single account for the entire Google ecosystem is incredibly convenient: switching from one Android phone to another is a simple matter of logging into your Google account and letting the system set everything up automatically. This is replicated on the desktop where setting up your Chrome browser on a new computer is as easy as logging in to your Gmail account for Chrome to automatically copy all of your previous settings and even install all of your Chrome apps and extensions.&lt;/p&gt;
+
+&lt;p&gt;On the other hand, Amazon’s diversification into groceries and pharmacies is part of their bid to be the one stop shop for e-commerce by building an ecosystem of retailers all powered by Amazon technology. Even their failed attempt to enter the smartphone market with the much-maligned Fire Phone was meant to make it easy for users to purchase products from Amazon — a key feature of the Fire Phone was its ability to recognize objects from photos and present the user with an Amazon e-commerce page selling the item from the photo.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/1000/1*-4I2hS37FJf77QuASe8jlw.jpeg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Amazon Fire Phone (credit: CNET)&lt;/p&gt;
+
+&lt;p&gt;For tech companies, a big positive effect of this focus on ecosystems is that consumers are more loyal to the tech brands they initially chose. On the flip-side, gaining new consumers is significantly harder: just ask any iPhone user who has spent a not insignificant amount on apps and in-app purchases. To gain new customers in this world of ecosystems, tech companies must continually introduce innovative features while making the transition as easy as possible for new users by incorporating as many aspects of their competitors’ ecosystems into their own. This inevitably leads to competing ecosystems with very similar features, leading to a negation of the former as new unique features quickly become commonplace, thus making some people complain that the tech world has “lost its mojo”. Tech companies are just doing what all companies aim to do: turn a profit.&lt;/p&gt;
+
+&lt;h2 id=&quot;users-are-the-product&quot;&gt;Users Are The Product&lt;/h2&gt;
+
+&lt;p&gt;To expect tech companies to bend to the will of a captured market is business naiveté. Tech companies do not exist to delight consumers with groundbreaking features, their purpose is to earn profits, no matter what lofty ideals their mission statements contain.&lt;/p&gt;
+
+&lt;p&gt;Apart from the obvious implication of more loyal users = more profits, keeping users loyal has additional benefits.&lt;/p&gt;
+
+&lt;p&gt;Take the example of Google Photos, Google’s free photo app which comes with unlimited cloud storage. Is this simply a case of Google bundling a free service to attract more users to Android? Surely not, as the Photos app is also free on the iOS App Store, unlimited cloud storage included. Why then is Google giving away what Dropbox charges $25 a month for? To answer this, we must look into Google’s business model.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/1000/1*nBrAFxG03L9S8YcxUdg26g.jpeg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Google Photos (credit: Wired)&lt;/p&gt;
+
+&lt;p&gt;Though a tech company by nature, Google earns most of its profits from advertising. More users means more data which means better targeting for ads. It’s as simple as that. The users are not the customers; they are the product. An iPhone user who uploads photos to the Google cloud is a win for Google who now knows what ads to target that user based on the contents of their photos.&lt;/p&gt;
+
+&lt;p&gt;For Amazon, users are customers, yes, but they are better (read: more profitable) customers if they actually buy something from the Amazon e-commerce site, whether it be an Amazon Echo or a non-Amazon product. The Amazon Echo therefore succeeds not only through Amazon Echo sales but also through the Amazon e-commerce sales it drives by directing users to Amazon whenever they ask Alexa to buy something online.&lt;/p&gt;
+
+&lt;p&gt;For Google and Amazon, a big part of why they offer all these additional services is because they want to collect user data. Data has been called the new oil, and rightly so: data allows companies to make better decisions, serve customers better, and, in the case of Google, develop their applications with minimal programmer intervention by using machine learning. (For a more complete discussion on how data can transform business, feel free to have a conversation with me by hitting me up on &lt;a href=&quot;https://www.linkedin.com/in/geloblancada/&quot;&gt;LinkedIn&lt;/a&gt;.)&lt;/p&gt;
+
+&lt;p&gt;This makes comparing the Google Home and Amazon Echo to the Apple HomePod difficult — the former two are a means to an end for Google and Amazon while the latter is Apple’s attempt to prevent user churn by replicating the convenience of a smart speaker for those in the Apple ecosystem.&lt;/p&gt;
+
+&lt;h2 id=&quot;innovation-human-productivity--machine-productivity&quot;&gt;Innovation, Human Productivity, &amp;amp; Machine Productivity&lt;/h2&gt;
+
+&lt;p&gt;The original article argued that technological benchmarking across industry leaders has led to stagnation, contrasting today’s devices with the “groundbreaking” iPhone which the author credits with an increase of human productivity. First of all, if getting a first-generation iPhone led to an increase of productivity that a person did not have with existing smartphones circa 2007 such as the BlackBerry and Microsoft phones (which both had an email client and a graphical browser), then that person is simply not doing productivity right. I, for one, did not look at a phone with a music player and think, “the world of technology appears brighter than ever!” But I must digress.&lt;/p&gt;
+
+&lt;p&gt;Innovation should not be measured by how “cool” features seem. Human productivity is not measured by nice a screen is to look at or how pleasurable it is to type into a laptop’s keys. Productivity is measured by output. Efficiency is measured by output over input.&lt;/p&gt;
+
+&lt;p&gt;If someone measures efficiency and productivity by the convenience (read: fun) one gets from doing work on an iPhone, then that person should prepare to have their world blown.&lt;/p&gt;
+
+&lt;p&gt;Imagine a machine that improves human productivity infinitely — what might that machine look like? Using our definition of productivity, that machine should provide maximum work output for minimum human input. Machines that repetitively and reliably perform work already exist — industrialization was brought about by automating factories. These machines, however, need to be set up for each batch of production. Whenever the product design changes, the machine has to be reconfigured. This is partly why white collar jobs were largely immune from this primitive form of automation — white collar jobs are characterized by workday to workday variations that require nuanced decision making.&lt;/p&gt;
+
+&lt;p&gt;This white collar immunity is rapidly diminishing as a new type of automation is gaining traction. Machine learning is a field of computer science specializing in leveraging vast amounts of data to teach computers to be artificially intelligent. At the risk of oversimplification, machine learning is an easy way to use data to create an AI. This means that computers are quickly learning the aforementioned nuances of decision making that protected white collar jobs for so long. Most of the tech industry giants have recognized the productivity potential of machine learning, with Google branding itself as an “AI-first company” (not a “smartphone-first” or “smart speaker first” company).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/2600/1*EIhS-Fo0Pw1s4MA5XY4fbQ.jpeg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Google’s AlphaGo (credit: Wired)&lt;/p&gt;
+
+&lt;p&gt;Indeed, if one follows the machine learning community, one can see that the tech industry is far from stagnating as key breakthroughs are made on a nearly daily basis. In this year alone:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Google created an AI that taught itself to beat the top ranked Go player by playing against itself thousands of times;&lt;/li&gt;
+  &lt;li&gt;Stanford researchers have developed an AI that can make more accurate diagnoses from X-rays than practicing radiologists; and&lt;/li&gt;
+  &lt;li&gt;Google’s AutoML project succeeded in creating an AI that can create other AIs&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;There is a reason why Elon Musk thinks that AI is such a big threat to humanity — it is just that powerful. (For a deeper discussion on how to implement machine learning for your business, feel free to reach out to me on &lt;a href=&quot;https://www.linkedin.com/in/geloblancada/&quot;&gt;LinkedIn&lt;/a&gt;.)&lt;/p&gt;
+
+&lt;p&gt;Why then do Google and Amazon go out of their way to come up with products like the Pixel and the Echo? As I have addressed this is the previous section: the answer is data. Data to optimize their core businesses of advertising and e-commerce respectively, and data for machine learning to enhance productivity more than the Pixel and Echo can on their own.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Data…when used for machine learning, will improve productivity and human prosperity more than the iPhone ever did back in 2007.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;While looking at smartphones and smart speakers alone make it seem like the tech industry has stagnated and “lost its mojo”, one needs to look at why Google and Amazon released these devices in the first place: to collect data. Data, that, in the long run, when used for machine learning, will improve productivity and human prosperity more than the iPhone ever did back in 2007.&lt;/p&gt;</content><author><name></name></author><category term="blog" /><category term="technology" /><category term="innovation" /><category term="economy" /><category term="data" /><category term="science" /><summary type="html">Have Tech Consumers Lost Their Power?</summary></entry><entry><title type="html">A Network Expansion Strategy Case Study</title><link href="http://localhost:4000/blog/2017/11/16/a-network-expansion-strategy-case-study.html" rel="alternate" type="text/html" title="A Network Expansion Strategy Case Study" /><published>2017-11-16T00:00:00+08:00</published><updated>2017-11-16T00:00:00+08:00</updated><id>http://localhost:4000/blog/2017/11/16/a-network-expansion-strategy-case-study</id><content type="html" xml:base="http://localhost:4000/blog/2017/11/16/a-network-expansion-strategy-case-study.html">&lt;p&gt;In 2014, I was part of a six person team that developed a big data optimization to guide the $400MM USD fiber network infrastructure expansion project of a North American telecommunications company.&lt;/p&gt;
+
+&lt;!--break--&gt;
+
+&lt;p&gt;The ubiquity and intangibility of the Internet makes it easy to forget that the information superhighway exists physically as a network of cables running beneath our cities and across oceans. This physical infrastructure is responsible for Internet access speed, with data sent over fiber optic cables being significantly faster than packets sent through the older (and currently more common) copper wires. The United States ranks behind countries such as South Korea because the American Internet infrastructure is still in the midst of transitioning to fiber Internet.&lt;/p&gt;
+
+&lt;p&gt;In 2014, I had the chance to help alleviate this problem when I worked on a fiber network expansion strategy project. The client, a regional North American telecommunications company, wanted to increase its market share by expanding their fiber network footprint and thereby winning new customers by offering fast Internet at competitive prices. The client set aside $400MM for the project, which was insufficient to expand the network across the entire country. They had to be selective about expansion.&lt;/p&gt;
+
+&lt;p&gt;Our firm was brought in to select markets for expansion in a way that will maximize profit. The client wanted to identify markets for expansion based on Metropolitan Statistical Areas or MSAs, which are geographical divisions defined by the Census Bureau based on core areas with high population density and close economic ties. While most strategists will conduct qualitative analyses on markets, our team decided that such a large investment would require validation only numbers could give.&lt;/p&gt;
+
+&lt;p&gt;We immediately identified the client ask as an optimization problem, roughly expressed in operations research terms as maximize profit as a function of customers gained multiplied by customer profit given a limited network budget, such that customers can only be gained if a network is built to their premises. Simply put, which customers should the client prioritize to maximize profits given that the cost of serving each customer differs and the budget is, as always, limited.&lt;/p&gt;
+
+&lt;p&gt;A third party data source, GeoResults, was used to gather data on telecommunications spending. The terabyte-scale data set contained 19 million rows of data on businesses across the United States, including business type, number of employees, industry, and most importantly, telecommunications spending subdivided by product (e.g. IDD, DS3, etc.). This was combined with the client’s own customer database to create a single customer view covering all existing and potential business customers for our client.&lt;/p&gt;
+
+&lt;p&gt;Since the client wanted to maximize profit, it was necessary to come up with a projection of the KPI. The team created a predictive customer lifetime value (CLV) model that estimated the potential net profits from each customer as a function of projected telecommunications spending, multiplied by the probability of acquiring that customer based on client market presence and level of competition. Since not all customers are similar, the businesses were classified using the k-nearest neighbor algorithm based on client-specified customer segments before individual CLV models were generated for each segment.&lt;/p&gt;
+
+&lt;p&gt;Given the computational requirements of the undertaking, we ran the calculations in an Amazon EC2 instance.&lt;/p&gt;
+
+&lt;p&gt;While the CLV models provided estimates of expected profit, simply aggregating customer-level profit by market produced expansion recommendations in markets that were geographically distant, making the initial proposed network expansion inefficient. To take the geographical aspect of network construction costs into account, we had to take a spatial approach to the problem.&lt;/p&gt;
+
+&lt;p&gt;We used QGIS, an open-source geographical information system (GIS), to map out existing and potential customers, the client’s existing network, and potential network expansion plans. QGIS can be thought of as Google Maps on steroids. It allows users to plot coordinate data as points or paths overlaid on maps of streets or terrain. More importantly, QGIS provides network and graph analysis functions out of the box - it is possible to compute for the shortest distance between points or even things such as minimum spanning trees. QGIS is written in C++ and Python. It is both extensible with C++ or Python plugins and includes an API that allows it to be controlled by third party programs and scripts.&lt;/p&gt;
+
+&lt;p&gt;By expressing the network plan as a collection of nodes and edges with costs associated with growing each edge and node, we were able to programmatically quantify the network construction cost. This meant that finding the optimum fiber network plan is reduced to the simple matter of solving a mathematical optimization problem.&lt;/p&gt;
+
+&lt;p&gt;The final output we presented was a building-level network expansion map that specified exactly how the client should scale their network.&lt;/p&gt;
+
+&lt;p&gt;There are a number of things that our model overlooked - for one thing, our approach did not take into account potential network effects by increased customer awareness of the client brand. Funnily enough, however, this was not what prevented our client’s expansion from becoming the resounding success we had hoped it would be. Taking everyone by surprise, Google launched Google Fiber less than a year after our final client presentation, and the first markets they served had considerable overlap with the markets we had suggested our client would expand to. Rerunning the analysis with this crucial piece of information, we would not have recommended those same markets because Google Fiber’s presence meant that probability of acquiring new customers would now be considerably lower. This just proves that the model is always only as good as the data.&lt;/p&gt;</content><author><name></name></author><category term="blog" /><category term="case" /><category term="study" /><category term="internet" /><category term="fiber" /><category term="network" /><category term="consulting" /><category term="optimization" /><category term="featured" /><summary type="html">In 2014, I was part of a six person team that developed a big data optimization to guide the $400MM USD fiber network infrastructure expansion project of a North American telecommunications company.</summary></entry><entry><title type="html">Elegance, Sophistication, and Complexity</title><link href="http://localhost:4000/blog/2017/10/26/elegance-sophistication-and-complexity.html" rel="alternate" type="text/html" title="Elegance, Sophistication, and Complexity" /><published>2017-10-26T00:00:00+08:00</published><updated>2017-10-26T00:00:00+08:00</updated><id>http://localhost:4000/blog/2017/10/26/elegance-sophistication-and-complexity</id><content type="html" xml:base="http://localhost:4000/blog/2017/10/26/elegance-sophistication-and-complexity.html">&lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML&quot;&gt;
+&lt;/script&gt;
+
+&lt;p&gt;The saying, “Everything should be made as simple as possible, but no simpler,” is widely attributed to Albert Einstein, yet there is no evidence that he actually said this, or at least that he used those specific words. Scholars hypothesize that this misquotation stemmed from a lecture Einstein delivered at Oxford where he actually said, “It can scarcely be denied that the supreme goal of all theory is to make the irreducible basic elements as simple and as few as possible without having to surrender the adequate representation of a single datum of experience.” Apparently, Einstein’s fans took his words’ meaning to heart, if not the words themselves.&lt;/p&gt;
+
+&lt;p&gt;Lexical minutiae aside, one cannot deny the twin perils of unnecessary complexity and oversimplification. The world is teeming with people who either obscure bad reasoning behind a veil of complexity or arrive at skewed conclusions via a grossly oversimplified view of reality. Like most things, information complexity nicely obeys the Aristotelian concept of the golden mean - any deficiency and any excess in the delivery of the truth is tantamount to a lie.&lt;/p&gt;
+
+&lt;p&gt;Scientists and mathematicians alike share this pursuit of simplicity without oversimplification. The word elegant is generally synonymous with style and grace but its usage in mathematics is more specific: an elegant solution is one that is pleasingly ingenious in its simplicity.&lt;/p&gt;
+
+&lt;p&gt;A prime example of mathematical elegance is Euler’s identity:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;e^{i\pi} + 1 = 0&lt;/script&gt;
+
+&lt;p&gt;The five constants are zero, one, pi, Euler’s number, and the imaginary unit. These are all numbers that feature in countless other formulas that underpin entire fields of science and mathematics, and combining all five in such a short and simple equation reveals deep relationships between seemingly disparate fields. Euler’s identity demonstrates that an idea doesn’t have to be complicated to be meaningful, and yet to arrive at such a powerful insight requires sophisticated knowledge of mathematics spanning across several disciplines. It is through this sophistication we glean simplicity from complexity.&lt;/p&gt;
+
+&lt;p&gt;The intrinsic value of solutions extends beyond hypothetical discourse into practical business applications. Too often, people are attracted to solutions that are intimidating in their complexity - as if each additional complication were a safeguard against failure.&lt;/p&gt;
+
+&lt;p&gt;In the analytics space, this manifests itself in the creation of complex yet crude metrics that obscure the KPI. All of this leads to reports chock full of pretty numbers that mean absolutely nothing to the client. This is in stark contrast with the intended role of analytics: to derive actionable insights from data to drive the growth for the company’s bottom line.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Victor Blancada is a data scientist focused on deriving actionable insights for clients. Visit his LinkedIn page &lt;a href=&quot;https://www.linkedin.com/in/geloblancada/&quot;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;</content><author><name></name></author><category term="blog" /><category term="math" /><category term="mathematics" /><category term="language" /><category term="data" /><category term="science" /><summary type="html"></summary></entry></feed>

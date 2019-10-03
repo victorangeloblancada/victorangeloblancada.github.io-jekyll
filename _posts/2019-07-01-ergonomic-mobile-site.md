@@ -15,7 +15,7 @@ In this blog post, I will explain what I kept, what I changed, and why.
 
 ## What I Kept
 
-### Hosting on GitHub Pages
+### Jekyll + GitHub Pages
 
 GitHub pages is 
 

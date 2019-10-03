@@ -38,7 +38,7 @@ To avoid getting different color palettes from different K-means cluster seeds, 
 np.random.seed(0)
 ```
 
-Read image file as 2-D array of RGB values.
+Read the image file as 2-D array of RGB values.
 
 ```python
 # Read image file as 2-D array of RGB values
@@ -143,3 +143,37 @@ for color in palette_list:
 
 ![png](/assets/images/palette-5.png)
 
+Recreate the image with using only colors from color palette.
+
+```python
+# Replace every pixel's color with the color of its cluster centroid
+data['R_cluster'] = data['Cluster'].apply(lambda x: palette_list[x][0][0][0])
+data['G_cluster'] = data['Cluster'].apply(lambda x: palette_list[x][0][0][1])
+data['B_cluster'] = data['Cluster'].apply(lambda x: palette_list[x][0][0][2])
+```
+
+```python
+# Convert the dataframe back to a numpy array
+img_c = data[['R_cluster', 'G_cluster', 'B_cluster']].values
+```
+
+```python
+# Reshape the data back to a 200x200 image
+img_c = img_c.reshape(200, 200, 3)
+```
+
+```python
+# Resize the image back to the original aspect ratio
+img_c = resize(img_c, (800, 1200))
+```
+
+```python
+# Display the image
+plt.axis('off')
+plt.imshow(img_c)
+plt.show()
+```
+
+![png](/assets/images/color-palette-clustered.png)
+
+Voila!

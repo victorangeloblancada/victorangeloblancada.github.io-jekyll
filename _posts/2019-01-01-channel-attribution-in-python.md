@@ -16,7 +16,7 @@ Attribution refers to the set of rules that determine which ad gets credit for a
 
 To more accurately depict the contribution of each touchpoint to the conversion, a more mathematically robust method of attribution must be applied. One way is to use a Markov chain model to represent the possible customer journeys. Markov chains show the possible touchpoint transitions as probabilities based on the current touchpoint. Markov chains also make it easier to compute the probability of conversion from the start of the journey by summing the probabilities of conversion across all possible paths.
 
- Sergey Bril discussed how to run data-driven attribution analysis using R on his [website](https://analyzecore.com/2016/08/03/attribution-model-r-part-1/). For illustrative purposes we will reuse the sample problem presented in Sergey Bril's original article. The sample Markov chain representing possible customer journeys is shown below:
+Sergey Bril discussed how to run data-driven channel attribution analysis using R on his [website](https://analyzecore.com/2016/08/03/attribution-model-r-part-1/). In this article, I will show how to perform data-driven channel attribution analysis using Python. For illustrative purposes I will reuse the sample problem presented in Sergey Bril's original article. The sample Markov chain representing possible customer journeys is shown below:
 
 ![Markov Chain](https://i0.wp.com/analyzecore.com/wp-content/uploads/2016/07/Screenshot-2016-07-22-14.26.50.png)
 
@@ -24,7 +24,7 @@ Data-driven attribution is calculated by measuring the removal effect. The remov
 
 ![Removal Effect](https://i0.wp.com/analyzecore.com/wp-content/uploads/2016/07/Screenshot-2016-07-25-21.26.57.png)
 
-This notebook uses Python to solve the sample attribution problem which Sergey Bril discussed on his website. This solution does not use specialized libraries and instead implements the mathematics of multi-channel attribution directly onto a Pandas dataframe. The original problem can be found [here](https://analyzecore.com/2016/08/03/attribution-model-r-part-1/).
+I will use Python to solve the sample attribution problem which Sergey Bril discussed on his website. This solution does not use specialized libraries and instead implements the mathematics of multi-channel attribution directly onto a Pandas dataframe. The original problem can be found [here](https://analyzecore.com/2016/08/03/attribution-model-r-part-1/).
 
 The full notebook with Python code follows while an interactive version may be found on Colab [here](https://colab.research.google.com/drive/1m_SMStJUN0Q08eaNhIa0R2dkQS6HAewT).
 
