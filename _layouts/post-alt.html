@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+	<head>
+		{% include gtm_head.html %}
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{{ page.title }}</title>
+		{% seo %}
+		{% include styles.html %}
+	</head>
+	<body>
+		{% include gtm_body.html %}
+		<div class="wrapper">
+			{% include navigation.html %}
+			<h1 id="post-alt-title-top" class="transition quote">{% if page.header %} {{ page.header }} {% else %} {{ page.title }} {% endif %}</h1>
+			<div class="hero-img-2" {% if page.featured-img %} style="background-image:  url( {{ page.featured-img }} );" {% endif %} >
+			</div>
+			<!--<div id="start"></div>-->
+			<h1 id="post-alt-title-bottom" class="transition quote">{% if page.header %} {{ page.header }} {% else %} {{ page.title }} {% endif %}</h1>
+			{% unless nodate %}
+			<p style="text-align: center">{{ page.date | date: '%B %d, %Y' }}</p>
+			{% endunless %}
+			<div class="content">
+				<div class="article {% if page.dropcap %} dropcap {% endif %}">
+					{{ content }}
+				</div>
+			</div>
+			<footer>
+				<hr>
+				© 2019 Victor Blancada. All Rights Reserved.
+			</footer>
+			<div class="spacer">
+			</div>
+		</div>
+	</body>
+</html>
+

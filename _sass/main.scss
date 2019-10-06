@@ -4,30 +4,35 @@
 @font-face {
 	font-family: Fanwood;
 	src: url("/assets/fonts/fanwood_text-webfont.woff");
+	font-display: swap;
 }
 
 @font-face {
 	font-family: Fanwood;
 	font-style: italic; 
 	src: url("/assets/fonts/fanwood_text_italic-webfont.woff");
+	font-display: swap;
 }
 
 @font-face {
 	font-family: Avenir;
 	font-style: normal;
 	src: url("/assets/fonts/AvenirNextLTPro-Regular.woff");
+	font-display: swap;
 }
 
 @font-face {
 	font-family: Avenir;
 	font-style: italic;
 	src: url("/assets/fonts/AvenirNextLTPro-Italic.woff");
+	font-display: swap;
 }
 
 @font-face {
 	font-family: Merriweather;
 	src: url("/assets/fonts/Merriweather-Regular.woff");
 	//src: url("/assets/fonts/merriweather-v19-latin-300.woff");
+	font-display: swap;
 }
 
 @font-face {
@@ -35,12 +40,31 @@
 	font-style: italic;
 	src: url("/assets/fonts/Merriweather-RegularItalic.woff");
 	//src: url("/assets/fonts/merriweather-v19-latin-300italic.woff");
+	font-display: swap;
+}
+
+@font-face {
+	font-family: Merriweather;
+	font-weight: 300;
+	//src: url("/assets/fonts/Merriweather-Regular.woff");
+	src: url("/assets/fonts/merriweather-v19-latin-300.woff");
+	font-display: swap;
+}
+
+@font-face {
+	font-family: Merriweather;
+	font-weight: 300;
+	font-style: italic;
+	//src: url("/assets/fonts/Merriweather-RegularItalic.woff");
+	src: url("/assets/fonts/merriweather-v19-latin-300italic.woff");
+	font-display: swap;
 }
 
 @font-face {
 	font-family: Merriweather;
 	font-weight: bold;
 	src: url("/assets/fonts/Merriweather-Bold.woff");
+	font-display: swap;
 }
 
 @font-face {
@@ -48,24 +72,28 @@
 	font-style: italic;
 	font-weight: bold;
 	src: url("/assets/fonts/Merriweather-BoldItalic.woff");
+	font-display: swap;
 }
 
 @font-face {
 	font-family: Oswald;
 	font-weight: 400;
 	src: url("/assets/fonts/Oswald-Regular.woff");
+	font-display: swap;
 }
 
 
 @font-face {
 	font-family: Oswald;
 	src: url("/assets/fonts/Oswald-Regular.woff");
+	font-display: swap;
 }
 
 @font-face {
 	font-family: Oswald;
 	font-weight: 700;
 	src: url("/assets/fonts/Oswald-Bold.woff");
+	font-display: swap;
 }
 
 
@@ -73,6 +101,7 @@
 	font-family: Oswald;
 	font-weight: 300;
 	src: url("/assets/fonts/Oswald-Light.woff");
+	font-display: swap;
 }
 
 $nav-count: 5;
@@ -100,6 +129,7 @@ html {
 body {
 	font-family: $serif-font;
 	font-size: 16px;
+	font-weight: 300;
 	line-height: 28px;
 	background-color: $light-color;
 	color: $dark-color;
@@ -266,6 +296,8 @@ table.dataframe tr:nth-child(even) {
 	top: 0;
 	color: $accent-2-color;
 	font-weight: 600;
+	padding-right: 8px;
+	padding-left: 3px;
 }
 
 .emphasized {
@@ -417,12 +449,29 @@ footer {
 	text-align: center;
 }
 
-
 div.hero-img {
 	// Full height
 	height: 100vh; 
 	line-height: 100vh;
 
+	// Create the parallax scrolling effect
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	// Fall back on gradient if image is not specified
+	//background-image: linear-gradient(to right, $accent-1-color, $accent-2-color);
+	background-color: $dark-color;
+
+	// Other CSS
+	top: 0px;
+	left: 0px;
+
+	align-items: center;
+}
+
+div.hero-img-2 {
 	// Create the parallax scrolling effect
 	background-attachment: fixed;
 	background-position: center;
@@ -539,6 +588,19 @@ div.square-img:hover {
 	div.hero-img {
 		background-attachment: scroll;
 	}
+	div.hero-img-2 {	
+		background-attachment: scroll;
+		// Almost full height
+		height: 65vh; 
+	}
+	#post-alt-title-top {
+		text-align: center;
+		display: block;
+	}
+	#post-alt-title-bottom {
+		text-align: center;
+		display: none;
+	}
 }
 
 // Desktop CSS
@@ -561,5 +623,17 @@ div.square-img:hover {
 
 	div #start{
 		height: $nav-height-desktop;
+	}
+	div.hero-img-2 {	
+		// Almost full height
+		height: 75vh; 
+	}
+	#post-alt-title-top {
+		text-align: center;
+		display: none;
+	}
+	#post-alt-title-bottom {
+		text-align: center;
+		display: block;
 	}
 }

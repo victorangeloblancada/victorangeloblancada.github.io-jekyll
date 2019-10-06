@@ -1,8 +1,9 @@
 ---
-layout: post
+layout: post-alt
 title: About Victor Angelo Blancada
-header: Hi, I'm Victor Angelo Blancada
-featured-img: /assets/images/Victor_2.jpg
+header: Hi, I'm <span class="emphasized">Victor Angelo Blancada</span>
+featured-img: /assets/images/Victor_3.jpg
+nodate: True
 ---
 <!--
 # Victor Angelo Blancada

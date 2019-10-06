@@ -21,6 +21,9 @@
 						-->
 						<a href="#start">
 							<div style="-webkit-animation-name: pulse; -webkit-animation-duration: 2s; animation-name: pulse;animation-duration: 2s; animation-direction: alternate;">
+								{% unless nodate %}
+								<p>{{ page.date | date: '%B %d, %Y' }}</p>
+								{% endunless %}
 								<p>scroll for more</p>
 								{% octicon arrow-down width:50 height:50 fill:white aria-label:down %}
 							</div>
