@@ -4,7 +4,6 @@ title: "Victor is a Data Scientist"
 header: "I am a <br> Data Scientist" 
 category: profile
 tags: resume me victor angelo blancada
-date: 2019-08-21
 featured-img: /assets/images/charts.jpg
 ---
 

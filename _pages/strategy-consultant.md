@@ -4,7 +4,6 @@ title: "Victor is a Strategy Consultant"
 header: "I am a <br> Strategy Consultant"
 category: profile
 tags: resume me victor angelo blancada
-date: 2019-08-19
 featured-img: /assets/images/consultant.jpg
 ---
 

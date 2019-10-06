@@ -4,7 +4,6 @@ title: "CV of Victor Angelo Blancada"
 header: "Download My Résumé"
 category: page
 tags: resume me victor angelo blancada
-date: 2019-08-21
 featured-img: /assets/images/night-sky.jpg
 ---
 

@@ -4,7 +4,6 @@ title: "Victor is an AI Developer"
 header: "I am an <br> AI Developer" 
 category: profile
 tags: resume me victor angelo blancada
-date: 2019-08-20
 featured-img: /assets/images/coding.jpg
 ---
 
