@@ -2,9 +2,18 @@
 layout: post
 title: "AI in Medicine"
 category: blog
-tags: ai ml artificial intelligence machine learning medicine health
+tags: 
+- ai 
+- ml 
+- artificial 
+- intelligence 
+- machine 
+- learning 
+- medicine 
+- health
 date: 2019-08-23
-featured-img: /assets/images/heart.png
+image: /assets/images/heart.png
+description: With the high costs associated with healthcare today, AI can make healthcare more accessible by augmenting the expertise of doctors and other medical professionals and scaling services to reach those who need it most.
 dropcap: true
 ---
 

@@ -2,8 +2,16 @@
 layout: post
 title: "10,000 Hours, Artificial Intelligence, and the Democratization of Expertise"
 category: blog
-tags: ai artificial intelligence expert expertise training featured	
-featured-img: https://cdn-images-1.medium.com/max/1000/1*APsnucR3MshWw5JVYBo6uA.png
+tags: 
+- ai 
+- artificial 
+- intelligence 
+- expert 
+- expertise 
+- training 
+- featured	
+image: /assets/images/chess-art.png
+description: Machines are more suited to the rigorous and time-consuming training that has traditionally been linked with success. What then must we humans do to succeed when practice is something that a machine can invariably do better?
 date: 2019-03-25
 ---
 ## 10,000 Hours of Training

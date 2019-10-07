@@ -3,8 +3,13 @@ layout: post
 title: "Victor is a Strategy Consultant"
 header: "I am a <br> Strategy Consultant"
 category: profile
-tags: resume me victor angelo blancada
-featured-img: /assets/images/consultant.jpg
+tags: 
+- resume 
+- me 
+- victor 
+- angelo 
+- blancada
+image: /assets/images/consultant.jpg
 ---
 
 I have worked closely with C-level executives on strategy and business transformation projects.

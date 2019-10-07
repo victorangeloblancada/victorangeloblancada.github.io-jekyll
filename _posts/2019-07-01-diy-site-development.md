@@ -2,9 +2,19 @@
 layout: post
 title: "DIY Website Development in 2019"
 category: blog
-tags: html web development ux ui user experience interface ergonomics
+tags: 
+- html 
+- web 
+- development 
+- ux 
+- ui
+- user
+- experience
+- interface
+- ergonomics
 date: 2019-07-01
-featured-img: /assets/images/ux.jpg
+image: /assets/images/ux.jpg
+description: In this article, I will explain how I developed this website.
 dropcap: true
 ---
 

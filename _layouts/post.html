@@ -12,7 +12,7 @@
 		{% include gtm_body.html %}
 		<div class="wrapper">
 			{% include navigation.html %}
-			<div class="hero-img" {% if page.featured-img %} style="background-image:  url( {{ page.featured-img }} );" {% endif %} >
+			<div class="hero-img" {% if page.image %} style="background-image:  url( {{ page.image }} );" {% endif %} >
 				<div class="center-content">
 					<span class="on-bg">
 						<h1>{% if page.header %} {{ page.header }} {% else %} {{ page.title }} {% endif %}</h1>

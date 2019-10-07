@@ -2,8 +2,13 @@
 layout: post
 title: "AI Biases and Independent Variables"
 category: blog
-tags: artificial intelligence ai statistics mathematics
-featured-img: https://cdn-images-1.medium.com/max/1000/1*2xdYJn8yXgCkDMXytLOujQ.png
+tags: 
+- artificial 
+- intelligence 
+- ai 
+- statistics
+- mathematics
+image: https://cdn-images-1.medium.com/max/1000/1*2xdYJn8yXgCkDMXytLOujQ.png
 date: 2019-01-20
 dropcap: True
 ---

@@ -2,9 +2,16 @@
 layout: post
 title: "Color Palettes Using K-Means Clustering"
 category: blog
-tags: color palette image processing kmeans clustering
+tags: 
+- color 
+- palette 
+- image 
+- processing 
+- kmeans 
+- clustering
 date: 2019-10-01
-featured-img: /assets/images/color-palette.jpg
+image: /assets/images/color-palette.jpg
+description: Applying K-means clustering on the RGB values of image pixels will give the color palette of an image. 
 dropcap: true
 ---
 

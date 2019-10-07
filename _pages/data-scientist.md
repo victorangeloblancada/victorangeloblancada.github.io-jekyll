@@ -3,8 +3,13 @@ layout: post
 title: "Victor is a Data Scientist"
 header: "I am a <br> Data Scientist" 
 category: profile
-tags: resume me victor angelo blancada
-featured-img: /assets/images/charts.jpg
+tags: 
+- resume 
+- me 
+- victor 
+- angelo 
+- blancada
+image: /assets/images/charts.jpg
 ---
 
 I have a proven track record of applying predictive modeling and mathematical optimization concepts to come up with actionable solutions to real life problems, helping organizations take advantage of the opportunities opened up by the rise of the data age.

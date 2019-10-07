@@ -3,8 +3,13 @@ layout: post
 title: "Victor is an AI Developer"
 header: "I am an <br> AI Developer" 
 category: profile
-tags: resume me victor angelo blancada
-featured-img: /assets/images/coding.jpg
+tags: 
+- resume 
+- me 
+- victor 
+- angelo 
+- blancada
+image: /assets/images/coding.jpg
 ---
 
 I am a full stack AI developer who has overseen projects to completion. I specialize in data science and machine learning using Python, R, and C but am also knowledgable in Java and web development. I am equally comfortable as an individual contributor or as a project manager.

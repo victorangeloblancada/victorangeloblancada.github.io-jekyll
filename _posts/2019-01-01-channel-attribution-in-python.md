@@ -2,9 +2,17 @@
 layout: post
 title: "Channel Attribution in Python"
 category: blog
-tags: python marketing attribution online network markov chain
+tags: 
+- python 
+- marketing 
+- attribution 
+- online 
+- network 
+- markov 
+- chain
 date: 2019-01-01
-featured-img: https://cdn-image.travelandleisure.com/sites/default/files/styles/1600x1000/public/1511365953/times-square-new-york-city-TSHOTELADS1117.jpg
+image: /assets/images/times-square.jpg
+description: In this article, I will demonstrate how to implement data-driven channel attribution in Python.
 dropcap: True
 ---
 

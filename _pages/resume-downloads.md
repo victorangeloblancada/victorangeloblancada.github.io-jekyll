@@ -3,8 +3,13 @@ layout: post
 title: "CV of Victor Angelo Blancada"
 header: "Download My Résumé"
 category: page
-tags: resume me victor angelo blancada
-featured-img: /assets/images/night-sky.jpg
+tags: 
+- resume 
+- me 
+- victor 
+- angelo 
+- blancada
+image: /assets/images/night-sky.jpg
 ---
 
 ### Downloads & Links

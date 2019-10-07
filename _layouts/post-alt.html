@@ -13,7 +13,7 @@
 		<div class="wrapper">
 			{% include navigation.html %}
 			<h1 id="post-alt-title-top" class="transition quote">{% if page.header %} {{ page.header }} {% else %} {{ page.title }} {% endif %}</h1>
-			<div class="hero-img-2" {% if page.featured-img %} style="background-image:  url( {{ page.featured-img }} );" {% endif %} >
+			<div class="hero-img-2" {% if page.image %} style="background-image:  url( {{ page.image }} );" {% endif %} >
 			</div>
 			<!--<div id="start"></div>-->
 			<h1 id="post-alt-title-bottom" class="transition quote">{% if page.header %} {{ page.header }} {% else %} {{ page.title }} {% endif %}</h1>

@@ -2,9 +2,15 @@
 layout: post
 title: "GIFs from Command Line"
 category: blog
-tags: gif command line coding gifs tumblr
+tags: 
+- gif 
+- command 
+- line 
+- coding 
+- gifs 
+- tumblr
 date: 2019-09-20
-featured-img: /assets/images/terminal.jpg
+image: /assets/images/terminal.jpg
 dropcap: true
 draft: true
 

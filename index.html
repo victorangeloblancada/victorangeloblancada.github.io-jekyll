@@ -2,7 +2,7 @@
 title: Hi, I'm Victor Angelo Blancada
 header: Victor Angelo Blancada Creates Value From Data
 layout: post
-featured-img: /assets/images/space-lights.jpg
+image: /assets/images/space-lights.jpg
 ---
 <center>
 	<h1 class="large quote">Hi, I'm</h1>
@@ -73,7 +73,7 @@ featured-img: /assets/images/space-lights.jpg
 	{% for post in site.posts %}
 		{% if post.tags contains 'featured' %}
 			<a href="{{ post.url }}">
-				<div class="square-img transition" {% if post.featured-img %} style="background-image:  url( {{ post.featured-img }} );" {% endif %} >
+				<div class="square-img transition" {% if post.image %} style="background-image:  url( {{ post.image }} );" {% endif %} >
 					<div class="center-content">
 						<span class="on-bg">
 							<h3>{% if post.header %} {{ post.header }} {% else %} {{ post.title }} {% endif %}</h3>

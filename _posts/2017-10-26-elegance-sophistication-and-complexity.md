@@ -2,9 +2,14 @@
 layout: post
 title: "Elegance, Sophistication, and Complexity"
 category: blog
-tags: math mathematics language data science
+tags: 
+- math 
+- mathematics 
+- language 
+- data 
+- science
 date: 2017-10-26
-featured-img: /assets/images/abstract-paint.jpg
+image: /assets/images/abstract-paint.jpg
 dropcap: True
 ---
 

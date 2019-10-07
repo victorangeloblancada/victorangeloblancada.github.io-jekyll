@@ -83,7 +83,7 @@
 		{
 			"title"    : "A Network Expansion Strategy Case Study",
 			"category" : "blog",
-			"tags"     : "case, study, internet, fiber, network, consulting, optimization, featured",
+			"tags"     : "case, study, internet, fiber network, consulting, optimization, featured",
 			"url"      : "/blog/2017/11/16/a-network-expansion-strategy-case-study.html",
 			"date"     : "2017-11-16 00:00:00 +0800"
 		} ,
@@ -109,17 +109,9 @@
 		{
 			"title"    : "About Victor Angelo Blancada",
 			"category" : "",
-			"tags"     : "",
+			"tags"     : "about, Victor, Angelo, Blancada, me",
 			"url"      : "/pages/about.html",
-			"date"     : "2019-10-07 01:29:57 +0800"
-		} ,
-	
-		{
-			"title"    : "Victor is a Strategy Consultant",
-			"category" : "profile",
-			"tags"     : "resume, me, victor, angelo, blancada",
-			"url"      : "/pages/strategy-consultant.html",
-			"date"     : "2019-08-19 00:00:00 +0800"
+			"date"     : "2019-10-07 21:27:13 +0800"
 		} ,
 	
 		{
@@ -127,7 +119,7 @@
 			"category" : "profile",
 			"tags"     : "resume, me, victor, angelo, blancada",
 			"url"      : "/pages/ai-developer.html",
-			"date"     : "2019-08-20 00:00:00 +0800"
+			"date"     : "2019-10-07 21:27:13 +0800"
 		} ,
 	
 		{
@@ -135,7 +127,7 @@
 			"category" : "profile",
 			"tags"     : "resume, me, victor, angelo, blancada",
 			"url"      : "/pages/data-scientist.html",
-			"date"     : "2019-08-21 00:00:00 +0800"
+			"date"     : "2019-10-07 21:27:13 +0800"
 		} ,
 	
 		{
@@ -143,7 +135,15 @@
 			"category" : "page",
 			"tags"     : "resume, me, victor, angelo, blancada",
 			"url"      : "/pages/resume-downloads.html",
-			"date"     : "2019-08-21 00:00:00 +0800"
+			"date"     : "2019-10-07 21:27:13 +0800"
+		} ,
+	
+		{
+			"title"    : "Victor is a Strategy Consultant",
+			"category" : "profile",
+			"tags"     : "resume, me, victor, angelo, blancada",
+			"url"      : "/pages/strategy-consultant.html",
+			"date"     : "2019-10-07 21:27:13 +0800"
 		} 
 	
 ]

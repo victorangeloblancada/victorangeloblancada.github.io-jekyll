@@ -2,9 +2,14 @@
 layout: post
 title: "Mathematics, Language, and Lies"
 category: blog
-tags: math mathematics language data science
+tags: 
+- math 
+- mathematics 
+- language 
+- data 
+- science
 date: 2017-10-24
-featured-img: /assets/images/brain.jpg
+image: /assets/images/brain.jpg
 dropcap: True
 ---
 
