@@ -10,6 +10,7 @@ tags:
 - angelo 
 - blancada
 image: /assets/images/coding.jpg
+notshareable: True
 ---
 
 I am a full stack AI developer who has overseen projects to completion. I specialize in data science and machine learning using Python, R, and C but am also knowledgable in Java and web development. I am equally comfortable as an individual contributor or as a project manager.

@@ -9,6 +9,7 @@ tags:
 - Blancada
 - me
 image: /assets/images/Victor_3.jpg
+notshareable: True
 ---
 <!--
 # Victor Angelo Blancada

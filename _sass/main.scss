@@ -110,6 +110,7 @@ $sans-serif-font: Avenir, Futura, 'Century Gothic', sans-serif;
 $serif-font: Merriweather, Georgia, Garamond, serif;
 $display-font: Oswald, Bahnschrift, Impact, serif;
 $quote-font: Fanwood, Garamond, Georgia, serif;
+//$quote-font: Merriweather, Georgia, Garamond, serif;
 //$mono-font: IBM Plex Mono;
 
 $light-color: #FFF;
@@ -429,6 +430,18 @@ div.paper {
 	padding: 50px;
 }
 
+span.on-bg > #share-buttons > div > svg {
+	height: 16px; 
+	fill: $light-color;
+	margin-top: 10px;
+}
+
+div.cta-box > #share-buttons > div > svg {
+	height: 16px; 
+	fill: $dark-color;
+	margin-top: 10px;
+}
+
 div.flex-container {
 	display: flex; 
 	flex-wrap: wrap; 
@@ -438,7 +451,6 @@ div.flex-container {
 div.spacer {
 	min-height: $nav-height;
 }
-
 
 footer {
 	bottom: 0px;

@@ -295,6 +295,16 @@ div.paper {
   box-shadow: 0 10px 20px -4px rgba(0, 0, 0, 0.5);
   padding: 50px; }
 
+span.on-bg > #share-buttons > div > svg {
+  height: 16px;
+  fill: #FFF;
+  margin-top: 10px; }
+
+div.cta-box > #share-buttons > div > svg {
+  height: 16px;
+  fill: #22181C;
+  margin-top: 10px; }
+
 div.flex-container {
   display: flex;
   flex-wrap: wrap;

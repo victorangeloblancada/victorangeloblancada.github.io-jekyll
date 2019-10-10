@@ -10,6 +10,7 @@ tags:
 - angelo 
 - blancada
 image: /assets/images/charts.jpg
+notshareable: True
 ---
 
 I have a proven track record of applying predictive modeling and mathematical optimization concepts to come up with actionable solutions to real life problems, helping organizations take advantage of the opportunities opened up by the rise of the data age.

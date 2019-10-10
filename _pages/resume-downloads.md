@@ -10,6 +10,7 @@ tags:
 - angelo 
 - blancada
 image: /assets/images/night-sky.jpg
+notshareable: True
 ---
 
 ### Downloads & Links

@@ -10,6 +10,7 @@ tags:
 - angelo 
 - blancada
 image: /assets/images/consultant.jpg
+notshareable: True
 ---
 
 I have worked closely with C-level executives on strategy and business transformation projects.
