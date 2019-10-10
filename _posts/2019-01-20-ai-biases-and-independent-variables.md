@@ -8,7 +8,7 @@ tags:
 - ai 
 - statistics
 - mathematics
-image: https://cdn-images-1.medium.com/max/1000/1*2xdYJn8yXgCkDMXytLOujQ.png
+image: /assets/images/justice.jpg
 date: 2019-01-20
 dropcap: True
 ---
