@@ -273,15 +273,13 @@ div.content {
   margin-left: auto;
   margin-right: auto; }
 
-div.article {
-  text-align: justify; }
-  div.article table, div.article th, div.article tr, div.article td {
-    border: 1px solid #22181C;
-    border-collapse: collapse;
-    padding: 10px; }
-  div.article table {
-    margin-left: auto;
-    margin-right: auto; }
+div.article table, div.article th, div.article tr, div.article td {
+  border: 1px solid #22181C;
+  border-collapse: collapse;
+  padding: 10px; }
+div.article table {
+  margin-left: auto;
+  margin-right: auto; }
 
 div.article img {
   max-width: 100%;
