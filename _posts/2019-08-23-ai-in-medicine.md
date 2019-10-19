@@ -12,7 +12,7 @@ tags:
 - medicine 
 - health
 date: 2019-08-23
-image: /assets/images/heart.png
+image: /assets/images/heart.jpg
 description: With the high costs associated with healthcare today, AI can make healthcare more accessible by augmenting the expertise of doctors and other medical professionals and scaling services to reach those who need it most.
 dropcap: true
 ---

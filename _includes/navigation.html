@@ -1,7 +1,7 @@
 <script src="/assets/js/nav.js" type="text/javascript"></script>
 <div class="navbar transition" id="navbar">
 	<nav>
-		<a onClick="expand('navbar')">
+		<a onClick="expand('navbar', 'search-input')">
 			{% octicon search width:50 height:50 aria-label:search %}
 			<p>Search</p>
 		</a>
@@ -16,7 +16,7 @@
 	<!-- Html Elements for Search -->
 	<div id="search-container" class="search-container">
 		<center>
-			Search site: <input type="text" id="search-input" placeholder="AI...Data Science..." style="width: 60%;">
+			<input type="text" id="search-input" placeholder="Search this site" style="width: 100%;">
 			<ol id="results-container"></ol>
 		</center>
 	</div>

@@ -28,7 +28,7 @@ notshareable: True
 	-->
 	{% for item in site.data.profile %}
 		<a href="{{ item.url }}">
-			<div class="square-img transition" {% if item.featured-img %} style="background-image:  url( {{ item.featured-img }} );" {% endif %} >
+			<div class="square-img transition" {% if item.featured-img %} style="background-image: linear-gradient(rgba(0,0,0,.1), rgba(0,0,0,.1)), url( {{ item.featured-img }} );" {% endif %} >
 				<div class="center-content">
 					<span class="on-bg">
 						<h2>{{ item.header }}</h2>
@@ -74,7 +74,7 @@ notshareable: True
 	{% for post in site.posts %}
 		{% if post.tags contains 'featured' %}
 			<a href="{{ post.url }}">
-				<div class="square-img transition" {% if post.image %} style="background-image:  url( {{ post.image }} );" {% endif %} >
+				<div class="square-img transition" {% if post.image %} style="background-image: linear-gradient(rgba(0,0,0,.1), rgba(0,0,0,.1)), url( {{ post.image }} );" {% endif %} >
 					<div class="center-content">
 						<span class="on-bg">
 							<h3>{% if post.header %} {{ post.header }} {% else %} {{ post.title }} {% endif %}</h3>

@@ -11,7 +11,7 @@ title: Blog
 		{% if post.category == 'blog' %}
 			{% if post.draft != true %}
 				<a href="{{ post.url }}">
-					<div class="square-img transition" {% if post.image %} style="background-image:  url( {{ post.image }} );" {% endif %} >
+					<div class="square-img transition" {% if post.image %} style="background-image: linear-gradient(rgba(0,0,0,.1), rgba(0,0,0,.1)), url( {{ post.image }} );" {% endif %} >
 						<div class="center-content">
 							<span class="on-bg">
 								<h3>{% if post.header %} {{ post.header }} {% else %} {{ post.title }} {% endif %}</h3>
