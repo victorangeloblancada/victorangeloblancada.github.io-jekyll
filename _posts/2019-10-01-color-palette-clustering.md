@@ -3,10 +3,8 @@ layout: post
 title: "Color Palettes Using K-Means Clustering"
 category: blog
 tags: 
-- color 
-- palette 
-- image 
-- processing 
+- color palette 
+- image processing 
 - kmeans 
 - clustering
 date: 2019-10-01

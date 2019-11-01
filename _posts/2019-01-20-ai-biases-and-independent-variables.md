@@ -3,8 +3,7 @@ layout: post
 title: "AI Biases and Independent Variables"
 category: blog
 tags: 
-- artificial 
-- intelligence 
+- artificial intelligence 
 - ai 
 - statistics
 - mathematics

@@ -4,10 +4,7 @@ title: "10,000 Hours, Artificial Intelligence, and the Democratization of Expert
 category: blog
 tags: 
 - ai 
-- artificial 
-- intelligence 
-- expert 
-- expertise 
+- artificial intelligence 
 - training 
 - featured	
 image: /assets/images/chess-art.png

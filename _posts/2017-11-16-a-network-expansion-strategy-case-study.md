@@ -3,8 +3,7 @@ layout: post
 title: "A Network Expansion Strategy Case Study"
 category: blog
 tags: 
-- case 
-- study 
+- case study 
 - internet 
 - fiber network 
 - consulting 

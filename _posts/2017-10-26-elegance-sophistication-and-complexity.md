@@ -6,8 +6,7 @@ tags:
 - math 
 - mathematics 
 - language 
-- data 
-- science
+- data science
 date: 2017-10-26
 image: /assets/images/abstract-paint.jpg
 dropcap: True

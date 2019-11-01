@@ -4,8 +4,7 @@ title: "GIFs from Command Line"
 category: blog
 tags: 
 - gif 
-- command 
-- line 
+- command line 
 - coding 
 - gifs 
 - tumblr

@@ -4,12 +4,10 @@ title: "DIY Website Development in 2019"
 category: blog
 tags: 
 - html 
-- web 
-- development 
+- web development 
 - ux 
 - ui
-- user
-- experience
+- user experience
 - interface
 - ergonomics
 date: 2019-07-01

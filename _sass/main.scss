@@ -306,6 +306,23 @@ table.dataframe tr:nth-child(even) {
 	fill: $accent-2-color;
 }
 
+ul.tags {
+	text-align: center;
+	font-family: $sans-serif-font;
+	font-size: 0.75rem;
+}
+
+ul.tags li {
+	display: inline-block;
+	width: fit-content;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	margin-left: 1rem;
+	maring-right: 1rem;
+	border: 1px solid $accent-1-color;
+	border-radius: 1rem;
+}
+
 hr {
 	border: 0.5px solid $dark-color;
 }

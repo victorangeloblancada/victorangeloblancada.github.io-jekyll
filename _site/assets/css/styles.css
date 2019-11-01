@@ -202,6 +202,21 @@ table.dataframe th {
   color: #F58A07;
   fill: #F58A07; }
 
+ul.tags {
+  text-align: center;
+  font-family: Avenir, Futura, "Century Gothic", sans-serif;
+  font-size: 0.75rem; }
+
+ul.tags li {
+  display: inline-block;
+  width: fit-content;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-left: 1rem;
+  maring-right: 1rem;
+  border: 1px solid #084887;
+  border-radius: 1rem; }
+
 hr {
   border: 0.5px solid #22181C; }
 

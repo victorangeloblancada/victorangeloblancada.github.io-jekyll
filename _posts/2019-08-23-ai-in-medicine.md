@@ -5,10 +5,8 @@ category: blog
 tags: 
 - ai 
 - ml 
-- artificial 
-- intelligence 
-- machine 
-- learning 
+- artificial intelligence 
+- machine learning 
 - medicine 
 - health
 date: 2019-08-23

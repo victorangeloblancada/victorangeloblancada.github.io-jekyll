@@ -8,8 +8,7 @@ tags:
 - attribution 
 - online 
 - network 
-- markov 
-- chain
+- markov chain
 date: 2019-01-01
 image: /assets/images/times-square.jpg
 description: In this article, I will demonstrate how to implement data-driven channel attribution in Python.

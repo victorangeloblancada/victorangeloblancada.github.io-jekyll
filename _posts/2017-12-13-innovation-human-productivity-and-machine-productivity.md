@@ -6,8 +6,7 @@ tags:
 - technology
 - innovation
 - economy
-- data
-- science
+- data science
 image: /assets/images/phones.jpg
 date: 2017-12-13
 ---

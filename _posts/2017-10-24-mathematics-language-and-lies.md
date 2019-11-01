@@ -6,8 +6,7 @@ tags:
 - math 
 - mathematics 
 - language 
-- data 
-- science
+- data science
 date: 2017-10-24
 image: /assets/images/brain.jpg
 dropcap: True

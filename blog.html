@@ -6,6 +6,7 @@ title: Blog
 <center>
 	<h1>Latest Posts</h1>
 </center>
+
 <div class="flex-container">
 	{% for post in site.posts %}
 		{% if post.category == 'blog' %}
@@ -23,3 +24,16 @@ title: Blog
 		{% endif %}
 	{% endfor %}
 </div>
+
+<center>
+	<h1>Post Tags</h1>
+</center>
+
+<ul class="tags">
+	{% for tag in site.tags %}
+		{% assign t = tag | first %}
+		{% assign posts = tag | last %}
+		<!--<li>{{t | downcase | replace:" ","-" }} has {{ posts | size }} posts</li>-->
+		<a href='/tag/{{ t }}'><li>{{t | downcase}} ({{ posts | size }})</li></a>
+	{% endfor %}
+</ul>
