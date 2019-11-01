@@ -25,7 +25,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-10-01T00:00:00+08:00" />
 <script type="application/ld+json">
-{"headline":"Color Palettes Using K-Means Clustering","url":"http://localhost:4000/blog/2019/10/01/color-palette-clustering.html","datePublished":"2019-10-01T00:00:00+08:00","dateModified":"2019-10-01T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2019/10/01/color-palette-clustering.html"},"image":"http://localhost:4000/assets/images/color-palette.jpg","description":"Applying K-means clustering on the RGB values of image pixels will give the color palette of an image.","@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"headline":"Color Palettes Using K-Means Clustering","dateModified":"2019-10-01T00:00:00+08:00","url":"http://localhost:4000/blog/2019/10/01/color-palette-clustering.html","datePublished":"2019-10-01T00:00:00+08:00","image":"http://localhost:4000/assets/images/color-palette.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2019/10/01/color-palette-clustering.html"},"description":"Applying K-means clustering on the RGB values of image pixels will give the color palette of an image.","@type":"BlogPosting","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 		<link rel="stylesheet" href="https://indestructibletype.com/fonts/Jost.css" type="text/css" charset="utf-8" />
@@ -48,7 +48,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="navbar transition" id="navbar">
 	<nav>
 		<a onClick="expand('navbar', 'search-input')">
-			<svg width="50" height="50" aria-label="search" class="octicon octicon-search" viewBox="0 0 16 16" version="1.1" role="img"><path fill-rule="evenodd" d="M15.7 13.3l-3.81-3.83A5.93 5.93 0 0 0 13 6c0-3.31-2.69-6-6-6S1 2.69 1 6s2.69 6 6 6c1.3 0 2.48-.41 3.47-1.11l3.83 3.81c.19.2.45.3.7.3.25 0 .52-.09.7-.3a.996.996 0 0 0 0-1.41v.01zM7 10.7c-2.59 0-4.7-2.11-4.7-4.7 0-2.59 2.11-4.7 4.7-4.7 2.59 0 4.7 2.11 4.7 4.7 0 2.59-2.11 4.7-4.7 4.7z"/></svg>
+			<svg width="50" height="50" aria-label="search" class="octicon octicon-search" viewBox="0 0 16 16" version="1.1" role="img"><path fill-rule="evenodd" d="M15.7 13.3l-3.81-3.83A5.93 5.93 0 0013 6c0-3.31-2.69-6-6-6S1 2.69 1 6s2.69 6 6 6c1.3 0 2.48-.41 3.47-1.11l3.83 3.81c.19.2.45.3.7.3.25 0 .52-.09.7-.3a.996.996 0 000-1.41v.01zM7 10.7c-2.59 0-4.7-2.11-4.7-4.7 0-2.59 2.11-4.7 4.7-4.7 2.59 0 4.7 2.11 4.7 4.7 0 2.59-2.11 4.7-4.7 4.7z"/></svg>
 			<p>Search</p>
 		</a>
 		
@@ -58,7 +58,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			</a>
 		
 			<a href="/pages/about.html" >
-				<svg width="50" height="50" aria-label="person" class="octicon octicon-person" viewBox="0 0 12 16" version="1.1" role="img"><path fill-rule="evenodd" d="M12 14.002a.998.998 0 0 1-.998.998H1.001A1 1 0 0 1 0 13.999V13c0-2.633 4-4 4-4s.229-.409 0-1c-.841-.62-.944-1.59-1-4 .173-2.413 1.867-3 3-3s2.827.586 3 3c-.056 2.41-.159 3.38-1 4-.229.59 0 1 0 1s4 1.367 4 4v1.002z"/></svg>
+				<svg width="50" height="50" aria-label="person" class="octicon octicon-person" viewBox="0 0 12 16" version="1.1" role="img"><path fill-rule="evenodd" d="M12 14.002a.998.998 0 01-.998.998H1.001A1 1 0 010 13.999V13c0-2.633 4-4 4-4s.229-.409 0-1c-.841-.62-.944-1.59-1-4 .173-2.413 1.867-3 3-3s2.827.586 3 3c-.056 2.41-.159 3.38-1 4-.229.59 0 1 0 1s4 1.367 4 4v1.002z"/></svg>
 				<p>About</p>
 			</a>
 		
@@ -180,8 +180,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p>The code to implement K-means clustering using scikit-learn follows. An interactive version of this notebook can be found on <a href="https://colab.research.google.com/drive/1EWcej7Hm2F_tGf7-SB2UX6uJ-5QvCEKb">Colab</a>.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
-<span class="c"># Import libraries</span>
-
+<span class="c1"># Import libraries
+</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
@@ -197,19 +197,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>To avoid getting different color palettes from different K-means cluster seeds, the random seed is fixed.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Fix random seed</span>
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Fix random seed
+</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Read the image file as 2-D array of RGB values.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Read image file as 2-D array of RGB values</span>
-<span class="n">filepath</span> <span class="o">=</span> <span class="s">'https://images.unsplash.com/photo-1522410818928-5522dacd5066'</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Read image file as 2-D array of RGB values
+</span><span class="n">filepath</span> <span class="o">=</span> <span class="s">'https://images.unsplash.com/photo-1522410818928-5522dacd5066'</span>
 
 <span class="n">img</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
 
-<span class="c"># Show image</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">'off'</span><span class="p">)</span>
+<span class="c1"># Show image
+</span><span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">'off'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">);</span>
 </code></pre></div></div>
 
@@ -232,8 +232,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Fit and assign clusters</span>
-<span class="n">data</span><span class="p">[</span><span class="s">'Cluster'</span><span class="p">]</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Fit and assign clusters
+</span><span class="n">data</span><span class="p">[</span><span class="s">'Cluster'</span><span class="p">]</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Get the color palette from the cluster centers.</p>
@@ -241,16 +241,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">palette</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">cluster_centers_</span>
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Convert data to format accepted by imshow</span>
-<span class="n">palette_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Convert data to format accepted by imshow
+</span><span class="n">palette_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">palette</span><span class="p">:</span>
     <span class="n">palette_list</span><span class="o">.</span><span class="n">append</span><span class="p">([[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">color</span><span class="p">)]])</span>
 </code></pre></div></div>
 
 <p>Show the color palette, along with the hexadecimal code for the color.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Show color palette</span>
-<span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">palette_list</span><span class="p">:</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Show color palette
+</span><span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">palette_list</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="n">to_hex</span><span class="p">(</span><span class="n">color</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">'off'</span><span class="p">)</span>
@@ -285,26 +285,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>Recreate the image with using only colors from color palette.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Replace every pixel's color with the color of its cluster centroid</span>
-<span class="n">data</span><span class="p">[</span><span class="s">'R_cluster'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'Cluster'</span><span class="p">]</span><span class="o">.</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">palette_list</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Replace every pixel's color with the color of its cluster centroid
+</span><span class="n">data</span><span class="p">[</span><span class="s">'R_cluster'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'Cluster'</span><span class="p">]</span><span class="o">.</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">palette_list</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">data</span><span class="p">[</span><span class="s">'G_cluster'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'Cluster'</span><span class="p">]</span><span class="o">.</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">palette_list</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">data</span><span class="p">[</span><span class="s">'B_cluster'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'Cluster'</span><span class="p">]</span><span class="o">.</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">palette_list</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Convert the dataframe back to a numpy array</span>
-<span class="n">img_c</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s">'R_cluster'</span><span class="p">,</span> <span class="s">'G_cluster'</span><span class="p">,</span> <span class="s">'B_cluster'</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Convert the dataframe back to a numpy array
+</span><span class="n">img_c</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s">'R_cluster'</span><span class="p">,</span> <span class="s">'G_cluster'</span><span class="p">,</span> <span class="s">'B_cluster'</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Reshape the data back to a 200x200 image</span>
-<span class="n">img_c</span> <span class="o">=</span> <span class="n">img_c</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Reshape the data back to a 200x200 image
+</span><span class="n">img_c</span> <span class="o">=</span> <span class="n">img_c</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Resize the image back to the original aspect ratio</span>
-<span class="n">img_c</span> <span class="o">=</span> <span class="n">resize</span><span class="p">(</span><span class="n">img_c</span><span class="p">,</span> <span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="mi">1200</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Resize the image back to the original aspect ratio
+</span><span class="n">img_c</span> <span class="o">=</span> <span class="n">resize</span><span class="p">(</span><span class="n">img_c</span><span class="p">,</span> <span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="mi">1200</span><span class="p">))</span>
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Display the image</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">'off'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Display the image
+</span><span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">'off'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_c</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div></div>

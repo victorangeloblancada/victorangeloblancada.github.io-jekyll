@@ -6,7 +6,6 @@ tags:
 - victor 
 - makati 
 - tosm 
-- 2018
 date: 2018-03-20
 image: /assets/images/makati.jpg
 description:  Victor Angelo Blancada was named one of the Ten Outstanding Students of Makati in 2009.
