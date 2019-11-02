@@ -1,12 +1,10 @@
 ---
-layout: post-alt
+layout: profile
 title: About Victor Angelo Blancada
 header: Hi, I'm <span class="emphasized">Victor Angelo Blancada</span>
 tags: 
 - about
-- Victor
-- Angelo
-- Blancada
+- Victor Angelo Blancada
 - me
 image: /assets/images/Victor_3.jpg
 notshareable: True
@@ -31,6 +29,8 @@ An experienced strategy consultant for Fortune 500 companies, I have worked with
 
 ### Li & Fung
 
+As the leading supply chain solutions partner for brands and retailers, Li & Fung is committed to building the supply chain of the future.
+
 #### Data Science Manager, Global Supply Chain Analytics (Hong Kong, China, 2019-Present)
 
 - Responsible for improving the efficiency of Li & Fung’s global supply chain by deploying self-service data science tools.
@@ -38,6 +38,8 @@ An experienced strategy consultant for Fortune 500 companies, I have worked with
 - Improved labor and space requirements planning by creating an SKU-level inventory prediction system for seasonal SKUs. The system uses K-Shape clustering to combine SKUs based on the shapes of their inventory curves before fitting regression models for each cluster.
 
 ### Publicis Worldwide
+
+Publicis Worldwide helps clients lead industry change by combining IT and data analytics with strategic creativity to produce innovative marketing solutions. It is part of the Publicis Groupe, the oldest and one of the largest marketing and communications companies in the world, by revenue.
 
 #### Data Lead, Hong Kong and Greater China (Hong Kong, China, 2017-2019)
 
@@ -47,6 +49,8 @@ An experienced strategy consultant for Fortune 500 companies, I have worked with
 
 ### IPG Mediabrands
 
+IPG Mediabrands is the global media and data management arm of Interpublic Group. An industry-leader in terms of analytics, it manages USD 39B of marketing investments on behalf of clients worldwide.
+
 #### Analytics Technology Manager, Manila Global Modeling Center (Philippines, 2015-2017)
 
 - Built and managed the global predictive modeling hub in Manila that supported the analytics needs of markets across IPG Mediabrands' global footprint. 
@@ -54,6 +58,8 @@ An experienced strategy consultant for Fortune 500 companies, I have worked with
 - Developed a marketing spend optimization platform that uses COByLA (constrained optimization by linear approximation)  to automatically determine the optimal media schedule across channels and days.
 
 ### Mitchell Madison Group
+
+Mitchell Madison Group is a management consulting firm that delivers measurable enterprise value to Fortune 500 companies through business analytics, performance improvement and strategic services.
 
 #### Business Analyst (Various Client Locations, 2014-2015)
 

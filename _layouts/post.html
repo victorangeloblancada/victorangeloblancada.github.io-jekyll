@@ -54,6 +54,15 @@
 				</div>
 				{% endunless %}
 			</div>
+			<center>
+				<h2>See more posts about...</h2>
+				<ul class="tags">
+					{% for tag in page.tags %}
+						<a href='/tag/{{ tag }}'><li> {{tag | downcase}} </li></a>
+					{% endfor %}
+				</ul>
+				<a href='/blog.html'><p>See all posts</p></a>
+			</center>
 			<footer>
 				<hr>
 				© 2019 Victor Blancada. All Rights Reserved.
