@@ -361,7 +361,7 @@ div.navbar {
 	padding-bottom: 10px;
 	text-align: center;
 	line-height: 8px;
-
+	//padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 
@@ -487,6 +487,11 @@ div.hero-img {
 	// Full height
 	height: 100vh; 
 	line-height: 100vh;
+	width: 100%;
+
+	position: absolute;
+	left: 0px;
+	top: 0px;
 
 	// Create the parallax scrolling effect
 	background-attachment: fixed;
@@ -678,8 +683,9 @@ div.square-img:hover {
 		display: block;
 	}
 	img.profile-pic {		
-		height: 75vh;
-		width: 75vh;
+		height: 70vh;
+		width: 70vh;
 		float: right;
+		padding-left: 10vh;
 	}
 }

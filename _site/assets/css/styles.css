@@ -339,6 +339,10 @@ footer {
 div.hero-img {
   height: 100vh;
   line-height: 100vh;
+  width: 100%;
+  position: absolute;
+  left: 0px;
+  top: 0px;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -466,6 +470,7 @@ div.square-img:hover {
     display: block; }
 
   img.profile-pic {
-    height: 75vh;
-    width: 75vh;
-    float: right; } }
+    height: 70vh;
+    width: 70vh;
+    float: right;
+    padding-left: 10vh; } }

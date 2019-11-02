@@ -36,6 +36,8 @@
 					</span>
 				</div>
 			</div>
+			<div id="hero-img-spacer" style="height: 100vh;">
+			</div>
 			<div id="start">
 			</div>
 			<div class="content">
@@ -54,8 +56,9 @@
 				</div>
 				{% endunless %}
 			</div>
+			{% if page.tags %}
 			<center>
-				<h2>See more posts about...</h2>
+				<h2>Read more posts about...</h2>
 				<ul class="tags">
 					{% for tag in page.tags %}
 						<a href='/tag/{{ tag }}'><li> {{tag | downcase}} </li></a>
@@ -63,6 +66,7 @@
 				</ul>
 				<a href='/blog.html'><p>See all posts</p></a>
 			</center>
+			{% endif %}
 			<footer>
 				<hr>
 				© 2019 Victor Blancada. All Rights Reserved.
