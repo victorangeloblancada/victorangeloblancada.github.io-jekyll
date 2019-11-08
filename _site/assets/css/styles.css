@@ -170,7 +170,7 @@ div.highlighter-rouge {
   max-width: 80vw; }
 
 div.dataframe {
-  font-family: Avenir, Futura, "Century Gothic", sans-serif;
+  font-family: Avenir, "Jost", Futura, "Century Gothic", sans-serif;
   overflow-x: auto; }
 
 table.dataframe th {
@@ -204,7 +204,7 @@ table.dataframe th {
 
 ul.tags {
   text-align: center;
-  font-family: Avenir, Futura, "Century Gothic", sans-serif;
+  font-family: Avenir, "Jost", Futura, "Century Gothic", sans-serif;
   font-size: 0.75rem; }
 
 ul.tags li {
@@ -255,11 +255,15 @@ div.navbar.expand {
   scroll: auto;
   overflow-y: auto; }
 
+div.navbar li {
+  text-align: left;
+  font-family: Avenir, "Jost", Futura, "Century Gothic", sans-serif; }
+
 nav a {
   float: left;
   display: block;
   text-align: center;
-  font-family: Avenir, Futura, "Century Gothic", sans-serif;
+  font-family: Avenir, "Jost", Futura, "Century Gothic", sans-serif;
   text-decoration: none;
   width: 20%; }
 
@@ -274,7 +278,7 @@ div.search-container {
 input[type=text] {
   border: none;
   border-bottom: 2px solid #F58A07;
-  font-family: Avenir, Futura, "Century Gothic", sans-serif;
+  font-family: Avenir, "Jost", Futura, "Century Gothic", sans-serif;
   line-height: 30px;
   background-color: #FFF;
   color: #22181C; }

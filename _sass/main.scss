@@ -106,7 +106,7 @@
 
 $nav-count: 5;
 
-$sans-serif-font: Avenir, Futura, 'Century Gothic', sans-serif;
+$sans-serif-font: Avenir, 'Jost', Futura, 'Century Gothic', sans-serif;
 $serif-font: Merriweather, Georgia, Garamond, serif;
 $display-font: Oswald, Bahnschrift, Impact, serif;
 $quote-font: Fanwood, Garamond, Georgia, serif;
@@ -370,6 +370,11 @@ div.navbar.expand {
 	max-height: 80vh;
 	scroll: auto;
 	overflow-y: auto;
+}
+
+div.navbar li {
+	text-align: left;
+	font-family: $sans-serif-font;
 }
 
 nav a {

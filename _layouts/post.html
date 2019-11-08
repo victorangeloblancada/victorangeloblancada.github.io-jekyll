@@ -41,6 +41,9 @@
 			<div id="start">
 			</div>
 			<div class="content">
+				{% unless page.notshareable %}
+				<h1>{{ page.title }}</h1>
+				{% endunless %}
 				<!--
 				<h1>{% if page.header %} {{ page.header }} {% else %} {{ page.title }} {% endif %}</h1>
 				{% unless page.nodate %}
