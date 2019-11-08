@@ -119,7 +119,7 @@ $accent-1-color: #084887;
 $accent-2-color: #F58A07;
 $accent-3-color: #F6F6F6;
 
-$nav-height: 80px;
+$nav-height: 80px + env(safe-area-inset-bottom);
 $nav-height-desktop: 50px;
 
 html {
@@ -620,9 +620,8 @@ div.square-img:hover {
 		z-index: 2;
 		height: $nav-height;
 		padding-bottom: 10px;
-		margin-bottom: env(safe-area-inset-bottom);
 		//position: fixed;
-		bottom: 0px;
+		bottom: env(safe-area-inset-bottom, 0px);
 		background-color: $light-color;
 		box-shadow: 0 -1px 20px -4px rgba(0,0,0,0.1);
 		//color: $dark-color;

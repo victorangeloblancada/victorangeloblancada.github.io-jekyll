@@ -332,11 +332,11 @@ div.flex-container {
   justify-content: center; }
 
 div.spacer {
-  min-height: 80px; }
+  min-height: 80pxenv(safe-area-inset-bottom); }
 
 footer {
   bottom: 0px;
-  height: 80px;
+  height: 80pxenv(safe-area-inset-bottom);
   padding: 10px;
   text-align: center; }
 
@@ -422,10 +422,9 @@ div.square-img:hover {
 @media only screen and (max-width: 600px) {
   div.navbar {
     z-index: 2;
-    height: 80px;
+    height: 80pxenv(safe-area-inset-bottom);
     padding-bottom: 10px;
-    margin-bottom: env(safe-area-inset-bottom);
-    bottom: 0px;
+    bottom: env(safe-area-inset-bottom, 0px);
     background-color: #FFF;
     box-shadow: 0 -1px 20px -4px rgba(0, 0, 0, 0.1); }
 
