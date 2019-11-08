@@ -34,6 +34,6 @@ title: Blog
 		{% assign t = tag | first %}
 		{% assign posts = tag | last %}
 		<!--<li>{{t | downcase | replace:" ","-" }} has {{ posts | size }} posts</li>-->
-		<a href='/tag/{{ t }}'><li>{{t | downcase}} ({{ posts | size }})</li></a>
+		<a href='/blog/tag/{{ t }}'><li>{{t | downcase}} ({{ posts | size }})</li></a>
 	{% endfor %}
 </ul>

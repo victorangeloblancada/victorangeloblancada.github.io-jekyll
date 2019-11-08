@@ -64,7 +64,7 @@
 				<h2>Read more posts about...</h2>
 				<ul class="tags">
 					{% for tag in page.tags %}
-						<a href='/tag/{{ tag }}'><li> {{tag | downcase}} </li></a>
+						<a href='/blog/tag/{{ tag }}'><li> {{tag | downcase}} </li></a>
 					{% endfor %}
 				</ul>
 				<a href='/blog.html'><p>See all posts</p></a>
