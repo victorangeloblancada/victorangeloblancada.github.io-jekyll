@@ -237,7 +237,6 @@ img.profile-pic {
 div.navbar {
   z-index: 2;
   position: fixed;
-  height: 80px;
   width: 100%;
   background-color: #FFF;
   box-shadow: 0 10px 20px -4px rgba(0, 0, 0, 0.1);
@@ -286,9 +285,6 @@ input[type=text] {
 
 input[type=text]:focus {
   outline: none; }
-
-div.wrapper {
-  min-height: 100vh; }
 
 div.content {
   display: block;
@@ -425,7 +421,8 @@ div.square-img:hover {
     z-index: 2;
     height: 80px;
     padding-bottom: 10px;
-    bottom: env(safe-area-inset-bottom, 0px);
+    bottom: 0px;
+    margin-bottom: env(safe-area-inset-bottom, 0px);
     background-color: #FFF;
     box-shadow: 0 -1px 20px -4px rgba(0, 0, 0, 0.1); }
 

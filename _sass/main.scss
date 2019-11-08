@@ -348,7 +348,7 @@ img.profile-pic {
 div.navbar {
 	z-index: 2;
 	position: fixed;
-	height: $nav-height;
+	//height: $nav-height;
 	width: 100%;
 	background-color: $light-color;
 	box-shadow: 0 10px 20px -4px rgba(0,0,0,0.1);
@@ -418,7 +418,7 @@ input[type=text]:focus {
 }
 
 div.wrapper {
-	min-height: 100vh;
+	//min-height: 100vh;
 }
 
 div.content {
@@ -621,7 +621,8 @@ div.square-img:hover {
 		height: $nav-height;
 		padding-bottom: 10px;
 		//position: fixed;
-		bottom: env(safe-area-inset-bottom, 0px);
+		bottom: 0px;
+		margin-bottom: env(safe-area-inset-bottom, 0px);
 		background-color: $light-color;
 		box-shadow: 0 -1px 20px -4px rgba(0,0,0,0.1);
 		//color: $dark-color;
