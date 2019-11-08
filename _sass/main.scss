@@ -119,7 +119,7 @@ $accent-1-color: #084887;
 $accent-2-color: #F58A07;
 $accent-3-color: #F6F6F6;
 
-$nav-height: 80px + env(safe-area-inset-bottom);
+$nav-height: 80px;
 $nav-height-desktop: 50px;
 
 html {
@@ -348,7 +348,7 @@ img.profile-pic {
 div.navbar {
 	z-index: 2;
 	position: fixed;
-	//height: $nav-height;
+	height: $nav-height;
 	width: 100%;
 	background-color: $light-color;
 	box-shadow: 0 10px 20px -4px rgba(0,0,0,0.1);
