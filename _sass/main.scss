@@ -619,6 +619,8 @@ div.square-img:hover {
 	div.navbar {
 		z-index: 2;
 		height: $nav-height;
+		padding-bottom: 10px;
+		margin-bottom: env(safe-area-inset-bottom);
 		//position: fixed;
 		bottom: 0px;
 		background-color: $light-color;
