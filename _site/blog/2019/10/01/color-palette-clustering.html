@@ -266,32 +266,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </code></pre></div></div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#c1a4a9
-</code></pre></div></div>
+<p>#c1a4a9 <img src="/assets/images/palette-1.png" alt="png" /></p>
 
-<p><img src="/assets/images/palette-1.png" alt="png" /></p>
+<p>#38293c <img src="/assets/images/palette-2.png" alt="png" /></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#38293c
-</code></pre></div></div>
+<p>#f2ebed<img src="/assets/images/palette-3.png" alt="png" /></p>
 
-<p><img src="/assets/images/palette-2.png" alt="png" /></p>
+<p>#df8c18<img src="/assets/images/palette-4.png" alt="png" /></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#f2ebed
-</code></pre></div></div>
+<p>#1565a1<img src="/assets/images/palette-5.png" alt="png" /></p>
 
-<p><img src="/assets/images/palette-3.png" alt="png" /></p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#df8c18
-</code></pre></div></div>
-
-<p><img src="/assets/images/palette-4.png" alt="png" /></p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#1565a1
-</code></pre></div></div>
-
-<p><img src="/assets/images/palette-5.png" alt="png" /></p>
-
-<p>Recreate the image with using only colors from color palette.</p>
+<p>Recreate the image using only colors from color palette.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Replace every pixel's color with the color of its cluster centroid
 </span><span class="n">data</span><span class="p">[</span><span class="s">'R_cluster'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'Cluster'</span><span class="p">]</span><span class="o">.</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">palette_list</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>

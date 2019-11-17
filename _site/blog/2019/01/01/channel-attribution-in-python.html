@@ -206,10 +206,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <h2 id="data-driven-attribution-in-python">Data-Driven Attribution in Python</h2>
 
+<p>Start by importing libraries.</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Import libraries
 </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
 </code></pre></div></div>
+
+<p>Define some dummy data.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Define data
 </span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="s">'start'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
@@ -234,6 +238,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </span><span class="n">data</span><span class="p">[</span><span class="s">'time'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'time'</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s">'coerce'</span><span class="p">)</span>
 <span class="n">data</span><span class="p">[</span><span class="s">'touchpoint'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'touchpoint'</span><span class="p">]</span><span class="o">.</span><span class="nb">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 </code></pre></div></div>
+
+<p>Preview the data.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Preview data
 </span><span class="n">data</span>
@@ -494,6 +500,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 </div>
 
+<p>The following code block defines the touchpoints class to load the touchpoint data into and also defines methods to analysis the touchpoint interaction data.</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">touchpoints</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">touchpoints</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">conversion</span><span class="p">,</span> <span class="n">nonconversion</span><span class="p">,</span> <span class="n">user_ids</span><span class="p">):</span>
         <span class="c1"># Define variables
@@ -652,37 +660,108 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                       <span class="n">user_ids</span><span class="o">=</span><span class="s">'customer_id'</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Describe the customer journeys
-</span><span class="n">tp_data</span><span class="o">.</span><span class="n">describe_data</span><span class="p">()</span>
-</code></pre></div></div>
+<!--
+```python
+# Describe the customer journeys
+tp_data.describe_data()
+```
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>There are 3 unique journeys.
+There are 3 unique journeys.
+
 There are 6 unique touchpoints.
-touchpoint  c1  c2  c3  purchase  start  unsuccessful
-journey_id                                           
-(1, 1.0)     1   1   1         1      1             0
-(1, 2.0)     1   0   0         0      1             1
-(2, 2.0)     0   1   1         0      1             1
-</code></pre></div></div>
+
+<div class="dataframe">
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+```
+.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+```
+
+</style>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>journey_id</th>
+      <th>touchpoint</th>
+      <th>c1</th>
+      <th>c2</th>
+      <th>c3</th>
+      <th>purchase</th>
+      <th>start</th>
+      <th>unsuccessful</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <th>1</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <th>2</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <th>2</th>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+-->
+
+<p>Calculate the removal rate for touchpoint 1.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Calculate the removal rate for c1
 </span><span class="n">tp_data</span><span class="o">.</span><span class="n">attribute_removal</span><span class="p">(</span><span class="s">'c1'</span><span class="p">)</span>
 </code></pre></div></div>
 
+<p>Show the long term probability of conversion for the entire Markov chain.</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Show the long term transition probability for the entire Markov chain
 </span><span class="n">tp_data</span><span class="o">.</span><span class="n">long_term_transition_probability</span><span class="p">()</span>
 </code></pre></div></div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.3333333333333333
-</code></pre></div></div>
+<p>0.3333333333333333</p>
+
+<p>Show the calculated removal rate for touchpoint 1.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Show the removal rate for c1
 </span><span class="n">tp_data</span><span class="o">.</span><span class="n">removal_rate</span><span class="p">(</span><span class="s">'c1'</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.5
+<p>0.5</p>
 
-</code></pre></div></div>
+<p>Calculate the removal rates for touchpoints 2 and 3.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Calculate the removal rate for c2 then c3
 </span><span class="n">tp_data</span><span class="o">.</span><span class="n">attribute_removal</span><span class="p">(</span><span class="s">'c2'</span><span class="p">)</span>
@@ -690,23 +769,22 @@ journey_id
 
 </code></pre></div></div>
 
+<p>Show the removal rate for touchpoint 2.</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Show the removal rate for c2
 </span><span class="n">tp_data</span><span class="o">.</span><span class="n">removal_rate</span><span class="p">(</span><span class="s">'c2'</span><span class="p">)</span>
 
 </code></pre></div></div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.0
+<p>1.0</p>
 
-</code></pre></div></div>
+<p>Show the removal rate for touchpoint 3.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Show the removal rate for c3
 </span><span class="n">tp_data</span><span class="o">.</span><span class="n">removal_rate</span><span class="p">(</span><span class="s">'c3'</span><span class="p">)</span>
-
 </code></pre></div></div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.0
-
-</code></pre></div></div>
+<p>1.0</p>
 
 <h2 id="interpretation">Interpretation</h2>
 

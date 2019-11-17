@@ -108,47 +108,17 @@ for color in palette_list:
     plt.show();
 ```
 
-```
-#c1a4a9
-```
+#c1a4a9 ![png](/assets/images/palette-1.png)
 
+#38293c ![png](/assets/images/palette-2.png)
 
+#f2ebed![png](/assets/images/palette-3.png)
 
-![png](/assets/images/palette-1.png)
+#df8c18![png](/assets/images/palette-4.png)
 
-```
-#38293c
-```
+#1565a1![png](/assets/images/palette-5.png)
 
-
-
-![png](/assets/images/palette-2.png)
-
-```
-#f2ebed
-```
-
-
-
-![png](/assets/images/palette-3.png)
-
-```
-#df8c18
-```
-
-
-
-![png](/assets/images/palette-4.png)
-
-```
-#1565a1
-```
-
-
-
-![png](/assets/images/palette-5.png)
-
-Recreate the image with using only colors from color palette.
+Recreate the image using only colors from color palette.
 
 ```python
 # Replace every pixel's color with the color of its cluster centroid

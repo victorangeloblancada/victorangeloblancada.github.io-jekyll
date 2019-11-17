@@ -41,11 +41,15 @@ The full notebook with Python code follows while an interactive version may be f
 
 ## Data-Driven Attribution in Python
 
+Start by importing libraries.
+
 ```python
 # Import libraries
 import pandas as pd
 import numpy as np
 ```
+
+Define some dummy data.
 
 ```python
 # Define data
@@ -73,12 +77,12 @@ data['time'] = pd.to_numeric(data['time'], errors='coerce')
 data['touchpoint'] = data['touchpoint'].str.lower()
 ```
 
+Preview the data.
+
 ```python
 # Preview data
 data
 ```
-
-
 
 <div class="dataframe">
 <style scoped>
@@ -206,8 +210,6 @@ data = data.sort_values('time')
 data = data.reset_index()
 data
 ```
-
-
 
 <div class="dataframe">
 <style scoped>
@@ -340,7 +342,7 @@ data
 
 </div>
 
-
+The following code block defines the touchpoints class to load the touchpoint data into and also defines methods to analysis the touchpoint interaction data.
 
 ```python
 class touchpoints:
@@ -502,56 +504,111 @@ tp_data = touchpoints(data=data,
                       user_ids='customer_id')
 ```
 
+<!--
 ```python
 # Describe the customer journeys
 tp_data.describe_data()
 ```
 
-```
 There are 3 unique journeys.
+
 There are 6 unique touchpoints.
-touchpoint  c1  c2  c3  purchase  start  unsuccessful
-journey_id                                           
-(1, 1.0)     1   1   1         1      1             0
-(1, 2.0)     1   0   0         0      1             1
-(2, 2.0)     0   1   1         0      1             1
+
+<div class="dataframe">
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+```
+.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
 ```
 
+</style>
 
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>journey_id</th>
+      <th>touchpoint</th>
+      <th>c1</th>
+      <th>c2</th>
+      <th>c3</th>
+      <th>purchase</th>
+      <th>start</th>
+      <th>unsuccessful</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <th>1</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <th>2</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <th>2</th>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+-->
+
+Calculate the removal rate for touchpoint 1.
 
 ```python
 # Calculate the removal rate for c1
 tp_data.attribute_removal('c1')
 ```
 
-
+Show the long term probability of conversion for the entire Markov chain.
 
 ```python
 # Show the long term transition probability for the entire Markov chain
 tp_data.long_term_transition_probability()
 ```
 
-
-
-```
 0.3333333333333333
-```
 
-
+Show the calculated removal rate for touchpoint 1.
 
 ```python
 # Show the removal rate for c1
 tp_data.removal_rate('c1')
 ```
 
-
-
-```
 0.5
 
-```
-
-
+Calculate the removal rates for touchpoints 2 and 3.
 
 ```python
 # Calculate the removal rate for c2 then c3
@@ -560,35 +617,24 @@ tp_data.attribute_removal('c3')
 
 ```
 
+Show the removal rate for touchpoint 2.
+
 ```python
 # Show the removal rate for c2
 tp_data.removal_rate('c2')
 
 ```
 
-
-
-```
 1.0
 
-```
-
-
+Show the removal rate for touchpoint 3.
 
 ```python
 # Show the removal rate for c3
 tp_data.removal_rate('c3')
-
 ```
 
-
-
-```
 1.0
-
-```
-
-
 
 ## Interpretation
 
