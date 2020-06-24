@@ -137,7 +137,7 @@ Note that Hyperopt expects this to be a loss metric such as the mean squared err
 
 The objective function takes in the selected hyperparameters from the distributions previously defined in the hyperparameter space as arguments and attempts to fit a model using these hyperparameters. Note that in this example, parameters for data variable transformations are also considered as hyperparameters (i.e. a1 controls the power transformation). The function then returns the model accuracy or loss metric for evaluation.
 
- ## Automating Model Iteration
+## Automating Model Iteration
 
 ```python
 # Getting the best hyperparameters and transformations using hyperopt
