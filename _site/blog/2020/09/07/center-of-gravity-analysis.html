@@ -211,6 +211,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>Let’s use the following dummy data to get the centers of gravity:</p>
 
+<div class="dataframe">
 <table>
   <thead>
     <tr>
@@ -266,11 +267,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </tr>
   </tbody>
 </table>
+</div>
 
 <p>Suppose that we want to identify two warehouse locations using the center of gravity method. The formula from the previous section will only provide a single center of gravity, however, from its definition as the point where transport costs are minimized, we can use the K-means clustering algorithm to determine multiple locations that will minimize the transport costs. K-means clustering is an unsupervised learning technique that identifies centroids such that each individual data point is assigned a cluster based on which centroid is closest to it. To identify two warehouse locations, we can run the K-means clustering algorithm with K=2 to get two centroids.</p>
 
 <p>Also suppose that the outbound and inbound shipping costs vary, with deliveries inbound to the warehouse generally costing less for a delivery of comparable distance from the warehouse, as they tend to do due to economies of scale. Suppose that outbound deliveries cost exactly twice as much as inbound deliveries. In this case, we need to scale the weights of the volumes accordingly. The outbound deliveries to demand locations are multiplied by two while the inbound deliveries from supply locations are kept the same:</p>
 
+<div class="dataframe">
 <table>
   <thead>
     <tr>
@@ -333,6 +336,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </tr>
   </tbody>
 </table>
+</div>
 
 <p>The code block below imports the necessary libraries for the analysis and loads the first table above:</p>
 
@@ -470,6 +474,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>We can vary our approach by introducing candidate sites for the algorithm to select the warehouse location from. In the table below, the raw data from the previous section has been updated with five candidate sites from which to choose two warehouse locations:</p>
 
+<div class="dataframe">
 <table>
   <thead>
     <tr>
@@ -527,39 +532,40 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <td>Charlottesville, VA</td>
       <td>38.04</td>
       <td>-78.5199</td>
-      <td> </td>
+      <td>&nbsp;</td>
       <td>Candidate</td>
     </tr>
     <tr>
       <td>Harrisburg, PA</td>
       <td>40.3394</td>
       <td>-77.0077</td>
-      <td> </td>
+      <td>&nbsp;</td>
       <td>Candidate</td>
     </tr>
     <tr>
       <td>Columbus, OH</td>
       <td>39.9828</td>
       <td>-83.1309</td>
-      <td> </td>
+      <td>&nbsp;</td>
       <td>Candidate</td>
     </tr>
     <tr>
       <td>Lafayette, IN</td>
       <td>40.4049</td>
       <td>-86.9282</td>
-      <td> </td>
+      <td>&nbsp;</td>
       <td>Candidate</td>
     </tr>
     <tr>
       <td>Buffalo, NY</td>
       <td>42.8962</td>
       <td>-78.9344</td>
-      <td> </td>
+      <td>&nbsp;</td>
       <td>Candidate</td>
     </tr>
   </tbody>
 </table>
+</div>
 
 <p>The data preparation is mostly the same and is covered by the code block below to show the supply locations (yellow) and demand locations (red) along with the candidate sites (black) in the Leaflet map:</p>
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="https://victorangeloblancada.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://victorangeloblancada.github.io/" rel="alternate" type="text/html" /><updated>2020-09-08T14:25:24+08:00</updated><id>https://victorangeloblancada.github.io/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">Center of Gravity Analysis in Python</title><link href="https://victorangeloblancada.github.io/blog/2020/09/07/center-of-gravity-analysis.html" rel="alternate" type="text/html" title="Center of Gravity Analysis in Python" /><published>2020-09-07T00:00:00+08:00</published><updated>2020-09-07T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2020/09/07/center-of-gravity-analysis</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2020/09/07/center-of-gravity-analysis.html">&lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="https://victorangeloblancada.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://victorangeloblancada.github.io/" rel="alternate" type="text/html" /><updated>2020-09-08T16:27:54+08:00</updated><id>https://victorangeloblancada.github.io/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">Center of Gravity Analysis in Python</title><link href="https://victorangeloblancada.github.io/blog/2020/09/07/center-of-gravity-analysis.html" rel="alternate" type="text/html" title="Center of Gravity Analysis in Python" /><published>2020-09-07T00:00:00+08:00</published><updated>2020-09-07T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2020/09/07/center-of-gravity-analysis</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2020/09/07/center-of-gravity-analysis.html">&lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML&quot;&gt;
 &lt;/script&gt;
 
 &lt;p&gt;In logistics, the center of gravity analysis is used to derive the ideal locations for warehousing facilities by calculating the transport costs to each of the locations to be served by the facility. The center of gravity is the location giving the lowest total transport costs.&lt;/p&gt;
@@ -28,6 +28,7 @@
 
 &lt;p&gt;Let’s use the following dummy data to get the centers of gravity:&lt;/p&gt;
 
+&lt;div class=&quot;dataframe&quot;&gt;
 &lt;table&gt;
   &lt;thead&gt;
     &lt;tr&gt;
@@ -83,11 +84,13 @@
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;/div&gt;
 
 &lt;p&gt;Suppose that we want to identify two warehouse locations using the center of gravity method. The formula from the previous section will only provide a single center of gravity, however, from its definition as the point where transport costs are minimized, we can use the K-means clustering algorithm to determine multiple locations that will minimize the transport costs. K-means clustering is an unsupervised learning technique that identifies centroids such that each individual data point is assigned a cluster based on which centroid is closest to it. To identify two warehouse locations, we can run the K-means clustering algorithm with K=2 to get two centroids.&lt;/p&gt;
 
 &lt;p&gt;Also suppose that the outbound and inbound shipping costs vary, with deliveries inbound to the warehouse generally costing less for a delivery of comparable distance from the warehouse, as they tend to do due to economies of scale. Suppose that outbound deliveries cost exactly twice as much as inbound deliveries. In this case, we need to scale the weights of the volumes accordingly. The outbound deliveries to demand locations are multiplied by two while the inbound deliveries from supply locations are kept the same:&lt;/p&gt;
 
+&lt;div class=&quot;dataframe&quot;&gt;
 &lt;table&gt;
   &lt;thead&gt;
     &lt;tr&gt;
@@ -150,6 +153,7 @@
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;/div&gt;
 
 &lt;p&gt;The code block below imports the necessary libraries for the analysis and loads the first table above:&lt;/p&gt;
 
@@ -287,6 +291,7 @@
 
 &lt;p&gt;We can vary our approach by introducing candidate sites for the algorithm to select the warehouse location from. In the table below, the raw data from the previous section has been updated with five candidate sites from which to choose two warehouse locations:&lt;/p&gt;
 
+&lt;div class=&quot;dataframe&quot;&gt;
 &lt;table&gt;
   &lt;thead&gt;
     &lt;tr&gt;
@@ -344,39 +349,40 @@
       &lt;td&gt;Charlottesville, VA&lt;/td&gt;
       &lt;td&gt;38.04&lt;/td&gt;
       &lt;td&gt;-78.5199&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&amp;nbsp;&lt;/td&gt;
       &lt;td&gt;Candidate&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Harrisburg, PA&lt;/td&gt;
       &lt;td&gt;40.3394&lt;/td&gt;
       &lt;td&gt;-77.0077&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&amp;nbsp;&lt;/td&gt;
       &lt;td&gt;Candidate&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Columbus, OH&lt;/td&gt;
       &lt;td&gt;39.9828&lt;/td&gt;
       &lt;td&gt;-83.1309&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&amp;nbsp;&lt;/td&gt;
       &lt;td&gt;Candidate&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Lafayette, IN&lt;/td&gt;
       &lt;td&gt;40.4049&lt;/td&gt;
       &lt;td&gt;-86.9282&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&amp;nbsp;&lt;/td&gt;
       &lt;td&gt;Candidate&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Buffalo, NY&lt;/td&gt;
       &lt;td&gt;42.8962&lt;/td&gt;
       &lt;td&gt;-78.9344&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&amp;nbsp;&lt;/td&gt;
       &lt;td&gt;Candidate&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;/div&gt;
 
 &lt;p&gt;The data preparation is mostly the same and is covered by the code block below to show the supply locations (yellow) and demand locations (red) along with the candidate sites (black) in the Leaflet map:&lt;/p&gt;
 
