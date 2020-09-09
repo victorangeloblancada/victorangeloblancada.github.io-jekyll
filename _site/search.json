@@ -1,11 +1,19 @@
 [
 	
 		{
-			"title"    : "Center of Gravity Analysis in Python",
+			"title"    : "Logistics Center of Gravity Analysis in Python",
 			"category" : "blog",
-			"tags"     : "logistics, python, combinations, itertools",
+			"tags"     : "logistics, python, combinations, itertools, kmeans, clustering",
 			"url"      : "/blog/2020/09/07/center-of-gravity-analysis.html",
 			"date"     : "2020-09-07 00:00:00 +0800"
+		} ,
+	
+		{
+			"title"    : "Neural Networks for Time Series",
+			"category" : "blog",
+			"tags"     : "logistics, python, combinations, itertools",
+			"url"      : "/blog/2020/08/20/time-series-neural-networks.html",
+			"date"     : "2020-08-20 00:00:00 +0800"
 		} ,
 	
 		{
@@ -135,7 +143,7 @@
 			"category" : "",
 			"tags"     : "about, Victor Angelo Blancada, me",
 			"url"      : "/pages/about.html",
-			"date"     : "2020-09-08 16:27:54 +0800"
+			"date"     : "2020-09-09 10:55:51 +0800"
 		} ,
 	
 		{
@@ -143,7 +151,7 @@
 			"category" : "profile",
 			"tags"     : "resume, me, victor, angelo, blancada",
 			"url"      : "/pages/ai-developer.html",
-			"date"     : "2020-09-08 16:27:54 +0800"
+			"date"     : "2020-09-09 10:55:51 +0800"
 		} ,
 	
 		{
@@ -151,7 +159,7 @@
 			"category" : "profile",
 			"tags"     : "resume, me, victor, angelo, blancada",
 			"url"      : "/pages/data-scientist.html",
-			"date"     : "2020-09-08 16:27:54 +0800"
+			"date"     : "2020-09-09 10:55:51 +0800"
 		} ,
 	
 		{
@@ -159,7 +167,7 @@
 			"category" : "page",
 			"tags"     : "resume, me, victor, angelo, blancada",
 			"url"      : "/pages/resume-downloads.html",
-			"date"     : "2020-09-08 16:27:54 +0800"
+			"date"     : "2020-09-09 10:55:51 +0800"
 		} ,
 	
 		{
@@ -167,7 +175,7 @@
 			"category" : "profile",
 			"tags"     : "resume, me, victor, angelo, blancada",
 			"url"      : "/pages/strategy-consultant.html",
-			"date"     : "2020-09-08 16:27:54 +0800"
+			"date"     : "2020-09-09 10:55:51 +0800"
 		} 
 	
 ]

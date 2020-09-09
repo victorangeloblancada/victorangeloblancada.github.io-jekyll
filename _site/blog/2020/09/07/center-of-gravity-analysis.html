@@ -10,11 +10,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Center of Gravity Analysis in Python</title>
+		<title>Logistics Center of Gravity Analysis in Python</title>
 		<!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Center of Gravity Analysis in Python | Victor Angelo Blancada</title>
+<title>Logistics Center of Gravity Analysis in Python | Victor Angelo Blancada</title>
 <meta name="generator" content="Jekyll v3.8.7" />
-<meta property="og:title" content="Center of Gravity Analysis in Python" />
+<meta property="og:title" content="Logistics Center of Gravity Analysis in Python" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation." />
 <meta property="og:description" content="Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation." />
@@ -25,7 +25,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-09-07T00:00:00+08:00" />
 <script type="application/ld+json">
-{"url":"https://victorangeloblancada.github.io/blog/2020/09/07/center-of-gravity-analysis.html","headline":"Center of Gravity Analysis in Python","dateModified":"2020-09-07T00:00:00+08:00","datePublished":"2020-09-07T00:00:00+08:00","description":"Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.","image":"https://victorangeloblancada.github.io/assets/images/truck.jpg","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://victorangeloblancada.github.io/blog/2020/09/07/center-of-gravity-analysis.html"},"@context":"https://schema.org"}</script>
+{"url":"https://victorangeloblancada.github.io/blog/2020/09/07/center-of-gravity-analysis.html","headline":"Logistics Center of Gravity Analysis in Python","dateModified":"2020-09-07T00:00:00+08:00","datePublished":"2020-09-07T00:00:00+08:00","description":"Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.","image":"https://victorangeloblancada.github.io/assets/images/truck.jpg","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://victorangeloblancada.github.io/blog/2020/09/07/center-of-gravity-analysis.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 		<link rel="stylesheet" href="https://indestructibletype.com/fonts/Jost.css" type="text/css" charset="utf-8" />
@@ -100,7 +100,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<div class="hero-img"  style="background-image: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url( /assets/images/truck.jpg );"  >
 				<div class="center-content">
 					<span class="on-bg">
-						<h1> Center of Gravity Analysis in Python </h1>
+						<h1> Logistics Center of Gravity Analysis in Python </h1>
 						<!--
 						<p>07 Sep 2020</p>
 						-->
@@ -172,10 +172,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			</div>
 			<div class="content">
 				
-				<h1>Center of Gravity Analysis in Python</h1>
+				<h1>Logistics Center of Gravity Analysis in Python</h1>
 				
 				<!--
-				<h1> Center of Gravity Analysis in Python </h1>
+				<h1> Logistics Center of Gravity Analysis in Python </h1>
 				
 				<p style="font-style:italic">September 07, 2020</p>
 				
@@ -184,9 +184,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
 </script>
 
-<p>In logistics, the center of gravity analysis is used to derive the ideal locations for warehousing facilities by calculating the transport costs to each of the locations to be served by the facility. The center of gravity is the location giving the lowest total transport costs.</p>
+<p>In logistics, the center of gravity analysis is used to derive the ideal location for warehousing facilities by calculating the transport costs to each of the supply or demand locations to be served by the facility. The center of gravity is therefore the location giving the lowest total transport costs.</p>
 
-<p>From its name, it can be inferred that the center of gravity analysis is analogous to its physics and engineering counterpart where a single point where the weighted relative position of the distributed mass sums to zero, i.e. the center of mass or the balance point. The formula is similarly analogous with the logistics center of gravity calculated using transport volumes to and from the warehousing facility instead of distributed mass as in the physical center of mass. The formula for the coordinates of the physical center of mass or the logistics center of gravity is thus:</p>
+<p>From its name, it can be inferred that the center of gravity analysis is analogous to the center of mass, its physics and engineering counterpart, where the center of mass is the single point where the weighted relative position of the distributed mass sums to zero. The formula is similarly analogous with the logistics center of gravity calculated using transport volumes to and from the warehousing facility instead of distributed mass as in the physical center of mass. The formula for the coordinates of the physical center of mass or the logistics center of gravity is thus:</p>
 
 <script type="math/tex; mode=display">x = \frac{\sum_{i=1}^n m_i x_i }{\sum_{i=1}^n m_i}</script>
 
@@ -194,18 +194,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>Where x and y refer to the coordinates of the n locations served (coordinates of the n distributed mass points for the physical center of mass) and m refers to the delivery volume (mass for the physical center of mass).</p>
 
-<p>However, applying this theoretical analysis in practice rapidly becomes involved as realistic assumptions and business constraints are considered:</p>
+<p>However, applying this theoretical analysis to practical problems rapidly becomes complicated as realistic assumptions and business constraints are considered, such as:</p>
 
 <ol>
   <li>What if there needs to be more than one warehousing facility location?</li>
-  <li>What if the inbound and outbound shipping costs vary? This is a realistic assumption because of economies of scale since inbound delivery costs tend to be lower since items are shipped by bulk to the warehouse while they are shipped out to customers or distributors in smaller quantities.</li>
+  <li>What if the inbound and outbound shipping costs vary? This is a realistic assumption as inbound delivery costs tend to be lower since items are shipped by bulk to the warehouse and thus benefit from economies of scale while items are shipped out to customers or distributors in smaller quantities.</li>
   <li>What if the business only have a few candidate locations where they can set up the facility?</li>
   <li>How do we ensure that selected coordinates land on feasible sites for warehouse locations, e.g. the location is not in a residential area or on a mountain or on water?</li>
 </ol>
 
-<p>For questions 1 &amp; 2, let’s look at how to use K-Means to get the centers of gravity. The following section includes code for implementing this in Python.</p>
+<p>For questions 1 &amp; 2, we’ll look at how to use K-Means to get the centers of gravity. The following section includes code for implementing this in Python.</p>
 
-<p>For questions 3 &amp; 4, let’s look at how to use Itertools in Python to select the centers of gravity from a set of candidate sites. The last section includes code for implementing this.</p>
+<p>For questions 3 &amp; 4, we will then look at how to use <a href="https://docs.python.org/2/library/itertools.html">Itertools</a> in Python to select the centers of gravity from a set of candidate sites. The last section includes code for implementing this.</p>
 
 <h2 id="using-k-means-for-multiple-facilities">Using K-Means for Multiple Facilities</h2>
 
@@ -269,7 +269,62 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </table>
 </div>
 
-<p>Suppose that we want to identify two warehouse locations using the center of gravity method. The formula from the previous section will only provide a single center of gravity, however, from its definition as the point where transport costs are minimized, we can use the K-means clustering algorithm to determine multiple locations that will minimize the transport costs. K-means clustering is an unsupervised learning technique that identifies centroids such that each individual data point is assigned a cluster based on which centroid is closest to it. To identify two warehouse locations, we can run the K-means clustering algorithm with K=2 to get two centroids.</p>
+<p>Suppose that we want to identify two warehouse locations using the center of gravity method. The center of mass formula from the previous section will only provide a single center of gravity, however, from its definition as the point where transport costs are minimized, we can use the K-means clustering algorithm to determine multiple locations that will minimize the transport costs as K-means clustering is an unsupervised learning technique that identifies centroids such that each individual data point is assigned a cluster based on which centroid is closest to it. To identify two warehouse locations, we can run the K-means clustering algorithm with K=2 to get two centroids that minimize the transport distances and therefore minimize the transport costs.</p>
+
+<p>The code block below imports the necessary libraries for the analysis and loads the table above:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="c1"># Import libraries
+</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span> 
+
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+
+<span class="kn">import</span> <span class="nn">folium</span>
+
+<span class="c1"># Load data
+</span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s">'Data.xlsx'</span><span class="p">,</span>
+                     <span class="n">dtypes</span><span class="o">=</span><span class="p">{</span><span class="s">'Location Name'</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                             <span class="s">'Location Type'</span><span class="p">:</span> <span class="nb">str</span><span class="p">})</span>
+</code></pre></div></div>
+
+<p>The code block below uses Folium to plot the sites (red for demand sites and yellow for supply sites) on a Leaflet map:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Color options
+</span><span class="n">color_options</span> <span class="o">=</span> <span class="p">{</span><span class="s">'demand'</span><span class="p">:</span> <span class="s">'red'</span><span class="p">,</span>
+                 <span class="s">'supply'</span><span class="p">:</span> <span class="s">'yellow'</span><span class="p">,</span>
+                 <span class="s">'flow'</span><span class="p">:</span> <span class="s">'black'</span><span class="p">,</span>
+                 <span class="s">'cog'</span><span class="p">:</span> <span class="s">'blue'</span><span class="p">,</span>
+                 <span class="s">'candidate'</span><span class="p">:</span> <span class="s">'black'</span><span class="p">,</span>
+                 <span class="s">'other'</span><span class="p">:</span> <span class="s">'gray'</span><span class="p">}</span>
+
+<span class="c1"># Instantiate map
+</span><span class="n">m</span> <span class="o">=</span> <span class="n">folium</span><span class="p">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="n">data</span><span class="p">[[</span><span class="s">'Latitude'</span><span class="p">,</span> <span class="s">'Longitude'</span><span class="p">]].</span><span class="n">mean</span><span class="p">(),</span>
+               <span class="n">fit_bounds</span><span class="o">=</span><span class="p">[[</span><span class="n">data</span><span class="p">[</span><span class="s">'Latitude'</span><span class="p">].</span><span class="nb">min</span><span class="p">(),</span>
+                            <span class="n">data</span><span class="p">[</span><span class="s">'Longitude'</span><span class="p">].</span><span class="nb">min</span><span class="p">()],</span> 
+                           <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s">'Latitude'</span><span class="p">].</span><span class="nb">max</span><span class="p">(),</span>
+                            <span class="n">data</span><span class="p">[</span><span class="s">'Longitude'</span><span class="p">].</span><span class="nb">max</span><span class="p">()]])</span>
+                            
+<span class="c1"># Add volume points
+</span><span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">folium</span><span class="p">.</span><span class="n">CircleMarker</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s">'Latitude'</span><span class="p">],</span> 
+                                  <span class="n">row</span><span class="p">[</span><span class="s">'Longitude'</span><span class="p">]],</span>
+                        <span class="n">radius</span><span class="o">=</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s">'Volume'</span><span class="p">]</span><span class="o">**</span><span class="mf">0.5</span><span class="p">),</span>
+                        <span class="n">color</span><span class="o">=</span><span class="n">color_options</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s">'Location Type'</span><span class="p">]).</span><span class="n">lower</span><span class="p">(),</span> <span class="s">'gray'</span><span class="p">),</span>
+                        <span class="n">tooltip</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s">'Location Name'</span><span class="p">])</span><span class="o">+</span><span class="s">' '</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s">'Volume'</span><span class="p">])).</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+                                <span class="c1">#row['Longitude']]).add_to(m)
+</span>        
+<span class="c1"># Zoom based on volume points
+</span><span class="n">m</span><span class="p">.</span><span class="n">fit_bounds</span><span class="p">(</span><span class="n">data</span><span class="p">[[</span><span class="s">'Latitude'</span><span class="p">,</span> <span class="s">'Longitude'</span><span class="p">]].</span><span class="n">values</span><span class="p">.</span><span class="n">tolist</span><span class="p">())</span>
+
+<span class="c1"># Show the map
+</span><span class="n">m</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/cog_1.PNG" alt="img" /></p>
 
 <p>Also suppose that the outbound and inbound shipping costs vary, with deliveries inbound to the warehouse generally costing less for a delivery of comparable distance from the warehouse, as they tend to do due to economies of scale. Suppose that outbound deliveries cost exactly twice as much as inbound deliveries. In this case, we need to scale the weights of the volumes accordingly. The outbound deliveries to demand locations are multiplied by two while the inbound deliveries from supply locations are kept the same:</p>
 
@@ -337,61 +392,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </tbody>
 </table>
 </div>
-
-<p>The code block below imports the necessary libraries for the analysis and loads the first table above:</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
-<span class="c1"># Import libraries
-</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span> 
-
-<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
-
-<span class="kn">import</span> <span class="nn">folium</span>
-
-<span class="c1"># Load data
-</span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s">'Data.xlsx'</span><span class="p">,</span>
-                     <span class="n">dtypes</span><span class="o">=</span><span class="p">{</span><span class="s">'Location Name'</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-                             <span class="s">'Location Type'</span><span class="p">:</span> <span class="nb">str</span><span class="p">})</span>
-</code></pre></div></div>
-
-<p>The code block below uses Folium to plot the sites (red for demand sites and yellow for supply sites) on a Leaflet map:</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Color options
-</span><span class="n">color_options</span> <span class="o">=</span> <span class="p">{</span><span class="s">'demand'</span><span class="p">:</span> <span class="s">'red'</span><span class="p">,</span>
-                 <span class="s">'supply'</span><span class="p">:</span> <span class="s">'yellow'</span><span class="p">,</span>
-                 <span class="s">'flow'</span><span class="p">:</span> <span class="s">'black'</span><span class="p">,</span>
-                 <span class="s">'cog'</span><span class="p">:</span> <span class="s">'blue'</span><span class="p">,</span>
-                 <span class="s">'candidate'</span><span class="p">:</span> <span class="s">'black'</span><span class="p">,</span>
-                 <span class="s">'other'</span><span class="p">:</span> <span class="s">'gray'</span><span class="p">}</span>
-
-<span class="c1"># Instantiate map
-</span><span class="n">m</span> <span class="o">=</span> <span class="n">folium</span><span class="p">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="n">data</span><span class="p">[[</span><span class="s">'Latitude'</span><span class="p">,</span> <span class="s">'Longitude'</span><span class="p">]].</span><span class="n">mean</span><span class="p">(),</span>
-               <span class="n">fit_bounds</span><span class="o">=</span><span class="p">[[</span><span class="n">data</span><span class="p">[</span><span class="s">'Latitude'</span><span class="p">].</span><span class="nb">min</span><span class="p">(),</span>
-                            <span class="n">data</span><span class="p">[</span><span class="s">'Longitude'</span><span class="p">].</span><span class="nb">min</span><span class="p">()],</span> 
-                           <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s">'Latitude'</span><span class="p">].</span><span class="nb">max</span><span class="p">(),</span>
-                            <span class="n">data</span><span class="p">[</span><span class="s">'Longitude'</span><span class="p">].</span><span class="nb">max</span><span class="p">()]])</span>
-                            
-<span class="c1"># Add volume points
-</span><span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="n">folium</span><span class="p">.</span><span class="n">CircleMarker</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s">'Latitude'</span><span class="p">],</span> 
-                                  <span class="n">row</span><span class="p">[</span><span class="s">'Longitude'</span><span class="p">]],</span>
-                        <span class="n">radius</span><span class="o">=</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s">'Volume'</span><span class="p">]</span><span class="o">**</span><span class="mf">0.5</span><span class="p">),</span>
-                        <span class="n">color</span><span class="o">=</span><span class="n">color_options</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s">'Location Type'</span><span class="p">]).</span><span class="n">lower</span><span class="p">(),</span> <span class="s">'gray'</span><span class="p">),</span>
-                        <span class="n">tooltip</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s">'Location Name'</span><span class="p">])</span><span class="o">+</span><span class="s">' '</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s">'Volume'</span><span class="p">])).</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-                                <span class="c1">#row['Longitude']]).add_to(m)
-</span>        
-<span class="c1"># Zoom based on volume points
-</span><span class="n">m</span><span class="p">.</span><span class="n">fit_bounds</span><span class="p">(</span><span class="n">data</span><span class="p">[[</span><span class="s">'Latitude'</span><span class="p">,</span> <span class="s">'Longitude'</span><span class="p">]].</span><span class="n">values</span><span class="p">.</span><span class="n">tolist</span><span class="p">())</span>
-
-<span class="c1"># Show the map
-</span><span class="n">m</span>
-</code></pre></div></div>
-
-<p><img src="/assets/images/cog_1.PNG" alt="img" /></p>
 
 <p>The code block below adjusts the volumes from our raw data to account for the difference in costs between comparable inbound and outbound shipments:</p>
 
@@ -566,7 +566,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </tbody>
 </table>
 </div>
-
 <p>The data preparation is mostly the same and is covered by the code block below to show the supply locations (yellow) and demand locations (red) along with the candidate sites (black) in the Leaflet map:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
@@ -644,7 +643,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </span><span class="n">data</span><span class="p">[</span><span class="s">'Calc_Vol'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'Location Type'</span><span class="p">].</span><span class="nb">apply</span><span class="p">(</span><span class="nb">str</span><span class="p">).</span><span class="nb">apply</span><span class="p">(</span><span class="n">loc_type_mult</span><span class="p">)</span><span class="o">*</span><span class="n">data</span><span class="p">[</span><span class="s">'Volume'</span><span class="p">]</span>
 </code></pre></div></div>
 
-<p>The code block below shows a different way of solving for the centers of gravity. <a href="https://docs.python.org/2/library/itertools.html">Itertools</a> is used to loop through all possible combinations of warehouse locations to get the combination that will minimize transport costs:</p>
+<p>The code block below shows a different way of solving for the centers of gravity. <a href="https://docs.python.org/2/library/itertools.html">Itertools</a> is used to loop through all possible combinations of warehouse locations to get the combination that will minimize transport costs. The code below calculates the total estimated transport costs based on distance weighted by relative transport costs for each combination of potential locations and saves the combination of locations that minimize this estimated cost:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cands</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s">'Location Type'</span><span class="p">].</span><span class="nb">str</span><span class="p">.</span><span class="n">lower</span><span class="p">()</span><span class="o">==</span><span class="s">'candidate'</span><span class="p">]</span>
 <span class="n">locs</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s">'Calc_Vol'</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
@@ -800,6 +799,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 						<a href='/blog/tag/combinations'><li> combinations </li></a>
 					
 						<a href='/blog/tag/itertools'><li> itertools </li></a>
+					
+						<a href='/blog/tag/kmeans'><li> kmeans </li></a>
+					
+						<a href='/blog/tag/clustering'><li> clustering </li></a>
 					
 				</ul>
 				<a href='/blog.html'><p>See all posts</p></a>
