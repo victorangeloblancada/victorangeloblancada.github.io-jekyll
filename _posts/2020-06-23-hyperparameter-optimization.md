@@ -10,7 +10,7 @@ tags:
 - predictive
 - statistics
 - model 
-- itetation
+- iteration
 - automation
 - Bayesian
 - Bayes
