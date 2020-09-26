@@ -227,6 +227,10 @@ a:hover {
 	fill: $accent-2-color;
 }
 
+img {
+	content-visibility: auto;
+}
+
 blockquote {
 	font-family: $quote-font;
 	line-height: 40px;
