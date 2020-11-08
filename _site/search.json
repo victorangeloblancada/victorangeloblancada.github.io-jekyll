@@ -1,6 +1,14 @@
 [
 	
 		{
+			"title"    : "Abakcus.com",
+			"category" : "blog",
+			"tags"     : "blog, math, mathematics, ai, data",
+			"url"      : "/blog/2020/11/08/abakcus.html",
+			"date"     : "2020-11-08 00:00:00 +0800"
+		} ,
+	
+		{
 			"title"    : "National Novel Generation Month 2020",
 			"category" : "blog",
 			"tags"     : "python, nlp, natural language processing, automation, nanogenmo, nanowrimo",
@@ -151,7 +159,7 @@
 			"category" : "",
 			"tags"     : "about, Victor Angelo Blancada, me",
 			"url"      : "/pages/about.html",
-			"date"     : "2020-10-23 16:01:31 +0800"
+			"date"     : "2020-11-08 16:19:51 +0800"
 		} ,
 	
 		{
@@ -159,7 +167,7 @@
 			"category" : "profile",
 			"tags"     : "resume, me, victor, angelo, blancada",
 			"url"      : "/pages/ai-developer.html",
-			"date"     : "2020-10-23 16:01:31 +0800"
+			"date"     : "2020-11-08 16:19:51 +0800"
 		} ,
 	
 		{
@@ -167,7 +175,7 @@
 			"category" : "profile",
 			"tags"     : "resume, me, victor, angelo, blancada",
 			"url"      : "/pages/data-scientist.html",
-			"date"     : "2020-10-23 16:01:31 +0800"
+			"date"     : "2020-11-08 16:19:51 +0800"
 		} ,
 	
 		{
@@ -175,7 +183,7 @@
 			"category" : "page",
 			"tags"     : "resume, me, victor, angelo, blancada",
 			"url"      : "/pages/resume-downloads.html",
-			"date"     : "2020-10-23 16:01:31 +0800"
+			"date"     : "2020-11-08 16:19:51 +0800"
 		} ,
 	
 		{
@@ -183,7 +191,7 @@
 			"category" : "profile",
 			"tags"     : "resume, me, victor, angelo, blancada",
 			"url"      : "/pages/strategy-consultant.html",
-			"date"     : "2020-10-23 16:01:31 +0800"
+			"date"     : "2020-11-08 16:19:51 +0800"
 		} 
 	
 ]
