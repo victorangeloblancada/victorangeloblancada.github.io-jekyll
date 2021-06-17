@@ -27,11 +27,11 @@ An experienced strategy consultant for Fortune 500 companies, I have worked with
 
 ## Work Experience
 
-### Li & Fung
+### LF Logistics
 
 As the leading supply chain solutions partner for brands and retailers, Li & Fung is committed to building the supply chain of the future.
 
-#### Data Science Manager, Global Supply Chain Analytics (Hong Kong, China, 2019-Present)
+#### Senior Data Science Manager, Global Supply Chain Analytics (2019-Present)
 
 - Responsible for improving the efficiency of Li & Fung’s global supply chain by deploying self-service data science tools.
 - Automated address cleansing by developing a deep learning seq2seq model that extracts standardized address components from unstructured customer address inputs.
@@ -41,7 +41,7 @@ As the leading supply chain solutions partner for brands and retailers, Li & Fun
 
 Publicis Worldwide helps clients lead industry change by combining IT and data analytics with strategic creativity to produce innovative marketing solutions. It is part of the Publicis Groupe, the oldest and one of the largest marketing and communications companies in the world, by revenue.
 
-#### Data Lead, Hong Kong and Greater China (Hong Kong, China, 2017-2019)
+#### Data Lead, Hong Kong and Greater China (2017-2019)
 
 - Managed the data team to partner with clients, collect requirements, define strategy, and deliver robust analytics solutions.
 - Created a bag-of-words sentiment scoring model for mixed English and Cantonese text that was used across different social listening and customer feedback analysis projects.
@@ -51,7 +51,7 @@ Publicis Worldwide helps clients lead industry change by combining IT and data a
 
 IPG Mediabrands is the global media and data management arm of Interpublic Group. An industry-leader in terms of analytics, it manages USD 39B of marketing investments on behalf of clients worldwide.
 
-#### Analytics Technology Manager, Manila Global Modeling Center (Philippines, 2015-2017)
+#### Analytics Technology Manager, Manila Global Modeling Center (2015-2017)
 
 - Built and managed the global predictive modeling hub in Manila that supported the analytics needs of markets across IPG Mediabrands' global footprint. 
 - Used Markov Chain Monte Carlo models to measure the effectiveness of advertising spending on client KPIs. Successfully predicted the results of the 2016 Philippine election using a Markov Chain Monte Carlo model created for a client political party.
@@ -61,7 +61,7 @@ IPG Mediabrands is the global media and data management arm of Interpublic Group
 
 Mitchell Madison Group is a management consulting firm that delivers measurable enterprise value to Fortune 500 companies through business analytics, performance improvement and strategic services.
 
-#### Business Analyst (Various Client Locations, 2014-2015)
+#### Business Analyst (2014-2015)
 
 - Assigned to work on-site on management consulting and analytics projects at client offices in North America.
 - Directed the $400MM USD fiber network expansion project of a Fortune 500 telecommunications company by running a large-scale network optimization algorithm to determine the network layout that will maximize the expected revenue based on predicted lifetime value of potential customers.
@@ -71,7 +71,7 @@ Mitchell Madison Group is a management consulting firm that delivers measurable 
 
 ### University of the Philippines-Diliman
 
-#### Bachelor of Science in Industrial Engineering (Philippines, 2009-2014)
+#### Bachelor of Science in Industrial Engineering (2009-2014)
 
 - Graduated *summa cum laude*, with a grade point average of 1.11, the third highest in the university graduating class of more than 4,000 graduates (US GPA equivalent is 3.84)
 - Oblation Scholarship awardee, placing within the top fifty scorers out of 62,111 test takers in the University of the Philippines College Admissions Test
