@@ -1,156 +1,165 @@
 [
-	
-		{
-			"title"    : "Abakcus.com",
-			"category" : "blog",
-			"tags"     : "blog, math, mathematics, ai, data",
-			"url"      : "/blog/2020/11/08/abakcus.html",
-			"date"     : "2020-11-08 00:00:00 +0800"
-		} ,
-	
-		{
-			"title"    : "National Novel Generation Month 2020",
-			"category" : "blog",
-			"tags"     : "python, nlp, natural language processing, automation, nanogenmo, nanowrimo",
-			"url"      : "/blog/2020/10/23/nanogenmo.html",
-			"date"     : "2020-10-23 00:00:00 +0800"
-		} ,
-	
-		{
-			"title"    : "Logistics Center of Gravity Analysis in Python",
-			"category" : "blog",
-			"tags"     : "logistics, python, combinations, itertools, kmeans, clustering",
-			"url"      : "/blog/2020/09/07/center-of-gravity-analysis.html",
-			"date"     : "2020-09-07 00:00:00 +0800"
-		} ,
-	
-		{
-			"title"    : "Neural Networks for Time Series",
-			"category" : "blog",
-			"tags"     : "logistics, python, combinations, itertools",
-			"url"      : "/blog/2020/08/20/time-series-neural-networks.html",
-			"date"     : "2020-08-20 00:00:00 +0800"
-		} ,
-	
-		{
-			"title"    : "Hyperparameter Optimization or The Science of Automating Model Iteration",
-			"category" : "blog",
-			"tags"     : "python, hyperopt, hyperparameter, optimization, predictive, statistics, model, iteration, automation, Bayesian, Bayes",
-			"url"      : "/blog/2020/06/23/hyperparameter-optimization.html",
-			"date"     : "2020-06-23 00:00:00 +0800"
-		} ,
-	
-		{
-			"title"    : "Color Palettes Using K-Means Clustering",
-			"category" : "blog",
-			"tags"     : "color palette, image processing, kmeans, clustering",
-			"url"      : "/blog/2019/10/01/color-palette-clustering.html",
-			"date"     : "2019-10-01 00:00:00 +0800"
-		} ,
-	
-		{
-			"title"    : "Gifs from Command Line",
-			"category" : "blog",
-			"tags"     : "gif, command line, coding, gifs, tumblr",
-			"url"      : "/blog/2019/09/20/command-line-gifs.html",
-			"date"     : "2019-09-20 00:00:00 +0800"
-		} ,
-	
-		{
-			"title"    : "AI Paintings",
-			"category" : "blog",
-			"tags"     : "artificial intelligence, image processing, ai, paintings, art, gradient descent",
-			"url"      : "/blog/2019/09/01/ai-art-gallery.html",
-			"date"     : "2019-09-01 00:00:00 +0800"
-		} ,
-	
-		{
-			"title"    : "AI in Medicine",
-			"category" : "blog",
-			"tags"     : "ai, ml, artificial intelligence, machine learning, medicine, health",
-			"url"      : "/blog/2019/08/23/ai-in-medicine.html",
-			"date"     : "2019-08-23 00:00:00 +0800"
-		} ,
-	
-		{
-			"title"    : "DIY Website Development in 2019",
-			"category" : "blog",
-			"tags"     : "html, web development, ux, ui, user experience, interface, ergonomics",
-			"url"      : "/blog/2019/07/01/diy-site-development.html",
-			"date"     : "2019-07-01 00:00:00 +0800"
-		} ,
-	
-		{
-			"title"    : "10,000 Hours, Artificial Intelligence, and the Democratization of Expertise",
-			"category" : "blog",
-			"tags"     : "ai, artificial intelligence, training, featured",
-			"url"      : "/blog/2019/03/25/democritization-of-expertise.html",
-			"date"     : "2019-03-25 00:00:00 +0800"
-		} ,
-	
-		{
-			"title"    : "AI Biases and Independent Variables",
-			"category" : "blog",
-			"tags"     : "artificial intelligence, ai, statistics, mathematics",
-			"url"      : "/blog/2019/01/20/ai-biases-and-independent-variables.html",
-			"date"     : "2019-01-20 00:00:00 +0800"
-		} ,
-	
-		{
-			"title"    : "Channel Attribution in Python",
-			"category" : "blog",
-			"tags"     : "python, marketing, attribution, online, network, markov chain",
-			"url"      : "/blog/2019/01/01/channel-attribution-in-python.html",
-			"date"     : "2019-01-01 00:00:00 +0800"
-		} ,
-	
-		{
-			"title"    : "GDPR Day 0: Data-Savvy Marketers Can Still Derive Insights Without Relying on Personal Data",
-			"category" : "blog",
-			"tags"     : "data science, marketing, gdpr, privacy, featured",
-			"url"      : "/blog/2018/05/25/gdpr-day-zero.html",
-			"date"     : "2018-05-25 00:00:00 +0800"
-		} ,
-	
-		{
-			"title"    : "Ten Outstanding Students of Makati 2009",
-			"category" : "blog",
-			"tags"     : "victor, makati, tosm",
-			"url"      : "/blog/2018/03/20/ten-outstanding-students-of-makati.html",
-			"date"     : "2018-03-20 00:00:00 +0800"
-		} ,
-	
-		{
-			"title"    : "Innovation, Human Productivity, &amp; Machine Productivity",
-			"category" : "blog",
-			"tags"     : "technology, innovation, economy, data science",
-			"url"      : "/blog/2017/12/13/innovation-human-productivity-and-machine-productivity.html",
-			"date"     : "2017-12-13 00:00:00 +0800"
-		} ,
-	
-		{
-			"title"    : "A Network Expansion Strategy Case Study",
-			"category" : "blog",
-			"tags"     : "case study, internet, fiber network, consulting, optimization, featured",
-			"url"      : "/blog/2017/11/16/a-network-expansion-strategy-case-study.html",
-			"date"     : "2017-11-16 00:00:00 +0800"
-		} ,
-	
-		{
-			"title"    : "Elegance, Sophistication, and Complexity",
-			"category" : "blog",
-			"tags"     : "math, mathematics, language, data science",
-			"url"      : "/blog/2017/10/26/elegance-sophistication-and-complexity.html",
-			"date"     : "2017-10-26 00:00:00 +0800"
-		} ,
-	
-		{
-			"title"    : "Mathematics, Language, and Lies",
-			"category" : "blog",
-			"tags"     : "math, mathematics, language, data science",
-			"url"      : "/blog/2017/10/24/mathematics-language-and-lies.html",
-			"date"     : "2017-10-24 00:00:00 +0800"
-		} 
+  
+    {
+      "title"    : "Decision Making Under Uncertainty: Multi-Armed Bandit",
+      "category" : "blog",
+      "tags"     : "blog, math, mathematics, reinforcement learning, rl, multi-armed bandit, mab, optimization",
+      "url"      : "/blog/2021/06/16/multi-armed-bandit.html",
+      "date"     : "2021-06-16 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "Percentage Calculator",
+      "category" : "blog",
+      "tags"     : "blog, math, mathematics, business, percentage, change",
+      "url"      : "/blog/2021/01/31/percentage-calculator.html",
+      "date"     : "2021-01-31 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "Abakcus.com",
+      "category" : "blog",
+      "tags"     : "blog, math, mathematics, ai, data",
+      "url"      : "/blog/2020/11/08/abakcus.html",
+      "date"     : "2020-11-08 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "Logistics Center of Gravity Analysis in Python",
+      "category" : "blog",
+      "tags"     : "logistics, python, combinations, itertools, kmeans, clustering",
+      "url"      : "/blog/2020/09/07/center-of-gravity-analysis.html",
+      "date"     : "2020-09-07 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "Neural Networks for Time Series",
+      "category" : "blog",
+      "tags"     : "logistics, python, combinations, itertools",
+      "url"      : "/blog/2020/08/20/time-series-neural-networks.html",
+      "date"     : "2020-08-20 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "Hyperparameter Optimization or The Science of Automating Model Iteration",
+      "category" : "blog",
+      "tags"     : "python, hyperopt, hyperparameter, optimization, predictive, statistics, model, iteration, automation, Bayesian, Bayes",
+      "url"      : "/blog/2020/06/23/hyperparameter-optimization.html",
+      "date"     : "2020-06-23 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "Color Palettes Using K-Means Clustering",
+      "category" : "blog",
+      "tags"     : "color palette, image processing, kmeans, clustering",
+      "url"      : "/blog/2019/10/01/color-palette-clustering.html",
+      "date"     : "2019-10-01 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "Gifs from Command Line",
+      "category" : "blog",
+      "tags"     : "gif, command line, coding, gifs, tumblr",
+      "url"      : "/blog/2019/09/20/command-line-gifs.html",
+      "date"     : "2019-09-20 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "AI Paintings",
+      "category" : "blog",
+      "tags"     : "artificial intelligence, image processing, ai, paintings, art, gradient descent",
+      "url"      : "/blog/2019/09/01/ai-art-gallery.html",
+      "date"     : "2019-09-01 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "AI in Medicine",
+      "category" : "blog",
+      "tags"     : "ai, ml, artificial intelligence, machine learning, medicine, health",
+      "url"      : "/blog/2019/08/23/ai-in-medicine.html",
+      "date"     : "2019-08-23 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "DIY Website Development in 2019",
+      "category" : "blog",
+      "tags"     : "html, web development, ux, ui, user experience, interface, ergonomics",
+      "url"      : "/blog/2019/07/01/diy-site-development.html",
+      "date"     : "2019-07-01 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "10,000 Hours, Artificial Intelligence, and the Democratization of Expertise",
+      "category" : "blog",
+      "tags"     : "ai, artificial intelligence, training, featured",
+      "url"      : "/blog/2019/03/25/democritization-of-expertise.html",
+      "date"     : "2019-03-25 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "AI Biases and Independent Variables",
+      "category" : "blog",
+      "tags"     : "artificial intelligence, ai, statistics, mathematics",
+      "url"      : "/blog/2019/01/20/ai-biases-and-independent-variables.html",
+      "date"     : "2019-01-20 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "Channel Attribution in Python",
+      "category" : "blog",
+      "tags"     : "python, marketing, attribution, online, network, markov chain",
+      "url"      : "/blog/2019/01/01/channel-attribution-in-python.html",
+      "date"     : "2019-01-01 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "GDPR Day 0: Data-Savvy Marketers Can Still Derive Insights Without Relying on Personal Data",
+      "category" : "blog",
+      "tags"     : "data science, marketing, gdpr, privacy, featured",
+      "url"      : "/blog/2018/05/25/gdpr-day-zero.html",
+      "date"     : "2018-05-25 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "Ten Outstanding Students of Makati 2009",
+      "category" : "blog",
+      "tags"     : "victor, makati, tosm",
+      "url"      : "/blog/2018/03/20/ten-outstanding-students-of-makati.html",
+      "date"     : "2018-03-20 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "Innovation, Human Productivity, &amp; Machine Productivity",
+      "category" : "blog",
+      "tags"     : "technology, innovation, economy, data science",
+      "url"      : "/blog/2017/12/13/innovation-human-productivity-and-machine-productivity.html",
+      "date"     : "2017-12-13 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "A Network Expansion Strategy Case Study",
+      "category" : "blog",
+      "tags"     : "case study, internet, fiber network, consulting, optimization, featured",
+      "url"      : "/blog/2017/11/16/a-network-expansion-strategy-case-study.html",
+      "date"     : "2017-11-16 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "Elegance, Sophistication, and Complexity",
+      "category" : "blog",
+      "tags"     : "math, mathematics, language, data science",
+      "url"      : "/blog/2017/10/26/elegance-sophistication-and-complexity.html",
+      "date"     : "2017-10-26 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "Mathematics, Language, and Lies",
+      "category" : "blog",
+      "tags"     : "math, mathematics, language, data science",
+      "url"      : "/blog/2017/10/24/mathematics-language-and-lies.html",
+      "date"     : "2017-10-24 00:00:00 +0800"
+    } 
+  
 	
 	,
 	
