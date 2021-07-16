@@ -1,6 +1,14 @@
 [
   
     {
+      "title"    : "Interactive Web Apps Using Python",
+      "category" : "blog",
+      "tags"     : "blog, python, web apps, web frameworks, dash",
+      "url"      : "/blog/2021/06/22/dash-apps.html",
+      "date"     : "2021-06-22 00:00:00 +0800"
+    } ,
+  
+    {
       "title"    : "Decision Making Under Uncertainty: Multi-Armed Bandit",
       "category" : "blog",
       "tags"     : "blog, math, mathematics, reinforcement learning, rl, multi-armed bandit, mab, optimization",
