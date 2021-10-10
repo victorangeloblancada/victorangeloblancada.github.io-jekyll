@@ -342,7 +342,7 @@ data
 
 </div>
 
-The following code block defines the touchpoints class to load the touchpoint data into and also defines methods to analysis the touchpoint interaction data.
+The following code block defines the touchpoints class to load the touchpoint data into and also defines methods to analyze the touchpoint interaction data.
 
 ```python
 class touchpoints:

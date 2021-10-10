@@ -28,7 +28,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="twitter:image" content="https://victorangeloblancada.github.io/assets/images/casino.jpg" />
 <meta property="twitter:title" content="Decision Making Under Uncertainty: Multi-Armed Bandit" />
 <script type="application/ld+json">
-{"headline":"Decision Making Under Uncertainty: Multi-Armed Bandit","dateModified":"2021-06-16T00:00:00+08:00","url":"https://victorangeloblancada.github.io/blog/2021/06/16/multi-armed-bandit.html","datePublished":"2021-06-16T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://victorangeloblancada.github.io/blog/2021/06/16/multi-armed-bandit.html"},"description":"Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.","image":"https://victorangeloblancada.github.io/assets/images/casino.jpg","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"url":"https://victorangeloblancada.github.io/blog/2021/06/16/multi-armed-bandit.html","headline":"Decision Making Under Uncertainty: Multi-Armed Bandit","dateModified":"2021-06-16T00:00:00+08:00","datePublished":"2021-06-16T00:00:00+08:00","description":"Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.","mainEntityOfPage":{"@type":"WebPage","@id":"https://victorangeloblancada.github.io/blog/2021/06/16/multi-armed-bandit.html"},"@type":"BlogPosting","image":"https://victorangeloblancada.github.io/assets/images/casino.jpg","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 		<link rel="stylesheet" href="https://indestructibletype.com/fonts/Jost.css" type="text/css" charset="utf-8" />
@@ -218,7 +218,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>Where \(N_n(a)\) denotes how many times action choice \(a\) has been selected as of step \(n\) and \(c&gt;0\) is an arbitrary constant used to control the rate of exploration.</p>
 
-<p>The agent selects the action based by taking the action \(a\) which maximizes both the estimated reward \(Q_n(a)\) (exploitation) and an incentive term \(c\sqrt{\frac{log(n)}{N_n(a)}}\\) that decreases as the number of times action \(a\) is selected \(N_n(a)\) increases (since the UCB bandit should not be incentivized to explore actions which it has already explored in the past).</p>
+<p>The agent selects the action based by taking the action \(a\) which maximizes both the estimated reward \(Q_n(a)\) (exploitation) and an incentive term \(c\sqrt{\frac{log(n)}{N_n(a)}}\) that decreases as the number of times action \(a\) is selected \(N_n(a)\) increases (since the UCB bandit should not be incentivized to explore actions which it has already explored in the past).</p>
 
 <p>The estimated reward \(Q_n(a)\) can be calculated in a number of ways depending on prior knowledge of the distribution of the reward function, but for this case this will simply be the sample mean of the reward from previous iterations. To make this calculation efficient as the agent runs more and more iterations, we use a formula that only requires the previous sample mean, the latest reward, and the iteration count to update the sample mean:</p>
 
@@ -279,7 +279,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </span>        <span class="bp">self</span><span class="p">.</span><span class="n">k_reward</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">reward</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">k_reward</span><span class="p">[</span><span class="n">a</span><span class="p">])</span> <span class="o">/</span> <span class="bp">self</span><span class="p">.</span><span class="n">k_n</span><span class="p">[</span><span class="n">a</span><span class="p">]</span>
         
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="s">"""Function to iterative run pull()
+        <span class="s">"""Function to iteratively run pull()
         """</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">iters</span><span class="p">):</span>
             <span class="bp">self</span><span class="p">.</span><span class="n">pull</span><span class="p">()</span>

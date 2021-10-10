@@ -50,7 +50,7 @@ $$A_n = argmax_a\left(Q_n(a) + c\sqrt{\frac{log(n)}{N_n(a)}}\right) $$
 
 Where $$N_n(a)$$ denotes how many times action choice $$a$$ has been selected as of step $$n$$ and $$c>0$$ is an arbitrary constant used to control the rate of exploration.
 
-The agent selects the action based by taking the action $$a$$ which maximizes both the estimated reward $$Q_n(a)$$ (exploitation) and an incentive term $$c\sqrt{\frac{log(n)}{N_n(a)}}\$$ that decreases as the number of times action $$a$$ is selected $$N_n(a)$$ increases (since the UCB bandit should not be incentivized to explore actions which it has already explored in the past). 
+The agent selects the action based by taking the action $$a$$ which maximizes both the estimated reward $$Q_n(a)$$ (exploitation) and an incentive term $$c\sqrt{\frac{log(n)}{N_n(a)}}$$ that decreases as the number of times action $$a$$ is selected $$N_n(a)$$ increases (since the UCB bandit should not be incentivized to explore actions which it has already explored in the past). 
 
 The estimated reward $$Q_n(a)$$ can be calculated in a number of ways depending on prior knowledge of the distribution of the reward function, but for this case this will simply be the sample mean of the reward from previous iterations. To make this calculation efficient as the agent runs more and more iterations, we use a formula that only requires the previous sample mean, the latest reward, and the iteration count to update the sample mean:
 
@@ -113,7 +113,7 @@ class ucb_bandit:
         self.k_reward[a] += (reward - self.k_reward[a]) / self.k_n[a]
         
     def run(self):
-        """Function to iterative run pull()
+        """Function to iteratively run pull()
         """
         for i in range(self.iters):
             self.pull()
