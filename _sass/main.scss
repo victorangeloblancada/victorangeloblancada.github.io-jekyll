@@ -179,7 +179,7 @@ h4, h5, h6{
 	}
 
 	blockquote {
-		font-size: 5vmax;
+		font-size: 2.5vmax;
 	}
 }
 
@@ -212,7 +212,7 @@ h4, h5, h6{
 	}
 
 	blockquote {
-		font-size: 34px;
+		font-size: 25px;
 	}
 }
 
@@ -561,12 +561,16 @@ div.square-img {
 	margin: 18px;
 
 	align-items: center;
+	background-color: rgba(100,100,100,.7); /* Tint color */
+	background-blend-mode: multiply;
 }
 
 div.square-img:hover {
 	box-shadow: 0 15px 25px -4px rgba(0,0,0,.7);
 	transform: scale(1.1);
 	z-index: 1;
+	background-color: rgba(0,0,0,0); /* Tint color */
+	background-blend-mode: multiply;
 }
 
 .center-content {

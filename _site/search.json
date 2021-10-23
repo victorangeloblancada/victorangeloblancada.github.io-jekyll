@@ -25,6 +25,14 @@
     } ,
   
     {
+      "title"    : "NaNoGenMo 2020",
+      "category" : "blog",
+      "tags"     : "blog, nlp, nanogenmo",
+      "url"      : "/blog/2020/11/30/nanogenmo-2020.html",
+      "date"     : "2020-11-30 00:00:00 +0800"
+    } ,
+  
+    {
       "title"    : "Abakcus.com",
       "category" : "blog",
       "tags"     : "blog, math, mathematics, ai, data",
