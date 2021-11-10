@@ -28,7 +28,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="twitter:image" content="https://victorangeloblancada.github.io/assets/images/interactive.jpg" />
 <meta property="twitter:title" content="Interactive Web Apps Using Python" />
 <script type="application/ld+json">
-{"url":"https://victorangeloblancada.github.io/blog/2021/06/22/dash-apps.html","headline":"Interactive Web Apps Using Python","dateModified":"2021-06-22T00:00:00+08:00","datePublished":"2021-06-22T00:00:00+08:00","description":"In this post, I demonstrate how to deploy an interactive web application in just a little over two hundred lines of Python. A Python module called Dash is used - Dash was developed by Plotly by building on top of Flask, a popular Python web framework, to create an easy way to develop interactive web data visualizations using Python.","mainEntityOfPage":{"@type":"WebPage","@id":"https://victorangeloblancada.github.io/blog/2021/06/22/dash-apps.html"},"@type":"BlogPosting","image":"https://victorangeloblancada.github.io/assets/images/interactive.jpg","@context":"https://schema.org"}</script>
+{"url":"https://victorangeloblancada.github.io/blog/2021/06/22/dash-apps.html","image":"https://victorangeloblancada.github.io/assets/images/interactive.jpg","headline":"Interactive Web Apps Using Python","dateModified":"2021-06-22T00:00:00+08:00","datePublished":"2021-06-22T00:00:00+08:00","description":"In this post, I demonstrate how to deploy an interactive web application in just a little over two hundred lines of Python. A Python module called Dash is used - Dash was developed by Plotly by building on top of Flask, a popular Python web framework, to create an easy way to develop interactive web data visualizations using Python.","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://victorangeloblancada.github.io/blog/2021/06/22/dash-apps.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 		<link rel="stylesheet" href="https://indestructibletype.com/fonts/Jost.css" type="text/css" charset="utf-8" />
@@ -42,6 +42,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="manifest" href="/site.webmanifest">
 	</head>
 	<body>
+		<script type="text/javascript">
+  window.onscroll = function() {myScrollIndicator()};
+
+  function myScrollIndicator() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+<div class="header">
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</div>
 		<!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5S5WB7M"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -111,6 +127,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 						-->
 						<a href="#start">
 							<div style="-webkit-animation-name: pulse; -webkit-animation-duration: 2s; animation-name: pulse;animation-duration: 2s; animation-direction: alternate;">
+								<!--<p>Reading time: 
+
+
+  20 mins
+</p>-->
 								
 								<p>June 22, 2021</p>
 								
@@ -193,6 +214,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="yt-container">
 	<iframe class="responsive-iframe" src="https://www.youtube.com/embed/ofmn4eIBwRo"></iframe>
 </div>
+<p>The GitHub repository for this project can be found (here)[https://github.com/victorangeloblancada/anova-dash].</p>
 
 <p>The full code for <strong>anova-dash.py</strong> from the video above can be found below. The <strong>anova-dash.py</strong> Python script allows us to run some calculations in Python, define some HTML whose contents come from the aforementioned Python calculations, and serve this HTML over localhost (or http://0.0.0.0) at our desired port (in this case, 8080) as it were a webpage.</p>
 

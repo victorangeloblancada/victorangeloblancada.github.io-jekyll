@@ -9,6 +9,7 @@
 		{% include styles.html %}
 	</head>
 	<body>
+		{% include scroll-indicator.html %}
 		{% include gtm_body.html %}
 		<div class="wrapper">
 			{% include navigation.html %}
@@ -21,6 +22,7 @@
 						-->
 						<a href="#start">
 							<div style="-webkit-animation-name: pulse; -webkit-animation-duration: 2s; animation-name: pulse;animation-duration: 2s; animation-direction: alternate;">
+								<!--<p>{% include reading-time.html %}</p>-->
 								{% unless page.nodate %}
 								<p>{{ page.date | date: '%B %d, %Y' }}</p>
 								{% endunless %}
