@@ -734,7 +734,7 @@ div.square-img:hover {
 	.header {
 	  position: fixed;
 	  //top: $nav-height-desktop + 20px; 
-	  top: 0; /* Hide scroll indicator on desktop */
+	  top: 0px; /* Hide scroll indicator on desktop */
 	  z-index: 1;
 	  width: 100%;
 	  background-color: $accent-1-color;
