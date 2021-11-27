@@ -112,7 +112,7 @@ h4, h5, h6 {
     font-size: 1.68vmax; }
 
   blockquote {
-    font-size: 2.5vmax; } }
+    font-size: 5vmax; } }
 @media screen and (min-width: 1000px) {
   body {
     font-size: 16px; }
@@ -136,7 +136,7 @@ h4, h5, h6 {
     font-size: 17px; }
 
   blockquote {
-    font-size: 25px; } }
+    font-size: 34px; } }
 a {
   color: #084887;
   fill: #084887; }
@@ -380,18 +380,12 @@ div.square-img {
   left: 0px;
   z-index: 0;
   margin: 18px;
-  align-items: center;
-  background-color: rgba(100, 100, 100, 0.7);
-  /* Tint color */
-  background-blend-mode: multiply; }
+  align-items: center; }
 
 div.square-img:hover {
   box-shadow: 0 15px 25px -4px rgba(0, 0, 0, 0.7);
   transform: scale(1.1);
-  z-index: 1;
-  background-color: rgba(0, 0, 0, 0);
-  /* Tint color */
-  background-blend-mode: multiply; }
+  z-index: 1; }
 
 .center-content {
   display: inline-block;
@@ -413,19 +407,23 @@ div.square-img:hover {
   text-decoration: none;
   font-style: italic; }
 
-/* Scroll Indicator */
-/* The progress container (grey background) */
-.progress-container {
+.yt-container {
+  position: relative;
+  overflow: hidden;
   width: 100%;
-  height: 8px;
-  background: #ccc; }
+  padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+}
 
-/* The progress bar (scroll indicator) */
-.progress-bar {
-  height: 8px;
-  background: #F58A07;
-  width: 0%; }
-
+/* Then style the iframe to fit in the container div with full height and width */
+.responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes pulse {
   from {
@@ -467,15 +465,7 @@ div.square-img:hover {
     height: 50vh;
     width: 100%;
     left: 0px;
-    right: 0px; }
-
-  /* Style the scroll indicator header: fixed position (always stay at the top) */
-  .header {
-    position: fixed;
-    top: 0;
-    z-index: 1;
-    width: 100%;
-    background-color: #084887; } }
+    right: 0px; } }
 @media (min-width: 600px) {
   div.navbar {
     height: 50px;
@@ -506,13 +496,4 @@ div.square-img:hover {
     height: 70vh;
     width: 70vh;
     float: right;
-    padding-left: 10vh; }
-
-  /* Style the scroll indicator header: fixed position (always stay at the top) */
-  .header {
-    position: fixed;
-    top: 0px;
-    /* Hide scroll indicator on desktop */
-    z-index: 1;
-    width: 100%;
-    background-color: #084887; } }
+    padding-left: 10vh; } }
