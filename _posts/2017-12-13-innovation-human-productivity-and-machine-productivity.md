@@ -21,7 +21,7 @@ Economic theory states that competition arises when more than one producer is tr
 
 The Model T is well-remembered because of how affordable Henry Ford’s assembly line produced them (nearly 15 million units sold) while Karl Benz’s Benz Patent-Motorwagen (25 units built) is reduced to the obscure answer to the trivial pursuit question, ‘what is the first car?’. (Karl Benz would later find widespread success with the first Mercedes-Benz after adopting mass production techniques in 1926, mere three years before his death.)
 
-![img](https://cdn-images-1.medium.com/max/2600/1*YPk4N6ce8muZbHFc27Wwkw.jpeg)
+![img](/assets/images/model-t.jpg)
 
 Ford Model T (credit: Bloomberg)
 

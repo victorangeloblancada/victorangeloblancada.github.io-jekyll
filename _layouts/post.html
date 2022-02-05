@@ -52,6 +52,7 @@
 				<p style="font-style:italic">{{ page.date | date: '%B %d, %Y' }}</p>
 				{% endunless %}
 				-->
+
 				<div class="article {% if page.dropcap %} dropcap {% endif %}">
 					{{ content }}
 				</div>
@@ -74,7 +75,7 @@
 			{% endif %}
 			<footer>
 				<hr>
-				© 2021 Victor Blancada. All Rights Reserved.
+				© <script>document.write(new Date().getFullYear())</script><noscript>2022</noscript> Victor Blancada. All Rights Reserved.
 			</footer>
 			<div class="spacer">
 			</div>

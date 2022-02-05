@@ -17,3 +17,5 @@ gem "kramdown", ">= 2.3.1"
 gem "nokogiri", ">= 1.12.5"
 gem "addressable", ">= 2.8.0"
 gem "webrick", "~> 1.7"
+
+#gem "jekyll-toc"
