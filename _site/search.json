@@ -1,6 +1,14 @@
 [
   
     {
+      "title"    : "Finance from First Principles",
+      "category" : "blog",
+      "tags"     : "blog, math, mathematics, business, finance",
+      "url"      : "/blog/2022/03/20/finance-from-first-principles.html",
+      "date"     : "2022-03-20 00:00:00 +0800"
+    } ,
+  
+    {
       "title"    : "NaNoGenMo 2021",
       "category" : "blog",
       "tags"     : "blog, nlp, nanogenmo",
