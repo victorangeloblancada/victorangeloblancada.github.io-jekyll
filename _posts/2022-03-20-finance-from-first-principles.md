@@ -8,6 +8,7 @@ tags:
 - mathematics
 - business
 - finance
+- economics
 date: 2022-03-20
 image: /assets/images/finance.jpg
 dropcap: False
@@ -203,6 +204,107 @@ for r>g
 
 ` NPV = FV_0 + ((FV_1)/(1+r)) + ((FV_2)/(1+r)^2) + ((FV_3)/(1+r)^3) + ... + ((FV_n)/(1+r)^n) `
 
+## Marginal Analysis 
+
+#### Marginal Cost
+` MC_n = TC_n - TC_(n-1) `
+
+
+#### Total Cost
+` TC = VC + FC `
+
+
+#### Average Total Cost
+` ATC = (TC)/Q `
+
+
+#### Average Variable Cost
+` AVC = (VC)/Q `
+
+
+#### Average Fixed Cost
+` AFC = (FC)/Q `
+
+
+#### Marginal Revenue
+` MR_n = TR_n - TR_(n-1) `
+
+
+#### Total Revenue
+` TR = Q * p `
+
+
+#### Marginal Profit
+` MP = MR - MC `
+or
+` MP_n = TP_n - TP_(n-1) `
+
+
+#### Total Profit
+` TP = TR - TC `
+
+## Marginal Analysis (with Calculus)
+
+Derivative of a Polynomial (Formulas)
+if y = axn then dy/dx = y' = naxn-1
+
+if y = a then dy/dx = y' = 0
+
+
+Derivative of a Polynomial (Term-by-Term Instructions)
+1. If the term is a constant then derivative is zero
+2. Otherwise, write sign of term
+3. Bring down exponent
+4. Multiply exponent by coefficient (the constant)
+5. Repeat variable (e.g., x)
+6. Reduce exponent by 1
+7. Move to step 1 for next term
+
+Example (from lecture):
+y = 7x4 - 5x3 + 9x2 - 3x + 6
+
+y' = 4*7x4-1 - 3*5x3-1 + 2*9x2-1 - 1*3x1-1 + 0
+
+y' = 28x3 - 15x2 + 18x1 - 3x0
+
+y' = 28x3 - 15x2 + 18x - 3
+
+
+Total Revenue
+
+` TR = p * Q `
+
+Marginal Revenue
+
+` MR = (dTR)/(dq) `
+
+first derivative of total revenue with respect to quantity
+
+
+Total Cost
+
+` TC = VC + FC `
+
+Marginal Cost
+
+` MC = (dTC)/(dq) `
+
+first derivative of total cost with respect to quantity
+
+
+Total Profit
+
+` TP = TR − TC `
+
+Marginal Profit
+
+` MP = MR − MC `
+
+or
+
+` MP = (dTP)/(dq) `
+
+first derivative of total profit with respect to quantity
 
 
 <!--<script>
