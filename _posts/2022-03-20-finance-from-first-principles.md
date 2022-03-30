@@ -11,8 +11,10 @@ tags:
 date: 2022-03-20
 image: /assets/images/finance.jpg
 dropcap: False
-draft: True
 ---
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script>
 
 As developers and data scientists rise in rank and expand their scope, finance becomes an unavoidable part of their responsibilities. This post is meant to serve as a reference of basic finance formulas with annotations designed to make the formulas easier to grok for engineers.
 
@@ -20,149 +22,178 @@ As developers and data scientists rise in rank and expand their scope, finance b
 
 #### Future Value
 
-FV=PV(1+r)nFV=PV(1+r)n
+<!--$$FV = PV (1+r)^n$$-->
+` FV = PV(1+r)^n `
+
+This just means that the future value of a present sum of money must be adjusted by the rate.
 
 #### Present Value
 
-PV=FV(1+r)nPV=FV(1+r)n
+<!--$$PV=\frac{FV}{(1+r)^n}$$-->
+` PV = (FV)/(1+r)^n `
+
+See future value above.
 
 #### Rate
 
-r=(FVPV)1n−1r=(FVPV)1n-1
+<!--$$r=(\frac{FV}{PV})^\frac{1}{n}−1$$-->
+` r = ((FV)/(PV))^(1/n)-1 `
+
+The rate can be calculated by getting the ratio of the future value compared to the present value then taking its nth root, where n is the number of compounding periods (usually in years).
 
 #### Years
 
-n=log(FVPV)log(1+r)
+<!--$$n=\frac{log(\frac{FV}{PV})}{log(1+r)}$$-->
+` n = (log((FV)/(PV))) / (log(1+r)) `
+
+The number of years can be calculated by first getting the ratio of the future value compared to the present value. Based on the previous formulas, this ratio is equivalent to one plus the rate raised by the number of compounding periods.
+
+` (1+r)^n=(FV)/(PV)` 
+
+Take the logarithm of both sides with base (1+r).
+
+###### ` n*log_(1+r)(1+r)=log_(1+r)((FV)/(PV))`
+
+` log_(1+r)(1+r)` cancels out to one and n is now isolated on the left hand side. Use the logarithm change of base rule to evaluate the right hand side.
+
+` n = (log((FV)/(PV))) / (log(1+r)) `
 
 ## Sub-Annual Time Value of Money
 
+This section is almost exactly the same as the Annual Time Value of Money formulas except that the compounding periods are not strictly annual.
+
 #### Future Value
 
-FV=PV(1+(rp))npFV=PV(1+(rp))np
+<!--FV=PV(1+(rp))npFV=PV(1+(rp))np-->
+` FV = PV(1+(r/p))^(np) `
 
 #### Future Value with Continuous Compounding
 
-FV=PV⋅(ern)FV=PV⋅(ern)
+` FV = PV*(e^(rn)) `
 
 #### Present Value
 
-PV=FV(1+(rp))npPV=FV(1+(rp))np
+` PV = (FV)/(1+(r/p))^(np) `
 
 #### Stated Annual Rate
 
-r=p[(FVPV)1np−1]r=p[(FVPV)1np-1]
+` r = p[((FV)/(PV))^(1/(np))-1] `
 
 #### Period Rate
 
-rp=(FVPV)1np−1rp=(FVPV)1np-1
+` r/p = ((FV)/(PV))^(1/(np))-1 `
 
 #### Effective Annual Rate
 
-reffective=(1+(rstatedp))p−1reffective=(1+(rstatedp))p-1
+` r_(effective) = (1+(r_(stated)/p))^p-1 `
 
 #### Periods
 
-np=log(FVPV)log(1+(rp))np=log(FVPV)log(1+(rp))
+` np = (log((FV)/(PV))) / (log(1+(r/p))) `
+
+#### Years
+
+` n = (log((FV)/(PV))) / (plog(1+(r/p))) `
 
 ## Constant Annuity/Perpetuity
 
 #### Constant Perpetuity Present Value
 
-PV=PMTrPV=PMTr
+` PV = (PMT)/r `
 
 #### Constant Perpetuity Payment
 
-PMT=PV⋅rPMT=PV⋅r
+` PMT = PV*r `
 
 #### Constant Annuity Present Value
 
-PV=(PMTr)⋅[1−(1(1+r)n)]PV=(PMTr)⋅[1-(1(1+r)n)]
+` PV = ((PMT)/r)*[1-(1/(1+r)^n)] `
 
 *where n is the number of years of payments*
 
 #### Sub-Annual Constant Annuity Present Value
 
-PV=(PMTrp)⋅⎡⎣⎢1−⎛⎝⎜1(1+(rp))n⋅p⎞⎠⎟⎤⎦⎥PV=(PMTrp)⋅[1-(1(1+(rp))n⋅p)]
+` PV = ((PMT)/(r/p))*[1-(1/(1+(r/p))^(n*p))] `
 
 *where n is the number of years of payments and p is the number of payments per year*
 
 #### Constant Annuity Payment
 
-PMT=PV⋅r1−(1(1+r)n)PMT=PV⋅r1-(1(1+r)n)
+` PMT = (PV*r)/[1-(1/(1+r)^n)] `
 
 *where n is the number of years of payments*
 
 #### Sub-Annual Constant Annuity Payment
 
-PMT=PV⋅(rp)1−(1(1+(rp))n⋅p)PMT=PV⋅(rp)1-(1(1+(rp))n⋅p)
+` PMT = (PV(r/p))/[1-(1/(1+(r/p))^(np))] `
 
 *where n is the number of years of payments and p is the number of payments per year*
-
-#### Years
-
-n=log(FVPV)plog(1+(rp))
 
 ## Growing Annuity/Perpetuity
 
 #### Growing Perpetuity Present Value
 
-PV=PMTr−gPV=PMTr-g
+` PV = (PMT)/(r-g) `
 
 for r>g
 
 #### Growing Perpetuity Payment
 
-PMT=PV⋅(r−g)PMT=PV⋅(r-g)
+` PMT = PV*(r-g) `
 
 for r>g
 
 #### Growing Annuity Present Value
 
-PV=PMTr−g⋅[1−(1+g1+r)n]PV=PMTr-g⋅[1-(1+g1+r)n]
+` PV = (PMT)/(r-g) * [1-((1+g)/(1+r))^n] `
 
 for r>g
+
 *where n is the number of years of payments*
 
 #### Sub-Annual Growing Annuity Present Value
 
-PV=(PMTrp−gp)⋅[1−(1+gp1+rp)n⋅p]PV=(PMTrp-gp)⋅[1-(1+gp1+rp)n⋅p]
+` PV = ((PMT)/(r/p-g/p))[1-((1+g/p)/(1+r/p))^(np)] `
 
 for r>g
+
 *where n is the number of years of payments and p is the number of payments per year*
 
 #### Growing Annuity Payment
 
-PMT=PV⋅(r−g)1−(1+g1+r)nPMT=PV⋅(r-g)1-(1+g1+r)n
+` PMT = (PV*(r-g)) / [1-((1+g)/(1+r))^n] `
 
 for r>g
+
 *where n is the number of years of payments*
 
 #### Sub-Annual Growing Annuity Payment
 
-PMT=PV⋅(rp−gp)1−(1+gp1+rp)n⋅pPMT=PV⋅(rp-gp)1-(1+gp1+rp)n⋅p
+` PMT = (PV(r/p-g/p))/[1-((1+g/p)/(1+r/p))^(np)] `
 
 for r>g
+
 *where n is the number of years of payments and p is the number of payments per year*
 
 ## Bonds
 
 #### Present Value (Annual)
 
-PV=FV(1+r)nPV=FV(1+r)n
+` PV = (FV)/(1+r)^n `
 
 #### Present Value (Sub-Annual)
 
-PV=FV(1+(rp))npPV=FV(1+(rp))np
+` PV = (FV)/(1+(r/p))^(np) `
 
 #### Annuity Present Value (Annual)
 
-PV=(PMTr)⋅[1−(1(1+r)n)]PV=(PMTr)⋅[1-(1(1+r)n)]
+` PV = ((PMT)/r) * [1-(1/(1+r)^n)] `
 
 *where n is the number of years of payments*
 
 #### Annuity Present Value (Sub-Annual)
 
-PV=(PMTrp)⋅⎡⎣⎢1−⎛⎝⎜1(1+(rp))np⎞⎠⎟⎤⎦⎥PV=(PMTrp)⋅[1-(1(1+(rp))np)]
+` PV = ((PMT)/(r/p)) * [1-(1/(1+(r/p))^(np))] `
 
 *where n is the number of years of payments and p is the number of payments per year*
 
@@ -170,11 +201,11 @@ PV=(PMTrp)⋅⎡⎣⎢1−⎛⎝⎜1(1+(rp))np⎞⎠⎟⎤⎦⎥PV=(PMTrp)⋅[1-
 
 #### Net Present Value
 
-NPV=FV0+(FV11+r)+(FV2(1+r)2)+(FV3(1+r)3)+...+(FVn(1+r)n)
+` NPV = FV_0 + ((FV_1)/(1+r)) + ((FV_2)/(1+r)^2) + ((FV_3)/(1+r)^3) + ... + ((FV_n)/(1+r)^n) `
 
 
 
-<script>
+<!--<script>
 	function calcPercent(a, b) {
 		// The function displays text expressing the relation between two numbers as percentages
 		if (isNaN(parseFloat(a))|isNaN(parseFloat(b))){
@@ -193,10 +224,11 @@ NPV=FV0+(FV11+r)+(FV2(1+r)2)+(FV3(1+r)3)+...+(FVn(1+r)n)
 		}
 	}
 </script>
+
 <form onload="calcPercent(document.getElementById('a').value, document.getElementById('b').value)">
 	<p>Number A: <input type="text" id="a" value="10" onchange="calcPercent(document.getElementById('a').value, document.getElementById('b').value)"></p>
 	<p>Number B: <input type="text" id="b" value="5" onchange="calcPercent(document.getElementById('a').value, document.getElementById('b').value)"></p>
 	<div id="results">
 		Results will show here 
 	</div>
-</form>
+</form>-->
