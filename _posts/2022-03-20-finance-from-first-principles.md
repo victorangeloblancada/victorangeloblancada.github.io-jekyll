@@ -310,6 +310,66 @@ first derivative of total profit with respect to quantity
 
 ![Supply and Demand]("/assets/images/Supply and Demand.png")
 
+#### Supply Curve
+
+A chart or formula of the relationship between price and quantity supplied by producers
+
+#### Demand Curve
+
+A chart or formula of the relationship between price and quantity demanded by consumers
+
+#### Equilibrium Point
+
+The price and quantity at which the quantity demanded is just equal to the quantity supplied. Graphically, the equilibrium point is the intersection of the supply and demand curves.
+
+#### Equilibrium Quantity (q* or Q*)
+
+The price at which the quantity demanded is just equal to the quantity supplied.
+
+#### Equilibrium Price (p*)
+
+The price at which the quantity demanded is just equal to the quantity supplied.
+
+#### Market Clearing Price (p*)
+
+Another term for equilibrium price. "Market clearing" refers to the fact that at this price all willing sellers in the market can find willing buyers and vice versa.
+
+#### Total Revenue (TR)
+
+The sum of the prices for the quantity sold. Because in most situations there is a constant market price, the total revenue is usually price times quantity. Graphically, total revenue at equilibrium is the area of the rectangle defined by the origin and the equilibrium point.
+
+#### Consumer Surplus
+
+The incremental revenue that consumers were willing to pay for a product or service but which they were able to keep because the equilibrium price is less than their willingness to pay. Graphically, the consumer surplus is the area of the triangle above the equilibrium price and below the demand curve.
+
+#### Producer Surplus
+
+The incremental revenue that producers received for a product or service above their lowest price they at which they were willing to supply. Graphically, the producer surplus is the area of the triangle below the equilibrium price and above the supply curve.
+
+#### Unmet Demand
+
+The revenue that consumers were willing to spend but didn't because the equilibrium price is higher than their willingness to pay. Graphically, the unmet demand is the area of the triangle to the right of the equilibrium quantity and below the demand curve.
+
+#### Price Elasticity of Demand
+
+Price elasticity of demand measures the how sensitive the quantity supplied is to a change in price. Elasticity is defined as the percentage change in quantity divided by the percentage change in price.
+
+The elasticity formula is:
+
+` text(Elasticity) = m * (p / Q) `
+
+where m is the slope of the demand curve equation, p is the equilibrium price, and Q is the equilibrium quantity.
+
+#### Price Elasticity of Supply
+
+Price elasticity of supply measures the how sensitive the quantity supplied is to a change in price. Elasticity is defined as the percentage change in quantity divided by the percentage change in price.
+
+The elasticity formula is:
+
+` text(Elasticity) = m * (p / Q) `
+
+where m is the slope of the supply curve equation, p is the equilibrium price, and Q is the equilibrium quantity.
+
 <!--<script>
 	function calcPercent(a, b) {
 		// The function displays text expressing the relation between two numbers as percentages
