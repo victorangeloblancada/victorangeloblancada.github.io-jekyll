@@ -308,7 +308,7 @@ first derivative of total profit with respect to quantity
 
 ## Supply and Demand
 
-![Supply and Demand]("/assets/images/Supply and Demand.png")
+![img](/assets/images/supply-and-demand.png)
 
 #### Supply Curve
 
@@ -369,6 +369,106 @@ The elasticity formula is:
 ` text(Elasticity) = m * (p / Q) `
 
 where m is the slope of the supply curve equation, p is the equilibrium price, and Q is the equilibrium quantity.
+
+## Basic Statistics for Finance
+
+#### Median
+
+The middle of an ordered set of values. For an even number of values, the median is the average of the two middle values of an ordered sequence.
+
+#### Mode
+
+The most frequently occurring value in a set of values. There may be more than one mode.
+
+#### Range
+
+The difference between the maximum and minimum of a set of values
+
+#### Mean (Population)
+
+` mu_x = ((sum_(i=1)^n x_i))/n ` 
+
+#### Variance (Population)
+
+` sigma_x^2 = ( sum_(i=1)^n(x_i-mu_x)^2 )/n `
+
+#### Standard Deviation (Population)
+
+` sigma_x = sqrt{sigma_x^2} `
+
+#### Mean (Sample)
+
+` overline{x} = (( sum_(i=1)^nx_i ))/n `
+
+#### Variance (Sample)
+
+` s_x^2 = ( sum_(i=1)^n(x_i-overline{x})^2 ) / (n-1) `
+
+#### Standard Deviation (Sample)
+
+`  s_x = sqrt{s_x^2}`
+
+#### Location of Quartile
+
+` L_q = (n+1)q/4 `
+
+where q is the quartile index (e.g., q=1 for the first quartile) and n is the number of data points.
+
+*Note: Other quartile location definitions are in common use.*
+
+#### Interquartile Range (IQR)
+
+**The difference between the third quartile and the first quartile of a set of values.** Multiple definitions for quartile are in common use, with differences most significant for small data sets. Unlike the range, which is defined by the extreme outliers, the interquartile range captures the size of the middle 50 percent by subtracting the 25th percentile from the 75th percentile.
+
+#### Location of Percentile
+
+` L_p = (n+1)p/(100) `
+
+*Note: Other percentile location definitions are in common use.*
+
+#### Pearson's Coefficient of Skewness
+
+A statistical measure of the extent of asymmetry in a set of values. Defines skewness as a multiple of the standard deviation of a set of values. Negative values signify a data set with greater weight given to values below the median while positive values signify the opposite.
+
+` sk_p = 3( (\text{mean}-\text{median})/(\text{standard deviation}) ) `
+
+#### Excel's SKEW Function (Sample)
+
+A statistical measure of the extent of asymmetry in a set of values. Defines skewness as, approximately, the average cubed number of standard deviations each point falls from the mean.
+
+` sk = n/((n-1)(n-2)) sum_(i=1)^n( (x_i- overline{x} ) /s_x)^3 `
+
+## Linear Combinations for Finance
+
+#### Covariance
+
+A statistical measure of the extent to which two variables move together above and below their respective means.
+
+` COV_(xy) = ( sum_(i=1)^n(x_i-mu_x)(y_i-mu_y) )/n `
+
+*Note: This is a population covariance. The sample covariance would have n-1 in the denominator rather than n. This lesson uses population data.*
+
+#### Correlation
+
+A normalized version of covariance with a range from -1 to +1. Positive values reflect positive correlation while negative values reflect inverse correlation, with values approaching 0 reflecting weak correlation.
+
+` \text{Correlation} = (COV_(xy)) / (sigma_xsigma_y) `
+
+#### Linear Combination
+
+` w = ax + by `
+
+#### Mean (Linear Combination)
+
+` mu_w = amu_x + bmu_y `
+
+#### Variance (Linear Combination)
+
+` sigma_w^2 = a^2sigma_x^2 + 2abCOV_(xy) + b^2sigma_y^2 `
+
+#### Standard Deviation (Linear Combination)
+
+` sigma_w = sqrt{sigma_w^2} `
 
 <!--<script>
 	function calcPercent(a, b) {

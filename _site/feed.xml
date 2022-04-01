@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://victorangeloblancada.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://victorangeloblancada.github.io/" rel="alternate" type="text/html" /><updated>2022-03-30T11:04:55+08:00</updated><id>https://victorangeloblancada.github.io/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">Finance from First Principles</title><link href="https://victorangeloblancada.github.io/blog/2022/03/20/finance-from-first-principles.html" rel="alternate" type="text/html" title="Finance from First Principles" /><published>2022-03-20T00:00:00+08:00</published><updated>2022-03-20T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2022/03/20/finance-from-first-principles</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2022/03/20/finance-from-first-principles.html">&lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://victorangeloblancada.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://victorangeloblancada.github.io/" rel="alternate" type="text/html" /><updated>2022-04-01T17:40:10+08:00</updated><id>https://victorangeloblancada.github.io/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">Finance from First Principles</title><link href="https://victorangeloblancada.github.io/blog/2022/03/20/finance-from-first-principles.html" rel="alternate" type="text/html" title="Finance from First Principles" /><published>2022-03-20T00:00:00+08:00</published><updated>2022-03-20T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2022/03/20/finance-from-first-principles</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2022/03/20/finance-from-first-principles.html">&lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML&quot;&gt;
 &lt;/script&gt;
 
 &lt;p&gt;As developers and data scientists rise in rank and expand their scope, finance becomes an unavoidable part of their responsibilities. This post is meant to serve as a reference of basic finance formulas with annotations designed to make the formulas easier to grok for engineers.&lt;/p&gt;
@@ -188,6 +188,262 @@
 
 &lt;p&gt;` NPV = FV_0 + ((FV_1)/(1+r)) + ((FV_2)/(1+r)^2) + ((FV_3)/(1+r)^3) + … + ((FV_n)/(1+r)^n) `&lt;/p&gt;
 
+&lt;h2 id=&quot;marginal-analysis&quot;&gt;Marginal Analysis&lt;/h2&gt;
+
+&lt;h4 id=&quot;marginal-cost&quot;&gt;Marginal Cost&lt;/h4&gt;
+&lt;p&gt;` MC_n = TC_n - TC_(n-1) `&lt;/p&gt;
+
+&lt;h4 id=&quot;total-cost&quot;&gt;Total Cost&lt;/h4&gt;
+&lt;p&gt;` TC = VC + FC `&lt;/p&gt;
+
+&lt;h4 id=&quot;average-total-cost&quot;&gt;Average Total Cost&lt;/h4&gt;
+&lt;p&gt;` ATC = (TC)/Q `&lt;/p&gt;
+
+&lt;h4 id=&quot;average-variable-cost&quot;&gt;Average Variable Cost&lt;/h4&gt;
+&lt;p&gt;` AVC = (VC)/Q `&lt;/p&gt;
+
+&lt;h4 id=&quot;average-fixed-cost&quot;&gt;Average Fixed Cost&lt;/h4&gt;
+&lt;p&gt;` AFC = (FC)/Q `&lt;/p&gt;
+
+&lt;h4 id=&quot;marginal-revenue&quot;&gt;Marginal Revenue&lt;/h4&gt;
+&lt;p&gt;` MR_n = TR_n - TR_(n-1) `&lt;/p&gt;
+
+&lt;h4 id=&quot;total-revenue&quot;&gt;Total Revenue&lt;/h4&gt;
+&lt;p&gt;` TR = Q * p `&lt;/p&gt;
+
+&lt;h4 id=&quot;marginal-profit&quot;&gt;Marginal Profit&lt;/h4&gt;
+&lt;p&gt;` MP = MR - MC `
+or
+` MP_n = TP_n - TP_(n-1) `&lt;/p&gt;
+
+&lt;h4 id=&quot;total-profit&quot;&gt;Total Profit&lt;/h4&gt;
+&lt;p&gt;` TP = TR - TC `&lt;/p&gt;
+
+&lt;h2 id=&quot;marginal-analysis-with-calculus&quot;&gt;Marginal Analysis (with Calculus)&lt;/h2&gt;
+
+&lt;p&gt;Derivative of a Polynomial (Formulas)
+if y = axn then dy/dx = y’ = naxn-1&lt;/p&gt;
+
+&lt;p&gt;if y = a then dy/dx = y’ = 0&lt;/p&gt;
+
+&lt;p&gt;Derivative of a Polynomial (Term-by-Term Instructions)&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;If the term is a constant then derivative is zero&lt;/li&gt;
+  &lt;li&gt;Otherwise, write sign of term&lt;/li&gt;
+  &lt;li&gt;Bring down exponent&lt;/li&gt;
+  &lt;li&gt;Multiply exponent by coefficient (the constant)&lt;/li&gt;
+  &lt;li&gt;Repeat variable (e.g., x)&lt;/li&gt;
+  &lt;li&gt;Reduce exponent by 1&lt;/li&gt;
+  &lt;li&gt;Move to step 1 for next term&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Example (from lecture):
+y = 7x4 - 5x3 + 9x2 - 3x + 6&lt;/p&gt;
+
+&lt;p&gt;y’ = 4&lt;em&gt;7x4-1 - 3&lt;/em&gt;5x3-1 + 2&lt;em&gt;9x2-1 - 1&lt;/em&gt;3x1-1 + 0&lt;/p&gt;
+
+&lt;p&gt;y’ = 28x3 - 15x2 + 18x1 - 3x0&lt;/p&gt;
+
+&lt;p&gt;y’ = 28x3 - 15x2 + 18x - 3&lt;/p&gt;
+
+&lt;p&gt;Total Revenue&lt;/p&gt;
+
+&lt;p&gt;` TR = p * Q `&lt;/p&gt;
+
+&lt;p&gt;Marginal Revenue&lt;/p&gt;
+
+&lt;p&gt;` MR = (dTR)/(dq) `&lt;/p&gt;
+
+&lt;p&gt;first derivative of total revenue with respect to quantity&lt;/p&gt;
+
+&lt;p&gt;Total Cost&lt;/p&gt;
+
+&lt;p&gt;` TC = VC + FC `&lt;/p&gt;
+
+&lt;p&gt;Marginal Cost&lt;/p&gt;
+
+&lt;p&gt;` MC = (dTC)/(dq) `&lt;/p&gt;
+
+&lt;p&gt;first derivative of total cost with respect to quantity&lt;/p&gt;
+
+&lt;p&gt;Total Profit&lt;/p&gt;
+
+&lt;p&gt;` TP = TR − TC `&lt;/p&gt;
+
+&lt;p&gt;Marginal Profit&lt;/p&gt;
+
+&lt;p&gt;` MP = MR − MC `&lt;/p&gt;
+
+&lt;p&gt;or&lt;/p&gt;
+
+&lt;p&gt;` MP = (dTP)/(dq) `&lt;/p&gt;
+
+&lt;p&gt;first derivative of total profit with respect to quantity&lt;/p&gt;
+
+&lt;h2 id=&quot;supply-and-demand&quot;&gt;Supply and Demand&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/supply-and-demand.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;supply-curve&quot;&gt;Supply Curve&lt;/h4&gt;
+
+&lt;p&gt;A chart or formula of the relationship between price and quantity supplied by producers&lt;/p&gt;
+
+&lt;h4 id=&quot;demand-curve&quot;&gt;Demand Curve&lt;/h4&gt;
+
+&lt;p&gt;A chart or formula of the relationship between price and quantity demanded by consumers&lt;/p&gt;
+
+&lt;h4 id=&quot;equilibrium-point&quot;&gt;Equilibrium Point&lt;/h4&gt;
+
+&lt;p&gt;The price and quantity at which the quantity demanded is just equal to the quantity supplied. Graphically, the equilibrium point is the intersection of the supply and demand curves.&lt;/p&gt;
+
+&lt;h4 id=&quot;equilibrium-quantity-q-or-q&quot;&gt;Equilibrium Quantity (q* or Q*)&lt;/h4&gt;
+
+&lt;p&gt;The price at which the quantity demanded is just equal to the quantity supplied.&lt;/p&gt;
+
+&lt;h4 id=&quot;equilibrium-price-p&quot;&gt;Equilibrium Price (p*)&lt;/h4&gt;
+
+&lt;p&gt;The price at which the quantity demanded is just equal to the quantity supplied.&lt;/p&gt;
+
+&lt;h4 id=&quot;market-clearing-price-p&quot;&gt;Market Clearing Price (p*)&lt;/h4&gt;
+
+&lt;p&gt;Another term for equilibrium price. “Market clearing” refers to the fact that at this price all willing sellers in the market can find willing buyers and vice versa.&lt;/p&gt;
+
+&lt;h4 id=&quot;total-revenue-tr&quot;&gt;Total Revenue (TR)&lt;/h4&gt;
+
+&lt;p&gt;The sum of the prices for the quantity sold. Because in most situations there is a constant market price, the total revenue is usually price times quantity. Graphically, total revenue at equilibrium is the area of the rectangle defined by the origin and the equilibrium point.&lt;/p&gt;
+
+&lt;h4 id=&quot;consumer-surplus&quot;&gt;Consumer Surplus&lt;/h4&gt;
+
+&lt;p&gt;The incremental revenue that consumers were willing to pay for a product or service but which they were able to keep because the equilibrium price is less than their willingness to pay. Graphically, the consumer surplus is the area of the triangle above the equilibrium price and below the demand curve.&lt;/p&gt;
+
+&lt;h4 id=&quot;producer-surplus&quot;&gt;Producer Surplus&lt;/h4&gt;
+
+&lt;p&gt;The incremental revenue that producers received for a product or service above their lowest price they at which they were willing to supply. Graphically, the producer surplus is the area of the triangle below the equilibrium price and above the supply curve.&lt;/p&gt;
+
+&lt;h4 id=&quot;unmet-demand&quot;&gt;Unmet Demand&lt;/h4&gt;
+
+&lt;p&gt;The revenue that consumers were willing to spend but didn’t because the equilibrium price is higher than their willingness to pay. Graphically, the unmet demand is the area of the triangle to the right of the equilibrium quantity and below the demand curve.&lt;/p&gt;
+
+&lt;h4 id=&quot;price-elasticity-of-demand&quot;&gt;Price Elasticity of Demand&lt;/h4&gt;
+
+&lt;p&gt;Price elasticity of demand measures the how sensitive the quantity supplied is to a change in price. Elasticity is defined as the percentage change in quantity divided by the percentage change in price.&lt;/p&gt;
+
+&lt;p&gt;The elasticity formula is:&lt;/p&gt;
+
+&lt;p&gt;` text(Elasticity) = m * (p / Q) `&lt;/p&gt;
+
+&lt;p&gt;where m is the slope of the demand curve equation, p is the equilibrium price, and Q is the equilibrium quantity.&lt;/p&gt;
+
+&lt;h4 id=&quot;price-elasticity-of-supply&quot;&gt;Price Elasticity of Supply&lt;/h4&gt;
+
+&lt;p&gt;Price elasticity of supply measures the how sensitive the quantity supplied is to a change in price. Elasticity is defined as the percentage change in quantity divided by the percentage change in price.&lt;/p&gt;
+
+&lt;p&gt;The elasticity formula is:&lt;/p&gt;
+
+&lt;p&gt;` text(Elasticity) = m * (p / Q) `&lt;/p&gt;
+
+&lt;p&gt;where m is the slope of the supply curve equation, p is the equilibrium price, and Q is the equilibrium quantity.&lt;/p&gt;
+
+&lt;h2 id=&quot;basic-statistics-for-finance&quot;&gt;Basic Statistics for Finance&lt;/h2&gt;
+
+&lt;h4 id=&quot;median&quot;&gt;Median&lt;/h4&gt;
+
+&lt;p&gt;The middle of an ordered set of values. For an even number of values, the median is the average of the two middle values of an ordered sequence.&lt;/p&gt;
+
+&lt;h4 id=&quot;mode&quot;&gt;Mode&lt;/h4&gt;
+
+&lt;p&gt;The most frequently occurring value in a set of values. There may be more than one mode.&lt;/p&gt;
+
+&lt;h4 id=&quot;range&quot;&gt;Range&lt;/h4&gt;
+
+&lt;p&gt;The difference between the maximum and minimum of a set of values&lt;/p&gt;
+
+&lt;h4 id=&quot;mean-population&quot;&gt;Mean (Population)&lt;/h4&gt;
+
+&lt;p&gt;` mu_x = ((sum_(i=1)^n x_i))/n `&lt;/p&gt;
+
+&lt;h4 id=&quot;variance-population&quot;&gt;Variance (Population)&lt;/h4&gt;
+
+&lt;p&gt;` sigma_x^2 = ( sum_(i=1)^n(x_i-mu_x)^2 )/n `&lt;/p&gt;
+
+&lt;h4 id=&quot;standard-deviation-population&quot;&gt;Standard Deviation (Population)&lt;/h4&gt;
+
+&lt;p&gt;` sigma_x = sqrt{sigma_x^2} `&lt;/p&gt;
+
+&lt;h4 id=&quot;mean-sample&quot;&gt;Mean (Sample)&lt;/h4&gt;
+
+&lt;p&gt;` overline{x} = (( sum_(i=1)^nx_i ))/n `&lt;/p&gt;
+
+&lt;h4 id=&quot;variance-sample&quot;&gt;Variance (Sample)&lt;/h4&gt;
+
+&lt;p&gt;` s_x^2 = ( sum_(i=1)^n(x_i-overline{x})^2 ) / (n-1) `&lt;/p&gt;
+
+&lt;h4 id=&quot;standard-deviation-sample&quot;&gt;Standard Deviation (Sample)&lt;/h4&gt;
+
+&lt;p&gt;`  s_x = sqrt{s_x^2}`&lt;/p&gt;
+
+&lt;h4 id=&quot;location-of-quartile&quot;&gt;Location of Quartile&lt;/h4&gt;
+
+&lt;p&gt;` L_q = (n+1)q/4 `&lt;/p&gt;
+
+&lt;p&gt;where q is the quartile index (e.g., q=1 for the first quartile) and n is the number of data points.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: Other quartile location definitions are in common use.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;interquartile-range-iqr&quot;&gt;Interquartile Range (IQR)&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;The difference between the third quartile and the first quartile of a set of values.&lt;/strong&gt; Multiple definitions for quartile are in common use, with differences most significant for small data sets. Unlike the range, which is defined by the extreme outliers, the interquartile range captures the size of the middle 50 percent by subtracting the 25th percentile from the 75th percentile.&lt;/p&gt;
+
+&lt;h4 id=&quot;location-of-percentile&quot;&gt;Location of Percentile&lt;/h4&gt;
+
+&lt;p&gt;` L_p = (n+1)p/(100) `&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: Other percentile location definitions are in common use.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;pearsons-coefficient-of-skewness&quot;&gt;Pearson’s Coefficient of Skewness&lt;/h4&gt;
+
+&lt;p&gt;A statistical measure of the extent of asymmetry in a set of values. Defines skewness as a multiple of the standard deviation of a set of values. Negative values signify a data set with greater weight given to values below the median while positive values signify the opposite.&lt;/p&gt;
+
+&lt;p&gt;` sk_p = 3( (\text{mean}-\text{median})/(\text{standard deviation}) ) `&lt;/p&gt;
+
+&lt;h4 id=&quot;excels-skew-function-sample&quot;&gt;Excel’s SKEW Function (Sample)&lt;/h4&gt;
+
+&lt;p&gt;A statistical measure of the extent of asymmetry in a set of values. Defines skewness as, approximately, the average cubed number of standard deviations each point falls from the mean.&lt;/p&gt;
+
+&lt;p&gt;` sk = n/((n-1)(n-2)) sum_(i=1)^n( (x_i- overline{x} ) /s_x)^3 `&lt;/p&gt;
+
+&lt;h2 id=&quot;linear-combinations-for-finance&quot;&gt;Linear Combinations for Finance&lt;/h2&gt;
+
+&lt;h4 id=&quot;covariance&quot;&gt;Covariance&lt;/h4&gt;
+
+&lt;p&gt;A statistical measure of the extent to which two variables move together above and below their respective means.&lt;/p&gt;
+
+&lt;p&gt;` COV_(xy) = ( sum_(i=1)^n(x_i-mu_x)(y_i-mu_y) )/n `&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: This is a population covariance. The sample covariance would have n-1 in the denominator rather than n. This lesson uses population data.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;correlation&quot;&gt;Correlation&lt;/h4&gt;
+
+&lt;p&gt;A normalized version of covariance with a range from -1 to +1. Positive values reflect positive correlation while negative values reflect inverse correlation, with values approaching 0 reflecting weak correlation.&lt;/p&gt;
+
+&lt;p&gt;` \text{Correlation} = (COV_(xy)) / (sigma_xsigma_y) `&lt;/p&gt;
+
+&lt;h4 id=&quot;linear-combination&quot;&gt;Linear Combination&lt;/h4&gt;
+
+&lt;p&gt;` w = ax + by `&lt;/p&gt;
+
+&lt;h4 id=&quot;mean-linear-combination&quot;&gt;Mean (Linear Combination)&lt;/h4&gt;
+
+&lt;p&gt;` mu_w = amu_x + bmu_y `&lt;/p&gt;
+
+&lt;h4 id=&quot;variance-linear-combination&quot;&gt;Variance (Linear Combination)&lt;/h4&gt;
+
+&lt;p&gt;` sigma_w^2 = a^2sigma_x^2 + 2abCOV_(xy) + b^2sigma_y^2 `&lt;/p&gt;
+
+&lt;h4 id=&quot;standard-deviation-linear-combination&quot;&gt;Standard Deviation (Linear Combination)&lt;/h4&gt;
+
+&lt;p&gt;` sigma_w = sqrt{sigma_w^2} `&lt;/p&gt;
+
 &lt;!--&lt;script&gt;
 	function calcPercent(a, b) {
 		// The function displays text expressing the relation between two numbers as percentages
@@ -214,7 +470,7 @@
 	&lt;div id=&quot;results&quot;&gt;
 		Results will show here 
 	&lt;/div&gt;
-&lt;/form&gt;--&gt;</content><author><name></name></author><category term="blog" /><category term="blog" /><category term="math" /><category term="mathematics" /><category term="business" /><category term="finance" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/finance.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/finance.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">NaNoGenMo 2021</title><link href="https://victorangeloblancada.github.io/blog/2021/10/09/nanogenmo-2021.html" rel="alternate" type="text/html" title="NaNoGenMo 2021" /><published>2021-10-09T00:00:00+08:00</published><updated>2021-10-09T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2021/10/09/nanogenmo-2021</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2021/10/09/nanogenmo-2021.html">&lt;p&gt;I participated in &lt;a href=&quot;https://github.com/NaNoGenMo/2021&quot;&gt;National Novel Generation Month for 2021&lt;/a&gt;.  &lt;a href=&quot;https://github.com/victorangeloblancada/nanogenmo-2021-vab&quot;&gt;See here&lt;/a&gt; for my GitHub repository with my code and my final novel.&lt;/p&gt;
+&lt;/form&gt;--&gt;</content><author><name></name></author><category term="blog" /><category term="blog" /><category term="math" /><category term="mathematics" /><category term="business" /><category term="finance" /><category term="economics" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/finance.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/finance.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">NaNoGenMo 2021</title><link href="https://victorangeloblancada.github.io/blog/2021/10/09/nanogenmo-2021.html" rel="alternate" type="text/html" title="NaNoGenMo 2021" /><published>2021-10-09T00:00:00+08:00</published><updated>2021-10-09T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2021/10/09/nanogenmo-2021</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2021/10/09/nanogenmo-2021.html">&lt;p&gt;I participated in &lt;a href=&quot;https://github.com/NaNoGenMo/2021&quot;&gt;National Novel Generation Month for 2021&lt;/a&gt;.  &lt;a href=&quot;https://github.com/victorangeloblancada/nanogenmo-2021-vab&quot;&gt;See here&lt;/a&gt; for my GitHub repository with my code and my final novel.&lt;/p&gt;
 
 &lt;p&gt;I was inspired by &lt;a href=&quot;https://abstrusegoose.com/98&quot;&gt;this Abstruse Goose comic&lt;/a&gt;:
 &lt;img src=&quot;/assets/images/computer_programming_101.png&quot; alt=&quot;Abstruse Goose 98&quot; /&gt;&lt;/p&gt;
