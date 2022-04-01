@@ -306,6 +306,9 @@ or
 
 first derivative of total profit with respect to quantity
 
+## Supply and Demand
+
+![Supply and Demand](/assets/images/Supply and Demand.png)
 
 <!--<script>
 	function calcPercent(a, b) {
