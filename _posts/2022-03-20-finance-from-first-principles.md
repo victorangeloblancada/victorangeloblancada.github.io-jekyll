@@ -466,9 +466,92 @@ A normalized version of covariance with a range from -1 to +1. Positive values r
 
 ` sigma_w^2 = a^2sigma_x^2 + 2abCOV_(xy) + b^2sigma_y^2 `
 
+This formula is useful when the individual values of x and y are unknown but their variances and covariance are known.
+
 #### Standard Deviation (Linear Combination)
 
 ` sigma_w = sqrt{sigma_w^2} `
+
+## Probability
+
+#### Mean (from probability table)
+
+` mu_x = sum_(i=1)^np_ix_i `
+
+#### Variance (from probability table)
+
+` sigma_x^2 = sum_(i=1)^np_i(( x_i - mu_x )^2) `
+
+#### Standard Deviation
+
+`sigma_x = sqrt{sigma_x^2}`
+
+## Regression
+
+Regression is  the statistical technique for finding the best line through a scatter plot of two variables. The most common form is least squares regression. "Least squares" refers to a criteria for determining the best-fit line through a two-variable data set. The criteria is to minimize the sum of the squares of the distance between each point and the line.
+
+#### Regression Line
+
+` y = mx + b `
+
+#### Regression Line Slope
+
+` m = (COV_(xy)) / (sigma_x^2) `
+
+#### Regression Line Y-Intercept
+
+` b = mu_y - m*mu_x `
+
+#### Correlation
+
+` R = (COV_(xy)) / (sigma_xsigma_y) `
+
+A normalized version of covariance (a statistical measure of the extent to which two variables move together above and below their respective means) with a range from -1 to +1. Positive values reflect positive correlation while negative values reflect inverse correlation, with values approaching 0 reflecting weak correlation.
+
+#### R-Squared
+
+` R^2 = \text{Correlation}^2 `
+
+A normalized version of correlation with a range from 0 to +1. R-squared, also referred to as the coefficient of determination, is the square of correlation. Values near 1 reflect strong correlation and values approaching 0 reflect weak correlation.
+
+## Normal Distribution
+
+#### Uniform Distribution
+
+
+A continuous probability distribution with minimum and maximum values, with all values in between of equal probability
+
+#### Normal Distribution
+
+
+A continuous probability distribution whose shape closely approximates the symmetrical "bell curve". A normal distribution is completely specified by providing its mean and standard deviation.
+
+#### Standard Normal Distribution
+
+
+A normal distribution with mean 0 and standard deviation 1
+
+#### Z-Value
+
+
+The value on the standard normal distribution that corresponds to the value x on a non-standard normal distribution
+
+#### X-Value
+
+The value x on a non-standard normal distribution. In the case of a problem stated in terms of the standard normal distribution, the z-value and x-value are the same.
+
+#### Normal Distribution X-to-Z Conversion
+
+` z = (x-m)/s `
+
+#### Normal Distribution Z-to-X Conversion
+
+` x = zs+m `
+
+#### Z Target Linear Interpolation
+
+
+` z_(targ et) = (((p_(targ et) - p_(low))/(p_(high) - p_(low))) * (z_(high) - z_(low))) + z_(low) `
 
 <!--<script>
 	function calcPercent(a, b) {
