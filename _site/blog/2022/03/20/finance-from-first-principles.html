@@ -13,7 +13,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		<title>Finance from First Principles</title>
 		<!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Finance from First Principles | Victor Angelo Blancada</title>
-<meta name="generator" content="Jekyll v3.9.0" />
+<meta name="generator" content="Jekyll v3.9.2" />
 <meta property="og:title" content="Finance from First Principles" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation." />
@@ -130,7 +130,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 								<!--<p>Reading time: 
 
 
-  11 mins
+  13 mins
 </p>-->
 								
 								<p>March 20, 2022</p>
@@ -650,9 +650,87 @@ y = 7x4 - 5x3 + 9x2 - 3x + 6</p>
 
 <p>` sigma_w^2 = a^2sigma_x^2 + 2abCOV_(xy) + b^2sigma_y^2 `</p>
 
+<p>This formula is useful when the individual values of x and y are unknown but their variances and covariance are known.</p>
+
 <h4 id="standard-deviation-linear-combination">Standard Deviation (Linear Combination)</h4>
 
 <p>` sigma_w = sqrt{sigma_w^2} `</p>
+
+<h2 id="probability">Probability</h2>
+
+<h4 id="mean-from-probability-table">Mean (from probability table)</h4>
+
+<p>` mu_x = sum_(i=1)^np_ix_i `</p>
+
+<h4 id="variance-from-probability-table">Variance (from probability table)</h4>
+
+<p>` sigma_x^2 = sum_(i=1)^np_i(( x_i - mu_x )^2) `</p>
+
+<h4 id="standard-deviation">Standard Deviation</h4>
+
+<p><code class="language-plaintext highlighter-rouge">sigma_x = sqrt{sigma_x^2}</code></p>
+
+<h2 id="regression">Regression</h2>
+
+<p>Regression is  the statistical technique for finding the best line through a scatter plot of two variables. The most common form is least squares regression. “Least squares” refers to a criteria for determining the best-fit line through a two-variable data set. The criteria is to minimize the sum of the squares of the distance between each point and the line.</p>
+
+<h4 id="regression-line">Regression Line</h4>
+
+<p>` y = mx + b `</p>
+
+<h4 id="regression-line-slope">Regression Line Slope</h4>
+
+<p>` m = (COV_(xy)) / (sigma_x^2) `</p>
+
+<h4 id="regression-line-y-intercept">Regression Line Y-Intercept</h4>
+
+<p>` b = mu_y - m*mu_x `</p>
+
+<h4 id="correlation-1">Correlation</h4>
+
+<p>` R = (COV_(xy)) / (sigma_xsigma_y) `</p>
+
+<p>A normalized version of covariance (a statistical measure of the extent to which two variables move together above and below their respective means) with a range from -1 to +1. Positive values reflect positive correlation while negative values reflect inverse correlation, with values approaching 0 reflecting weak correlation.</p>
+
+<h4 id="r-squared">R-Squared</h4>
+
+<p>` R^2 = \text{Correlation}^2 `</p>
+
+<p>A normalized version of correlation with a range from 0 to +1. R-squared, also referred to as the coefficient of determination, is the square of correlation. Values near 1 reflect strong correlation and values approaching 0 reflect weak correlation.</p>
+
+<h2 id="normal-distribution">Normal Distribution</h2>
+
+<h4 id="uniform-distribution">Uniform Distribution</h4>
+
+<p>A continuous probability distribution with minimum and maximum values, with all values in between of equal probability</p>
+
+<h4 id="normal-distribution-1">Normal Distribution</h4>
+
+<p>A continuous probability distribution whose shape closely approximates the symmetrical “bell curve”. A normal distribution is completely specified by providing its mean and standard deviation.</p>
+
+<h4 id="standard-normal-distribution">Standard Normal Distribution</h4>
+
+<p>A normal distribution with mean 0 and standard deviation 1</p>
+
+<h4 id="z-value">Z-Value</h4>
+
+<p>The value on the standard normal distribution that corresponds to the value x on a non-standard normal distribution</p>
+
+<h4 id="x-value">X-Value</h4>
+
+<p>The value x on a non-standard normal distribution. In the case of a problem stated in terms of the standard normal distribution, the z-value and x-value are the same.</p>
+
+<h4 id="normal-distribution-x-to-z-conversion">Normal Distribution X-to-Z Conversion</h4>
+
+<p>` z = (x-m)/s `</p>
+
+<h4 id="normal-distribution-z-to-x-conversion">Normal Distribution Z-to-X Conversion</h4>
+
+<p>` x = zs+m `</p>
+
+<h4 id="z-target-linear-interpolation">Z Target Linear Interpolation</h4>
+
+<p>` z_(targ et) = (((p_(targ et) - p_(low))/(p_(high) - p_(low))) * (z_(high) - z_(low))) + z_(low) `</p>
 
 <!--<script>
 	function calcPercent(a, b) {

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://victorangeloblancada.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://victorangeloblancada.github.io/" rel="alternate" type="text/html" /><updated>2022-04-01T17:40:10+08:00</updated><id>https://victorangeloblancada.github.io/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">Finance from First Principles</title><link href="https://victorangeloblancada.github.io/blog/2022/03/20/finance-from-first-principles.html" rel="alternate" type="text/html" title="Finance from First Principles" /><published>2022-03-20T00:00:00+08:00</published><updated>2022-03-20T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2022/03/20/finance-from-first-principles</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2022/03/20/finance-from-first-principles.html">&lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="https://victorangeloblancada.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://victorangeloblancada.github.io/" rel="alternate" type="text/html" /><updated>2022-05-01T21:12:08+08:00</updated><id>https://victorangeloblancada.github.io/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">Finance from First Principles</title><link href="https://victorangeloblancada.github.io/blog/2022/03/20/finance-from-first-principles.html" rel="alternate" type="text/html" title="Finance from First Principles" /><published>2022-03-20T00:00:00+08:00</published><updated>2022-03-20T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2022/03/20/finance-from-first-principles</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2022/03/20/finance-from-first-principles.html">&lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML&quot;&gt;
 &lt;/script&gt;
 
 &lt;p&gt;As developers and data scientists rise in rank and expand their scope, finance becomes an unavoidable part of their responsibilities. This post is meant to serve as a reference of basic finance formulas with annotations designed to make the formulas easier to grok for engineers.&lt;/p&gt;
@@ -440,9 +440,87 @@ y = 7x4 - 5x3 + 9x2 - 3x + 6&lt;/p&gt;
 
 &lt;p&gt;` sigma_w^2 = a^2sigma_x^2 + 2abCOV_(xy) + b^2sigma_y^2 `&lt;/p&gt;
 
+&lt;p&gt;This formula is useful when the individual values of x and y are unknown but their variances and covariance are known.&lt;/p&gt;
+
 &lt;h4 id=&quot;standard-deviation-linear-combination&quot;&gt;Standard Deviation (Linear Combination)&lt;/h4&gt;
 
 &lt;p&gt;` sigma_w = sqrt{sigma_w^2} `&lt;/p&gt;
+
+&lt;h2 id=&quot;probability&quot;&gt;Probability&lt;/h2&gt;
+
+&lt;h4 id=&quot;mean-from-probability-table&quot;&gt;Mean (from probability table)&lt;/h4&gt;
+
+&lt;p&gt;` mu_x = sum_(i=1)^np_ix_i `&lt;/p&gt;
+
+&lt;h4 id=&quot;variance-from-probability-table&quot;&gt;Variance (from probability table)&lt;/h4&gt;
+
+&lt;p&gt;` sigma_x^2 = sum_(i=1)^np_i(( x_i - mu_x )^2) `&lt;/p&gt;
+
+&lt;h4 id=&quot;standard-deviation&quot;&gt;Standard Deviation&lt;/h4&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sigma_x = sqrt{sigma_x^2}&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;regression&quot;&gt;Regression&lt;/h2&gt;
+
+&lt;p&gt;Regression is  the statistical technique for finding the best line through a scatter plot of two variables. The most common form is least squares regression. “Least squares” refers to a criteria for determining the best-fit line through a two-variable data set. The criteria is to minimize the sum of the squares of the distance between each point and the line.&lt;/p&gt;
+
+&lt;h4 id=&quot;regression-line&quot;&gt;Regression Line&lt;/h4&gt;
+
+&lt;p&gt;` y = mx + b `&lt;/p&gt;
+
+&lt;h4 id=&quot;regression-line-slope&quot;&gt;Regression Line Slope&lt;/h4&gt;
+
+&lt;p&gt;` m = (COV_(xy)) / (sigma_x^2) `&lt;/p&gt;
+
+&lt;h4 id=&quot;regression-line-y-intercept&quot;&gt;Regression Line Y-Intercept&lt;/h4&gt;
+
+&lt;p&gt;` b = mu_y - m*mu_x `&lt;/p&gt;
+
+&lt;h4 id=&quot;correlation-1&quot;&gt;Correlation&lt;/h4&gt;
+
+&lt;p&gt;` R = (COV_(xy)) / (sigma_xsigma_y) `&lt;/p&gt;
+
+&lt;p&gt;A normalized version of covariance (a statistical measure of the extent to which two variables move together above and below their respective means) with a range from -1 to +1. Positive values reflect positive correlation while negative values reflect inverse correlation, with values approaching 0 reflecting weak correlation.&lt;/p&gt;
+
+&lt;h4 id=&quot;r-squared&quot;&gt;R-Squared&lt;/h4&gt;
+
+&lt;p&gt;` R^2 = \text{Correlation}^2 `&lt;/p&gt;
+
+&lt;p&gt;A normalized version of correlation with a range from 0 to +1. R-squared, also referred to as the coefficient of determination, is the square of correlation. Values near 1 reflect strong correlation and values approaching 0 reflect weak correlation.&lt;/p&gt;
+
+&lt;h2 id=&quot;normal-distribution&quot;&gt;Normal Distribution&lt;/h2&gt;
+
+&lt;h4 id=&quot;uniform-distribution&quot;&gt;Uniform Distribution&lt;/h4&gt;
+
+&lt;p&gt;A continuous probability distribution with minimum and maximum values, with all values in between of equal probability&lt;/p&gt;
+
+&lt;h4 id=&quot;normal-distribution-1&quot;&gt;Normal Distribution&lt;/h4&gt;
+
+&lt;p&gt;A continuous probability distribution whose shape closely approximates the symmetrical “bell curve”. A normal distribution is completely specified by providing its mean and standard deviation.&lt;/p&gt;
+
+&lt;h4 id=&quot;standard-normal-distribution&quot;&gt;Standard Normal Distribution&lt;/h4&gt;
+
+&lt;p&gt;A normal distribution with mean 0 and standard deviation 1&lt;/p&gt;
+
+&lt;h4 id=&quot;z-value&quot;&gt;Z-Value&lt;/h4&gt;
+
+&lt;p&gt;The value on the standard normal distribution that corresponds to the value x on a non-standard normal distribution&lt;/p&gt;
+
+&lt;h4 id=&quot;x-value&quot;&gt;X-Value&lt;/h4&gt;
+
+&lt;p&gt;The value x on a non-standard normal distribution. In the case of a problem stated in terms of the standard normal distribution, the z-value and x-value are the same.&lt;/p&gt;
+
+&lt;h4 id=&quot;normal-distribution-x-to-z-conversion&quot;&gt;Normal Distribution X-to-Z Conversion&lt;/h4&gt;
+
+&lt;p&gt;` z = (x-m)/s `&lt;/p&gt;
+
+&lt;h4 id=&quot;normal-distribution-z-to-x-conversion&quot;&gt;Normal Distribution Z-to-X Conversion&lt;/h4&gt;
+
+&lt;p&gt;` x = zs+m `&lt;/p&gt;
+
+&lt;h4 id=&quot;z-target-linear-interpolation&quot;&gt;Z Target Linear Interpolation&lt;/h4&gt;
+
+&lt;p&gt;` z_(targ et) = (((p_(targ et) - p_(low))/(p_(high) - p_(low))) * (z_(high) - z_(low))) + z_(low) `&lt;/p&gt;
 
 &lt;!--&lt;script&gt;
 	function calcPercent(a, b) {
