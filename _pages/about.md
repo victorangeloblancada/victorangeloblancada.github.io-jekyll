@@ -63,9 +63,9 @@ Mitchell Madison Group is a management consulting firm that delivers measurable 
 
 #### Business Analyst (2014-2015)
 
-- Assigned to work on-site on management consulting and analytics projects at client offices.
+- Assigned to work on-site on management consulting and analytics projects at client offices in North America.
 - Directed the $400MM USD fiber network expansion project of a Fortune 500 telecommunications company by running a large-scale network optimization algorithm to determine the network layout that will maximize the expected revenue based on predicted lifetime value of potential customers.
-- Generated $9MM in cost-savings for a manufacturing company through on-site strategic sourcing and vendor contract renegotiation.
+- Generated $9MM in cost-savings for a US manufacturing company through on-site strategic sourcing and vendor contract renegotiation.
 
 ## Educational Experience
 
