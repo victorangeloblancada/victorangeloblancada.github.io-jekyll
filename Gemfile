@@ -14,7 +14,7 @@ gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 gem "jekyll-sitemap"
 
 gem "kramdown", ">= 2.3.1"
-gem "nokogiri", ">= 1.13.4"
+gem "nokogiri", ">= 1.13.5"
 gem "addressable", ">= 2.8.0"
 gem "webrick", "~> 1.7"
 
