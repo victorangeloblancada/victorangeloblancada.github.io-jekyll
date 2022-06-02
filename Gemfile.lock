@@ -295,7 +295,7 @@ DEPENDENCIES
   jekyll-octicons
   jekyll-sitemap
   kramdown (>= 2.3.1)
-  nokogiri (>= 1.13.5)
+  nokogiri (>= 1.13.6)
   wdm (>= 0.1.0)
   webrick (~> 1.7)
 
