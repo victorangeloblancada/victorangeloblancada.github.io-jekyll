@@ -1,6 +1,14 @@
 [
   
     {
+      "title"    : "State of the Art: Creativity in the Age of Stable Diffusion",
+      "category" : "blog",
+      "tags"     : "blog, ai, artificial intelligence, art, creativity, machine learning, opinion",
+      "url"      : "/blog/2022/09/06/state-of-the-art-creativity-in-the-age-of-stable-diffusion.html",
+      "date"     : "2022-09-06 00:00:00 +0800"
+    } ,
+  
+    {
       "title"    : "Finance from First Principles",
       "category" : "blog",
       "tags"     : "blog, math, mathematics, business, finance, economics",
