@@ -483,7 +483,7 @@ def loc_type_mult(x):
 data['Calc_Vol'] = data['Location Type'].apply(str).apply(loc_type_mult)*data['Volume']
 ```
 
-The code block below shows a different way of solving for the centers of gravity. [Itertools](https://docs.python.org/2/library/itertools.html) is used to loop through all possible combinations of warehouse locations to get the combination that will minimize transport costs. The code below calculates the total estimated transport costs based on distance weighted by relative transport costs for each combination of potential locations and saves the combination of locations that minimize this estimated cost:
+The code block below shows a different way of solving for the centers of gravity. [Itertools](https://docs.python.org/2/library/itertools.html) is used to loop through all possible combinations of warehouse locations to get the combination of n sites that will minimize transport costs. The code below calculates the total estimated transport costs based on distance weighted by relative transport costs for each combination of potential locations and saves the combination of locations that minimize this estimated cost:
 
 ```python
 cands = data.loc[data['Location Type'].str.lower()=='candidate']
@@ -492,7 +492,7 @@ locs = data.loc[data['Calc_Vol']>0]
 total_dist = np.inf
 best_cogs = []
 
-# Loop to find best combination of candidate sites
+# Loop to find best combination of n candidate sites (replace n with the number of sites to select)
 for i in tqdm(list(combinations(cands.index, n))):
     temp_cands = cands.loc[list(i)]
     locs['Cluster'] = 0
