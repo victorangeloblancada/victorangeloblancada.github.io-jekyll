@@ -1,6 +1,22 @@
 [
   
     {
+      "title"    : "Resize an Image to 4R",
+      "category" : "blog",
+      "tags"     : "blog, python, image processing, coding, automation",
+      "url"      : "/blog/2022/09/21/image-resize.html",
+      "date"     : "2022-09-21 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "Adding a Date Watermark to an Image",
+      "category" : "blog",
+      "tags"     : "blog, python, image processing, coding, automation",
+      "url"      : "/blog/2022/09/20/image-watermark.html",
+      "date"     : "2022-09-20 00:00:00 +0800"
+    } ,
+  
+    {
       "title"    : "State of the Art: Creativity in the Age of Stable Diffusion",
       "category" : "blog",
       "tags"     : "blog, ai, artificial intelligence, art, creativity, machine learning, opinion",
@@ -70,14 +86,6 @@
       "tags"     : "logistics, python, combinations, itertools, kmeans, clustering",
       "url"      : "/blog/2020/09/07/center-of-gravity-analysis.html",
       "date"     : "2020-09-07 00:00:00 +0800"
-    } ,
-  
-    {
-      "title"    : "Neural Networks for Time Series",
-      "category" : "blog",
-      "tags"     : "logistics, python, combinations, itertools",
-      "url"      : "/blog/2020/08/20/time-series-neural-networks.html",
-      "date"     : "2020-08-20 00:00:00 +0800"
     } ,
   
     {
