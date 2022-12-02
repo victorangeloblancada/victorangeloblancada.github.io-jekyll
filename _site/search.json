@@ -1,6 +1,14 @@
 [
   
     {
+      "title"    : "NaNoGenMo 2022",
+      "category" : "blog",
+      "tags"     : "blog, nlp, nanogenmo",
+      "url"      : "/blog/2022/12/01/nanogenmo-2022.html",
+      "date"     : "2022-12-01 00:00:00 +0800"
+    } ,
+  
+    {
       "title"    : "Resize an Image to 4R",
       "category" : "blog",
       "tags"     : "blog, python, image processing, coding, automation",

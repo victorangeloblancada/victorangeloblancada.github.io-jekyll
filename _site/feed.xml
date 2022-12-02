@@ -1,4 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="https://victorangeloblancada.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://victorangeloblancada.github.io/" rel="alternate" type="text/html" /><updated>2022-09-22T22:14:19+08:00</updated><id>https://victorangeloblancada.github.io/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">Resize an Image to 4R</title><link href="https://victorangeloblancada.github.io/blog/2022/09/21/image-resize.html" rel="alternate" type="text/html" title="Resize an Image to 4R" /><published>2022-09-21T00:00:00+08:00</published><updated>2022-09-21T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2022/09/21/image-resize</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2022/09/21/image-resize.html">&lt;p&gt;&lt;em&gt;This is part of a series of short blog posts about automating &lt;s&gt;boring&lt;/s&gt; repetitive work using Python.&lt;/em&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="https://victorangeloblancada.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://victorangeloblancada.github.io/" rel="alternate" type="text/html" /><updated>2022-12-02T12:30:19+08:00</updated><id>https://victorangeloblancada.github.io/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">NaNoGenMo 2022</title><link href="https://victorangeloblancada.github.io/blog/2022/12/01/nanogenmo-2022.html" rel="alternate" type="text/html" title="NaNoGenMo 2022" /><published>2022-12-01T00:00:00+08:00</published><updated>2022-12-01T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2022/12/01/nanogenmo-2022</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2022/12/01/nanogenmo-2022.html">&lt;p&gt;I participated in &lt;a href=&quot;https://github.com/NaNoGenMo/2022&quot;&gt;National Novel Generation Month for 2022&lt;/a&gt;. This marked the third consecutive year where I completed my project.  &lt;a href=&quot;https://github.com/victorangeloblancada/nanogenmo-2022&quot;&gt;See here&lt;/a&gt; for my GitHub repository with my code and my final novel.&lt;/p&gt;
+
+&lt;p&gt;With the recent breakthroughs in generative AI, I decided it was high time for me to use a Large Language Model (LLM) for a NaNoGenMo project. I opted to fine-tune a &lt;a href=&quot;https://www.eleuther.ai/projects/gpt-neo/&quot;&gt;GPT-Neo model&lt;/a&gt; as I wanted control over the model itself lest the project turn into a prompt engineering exercise. I used &lt;a href=&quot;https://github.com/minimaxir&quot;&gt;Max Woolf&lt;/a&gt;’s &lt;a href=&quot;https://github.com/minimaxir/aitextgen&quot;&gt;aitextgen&lt;/a&gt; package to finetune the 125M GPT-Neo model on &lt;a href=&quot;https://github.com/victorangeloblancada/nanogenmo-2022/tree/main/corpus&quot;&gt;philosophy texts by Aristotle, Plato, Kant, Hume, and Nietzsche&lt;/a&gt;. I used &lt;a href=&quot;https://github.com/aparrish/pytracery&quot;&gt;pytracery&lt;/a&gt; to define grammars for model prompts.&lt;/p&gt;
+
+&lt;p&gt;Here are some brief, cherry-picked snippets from the output:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What Will Happen If Literature Is Divine?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;What will happen if literature is divine?&lt;/p&gt;
+
+  &lt;p&gt;CLEINIAS: What do you mean? he said.&lt;/p&gt;
+
+  &lt;p&gt;ATHENIAN: I should say, that it must be the greatest of all things which can be known to us; and we ought not to seek for them in order that they may know what sort of things are better than words–and now let us have a way out of them.&lt;/p&gt;
+
+  &lt;p&gt;CLEINIAS: That would be my desire.&lt;/p&gt;
+
+  &lt;p&gt;ATHENIAN: But there is no difficulty in seeing how wisely Hesiod spoke when he says ‘the truth.’&lt;/p&gt;
+
+  &lt;p&gt;MEGILLUS: True.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;What Is A Lover?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;What is a lover?&lt;/p&gt;
+
+  &lt;p&gt;Yes, he said.&lt;/p&gt;
+
+  &lt;p&gt;And what do you say of him who loves no one but himself? Would you not admit him to be loved by any one in whom there is no reason for praising or blaming others? For pity and hatred are opposites; they cannot be compared with each other when the latter becomes more innocent than the former.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;What Is The Best Way To Be Joyful?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;What is the best way to be joyful?&lt;/p&gt;
+
+  &lt;p&gt;CLEINIAS: Certainly not, Stranger.&lt;/p&gt;
+
+  &lt;p&gt;ATHENIAN: And when you say that any one should abstain from weeping and lamenting in your sorrows utterances–whence do you admit this?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;em&gt;Victor Blancada is a data scientist. Visit his LinkedIn page &lt;a href=&quot;https://www.linkedin.com/in/geloblancada/&quot;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;</content><author><name></name></author><category term="blog" /><category term="blog" /><category term="nlp" /><category term="nanogenmo" /><summary type="html">I participated in National Novel Generation Month for 2022. This marked the third consecutive year where I completed my project. See here for my GitHub repository with my code and my final novel.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/DrunkPhilosophyCover.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/DrunkPhilosophyCover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Resize an Image to 4R</title><link href="https://victorangeloblancada.github.io/blog/2022/09/21/image-resize.html" rel="alternate" type="text/html" title="Resize an Image to 4R" /><published>2022-09-21T00:00:00+08:00</published><updated>2022-09-21T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2022/09/21/image-resize</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2022/09/21/image-resize.html">&lt;p&gt;&lt;em&gt;This is part of a series of short blog posts about automating &lt;s&gt;boring&lt;/s&gt; repetitive work using Python.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;The following code automatically resizes all images in the directory specified in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mypath&lt;/code&gt; to 4R aspect ratio. 4R images have a size of 4 inches by 6 inches (or 10.2 cm by 15.2 cm), which means that images must have a 2 by 3 aspect ratio.&lt;/p&gt;
 
@@ -1408,15 +1450,4 @@ y = 7x4 - 5x3 + 9x2 - 3x + 6&lt;/p&gt;
   &lt;p&gt;The producer crinkled his brow. “Come back again next time with something better.”&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;em&gt;Victor Blancada is a data scientist. Visit his LinkedIn page &lt;a href=&quot;https://www.linkedin.com/in/geloblancada/&quot;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;</content><author><name></name></author><category term="blog" /><category term="blog" /><category term="nlp" /><category term="nanogenmo" /><summary type="html">I participated in National Novel Generation Month for 2020. See here for my GitHub repository with my code and my final novel.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/Scripted.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/Scripted.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Abakcus.com</title><link href="https://victorangeloblancada.github.io/blog/2020/11/08/abakcus.html" rel="alternate" type="text/html" title="Abakcus.com" /><published>2020-11-08T00:00:00+08:00</published><updated>2020-11-08T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2020/11/08/abakcus</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2020/11/08/abakcus.html">&lt;p&gt;Hey guys, check out &lt;a href=&quot;https://abakcus.com/&quot;&gt;Abakcus.com&lt;/a&gt;! It’s a great curation site for the best articles, books, tools, products, videos, and projects in mathematics and science. If you enjoy my content, you’ll be sure to like theirs as well.&lt;/p&gt;
-
-&lt;p&gt;Need a place to start? Try these articles:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://abakcus.com/article/5-year-olds-can-learn-calculus/&quot;&gt;5-Year-Olds Can Learn Calculus&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://abakcus.com/article/what-does-randomness-look-like/&quot;&gt;What Does Randomness Look Like&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://abakcus.com/article/how-a-19th-century-math-genius-carl-friedrich-gauss-taught-us-the-best-way-to-hold-a-pizza-slice/&quot;&gt;How a 19th Century Math Genius Carl Friedrich Gauss Taught Us the Best Way to Hold a Pizza Slice&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I hope you enjoy them as much as I did!&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Victor Blancada is a data scientist. Visit his LinkedIn page &lt;a href=&quot;https://www.linkedin.com/in/geloblancada/&quot;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;</content><author><name></name></author><category term="blog" /><category term="blog" /><category term="math" /><category term="mathematics" /><category term="ai" /><category term="data" /><summary type="html">Hey guys, check out Abakcus.com! It’s a great curation site for the best articles, books, tools, products, videos, and projects in mathematics and science. If you enjoy my content, you’ll be sure to like theirs as well.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/abakcus.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/abakcus.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+&lt;p&gt;&lt;em&gt;Victor Blancada is a data scientist. Visit his LinkedIn page &lt;a href=&quot;https://www.linkedin.com/in/geloblancada/&quot;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;</content><author><name></name></author><category term="blog" /><category term="blog" /><category term="nlp" /><category term="nanogenmo" /><summary type="html">I participated in National Novel Generation Month for 2020. See here for my GitHub repository with my code and my final novel.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/Scripted.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/Scripted.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
