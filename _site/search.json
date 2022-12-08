@@ -1,6 +1,14 @@
 [
   
     {
+      "title"    : "Cropping an MS Teams Recording",
+      "category" : "blog",
+      "tags"     : "blog, python, video processing, coding, automation",
+      "url"      : "/blog/2022/12/07/teams-recording-resize.html",
+      "date"     : "2022-12-07 00:00:00 +0800"
+    } ,
+  
+    {
       "title"    : "NaNoGenMo 2022",
       "category" : "blog",
       "tags"     : "blog, nlp, nanogenmo",
