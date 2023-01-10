@@ -1,6 +1,22 @@
 [
   
     {
+      "title"    : "Marketing Mix Modeling for Engineers",
+      "category" : "blog",
+      "tags"     : "ai, ml, artificial intelligence, machine learning, marketing, marketing mix modeling, python",
+      "url"      : "/blog/2023/01/10/mmm-for-engineers.html",
+      "date"     : "2023-01-10 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "AI Alignment: How I Learned to Stop Worrying and Love AI",
+      "category" : "blog",
+      "tags"     : "artificial intelligence, ai, ai alignment, economics",
+      "url"      : "/blog/2022/12/08/ai-alignment-for-business-owners.html",
+      "date"     : "2022-12-08 00:00:00 +0800"
+    } ,
+  
+    {
       "title"    : "Cropping an MS Teams Recording",
       "category" : "blog",
       "tags"     : "blog, python, video processing, coding, automation",

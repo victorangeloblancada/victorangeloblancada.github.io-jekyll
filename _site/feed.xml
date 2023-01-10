@@ -1,4 +1,75 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="https://victorangeloblancada.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://victorangeloblancada.github.io/" rel="alternate" type="text/html" /><updated>2022-12-08T12:08:24+08:00</updated><id>https://victorangeloblancada.github.io/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">Cropping an MS Teams Recording</title><link href="https://victorangeloblancada.github.io/blog/2022/12/07/teams-recording-resize.html" rel="alternate" type="text/html" title="Cropping an MS Teams Recording" /><published>2022-12-07T00:00:00+08:00</published><updated>2022-12-07T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2022/12/07/teams-recording-resize</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2022/12/07/teams-recording-resize.html">&lt;p&gt;&lt;em&gt;This is part of a series of short blog posts about automating &lt;s&gt;boring&lt;/s&gt; repetitive work using Python.&lt;/em&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="https://victorangeloblancada.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://victorangeloblancada.github.io/" rel="alternate" type="text/html" /><updated>2023-01-10T17:53:17+08:00</updated><id>https://victorangeloblancada.github.io/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">Marketing Mix Modeling for Engineers</title><link href="https://victorangeloblancada.github.io/blog/2023/01/10/mmm-for-engineers.html" rel="alternate" type="text/html" title="Marketing Mix Modeling for Engineers" /><published>2023-01-10T00:00:00+08:00</published><updated>2023-01-10T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2023/01/10/mmm-for-engineers</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2023/01/10/mmm-for-engineers.html">&lt;p&gt;Marketing Mix Modeling (MMM) is a powerful tool for understanding the effectiveness of a company’s marketing campaigns and strategies. Over the past decade, Python has become a popular choice for engineers and data scientists alike who are looking to develop and build MMM models. In this guide, we will discuss the fundamentals of marketing mix modeling and how to implement it using Python.&lt;/p&gt;
+
+&lt;h2 id=&quot;data-collection&quot;&gt;Data Collection&lt;/h2&gt;
+
+&lt;p&gt;The success of any MMM model is dependent on the data that is used to build it. It is important to collect the right data that will provide the insights and results needed. This includes data such as customer demographics, sales data, media spend, and other factors that could have an effect on the results. Once the data is gathered, it needs to be cleaned, organized, and prepared for analysis.&lt;/p&gt;
+
+&lt;h2 id=&quot;selecting-features-for-the-regression-equation&quot;&gt;Selecting Features for the Regression Equation&lt;/h2&gt;
+
+&lt;p&gt;When building a marketing mix model, the choice of features is critical for achieving accurate results. Here, we will focus on selecting the appropriate features for the regression equation.&lt;/p&gt;
+
+&lt;h3 id=&quot;marketing-features&quot;&gt;Marketing Features&lt;/h3&gt;
+
+&lt;p&gt;The most obvious starting point is to include all relevant marketing features. This includes, but is not limited to:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;TV Spend&lt;/li&gt;
+  &lt;li&gt;Digital Impressions&lt;/li&gt;
+  &lt;li&gt;Print/Out of Home Advertising&lt;/li&gt;
+  &lt;li&gt;Social Media Metrics&lt;/li&gt;
+  &lt;li&gt;Other Promotional Activity&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;non-marketing-features&quot;&gt;Non-Marketing Features&lt;/h3&gt;
+
+&lt;p&gt;In addition to marketing metrics, there are also non-marketing features that should be considered. These include:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Price of the Product&lt;/li&gt;
+  &lt;li&gt;Seasonality&lt;/li&gt;
+  &lt;li&gt;Competitor Activity&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;further-feature-engineering&quot;&gt;Further Feature Engineering&lt;/h3&gt;
+
+&lt;p&gt;After selecting the features, further feature engineering may be necessary. This includes:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Normalizing Values&lt;/li&gt;
+  &lt;li&gt;Removing Outliers&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Using the right combination of features, marketing mix models can be incredibly powerful tools for understanding the impact of marketing activities on sales.&lt;/p&gt;
+
+&lt;h2 id=&quot;model-building&quot;&gt;Model Building&lt;/h2&gt;
+
+&lt;p&gt;Once the data is prepared, engineers can begin building the MMM model. This involves using Python’s various libraries such as Scikit-Learn and Pandas to build and test the model. The model should be tested multiple times to ensure that the results are accurate and reliable.&lt;/p&gt;
+
+&lt;h2 id=&quot;mathematical-transformations&quot;&gt;Mathematical Transformations&lt;/h2&gt;
+
+&lt;p&gt;Mathematical transformations are used in marketing mix modeling to analyze data and gain insights. Two of the most common transformations are decays or ad stocks and response curves. Both of these transformations are useful for gaining insights into the effectiveness of marketing campaigns.&lt;/p&gt;
+
+&lt;h3 id=&quot;decays-or-ad-stocks&quot;&gt;Decays or Ad Stocks&lt;/h3&gt;
+
+&lt;p&gt;Decays or ad stocks are a type of marketing tactic used to track and measure the decline in the effectiveness of a promotional campaign over a period of time. This decline, known as the decay rate, is evaluated to determine the rate at which the campaign’s influence wanes; this is important information for marketers, as it helps inform decisions as to when to refresh a campaign or create new ones. By monitoring the decay rate, marketers can ensure that their campaigns remain effective and that they are able to adjust their strategies accordingly.&lt;/p&gt;
+
+&lt;h3 id=&quot;response-curves&quot;&gt;Response Curves&lt;/h3&gt;
+
+&lt;p&gt;Response curves are a useful tool for marketers looking to understand the relationship between a marketing metric and sales. They can be used to estimate the impact of a marketing campaign by plotting the relationship between a metric and sales. Generally, sales response curves downward as diminishing returns set in. Plotting the response curve allows marketers to determine the potential impact of a campaign and adjust their strategy accordingly. It also helps them identify opportunities for improvement and inform decision-making around marketing strategies and investments.&lt;/p&gt;
+
+&lt;h2 id=&quot;iterating-models&quot;&gt;Iterating Models&lt;/h2&gt;
+
+&lt;p&gt;Analysts need to iterate through multiple possible marketing mix models to identify the equation that will provide the best estimate of the impact of marketing on sales. This process is usually achieved by performing a grid search across all potential models, based on a set of assumptions regarding the variables involved and the mathematical transformations that need to be applied.&lt;/p&gt;
+
+&lt;p&gt;The model with the highest accuracy – as measured using error metrics such as MSE, MAPE or coefficients of determination R2 – is often preferred. However, it is also important to ensure that the model’s coefficients make sense, and that the model is able to perform well, even when applied to data outside of the sample range. This prevents analysts from selecting models with nonsensical coefficients, such as an inverse relationship between media spending and sales.&lt;/p&gt;
+
+&lt;h2 id=&quot;analysis-and-results&quot;&gt;Analysis and Results&lt;/h2&gt;
+
+&lt;p&gt;Once the MMM model is built and tested, engineers can begin analyzing the results. The results should be compared to the objectives of the project and used to gain insights into the effectiveness of the marketing campaigns and strategies.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;In conclusion, marketing mix modeling is a powerful tool for understanding the effectiveness of a company’s marketing campaigns and strategies. Python is a great choice for engineers and data scientists who are looking to build and test MMM models. With the right data, model building, and analysis, engineers can gain valuable insights into their marketing efforts.&lt;/p&gt;</content><author><name></name></author><category term="blog" /><category term="ai" /><category term="ml" /><category term="artificial intelligence" /><category term="machine learning" /><category term="marketing" /><category term="marketing mix modeling" /><category term="python" /><summary type="html">Marketing Mix Modeling (MMM) is a powerful tool for understanding the effectiveness of a company’s marketing campaigns and strategies. Over the past decade, Python has become a popular choice for engineers and data scientists alike who are looking to develop and build MMM models. In this guide, we will discuss the fundamentals of marketing mix modeling and how to implement it using Python.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/pointing.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/pointing.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Cropping an MS Teams Recording</title><link href="https://victorangeloblancada.github.io/blog/2022/12/07/teams-recording-resize.html" rel="alternate" type="text/html" title="Cropping an MS Teams Recording" /><published>2022-12-07T00:00:00+08:00</published><updated>2022-12-07T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2022/12/07/teams-recording-resize</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2022/12/07/teams-recording-resize.html">&lt;p&gt;&lt;em&gt;This is part of a series of short blog posts about automating &lt;s&gt;boring&lt;/s&gt; repetitive work using Python.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;Have you ever saved a recording of an MS Teams call where someone shared their screen and wanted to crop the recording to only keep the screen share? If so, you’re in luck.&lt;/p&gt;
 
@@ -1428,32 +1499,4 @@ y = 7x4 - 5x3 + 9x2 - 3x + 6&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/output_7_0.png&quot; alt=&quot;Regret chart&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;The chart above plots the average reward (i.e. clicks per ad) across iterations. We can observe that the average reward of the multi-armed bandit agent steadily increases as it learns more about the decision environment and that the average reward begins to plateau as the agent focuses on exploitation after an initial exploration period.&lt;/p&gt;</content><author><name></name></author><category term="blog" /><category term="blog" /><category term="math" /><category term="mathematics" /><category term="reinforcement learning" /><category term="rl" /><category term="multi-armed bandit" /><category term="mab" /><category term="optimization" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/casino.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/casino.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Percentage Calculator</title><link href="https://victorangeloblancada.github.io/blog/2021/01/31/percentage-calculator.html" rel="alternate" type="text/html" title="Percentage Calculator" /><published>2021-01-31T00:00:00+08:00</published><updated>2021-01-31T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2021/01/31/percentage-calculator</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2021/01/31/percentage-calculator.html">&lt;p&gt;After a brief debate at work on how to calculate percentage change, I’ve decided to build a very simple calculator to compare two values and give the assorted percentage relationshipes between them. Change numbers A and B below then press enter to show the percentage relationships.&lt;/p&gt;
-
-&lt;script&gt;
-	function calcPercent(a, b) {
-		// The function displays text expressing the relation between two numbers as percentages
-		if (isNaN(parseFloat(a))|isNaN(parseFloat(b))){
-			document.getElementById(&apos;results&apos;).innerHTML = &apos;Please enter numeric values only&apos;
-		} else {
-			document.getElementById(&apos;results&apos;).innerHTML = &apos;The following percentage relationships are true:&apos;
-			document.getElementById(&apos;results&apos;).innerHTML += &apos;&lt;p&gt;&apos;+a+&apos; is &apos;+100*parseFloat(a)/parseFloat(b)+&apos;% of &apos;+b+&apos;.&lt;/p&gt;&apos;
-			document.getElementById(&apos;results&apos;).innerHTML += &apos;&lt;p&gt;&apos;+b+&apos; is &apos;+100*parseFloat(b)/parseFloat(a)+&apos;% of &apos;+a+&apos;.&lt;/p&gt;&apos;
-			if (parseFloat(a)&gt;parseFloat(b)) {
-				document.getElementById(&apos;results&apos;).innerHTML += &apos;&lt;p&gt;&apos;+a+&apos; is &apos;+100*(parseFloat(a)-parseFloat(b))/parseFloat(b)+&apos;% larger than &apos;+b+&apos;.&lt;/p&gt;&apos;
-				document.getElementById(&apos;results&apos;).innerHTML += &apos;&lt;p&gt;&apos;+b+&apos; is &apos;+100*(parseFloat(a)-parseFloat(b))/parseFloat(a)+&apos;% smaller than &apos;+a+&apos;.&lt;/p&gt;&apos;
-			} else {
-				document.getElementById(&apos;results&apos;).innerHTML += &apos;&lt;p&gt;&apos;+a+&apos; is &apos;+100*(parseFloat(b)-parseFloat(a))/parseFloat(b)+&apos;% smaller than &apos;+b+&apos;.&lt;/p&gt;&apos;
-				document.getElementById(&apos;results&apos;).innerHTML += &apos;&lt;p&gt;&apos;+b+&apos; is &apos;+100*(parseFloat(b)-parseFloat(a))/parseFloat(a)+&apos;% larger than &apos;+a+&apos;.&lt;/p&gt;&apos;
-			}
-		}
-	}
-&lt;/script&gt;
-
-&lt;form onload=&quot;calcPercent(document.getElementById(&apos;a&apos;).value, document.getElementById(&apos;b&apos;).value)&quot;&gt;
-	&lt;p&gt;Number A: &lt;input type=&quot;text&quot; id=&quot;a&quot; value=&quot;10&quot; onchange=&quot;calcPercent(document.getElementById(&apos;a&apos;).value, document.getElementById(&apos;b&apos;).value)&quot; /&gt;&lt;/p&gt;
-	&lt;p&gt;Number B: &lt;input type=&quot;text&quot; id=&quot;b&quot; value=&quot;5&quot; onchange=&quot;calcPercent(document.getElementById(&apos;a&apos;).value, document.getElementById(&apos;b&apos;).value)&quot; /&gt;&lt;/p&gt;
-	&lt;div id=&quot;results&quot;&gt;
-		Results will show here 
-	&lt;/div&gt;
-&lt;/form&gt;</content><author><name></name></author><category term="blog" /><category term="blog" /><category term="math" /><category term="mathematics" /><category term="business" /><category term="percentage" /><category term="change" /><summary type="html">After a brief debate at work on how to calculate percentage change, I’ve decided to build a very simple calculator to compare two values and give the assorted percentage relationshipes between them. Change numbers A and B below then press enter to show the percentage relationships.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/whiteboard.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/whiteboard.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+&lt;p&gt;The chart above plots the average reward (i.e. clicks per ad) across iterations. We can observe that the average reward of the multi-armed bandit agent steadily increases as it learns more about the decision environment and that the average reward begins to plateau as the agent focuses on exploitation after an initial exploration period.&lt;/p&gt;</content><author><name></name></author><category term="blog" /><category term="blog" /><category term="math" /><category term="mathematics" /><category term="reinforcement learning" /><category term="rl" /><category term="multi-armed bandit" /><category term="mab" /><category term="optimization" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/casino.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/casino.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
