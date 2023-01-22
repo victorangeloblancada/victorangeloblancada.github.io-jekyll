@@ -1,6 +1,14 @@
 [
   
     {
+      "title"    : "Supply Chain Network Design in Python",
+      "category" : "blog",
+      "tags"     : "scnd, supply chain, logistics, python",
+      "url"      : "/blog/2023/01/21/supply-chain-network-design-python-pulp.html",
+      "date"     : "2023-01-21 00:00:00 +0800"
+    } ,
+  
+    {
       "title"    : "Marketing Mix Modeling for Engineers",
       "category" : "blog",
       "tags"     : "ai, ml, artificial intelligence, machine learning, marketing, marketing mix modeling, python",

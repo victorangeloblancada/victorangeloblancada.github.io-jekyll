@@ -1,0 +1,2498 @@
+<!doctype html>
+<html>
+	<head>
+		<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5S5WB7M');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ERJECQ081H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ERJECQ081H');
+</script>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Supply Chain Network Design in Python</title>
+		<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Supply Chain Network Design in Python | Victor Angelo Blancada</title>
+<meta name="generator" content="Jekyll v3.9.2" />
+<meta property="og:title" content="Supply Chain Network Design in Python" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Marketing Mix Modeling (MMM) is a powerful tool for understanding the effectiveness of a company’s marketing campaigns and strategies." />
+<meta property="og:description" content="Marketing Mix Modeling (MMM) is a powerful tool for understanding the effectiveness of a company’s marketing campaigns and strategies." />
+<link rel="canonical" href="http://localhost:4000/blog/2023/01/21/supply-chain-network-design-python-pulp.html" />
+<meta property="og:url" content="http://localhost:4000/blog/2023/01/21/supply-chain-network-design-python-pulp.html" />
+<meta property="og:site_name" content="Victor Angelo Blancada" />
+<meta property="og:image" content="http://localhost:4000/assets/images/supplychain.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-01-21T00:00:00+08:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="http://localhost:4000/assets/images/supplychain.jpg" />
+<meta property="twitter:title" content="Supply Chain Network Design in Python" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-01-21T00:00:00+08:00","datePublished":"2023-01-21T00:00:00+08:00","description":"Marketing Mix Modeling (MMM) is a powerful tool for understanding the effectiveness of a company’s marketing campaigns and strategies.","headline":"Supply Chain Network Design in Python","image":"http://localhost:4000/assets/images/supplychain.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2023/01/21/supply-chain-network-design-python-pulp.html"},"url":"http://localhost:4000/blog/2023/01/21/supply-chain-network-design-python-pulp.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+		<link rel="stylesheet" href="https://indestructibletype.com/fonts/Jost.css" type="text/css" charset="utf-8" />
+
+<link rel="stylesheet" href="/assets/css/styles.css">
+<link rel="stylesheet" href="/assets/css/syntax.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+	</head>
+	<body>
+		<script type="text/javascript">
+  window.onscroll = function() {myScrollIndicator()};
+
+  function myScrollIndicator() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+<div class="header">
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</div>
+		<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5S5WB7M"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+		<div class="wrapper">
+			<link rel="stylesheet" href="/assets/css/speech-input.css">
+<script src="/assets/js/nav.js" type="text/javascript"></script>
+<script src="/assets/js/speech-input.js" type="text/javascript"></script>
+<div class="navbar transition" id="navbar">
+	<nav>
+		<a onClick="expand('navbar', 'search-input')">
+			<svg width="50" height="50" aria-label="search" class="octicon octicon-search" viewBox="0 0 24 24" version="1.1" role="img"><path fill-rule="evenodd" d="M10.25 2a8.25 8.25 0 105.28 14.59l5.69 5.69a.75.75 0 101.06-1.06l-5.69-5.69A8.25 8.25 0 0010.25 2zM3.5 10.25a6.75 6.75 0 1113.5 0 6.75 6.75 0 01-13.5 0z"></path></svg>
+			<p>Search</p>
+		</a>
+		
+			<a href="/" >
+				<svg width="50" height="50" aria-label="home" class="octicon octicon-home" viewBox="0 0 24 24" version="1.1" role="img"><path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"></path></svg>
+				<p>Home</p>
+			</a>
+		
+			<a href="/pages/about.html" >
+				<svg width="50" height="50" aria-label="person" class="octicon octicon-person" viewBox="0 0 24 24" version="1.1" role="img"><path fill-rule="evenodd" d="M12 2.5a5.5 5.5 0 00-3.096 10.047 9.005 9.005 0 00-5.9 8.18.75.75 0 001.5.045 7.5 7.5 0 0114.993 0 .75.75 0 101.499-.044 9.005 9.005 0 00-5.9-8.181A5.5 5.5 0 0012 2.5zM8 8a4 4 0 118 0 4 4 0 01-8 0z"></path></svg>
+				<p>About</p>
+			</a>
+		
+			<a href="/blog.html" >
+				<svg width="50" height="50" aria-label="book" class="octicon octicon-book" viewBox="0 0 24 24" version="1.1" role="img"><path fill-rule="evenodd" d="M0 3.75A.75.75 0 01.75 3h7.497c1.566 0 2.945.8 3.751 2.014A4.496 4.496 0 0115.75 3h7.5a.75.75 0 01.75.75v15.063a.75.75 0 01-.755.75l-7.682-.052a3 3 0 00-2.142.878l-.89.891a.75.75 0 01-1.061 0l-.902-.901a3 3 0 00-2.121-.879H.75a.75.75 0 01-.75-.75v-15zm11.247 3.747a3 3 0 00-3-2.997H1.5V18h6.947a4.5 4.5 0 012.803.98l-.003-11.483zm1.503 11.485V7.5a3 3 0 013-3h6.75v13.558l-6.927-.047a4.5 4.5 0 00-2.823.971z"></path></svg>
+				<p>Blog</p>
+			</a>
+		
+			<a href="/pages/resume-downloads.html" >
+				<svg width="50" height="50" aria-label="file" class="octicon octicon-file" viewBox="0 0 24 24" version="1.1" role="img"><path fill-rule="evenodd" d="M5 2.5a.5.5 0 00-.5.5v18a.5.5 0 00.5.5h14a.5.5 0 00.5-.5V8.5h-4a2 2 0 01-2-2v-4H5zm10 0v4a.5.5 0 00.5.5h4a.5.5 0 00-.146-.336l-4.018-4.018A.5.5 0 0015 2.5zM3 3a2 2 0 012-2h9.982a2 2 0 011.414.586l4.018 4.018A2 2 0 0121 7.018V21a2 2 0 01-2 2H5a2 2 0 01-2-2V3z"></path></svg>
+				<p>Résumé</p>
+			</a>
+		
+	</nav>
+
+	<!-- Html Elements for Search -->
+	<div id="search-container" class="search-container">
+		<center>
+			<input type="text" id="search-input" class="speech-input" placeholder="Search this site" style="width: 100%;">
+			<ol id="results-container"></ol>
+		</center>
+	</div>
+
+	<!-- Script pointing to search.js -->
+	<script src="/assets/js/search.js" type="text/javascript"></script>
+
+	<!-- Configuration -->
+	<script>
+	SimpleJekyllSearch({
+	  searchInput: document.getElementById('search-input'),
+	  resultsContainer: document.getElementById('results-container'),
+	  json: '/search.json'
+	})
+	</script>
+</div>
+
+</div>
+
+			<div class="hero-img"  style="background-image: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url( /assets/images/supplychain.jpg );"  >
+				<div class="center-content">
+					<span class="on-bg">
+						<h1> Supply Chain Network Design in Python </h1>
+						<!--
+						<p>21 Jan 2023</p>
+						-->
+						<a href="#start">
+							<div style="-webkit-animation-name: pulse; -webkit-animation-duration: 2s; animation-name: pulse;animation-duration: 2s; animation-direction: alternate;">
+								<!--<p>Reading time: 
+
+
+  53 mins
+</p>-->
+								
+								<p>January 21, 2023</p>
+								
+								<p>scroll for more</p>
+								<svg width="50" height="50" fill="white" aria-label="down" class="octicon octicon-arrow-down" viewBox="0 0 24 24" version="1.1" role="img"><path fill-rule="evenodd" d="M4.97 13.22a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 10-1.06-1.06l-4.97 4.97V3.75a.75.75 0 00-1.5 0v14.44l-4.97-4.97a.75.75 0 00-1.06 0z"></path></svg>
+							</div>
+						</a>
+						
+						<div>
+							
+
+<style>
+#share-buttons {display: inline-block; vertical-align: middle; }
+#share-buttons:after {content: ""; display: block; clear: both;}
+#share-buttons > div {
+    position: relative;
+    text-align: left; 
+    height: 36px; 
+    width: 32px; 
+    float: left; 
+    text-align: center;
+}
+#share-buttons > div > svg {height: 16px; fill: #FFF; margin-top: 10px;}
+#share-buttons > div:hover {cursor: pointer;}
+#share-buttons > div.facebook:hover > svg {fill: #3B5998;}
+#share-buttons > div.twitter:hover > svg {fill: #55ACEE;}
+#share-buttons > div.linkedin:hover > svg {fill: #0077b5;}
+#share-buttons > div.pinterest:hover > svg {fill: #CB2027;}
+#share-buttons > div.gplus:hover > svg {fill: #dd4b39;}
+#share-buttons > div.mail:hover > svg {fill: #7D7D7D;}
+#share-buttons > div.instagram:hover > svg {fill: #C73B92;}
+#share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
+#share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
+#share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
+#share-buttons > div.pinterest > svg {height: 20px; margin-top: 9px;}
+#share-buttons > div.gplus > svg {height: 17px; margin-top: 9px; position: relative; left: 1px;}
+#share-buttons > div.mail > svg {height: 14px; margin-top: 11px;}
+</style>
+
+<span>Share on: </span><div id="share-buttons">
+
+    <div class="linkedin" title="Share this on Linkedin" onclick="window.open('https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/blog/2023/01/21/supply-chain-network-design-python-pulp.html&title=&summary=&source=');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></div>
+
+    <div class="twitter" title="Share this on Twitter" onclick="window.open('http://twitter.com/home?status=http://localhost:4000/blog/2023/01/21/supply-chain-network-design-python-pulp.html');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
+    
+    <div class="facebook" title="Share this on Facebook" onclick="window.open('http://www.facebook.com/share.php?u=http://localhost:4000/blog/2023/01/21/supply-chain-network-design-python-pulp.html');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"/></svg></div>
+
+
+    <!--<div class="pinterest" title="Share this on Pinterest" onclick="window.open('https://pinterest.com/pin/create/button/?url=&media=http://localhost:4000/assets/images/supplychain.jpg&description=');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M256 597q0-108 37.5-203.5t103.5-166.5 152-123 185-78 202-26q158 0 294 66.5t221 193.5 85 287q0 96-19 188t-60 177-100 149.5-145 103-189 38.5q-68 0-135-32t-96-88q-10 39-28 112.5t-23.5 95-20.5 71-26 71-32 62.5-46 77.5-62 86.5l-14 5-9-10q-15-157-15-188 0-92 21.5-206.5t66.5-287.5 52-203q-32-65-32-169 0-83 52-156t132-73q61 0 95 40.5t34 102.5q0 66-44 191t-44 187q0 63 45 104.5t109 41.5q55 0 102-25t78.5-68 56-95 38-110.5 20-111 6.5-99.5q0-173-109.5-269.5t-285.5-96.5q-200 0-334 129.5t-134 328.5q0 44 12.5 85t27 65 27 45.5 12.5 30.5q0 28-15 73t-37 45q-2 0-17-3-51-15-90.5-56t-61-94.5-32.5-108-11-106.5z"/></svg></div>-->
+
+    <!--<div class="gplus" title="Share this on Google Plus" onclick="window.open('https://plus.google.com/share?url=http://localhost:4000/blog/2023/01/21/supply-chain-network-design-python-pulp.html');"><svg viewBox="0 0 2304 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1437 913q0 208-87 370.5t-248 254-369 91.5q-149 0-285-58t-234-156-156-234-58-285 58-285 156-234 234-156 285-58q286 0 491 192l-199 191q-117-113-292-113-123 0-227.5 62t-165.5 168.5-61 232.5 61 232.5 165.5 168.5 227.5 62q83 0 152.5-23t114.5-57.5 78.5-78.5 49-83 21.5-74h-416v-252h692q12 63 12 122zm867-122v210h-209v209h-210v-209h-209v-210h209v-209h210v209h209z"/></svg></div>-->
+
+    <div class="mail" title="Share this through Email" onclick="window.open('mailto:?&body=http://localhost:4000/blog/2023/01/21/supply-chain-network-design-python-pulp.html');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"/></svg></div>
+
+</div>
+						</div>
+						
+					</span>
+				</div>
+			</div>
+			<div id="hero-img-spacer" style="height: 100vh;">
+			</div>
+			<div id="start">
+			</div>
+			<div class="content">
+				
+				<h1>Supply Chain Network Design in Python</h1>
+				
+				<!--
+				<h1> Supply Chain Network Design in Python </h1>
+				
+				<p style="font-style:italic">January 21, 2023</p>
+				
+				-->
+
+				<div class="article ">
+					<p>Supply chain network design is a critical component of successful supply chain management. It involves the optimal arrangement of facilities and distribution channels to minimize costs and maximize efficiency. Operations research (OR) is a powerful tool used to analyze and optimize supply chain network design. In this blog post, we will demonstrate how operations research can be used to optimize supply chain network design and how the PuLP operations research library in Python can be used to automate the process.</p>
+
+<h2 id="load-data">Load Data</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Import libraries
+</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="kn">from</span> <span class="nn">pulp</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="n">go</span>
+</code></pre></div></div>
+
+<p>Major changes from previous INFOR-based approach:</p>
+<ul>
+  <li>All sites are treated the same, i.e., a flowthrough site may have its own non-zero demand or supply.</li>
+  <li>Links are defined in the lane sheets, i.e., if no lane is defined, the assumption is that there is actually no lane.</li>
+  <li>Sites of different kinds may be combined in the same sheet.</li>
+  <li>Lanes of different origin and destination site kinds may be combined in the same sheet.</li>
+</ul>
+
+<p>Spreadsheet inputs are therefore:</p>
+<ol>
+  <li>Products</li>
+  <li>Sites - No longer need to define supply, flowthrough, and demand sites separately.</li>
+  <li>Product-Sites - The linkage to sites and products are purely by ID, so strictly no duplication of IDs.</li>
+  <li>Lanes - Similar to sites, no longer need to define supply to flowthrough and flowthrough to demand sites separately.</li>
+  <li>Product-Lanes - The linkage to lanes and products are purely by ID, so strictly no duplication of IDs.</li>
+</ol>
+
+<p>Required columns per sheet:</p>
+<ul>
+  <li>Prod
+    <ul>
+      <li>ID</li>
+    </ul>
+  </li>
+  <li>Site
+    <ul>
+      <li>ID</li>
+    </ul>
+  </li>
+  <li>PSite
+    <ul>
+      <li>ID</li>
+      <li>Supply</li>
+      <li>Demand</li>
+    </ul>
+  </li>
+  <li>Lane
+    <ul>
+      <li>ID</li>
+    </ul>
+  </li>
+  <li>PLane
+    <ul>
+      <li>ID</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Settings
+</span><span class="n">fn</span> <span class="o">=</span> <span class="s">'Sample.xlsm'</span>
+
+<span class="c1"># Project name
+</span><span class="n">project</span> <span class="o">=</span> <span class="s">'Sample'</span>
+
+<span class="c1"># Force round off (2 means 2 decimal places, 
+# -2 means round off to hundreds, set to None if no need to round off)
+</span><span class="n">round_dec</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Scenario name
+</span><span class="n">scenario_name</span> <span class="o">=</span> <span class="s">'Output'</span>
+
+<span class="c1"># Historical flow? (Keeps flow from HistFlow columns and calculates costs)
+</span><span class="n">histFlow</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="c1">#histFlow = False
+</span>
+<span class="c1"># Always apply fixed costs regardless of whether site is open?
+#alwaysFixed = True
+</span><span class="n">alwaysFixed</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="c1"># Dictionary of sheet names (key is based on spreadsheet sheet names, 
+# value is data role) &lt;- breaking change from previous version
+</span><span class="n">sheets</span> <span class="o">=</span> <span class="p">{</span><span class="s">'Prod'</span><span class="p">:</span> <span class="s">'Prod'</span><span class="p">,</span>
+          <span class="s">'Supply'</span><span class="p">:</span> <span class="s">'Site'</span><span class="p">,</span>
+          <span class="s">'psS'</span><span class="p">:</span> <span class="s">'PSite'</span><span class="p">,</span>
+          <span class="s">'DC'</span><span class="p">:</span> <span class="s">'Site'</span><span class="p">,</span>
+          <span class="s">'psDC'</span><span class="p">:</span> <span class="s">'PSite'</span><span class="p">,</span>
+          <span class="s">'Market'</span><span class="p">:</span> <span class="s">'Site'</span><span class="p">,</span>
+          <span class="s">'psM'</span><span class="p">:</span> <span class="s">'PSite'</span><span class="p">,</span>
+          <span class="s">'lSDC'</span><span class="p">:</span> <span class="s">'Lane'</span><span class="p">,</span>
+          <span class="s">'plSDC'</span><span class="p">:</span> <span class="s">'PLane'</span><span class="p">,</span>
+          <span class="s">'lDCM'</span><span class="p">:</span> <span class="s">'Lane'</span><span class="p">,</span>
+          <span class="s">'plDCM'</span><span class="p">:</span> <span class="s">'PLane'</span><span class="p">}</span>
+
+<span class="c1"># Site and product site connections (key is site, value is product site)
+# and lane and product lane connections (key is lane, value is product lane)
+</span><span class="n">prod_conn</span> <span class="o">=</span> <span class="p">{</span><span class="s">'Supply'</span><span class="p">:</span> <span class="s">'psS'</span><span class="p">,</span>
+             <span class="s">'DC'</span><span class="p">:</span> <span class="s">'psDC'</span><span class="p">,</span>
+             <span class="s">'Market'</span><span class="p">:</span> <span class="s">'psM'</span><span class="p">,</span>
+             <span class="s">'lSDC'</span><span class="p">:</span> <span class="s">'plSDC'</span><span class="p">,</span>
+             <span class="s">'lDCM'</span><span class="p">:</span> <span class="s">'plDCM'</span><span class="p">}</span>
+
+<span class="c1"># Columns of fixed costs in site sheet
+# FixedCost renamed to Fixed Cost when computing totals
+</span><span class="n">fix_cost_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s">'FixedCost'</span><span class="p">]</span>
+
+<span class="c1"># NOT YET IMPLEMENTED
+# Columns of product fixed costs in product site sheet
+# FixedCost renamed to Fixed Cost when computing totals
+</span><span class="n">fixp_cost_cols</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Columns of variable costs in site sheet
+# CPU renamed to Total Cost when computing totals
+</span><span class="n">var_cost_cols</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Columns of product variable costs in product site sheet
+# CPU renamed to Total Cost when computing totals
+</span><span class="n">varp_cost_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s">'ReceivingCPU'</span><span class="p">,</span>
+                  <span class="s">'StorageCPU'</span><span class="p">,</span>
+                  <span class="s">'VASCPU'</span><span class="p">,</span>
+                  <span class="s">'XDockCPU'</span><span class="p">]</span>
+
+<span class="c1"># NOT YET IMPLEMENTED
+# Columns of fixed costs in lane sheet
+# FixedCost renamed to Fixed Cost when computing totals
+</span><span class="n">tfix_cost_cols</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># NOT YET IMPLEMENTED
+# Columns of product fixed costs in product lane sheet
+# FixedCost renamed to Fixed Cost when computing totals
+</span><span class="n">tfixp_cost_cols</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Columns of variable costs in lane sheet
+# TransPrice renamed to Transport Cost when computing totals
+</span><span class="n">tvar_cost_cols</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Columns of product variable costs in product lane sheet
+# TransPrice renamed to Transport Cost when computing totals
+</span><span class="n">tvarp_cost_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s">'FreightCPU'</span><span class="p">,</span>
+                   <span class="s">'DrayageCPU'</span><span class="p">,</span>
+                   <span class="s">'TransportCPU'</span><span class="p">]</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'Prod'</span><span class="p">:</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(),</span>
+        <span class="s">'Site'</span><span class="p">:</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(),</span>
+        <span class="s">'PSite'</span><span class="p">:</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(),</span>
+        <span class="s">'Lane'</span><span class="p">:</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(),</span>
+        <span class="s">'PLane'</span><span class="p">:</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">()}</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Rename cost variables when getting cost totals
+</span><span class="k">def</span> <span class="nf">costRename</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+    <span class="c1"># Rename CPU to Cost
+</span>    <span class="n">string</span> <span class="o">=</span> <span class="n">string</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'CPU'</span><span class="p">,</span> <span class="s">' Cost'</span><span class="p">)</span>
+    <span class="c1"># Rename TransPrice to Transport Cost
+</span>    <span class="n">string</span> <span class="o">=</span> <span class="n">string</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'TransPrice'</span><span class="p">,</span> <span class="s">'Transport Cost'</span><span class="p">)</span>
+    <span class="c1"># Rename FixedCost to Fixed Cost
+</span>    <span class="n">string</span> <span class="o">=</span> <span class="n">string</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'FixedCost'</span><span class="p">,</span> <span class="s">'Fixed Cost'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">string</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Map Settings
+</span>
+<span class="c1"># Insert mapbox token
+</span><span class="n">mapbox_access_token</span> <span class="o">=</span> <span class="s">''</span>
+
+<span class="c1"># Map dimensions
+</span><span class="n">map_height</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">map_width</span> <span class="o">=</span> <span class="mi">800</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Function to get zoom level
+</span><span class="k">def</span> <span class="nf">getBoundsZoomLevel</span><span class="p">(</span><span class="n">bounds</span><span class="p">,</span> <span class="n">mapDim</span><span class="p">):</span>
+    <span class="s">"""source: https://stackoverflow.com/questions/6048975/google-maps-v3-how-to-calculate-the-zoom-level-for-a-given-bounds
+    bounds: list of ne and sw lat/lon
+    mapDim: dictionary with image size in pixels
+    returns: zoom level to fit bounds in the visible area
+    """</span>
+    <span class="n">ne_lat</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">ne_long</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">sw_lat</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">sw_long</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+    <span class="n">scale</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># adjustment to reflect MapBox base tiles are 512x512 vs. Google's 256x256
+</span>    <span class="n">WORLD_DIM</span> <span class="o">=</span> <span class="p">{</span><span class="s">'height'</span><span class="p">:</span> <span class="mi">256</span> <span class="o">*</span> <span class="n">scale</span><span class="p">,</span> <span class="s">'width'</span><span class="p">:</span> <span class="mi">256</span> <span class="o">*</span> <span class="n">scale</span><span class="p">}</span>
+    <span class="n">ZOOM_MAX</span> <span class="o">=</span> <span class="mi">18</span>
+
+    <span class="k">def</span> <span class="nf">latRad</span><span class="p">(</span><span class="n">lat</span><span class="p">):</span>
+        <span class="n">sin</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lat</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">180</span><span class="p">)</span>
+        <span class="n">radX2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">log</span><span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sin</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sin</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">radX2</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="n">pi</span><span class="p">),</span> <span class="o">-</span><span class="n">np</span><span class="p">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+    <span class="k">def</span> <span class="nf">zoom</span><span class="p">(</span><span class="n">mapPx</span><span class="p">,</span> <span class="n">worldPx</span><span class="p">,</span> <span class="n">fraction</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">floor</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">mapPx</span> <span class="o">/</span> <span class="n">worldPx</span> <span class="o">/</span> <span class="n">fraction</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+
+    <span class="n">latFraction</span> <span class="o">=</span> <span class="p">(</span><span class="n">latRad</span><span class="p">(</span><span class="n">ne_lat</span><span class="p">)</span> <span class="o">-</span> <span class="n">latRad</span><span class="p">(</span><span class="n">sw_lat</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="p">.</span><span class="n">pi</span>
+
+    <span class="n">lngDiff</span> <span class="o">=</span> <span class="n">ne_long</span> <span class="o">-</span> <span class="n">sw_long</span>
+    <span class="n">lngFraction</span> <span class="o">=</span> <span class="p">((</span><span class="n">lngDiff</span> <span class="o">+</span> <span class="mi">360</span><span class="p">)</span> <span class="k">if</span> <span class="n">lngDiff</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">lngDiff</span><span class="p">)</span> <span class="o">/</span> <span class="mi">360</span>
+
+    <span class="n">latZoom</span> <span class="o">=</span> <span class="n">zoom</span><span class="p">(</span><span class="n">mapDim</span><span class="p">[</span><span class="s">'height'</span><span class="p">],</span> <span class="n">WORLD_DIM</span><span class="p">[</span><span class="s">'height'</span><span class="p">],</span> <span class="n">latFraction</span><span class="p">)</span>
+    <span class="n">lngZoom</span> <span class="o">=</span> <span class="n">zoom</span><span class="p">(</span><span class="n">mapDim</span><span class="p">[</span><span class="s">'width'</span><span class="p">],</span> <span class="n">WORLD_DIM</span><span class="p">[</span><span class="s">'width'</span><span class="p">],</span> <span class="n">lngFraction</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">latZoom</span><span class="p">,</span> <span class="n">lngZoom</span><span class="p">,</span> <span class="n">ZOOM_MAX</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Load data
+</span><span class="n">xls</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">ExcelFile</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">sheet</span> <span class="ow">in</span> <span class="n">sheets</span><span class="p">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">xls</span><span class="p">,</span> 
+                         <span class="n">sheet</span><span class="p">,</span>
+                         <span class="n">skiprows</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">sheets</span><span class="p">[</span><span class="n">sheet</span><span class="p">]</span> <span class="o">==</span> <span class="s">'Lane'</span><span class="p">:</span>
+        <span class="n">temp</span><span class="p">[</span><span class="s">'ID'</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">[</span><span class="s">'ID'</span><span class="p">].</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">prod_conn</span><span class="p">[</span><span class="n">sheet</span><span class="p">]</span><span class="o">+</span><span class="s">'_'</span><span class="o">+</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">sheets</span><span class="p">[</span><span class="n">sheet</span><span class="p">]</span> <span class="o">==</span> <span class="s">'PLane'</span><span class="p">:</span>
+        <span class="n">temp</span><span class="p">[</span><span class="s">'LaneID'</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">[</span><span class="s">'LaneID'</span><span class="p">].</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">sheet</span><span class="o">+</span><span class="s">'_'</span><span class="o">+</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">sheets</span><span class="p">[</span><span class="n">sheet</span><span class="p">]]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">sheets</span><span class="p">[</span><span class="n">sheet</span><span class="p">]].</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+                                                     
+<span class="k">for</span> <span class="n">dataType</span> <span class="ow">in</span> <span class="n">data</span><span class="p">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">dataType</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">dataType</span><span class="p">].</span><span class="n">loc</span><span class="p">[:,</span> <span class="o">~</span><span class="n">data</span><span class="p">[</span><span class="n">dataType</span><span class="p">].</span><span class="n">columns</span><span class="p">.</span><span class="nb">str</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="s">'^unnamed'</span><span class="p">,</span> 
+                                                                                <span class="n">case</span><span class="o">=</span><span class="bp">False</span><span class="p">)]</span>
+
+<span class="n">xls</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Round off if necessary
+</span><span class="k">if</span> <span class="ow">not</span> <span class="n">round_dec</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s">'PSite'</span><span class="p">][</span><span class="s">'Supply'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'PSite'</span><span class="p">][</span><span class="s">'Supply'</span><span class="p">].</span><span class="nb">round</span><span class="p">(</span><span class="n">round_dec</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'No column Supply in PSite'</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s">'PSite'</span><span class="p">][</span><span class="s">'Demand'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'PSite'</span><span class="p">][</span><span class="s">'Demand'</span><span class="p">].</span><span class="nb">round</span><span class="p">(</span><span class="n">round_dec</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'No column Demand in PSite'</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">][</span><span class="s">'HistFlow'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">][</span><span class="s">'HistFlow'</span><span class="p">].</span><span class="nb">round</span><span class="p">(</span><span class="n">round_dec</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'No column HistFlow in PLane'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Get value of M (very large number)
+</span><span class="n">M</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'PSite'</span><span class="p">][</span><span class="s">'Supply'</span><span class="p">].</span><span class="nb">sum</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="products">Products</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># The list of products
+</span><span class="n">products</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'Prod'</span><span class="p">][</span><span class="s">'ID'</span><span class="p">])</span>
+<span class="c1">#products
+</span></code></pre></div></div>
+
+<h3 id="sites-and-product-sites">Sites and Product Sites</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sites</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'Site'</span><span class="p">][</span><span class="s">'ID'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Get dataframe of suppliers
+</span><span class="n">suppliers</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'PSite'</span><span class="p">]</span><span class="c1">#.loc[data['PSite']['Supply']&gt;0]
+</span>
+<span class="c1"># The dictionary of supply per product per site
+</span><span class="n">supply</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">:{</span><span class="n">p</span><span class="p">:</span><span class="n">suppliers</span><span class="p">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">suppliers</span><span class="p">[</span><span class="s">'SiteID'</span><span class="p">]</span><span class="o">==</span><span class="n">s</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">suppliers</span><span class="p">[</span><span class="s">'ProductID'</span><span class="p">]</span><span class="o">==</span><span class="n">p</span><span class="p">),</span> <span class="s">'Supply'</span><span class="p">].</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">suppliers</span><span class="p">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">suppliers</span><span class="p">[</span><span class="s">'SiteID'</span><span class="p">]</span><span class="o">==</span><span class="n">s</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">suppliers</span><span class="p">[</span><span class="s">'Supply'</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">),</span> <span class="s">'ProductID'</span><span class="p">].</span><span class="n">values</span><span class="p">}</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">pd</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">suppliers</span><span class="p">[</span><span class="s">'SiteID'</span><span class="p">])}</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Get dataframe of markets
+</span><span class="n">markets</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'PSite'</span><span class="p">]</span><span class="c1">#.loc[data['PSite']['Demand']&gt;0]
+</span>
+<span class="c1"># The dictionary of demand per product per market
+</span><span class="n">demand</span> <span class="o">=</span> <span class="p">{</span><span class="n">m</span><span class="p">:{</span><span class="n">p</span><span class="p">:</span><span class="n">markets</span><span class="p">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">markets</span><span class="p">[</span><span class="s">'SiteID'</span><span class="p">]</span><span class="o">==</span><span class="n">m</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">markets</span><span class="p">[</span><span class="s">'ProductID'</span><span class="p">]</span><span class="o">==</span><span class="n">p</span><span class="p">),</span> <span class="s">'Demand'</span><span class="p">].</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">markets</span><span class="p">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">markets</span><span class="p">[</span><span class="s">'SiteID'</span><span class="p">]</span><span class="o">==</span><span class="n">m</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">markets</span><span class="p">[</span><span class="s">'Demand'</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">),</span> <span class="s">'ProductID'</span><span class="p">].</span><span class="n">values</span><span class="p">}</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">pd</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">markets</span><span class="p">[</span><span class="s">'SiteID'</span><span class="p">])}</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Join product-independent costs from DC Site sheet to DC Product Site sheet
+</span><span class="n">data</span><span class="p">[</span><span class="s">'PSite'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'PSite'</span><span class="p">].</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'Site'</span><span class="p">].</span><span class="n">set_index</span><span class="p">(</span><span class="s">'ID'</span><span class="p">)[</span><span class="n">fix_cost_cols</span> <span class="o">+</span> 
+                                                                <span class="n">var_cost_cols</span><span class="p">],</span>
+                                   <span class="n">on</span><span class="o">=</span><span class="s">'SiteID'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Get dataframe of DCs (defined as sites with costs greater than zero)
+</span><span class="n">DC</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'PSite'</span><span class="p">].</span><span class="n">loc</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s">'PSite'</span><span class="p">][</span><span class="n">fix_cost_cols</span> <span class="o">+</span>
+                                     <span class="n">fixp_cost_cols</span> <span class="o">+</span>
+                                     <span class="n">var_cost_cols</span> <span class="o">+</span> 
+                                     <span class="n">varp_cost_cols</span><span class="p">].</span><span class="nb">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># The dictionary of dictionaries of variable costs per DC
+</span><span class="n">DCVar</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">var_cost_cols</span> <span class="o">+</span> <span class="n">varp_cost_cols</span><span class="p">:</span>
+    <span class="n">DCVar</span><span class="p">[</span><span class="n">cost</span><span class="p">]</span> <span class="o">=</span> <span class="n">makeDict</span><span class="p">([</span><span class="n">pd</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">DC</span><span class="p">[</span><span class="s">'SiteID'</span><span class="p">]),</span>
+                            <span class="n">pd</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">DC</span><span class="p">[</span><span class="s">'ProductID'</span><span class="p">])],</span>
+                           <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">DC</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">DC</span><span class="p">[</span><span class="s">'SiteID'</span><span class="p">]</span> <span class="o">==</span> <span class="n">dc</span><span class="p">,</span> <span class="n">cost</span><span class="p">])</span> <span class="k">for</span> <span class="n">dc</span> <span class="ow">in</span> <span class="n">pd</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">DC</span><span class="p">[</span><span class="s">'SiteID'</span><span class="p">])],</span>
+                           <span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">DCVar</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'ReceivingCPU': defaultdict(&lt;function pulp.utilities.__makeDict.&lt;locals&gt;.&lt;lambda&gt;()&gt;,
+             {'NZ DC': defaultdict(&lt;function pulp.utilities.__makeDict.&lt;locals&gt;.&lt;lambda&gt;()&gt;,
+                          {'ProductA': 0.3}),
+              'AU DC': defaultdict(&lt;function pulp.utilities.__makeDict.&lt;locals&gt;.&lt;lambda&gt;()&gt;,
+                          {'ProductA': 0.22})}),
+ 'StorageCPU': defaultdict(&lt;function pulp.utilities.__makeDict.&lt;locals&gt;.&lt;lambda&gt;()&gt;,
+             {'NZ DC': defaultdict(&lt;function pulp.utilities.__makeDict.&lt;locals&gt;.&lt;lambda&gt;()&gt;,
+                          {'ProductA': 1.25}),
+              'AU DC': defaultdict(&lt;function pulp.utilities.__makeDict.&lt;locals&gt;.&lt;lambda&gt;()&gt;,
+                          {'ProductA': 0.9})}),
+ 'VASCPU': defaultdict(&lt;function pulp.utilities.__makeDict.&lt;locals&gt;.&lt;lambda&gt;()&gt;,
+             {'NZ DC': defaultdict(&lt;function pulp.utilities.__makeDict.&lt;locals&gt;.&lt;lambda&gt;()&gt;,
+                          {'ProductA': 0.9}),
+              'AU DC': defaultdict(&lt;function pulp.utilities.__makeDict.&lt;locals&gt;.&lt;lambda&gt;()&gt;,
+                          {'ProductA': 0.75})}),
+ 'XDockCPU': defaultdict(&lt;function pulp.utilities.__makeDict.&lt;locals&gt;.&lt;lambda&gt;()&gt;,
+             {'NZ DC': defaultdict(&lt;function pulp.utilities.__makeDict.&lt;locals&gt;.&lt;lambda&gt;()&gt;,
+                          {'ProductA': 0.02}),
+              'AU DC': defaultdict(&lt;function pulp.utilities.__makeDict.&lt;locals&gt;.&lt;lambda&gt;()&gt;,
+                          {'ProductA': 0.07})})}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># The dictionary of dictionaries of fixed costs per DC
+</span><span class="n">DCFix</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">fix_cost_cols</span><span class="p">:</span>
+    <span class="n">DCFix</span><span class="p">[</span><span class="n">cost</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">DC</span><span class="p">[</span><span class="s">'SiteID'</span><span class="p">],</span> <span class="n">DC</span><span class="p">[</span><span class="n">cost</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">DCFix</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'FixedCost': {'NZ DC': 100000.0, 'AU DC': 120000.0}}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># The dictionary of dictionaries of fixed product costs per DC
+</span><span class="n">DCFixp</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">fixp_cost_cols</span><span class="p">:</span>
+    <span class="n">DCFixp</span><span class="p">[</span><span class="n">cost</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">DC</span><span class="p">[</span><span class="s">'SiteID'</span><span class="p">],</span> <span class="n">DC</span><span class="p">[</span><span class="n">cost</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">DCFixp</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="ow">not</span> <span class="n">alwaysFixed</span><span class="p">:</span>
+    <span class="c1"># The binary variables for DC fixed costs
+</span>    <span class="n">DC_bv</span> <span class="o">=</span> <span class="n">LpVariable</span><span class="p">.</span><span class="n">dicts</span><span class="p">(</span><span class="s">'DCbin'</span><span class="p">,</span> <span class="n">DC</span><span class="p">[</span><span class="s">'SiteID'</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cat</span><span class="o">=</span><span class="s">'Binary'</span><span class="p">)</span>
+    <span class="c1">#DC_bv
+</span>    
+    <span class="c1"># The binary variables for DC product fixed costs
+</span>    <span class="c1"># TBD
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">DC_bv</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'NZ DC': DCbin_NZ_DC, 'AU DC': DCbin_AU_DC}
+</code></pre></div></div>
+
+<h3 id="lanes-and-product-lanes">Lanes and Product Lanes</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Join in origin and destination data to product lane dataframe
+</span><span class="k">if</span> <span class="s">'FromID'</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">].</span><span class="n">columns</span><span class="p">:</span>
+    <span class="k">pass</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">].</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'Lane'</span><span class="p">].</span><span class="n">set_index</span><span class="p">(</span><span class="s">'ID'</span><span class="p">)[[</span><span class="s">'FromID'</span><span class="p">,</span>
+                                                                     <span class="s">'ToID'</span><span class="p">]],</span>
+                                       <span class="n">on</span><span class="o">=</span><span class="s">'LaneID'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Fill NaNs in costs with zeroes
+</span><span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">][</span><span class="n">tvarp_cost_cols</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">][</span><span class="n">tvarp_cost_cols</span><span class="p">].</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>LaneID</th>
+      <th>ProductID</th>
+      <th>FreightCPU</th>
+      <th>DrayageCPU</th>
+      <th>HistFlow</th>
+      <th>TransportCPU</th>
+      <th>FromID</th>
+      <th>ToID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>PL00000001</td>
+      <td>plSDC_LA00000001</td>
+      <td>ProductA</td>
+      <td>0.278624</td>
+      <td>0.022397</td>
+      <td>100</td>
+      <td>0.000000</td>
+      <td>Shanghai</td>
+      <td>NZ DC</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>PL00000002</td>
+      <td>plSDC_LA00000002</td>
+      <td>ProductA</td>
+      <td>0.162942</td>
+      <td>0.040232</td>
+      <td>200</td>
+      <td>0.000000</td>
+      <td>Shanghai</td>
+      <td>AU DC</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>PL00000001</td>
+      <td>plDCM_LA00000001</td>
+      <td>ProductA</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>100</td>
+      <td>0.462276</td>
+      <td>NZ DC</td>
+      <td>NZ Market</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>PL00000002</td>
+      <td>plDCM_LA00000002</td>
+      <td>ProductA</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>2.647417</td>
+      <td>NZ DC</td>
+      <td>AU Market</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>PL00000003</td>
+      <td>plDCM_LA00000003</td>
+      <td>ProductA</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>9.093692</td>
+      <td>AU DC</td>
+      <td>NZ Market</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>PL00000004</td>
+      <td>plDCM_LA00000004</td>
+      <td>ProductA</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>200</td>
+      <td>0.412256</td>
+      <td>AU DC</td>
+      <td>AU Market</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Remove later
+</span><span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">].</span><span class="n">loc</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">][</span><span class="s">'HistFlow'</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span><span class="c1">#.to_clipboard(index=False)
+</span></code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>LaneID</th>
+      <th>ProductID</th>
+      <th>FreightCPU</th>
+      <th>DrayageCPU</th>
+      <th>HistFlow</th>
+      <th>TransportCPU</th>
+      <th>FromID</th>
+      <th>ToID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>PL00000001</td>
+      <td>plSDC_LA00000001</td>
+      <td>ProductA</td>
+      <td>0.278624</td>
+      <td>0.022397</td>
+      <td>100</td>
+      <td>0.000000</td>
+      <td>Shanghai</td>
+      <td>NZ DC</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>PL00000002</td>
+      <td>plSDC_LA00000002</td>
+      <td>ProductA</td>
+      <td>0.162942</td>
+      <td>0.040232</td>
+      <td>200</td>
+      <td>0.000000</td>
+      <td>Shanghai</td>
+      <td>AU DC</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>PL00000001</td>
+      <td>plDCM_LA00000001</td>
+      <td>ProductA</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>100</td>
+      <td>0.462276</td>
+      <td>NZ DC</td>
+      <td>NZ Market</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>PL00000004</td>
+      <td>plDCM_LA00000004</td>
+      <td>ProductA</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>200</td>
+      <td>0.412256</td>
+      <td>AU DC</td>
+      <td>AU Market</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Remove later
+</span><span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'OUT'</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">].</span><span class="n">groupby</span><span class="p">([</span><span class="s">'FromID'</span><span class="p">,</span> <span class="s">'ProductID'</span><span class="p">])[</span><span class="s">'HistFlow'</span><span class="p">].</span><span class="nb">sum</span><span class="p">(),</span>
+              <span class="s">'IN'</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">].</span><span class="n">groupby</span><span class="p">([</span><span class="s">'ToID'</span><span class="p">,</span> <span class="s">'ProductID'</span><span class="p">])[</span><span class="s">'HistFlow'</span><span class="p">].</span><span class="nb">sum</span><span class="p">()}).</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">to_clipboard</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Remove later
+</span><span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">].</span><span class="n">loc</span><span class="p">[(</span><span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">][</span><span class="s">'FromID'</span><span class="p">]</span><span class="o">==</span><span class="s">'Kunshan'</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">][</span><span class="s">'HistFlow'</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)]</span><span class="c1">#.to_clipboard(index=False)
+</span></code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>LaneID</th>
+      <th>ProductID</th>
+      <th>FreightCPU</th>
+      <th>DrayageCPU</th>
+      <th>HistFlow</th>
+      <th>TransportCPU</th>
+      <th>FromID</th>
+      <th>ToID</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Remove later
+</span><span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">].</span><span class="n">loc</span><span class="p">[(</span><span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">][</span><span class="s">'ToID'</span><span class="p">]</span><span class="o">==</span><span class="s">'Kunshan'</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">][</span><span class="s">'HistFlow'</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)]</span><span class="c1">#.to_clipboard(index=False)
+</span></code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>LaneID</th>
+      <th>ProductID</th>
+      <th>FreightCPU</th>
+      <th>DrayageCPU</th>
+      <th>HistFlow</th>
+      <th>TransportCPU</th>
+      <th>FromID</th>
+      <th>ToID</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Get dataframe of transport lanes (defined as lanes with transport costs greater than zero)
+</span><span class="n">Lanes</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">].</span><span class="n">loc</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">][</span><span class="n">tfix_cost_cols</span> <span class="o">+</span>
+                                        <span class="n">tfixp_cost_cols</span> <span class="o">+</span>
+                                        <span class="n">tvar_cost_cols</span> <span class="o">+</span> 
+                                        <span class="n">tvarp_cost_cols</span><span class="p">].</span><span class="nb">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Lanes</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>LaneID</th>
+      <th>ProductID</th>
+      <th>FreightCPU</th>
+      <th>DrayageCPU</th>
+      <th>HistFlow</th>
+      <th>TransportCPU</th>
+      <th>FromID</th>
+      <th>ToID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>PL00000001</td>
+      <td>plSDC_LA00000001</td>
+      <td>ProductA</td>
+      <td>0.278624</td>
+      <td>0.022397</td>
+      <td>100</td>
+      <td>0.000000</td>
+      <td>Shanghai</td>
+      <td>NZ DC</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>PL00000002</td>
+      <td>plSDC_LA00000002</td>
+      <td>ProductA</td>
+      <td>0.162942</td>
+      <td>0.040232</td>
+      <td>200</td>
+      <td>0.000000</td>
+      <td>Shanghai</td>
+      <td>AU DC</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>PL00000001</td>
+      <td>plDCM_LA00000001</td>
+      <td>ProductA</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>100</td>
+      <td>0.462276</td>
+      <td>NZ DC</td>
+      <td>NZ Market</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>PL00000002</td>
+      <td>plDCM_LA00000002</td>
+      <td>ProductA</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>2.647417</td>
+      <td>NZ DC</td>
+      <td>AU Market</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>PL00000003</td>
+      <td>plDCM_LA00000003</td>
+      <td>ProductA</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>9.093692</td>
+      <td>AU DC</td>
+      <td>NZ Market</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>PL00000004</td>
+      <td>plDCM_LA00000004</td>
+      <td>ProductA</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>200</td>
+      <td>0.412256</td>
+      <td>AU DC</td>
+      <td>AU Market</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># The dictionary of dictionaries of costs for the transport routes per product from origin to destination
+</span><span class="n">OtoD</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">tvarp_cost_cols</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">OtoD</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">OtoD</span><span class="p">[</span><span class="n">cost</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">Lanes</span><span class="p">[</span><span class="s">'FromID'</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">OtoD</span><span class="p">[</span><span class="n">cost</span><span class="p">]:</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">OtoD</span><span class="p">[</span><span class="n">cost</span><span class="p">][</span><span class="n">o</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">Lanes</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">Lanes</span><span class="p">[</span><span class="s">'FromID'</span><span class="p">]</span><span class="o">==</span><span class="n">o</span><span class="p">,</span> 
+                                     <span class="s">'ProductID'</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">OtoD</span><span class="p">[</span><span class="n">cost</span><span class="p">][</span><span class="n">o</span><span class="p">]:</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">OtoD</span><span class="p">[</span><span class="n">cost</span><span class="p">][</span><span class="n">o</span><span class="p">][</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">Lanes</span><span class="p">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">Lanes</span><span class="p">[</span><span class="s">'FromID'</span><span class="p">]</span><span class="o">==</span><span class="n">o</span><span class="p">)</span> <span class="o">&amp;</span> 
+                                         <span class="p">(</span><span class="n">Lanes</span><span class="p">[</span><span class="s">'ProductID'</span><span class="p">]</span><span class="o">==</span><span class="n">p</span><span class="p">),</span> 
+                                         <span class="s">'ToID'</span><span class="p">]):</span>
+                <span class="n">OtoD</span><span class="p">[</span><span class="n">cost</span><span class="p">][</span><span class="n">o</span><span class="p">][</span><span class="n">p</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="o">=</span> <span class="n">Lanes</span><span class="p">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">Lanes</span><span class="p">[</span><span class="s">'FromID'</span><span class="p">]</span><span class="o">==</span><span class="n">o</span><span class="p">)</span> <span class="o">&amp;</span> 
+                                                <span class="p">(</span><span class="n">Lanes</span><span class="p">[</span><span class="s">'ProductID'</span><span class="p">]</span><span class="o">==</span><span class="n">p</span><span class="p">)</span> <span class="o">&amp;</span> 
+                                                <span class="p">(</span><span class="n">Lanes</span><span class="p">[</span><span class="s">'ToID'</span><span class="p">]</span><span class="o">==</span><span class="n">d</span><span class="p">),</span> 
+                                                <span class="n">cost</span><span class="p">].</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">OtoD</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'FreightCPU': {'AU DC': {'ProductA': {'AU Market': 0.0, 'NZ Market': 0.0}},
+  'NZ DC': {'ProductA': {'AU Market': 0.0, 'NZ Market': 0.0}},
+  'Shanghai': {'ProductA': {'AU DC': 0.16294159923090565,
+    'NZ DC': 0.2786243970847587}}},
+ 'DrayageCPU': {'AU DC': {'ProductA': {'AU Market': 0.0, 'NZ Market': 0.0}},
+  'NZ DC': {'ProductA': {'AU Market': 0.0, 'NZ Market': 0.0}},
+  'Shanghai': {'ProductA': {'AU DC': 0.04023184834654048,
+    'NZ DC': 0.02239721224741304}}},
+ 'TransportCPU': {'AU DC': {'ProductA': {'AU Market': 0.41225625063258187,
+    'NZ Market': 9.093692079973163}},
+  'NZ DC': {'ProductA': {'AU Market': 2.647417446257063,
+    'NZ Market': 0.46227599344198433}},
+  'Shanghai': {'ProductA': {'AU DC': 0.0, 'NZ DC': 0.0}}}}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># The dictionary containing the referenced variables (the routes) per product for origin to destination
+</span><span class="n">OtoD_v</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">Lanes</span><span class="p">[</span><span class="s">'FromID'</span><span class="p">]):</span>
+    <span class="k">if</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">OtoD_v</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">OtoD_v</span><span class="p">[</span><span class="n">o</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">Lanes</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">Lanes</span><span class="p">[</span><span class="s">'FromID'</span><span class="p">]</span><span class="o">==</span><span class="n">o</span><span class="p">,</span> 
+                                 <span class="s">'ProductID'</span><span class="p">]):</span>        
+        <span class="k">if</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">OtoD_v</span><span class="p">[</span><span class="n">o</span><span class="p">]:</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">OtoD_v</span><span class="p">[</span><span class="n">o</span><span class="p">][</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">Lanes</span><span class="p">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">Lanes</span><span class="p">[</span><span class="s">'FromID'</span><span class="p">]</span><span class="o">==</span><span class="n">o</span><span class="p">)</span> <span class="o">&amp;</span> 
+                                     <span class="p">(</span><span class="n">Lanes</span><span class="p">[</span><span class="s">'ProductID'</span><span class="p">]</span><span class="o">==</span><span class="n">p</span><span class="p">),</span> 
+                                     <span class="s">'ToID'</span><span class="p">]):</span>
+            <span class="n">OtoD_v</span><span class="p">[</span><span class="n">o</span><span class="p">][</span><span class="n">p</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="o">=</span> <span class="n">LpVariable</span><span class="p">(</span><span class="s">'OtoD_'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">o</span><span class="p">)</span><span class="o">+</span><span class="s">'_'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">+</span><span class="s">'_'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">),</span>
+                                         <span class="mi">0</span><span class="p">,</span>
+                                         <span class="bp">None</span><span class="p">,</span>
+                                         <span class="n">LpInteger</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">OtoD_v</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'AU DC': {'ProductA': {'AU Market': OtoD_AU_DC_ProductA_AU_Market,
+   'NZ Market': OtoD_AU_DC_ProductA_NZ_Market}},
+ 'NZ DC': {'ProductA': {'AU Market': OtoD_NZ_DC_ProductA_AU_Market,
+   'NZ Market': OtoD_NZ_DC_ProductA_NZ_Market}},
+ 'Shanghai': {'ProductA': {'AU DC': OtoD_Shanghai_ProductA_AU_DC,
+   'NZ DC': OtoD_Shanghai_ProductA_NZ_DC}}}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Creates a list of tuples containing all the possible routes per product from origin to destination
+</span><span class="n">OtoD_l</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">Lanes</span><span class="p">[[</span><span class="s">'FromID'</span><span class="p">,</span> 
+                     <span class="s">'ProductID'</span><span class="p">,</span> 
+                     <span class="s">'ToID'</span><span class="p">]].</span><span class="n">itertuples</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                                                 <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">))</span>
+<span class="c1">#OtoD_l
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">OtoD_l</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[('Shanghai', 'ProductA', 'NZ DC'),
+ ('Shanghai', 'ProductA', 'AU DC'),
+ ('NZ DC', 'ProductA', 'NZ Market'),
+ ('NZ DC', 'ProductA', 'AU Market'),
+ ('AU DC', 'ProductA', 'NZ Market'),
+ ('AU DC', 'ProductA', 'AU Market')]
+</code></pre></div></div>
+
+<h2 id="define-lp">Define LP</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># The variable containing the problem data
+</span><span class="n">prob</span> <span class="o">=</span> <span class="n">LpProblem</span><span class="p">(</span><span class="n">project</span><span class="p">,</span> <span class="n">LpMinimize</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="objective-function">Objective Function</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># The objective function is added to 'prob' first
+</span>
+<span class="k">if</span> <span class="n">alwaysFixed</span><span class="p">:</span>
+    <span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span>
+        <span class="n">lpSum</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">OtoD_v</span><span class="p">[</span><span class="n">o</span><span class="p">][</span><span class="n">p</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="o">*</span> <span class="n">OtoD</span><span class="p">[</span><span class="n">cost</span><span class="p">][</span><span class="n">o</span><span class="p">][</span><span class="n">p</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="k">for</span> <span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="ow">in</span> <span class="n">OtoD_l</span> <span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">OtoD</span><span class="p">]</span> <span class="o">+</span> <span class="c1"># Origin to destination transport cost
+</span>            <span class="p">[</span><span class="n">OtoD_v</span><span class="p">[</span><span class="n">o</span><span class="p">][</span><span class="n">p</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="o">*</span> <span class="n">DCVar</span><span class="p">[</span><span class="n">cost</span><span class="p">][</span><span class="n">d</span><span class="p">][</span><span class="n">p</span><span class="p">]</span> <span class="k">for</span> <span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="ow">in</span> <span class="n">OtoD_l</span> <span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">DCVar</span><span class="p">]</span> <span class="o">+</span> <span class="c1"># Site variable cost (based on inbound)
+</span>            <span class="c1">#[OtoD_v[o][p][d] * DCVar[cost][o][p] for (o, p, d) in OtoD_l for cost in DCVar] + # Site variable cost (based on outbound)
+</span>            <span class="c1">#[DC_bv[d] * DCFix[cost][d] for d in DC['SiteID'] for cost in DCFix] # Site fixed cost applied if there is flow
+</span>            <span class="p">[</span><span class="n">DCFix</span><span class="p">[</span><span class="n">cost</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">DC</span><span class="p">[</span><span class="s">'SiteID'</span><span class="p">])</span> <span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">DCFix</span><span class="p">]</span> <span class="c1"># DC fixed cost is always applied
+</span>             <span class="p">),</span>
+        <span class="s">'Sum_of_Logistics_Costs'</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span>
+        <span class="n">lpSum</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">OtoD_v</span><span class="p">[</span><span class="n">o</span><span class="p">][</span><span class="n">p</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="o">*</span> <span class="n">OtoD</span><span class="p">[</span><span class="n">cost</span><span class="p">][</span><span class="n">o</span><span class="p">][</span><span class="n">p</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="k">for</span> <span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="ow">in</span> <span class="n">OtoD_l</span> <span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">OtoD</span><span class="p">]</span> <span class="o">+</span> <span class="c1"># Origin to destination transport cost
+</span>            <span class="p">[</span><span class="n">OtoD_v</span><span class="p">[</span><span class="n">o</span><span class="p">][</span><span class="n">p</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="o">*</span> <span class="n">DCVar</span><span class="p">[</span><span class="n">cost</span><span class="p">][</span><span class="n">d</span><span class="p">][</span><span class="n">p</span><span class="p">]</span> <span class="k">for</span> <span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="ow">in</span> <span class="n">OtoD_l</span> <span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">DCVar</span><span class="p">]</span> <span class="o">+</span> <span class="c1"># Site variable cost (based on inbound)
+</span>            <span class="c1">#[OtoD_v[o][p][d] * DCVar[cost][o][p] for (o, p, d) in OtoD_l for cost in DCVar] + # Site variable cost (based on outbound)
+</span>            <span class="p">[</span><span class="n">DC_bv</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">*</span> <span class="n">DCFix</span><span class="p">[</span><span class="n">cost</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">DC</span><span class="p">[</span><span class="s">'SiteID'</span><span class="p">])</span> <span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">DCFix</span><span class="p">]</span> <span class="c1"># Site fixed cost applied if there is flow
+</span>            <span class="c1">#[DCFix[cost][d] for d in DC['SiteID'] for cost in DCFix] # DC fixed cost is always applied
+</span>             <span class="p">),</span>
+        <span class="s">'Sum_of_Logistics_Costs'</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Print objective
+</span><span class="n">prob</span><span class="p">.</span><span class="n">objective</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>120000.0*DCbin_AU_DC + 100000.0*DCbin_NZ_DC + 0.41225625063258187*OtoD_AU_DC_ProductA_AU_Market + 9.093692079973163*OtoD_AU_DC_ProductA_NZ_Market + 2.647417446257063*OtoD_NZ_DC_ProductA_AU_Market + 0.46227599344198433*OtoD_NZ_DC_ProductA_NZ_Market + 2.1431734475774458*OtoD_Shanghai_ProductA_AU_DC + 2.7710216093321716*OtoD_Shanghai_ProductA_NZ_DC + 0.0
+</code></pre></div></div>
+
+<h3 id="dc-integer-constraints">DC Integer Constraints</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="ow">not</span> <span class="n">alwaysFixed</span><span class="p">:</span>
+    <span class="c1"># Get list of DCs with fixed costs
+</span>    <span class="n">temp_list</span> <span class="o">=</span> <span class="n">DC</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">DC</span><span class="p">[</span><span class="n">fix_cost_cols</span><span class="p">].</span><span class="nb">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">,</span> <span class="s">'SiteID'</span><span class="p">]</span>
+    <span class="c1"># DC fixed costs are applied if a DC is open (based on inbound)
+</span>    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">temp_list</span><span class="p">):</span>
+        <span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span>
+            <span class="n">lpSum</span><span class="p">([</span><span class="n">OtoD_v</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">p</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">Lanes</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">Lanes</span><span class="p">[</span><span class="s">'ToID'</span><span class="p">]</span><span class="o">==</span><span class="n">d</span><span class="p">,</span> <span class="s">'FromID'</span><span class="p">])</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">Lanes</span><span class="p">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">Lanes</span><span class="p">[</span><span class="s">'FromID'</span><span class="p">]</span><span class="o">==</span><span class="n">s</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">Lanes</span><span class="p">[</span><span class="s">'ToID'</span><span class="p">]</span><span class="o">==</span><span class="n">d</span><span class="p">),</span> <span class="s">'ProductID'</span><span class="p">])])</span> <span class="o">&lt;=</span> <span class="n">DC_bv</span><span class="p">[</span><span class="n">d</span><span class="p">]</span><span class="o">*</span><span class="n">M</span><span class="p">,</span>
+            <span class="s">"%s_Hub_is_Open"</span> <span class="o">%</span> <span class="n">d</span><span class="p">,</span>
+        <span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Print DC integer constraints
+</span><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">prob</span><span class="p">.</span><span class="n">constraints</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s">'_Hub_is_Open'</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="s">':'</span><span class="p">,</span> <span class="n">prob</span><span class="p">.</span><span class="n">constraints</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AU_DC_Hub_is_Open : -300.0*DCbin_AU_DC + OtoD_Shanghai_ProductA_AU_DC &lt;= -0.0 
+
+NZ_DC_Hub_is_Open : -300.0*DCbin_NZ_DC + OtoD_Shanghai_ProductA_NZ_DC &lt;= -0.0 
+</code></pre></div></div>
+
+<h3 id="supply-constraints">Supply Constraints</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1"># The supply maximum constraints are added to prob for each supply node (supplier)
+</span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">supply</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">supply</span><span class="p">[</span><span class="n">s</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="p">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">supply</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">p</span><span class="p">]):</span>
+            <span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span>
+                <span class="n">lpSum</span><span class="p">([</span><span class="n">OtoD_v</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">p</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">OtoD_v</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">p</span><span class="p">].</span><span class="n">keys</span><span class="p">()])</span> <span class="o">&lt;=</span> <span class="n">supply</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">p</span><span class="p">],</span>
+                <span class="s">"Sum_of_Products_{}_out_of_Supplier_{}"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">s</span><span class="p">),</span>
+            <span class="p">)</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Print supply constraints
+</span><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">prob</span><span class="p">.</span><span class="n">constraints</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s">'_out_of_Supplier_'</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="s">':'</span><span class="p">,</span> <span class="n">prob</span><span class="p">.</span><span class="n">constraints</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Sum_of_Products_ProductA_out_of_Supplier_Shanghai : OtoD_Shanghai_ProductA_AU_DC + OtoD_Shanghai_ProductA_NZ_DC &lt;= 300.0 
+</code></pre></div></div>
+
+<h3 id="dc-flow-constraints">DC Flow Constraints</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># The DC can only ship out what was shipped in
+</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sites</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">products</span><span class="p">:</span>
+        <span class="c1"># Skip supply and demand sites:
+</span>        <span class="k">if</span> <span class="p">(</span><span class="n">demand</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="p">{</span><span class="n">p</span><span class="p">:</span><span class="mi">0</span><span class="p">}).</span><span class="n">get</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">supply</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="p">{</span><span class="n">p</span><span class="p">:</span><span class="mi">0</span><span class="p">}).</span><span class="n">get</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">):</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">prob</span> <span class="o">+=</span><span class="p">(</span>
+                <span class="n">lpSum</span><span class="p">([</span><span class="n">OtoD_v</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">p</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">Lanes</span><span class="p">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">Lanes</span><span class="p">[</span><span class="s">'FromID'</span><span class="p">]</span><span class="o">==</span><span class="n">s</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">Lanes</span><span class="p">[</span><span class="s">'ProductID'</span><span class="p">]</span><span class="o">==</span><span class="n">p</span><span class="p">),</span> <span class="s">'ToID'</span><span class="p">])])</span> <span class="o">+</span> <span class="c1"># Total outbound to site
+</span>                <span class="c1">#demand.get(s, {p:0}).get(p, 0) == # Total demand at site
+</span>                <span class="n">demand</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="p">{</span><span class="n">p</span><span class="p">:</span><span class="mi">0</span><span class="p">}).</span><span class="n">get</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="c1"># Total demand at site # Test Demand &lt;= Supply
+</span>                <span class="n">lpSum</span><span class="p">([</span><span class="n">OtoD_v</span><span class="p">[</span><span class="n">o</span><span class="p">][</span><span class="n">p</span><span class="p">][</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">Lanes</span><span class="p">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">Lanes</span><span class="p">[</span><span class="s">'ToID'</span><span class="p">]</span><span class="o">==</span><span class="n">s</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">Lanes</span><span class="p">[</span><span class="s">'ProductID'</span><span class="p">]</span><span class="o">==</span><span class="n">p</span><span class="p">),</span> <span class="s">'FromID'</span><span class="p">])])</span> <span class="o">+</span> <span class="c1"># Total inbound to site
+</span>                <span class="n">supply</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="p">{</span><span class="n">p</span><span class="p">:</span><span class="mi">0</span><span class="p">}).</span><span class="n">get</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="c1"># Total supply at site
+</span>                <span class="s">"Sum_of_Products_{}_Through_Site_{}"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">s</span><span class="p">),</span>
+            <span class="p">)</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Print DC flow constraints
+</span><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">prob</span><span class="p">.</span><span class="n">constraints</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s">'_Through_Site_'</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="s">':'</span><span class="p">,</span> <span class="n">prob</span><span class="p">.</span><span class="n">constraints</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Sum_of_Products_ProductA_Through_Site_NZ_DC : OtoD_NZ_DC_ProductA_AU_Market + OtoD_NZ_DC_ProductA_NZ_Market - OtoD_Shanghai_ProductA_NZ_DC &lt;= 0 
+
+Sum_of_Products_ProductA_Through_Site_AU_DC : OtoD_AU_DC_ProductA_AU_Market + OtoD_AU_DC_ProductA_NZ_Market - OtoD_Shanghai_ProductA_AU_DC &lt;= 0 
+</code></pre></div></div>
+
+<h3 id="demand-constraints">Demand Constraints</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># The demand minimum constraints are added to prob for each demand node (market)
+</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">demand</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">demand</span><span class="p">[</span><span class="n">m</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="p">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">demand</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="n">p</span><span class="p">]):</span>
+            <span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span>
+                <span class="n">lpSum</span><span class="p">([</span><span class="n">OtoD_v</span><span class="p">[</span><span class="n">d</span><span class="p">][</span><span class="n">p</span><span class="p">][</span><span class="n">m</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">Lanes</span><span class="p">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">Lanes</span><span class="p">[</span><span class="s">'ToID'</span><span class="p">]</span><span class="o">==</span><span class="n">m</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">Lanes</span><span class="p">[</span><span class="s">'ProductID'</span><span class="p">]</span><span class="o">==</span><span class="n">p</span><span class="p">),</span> <span class="s">'FromID'</span><span class="p">])])</span> <span class="o">&gt;=</span> <span class="n">demand</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="n">p</span><span class="p">],</span>
+                <span class="s">"Sum_of_Products_{}_into_Market_{}"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">m</span><span class="p">),</span>
+            <span class="p">)</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Print demand constraints
+</span><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">prob</span><span class="p">.</span><span class="n">constraints</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s">'_into_Market_'</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="s">':'</span><span class="p">,</span> <span class="n">prob</span><span class="p">.</span><span class="n">constraints</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Sum_of_Products_ProductA_into_Market_NZ_Market : OtoD_AU_DC_ProductA_NZ_Market + OtoD_NZ_DC_ProductA_NZ_Market &gt;= 100.0 
+
+Sum_of_Products_ProductA_into_Market_AU_Market : OtoD_AU_DC_ProductA_AU_Market + OtoD_NZ_DC_ProductA_AU_Market &gt;= 200.0 
+</code></pre></div></div>
+
+<h3 id="baseline-constraint-use-historical-flow-optional">Baseline Constraint (Use Historical Flow) (Optional)</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">histFlow</span><span class="p">:</span>
+    <span class="c1"># Fix historical supplier to hub flow
+</span>    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">OtoD_v</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">OtoD_v</span><span class="p">[</span><span class="n">s</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">OtoD_v</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">p</span><span class="p">]:</span>
+                <span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span>
+                    <span class="n">OtoD_v</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">p</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="o">==</span> <span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">].</span><span class="n">loc</span><span class="p">[(</span><span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">][</span><span class="s">'ProductID'</span><span class="p">]</span><span class="o">==</span><span class="n">p</span><span class="p">)</span><span class="o">&amp;</span>
+                                                         <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">][</span><span class="s">'FromID'</span><span class="p">]</span><span class="o">==</span><span class="n">s</span><span class="p">)</span><span class="o">&amp;</span>
+                                                         <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">][</span><span class="s">'ToID'</span><span class="p">]</span><span class="o">==</span><span class="n">d</span><span class="p">),</span> 
+                                                         <span class="s">'HistFlow'</span><span class="p">].</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="s">"Historical_Flow_of_{}_from_{}_to_{}"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+                <span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Print optional baseline historical flow constraint
+</span><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">prob</span><span class="p">.</span><span class="n">constraints</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s">'Historical_Flow_of_'</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="s">':'</span><span class="p">,</span> <span class="n">prob</span><span class="p">.</span><span class="n">constraints</span><span class="p">[</span><span class="n">c</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Historical_Flow_of_ProductA_from_AU_DC_to_AU_Market : OtoD_AU_DC_ProductA_AU_Market = 200
+Historical_Flow_of_ProductA_from_AU_DC_to_NZ_Market : OtoD_AU_DC_ProductA_NZ_Market = 0
+Historical_Flow_of_ProductA_from_NZ_DC_to_AU_Market : OtoD_NZ_DC_ProductA_AU_Market = 0
+Historical_Flow_of_ProductA_from_NZ_DC_to_NZ_Market : OtoD_NZ_DC_ProductA_NZ_Market = 100
+Historical_Flow_of_ProductA_from_Shanghai_to_AU_DC : OtoD_Shanghai_ProductA_AU_DC = 200
+Historical_Flow_of_ProductA_from_Shanghai_to_NZ_DC : OtoD_Shanghai_ProductA_NZ_DC = 100
+</code></pre></div></div>
+
+<h2 id="solve-lp">Solve LP</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Print LP
+</span><span class="n">prob</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Sample:
+MINIMIZE
+120000.0*DCbin_AU_DC + 100000.0*DCbin_NZ_DC + 0.41225625063258187*OtoD_AU_DC_ProductA_AU_Market + 9.093692079973163*OtoD_AU_DC_ProductA_NZ_Market + 2.647417446257063*OtoD_NZ_DC_ProductA_AU_Market + 0.46227599344198433*OtoD_NZ_DC_ProductA_NZ_Market + 2.1431734475774458*OtoD_Shanghai_ProductA_AU_DC + 2.7710216093321716*OtoD_Shanghai_ProductA_NZ_DC + 0.0
+SUBJECT TO
+AU_DC_Hub_is_Open: - 300 DCbin_AU_DC + OtoD_Shanghai_ProductA_AU_DC &lt;= 0
+
+NZ_DC_Hub_is_Open: - 300 DCbin_NZ_DC + OtoD_Shanghai_ProductA_NZ_DC &lt;= 0
+
+Sum_of_Products_ProductA_out_of_Supplier_Shanghai:
+ OtoD_Shanghai_ProductA_AU_DC + OtoD_Shanghai_ProductA_NZ_DC &lt;= 300
+
+Sum_of_Products_ProductA_Through_Site_NZ_DC: OtoD_NZ_DC_ProductA_AU_Market
+ + OtoD_NZ_DC_ProductA_NZ_Market - OtoD_Shanghai_ProductA_NZ_DC &lt;= 0
+
+Sum_of_Products_ProductA_Through_Site_AU_DC: OtoD_AU_DC_ProductA_AU_Market
+ + OtoD_AU_DC_ProductA_NZ_Market - OtoD_Shanghai_ProductA_AU_DC &lt;= 0
+
+Sum_of_Products_ProductA_into_Market_NZ_Market: OtoD_AU_DC_ProductA_NZ_Market
+ + OtoD_NZ_DC_ProductA_NZ_Market &gt;= 100
+
+Sum_of_Products_ProductA_into_Market_AU_Market: OtoD_AU_DC_ProductA_AU_Market
+ + OtoD_NZ_DC_ProductA_AU_Market &gt;= 200
+
+Historical_Flow_of_ProductA_from_AU_DC_to_AU_Market:
+ OtoD_AU_DC_ProductA_AU_Market = 200
+
+Historical_Flow_of_ProductA_from_AU_DC_to_NZ_Market:
+ OtoD_AU_DC_ProductA_NZ_Market = 0
+
+Historical_Flow_of_ProductA_from_NZ_DC_to_AU_Market:
+ OtoD_NZ_DC_ProductA_AU_Market = 0
+
+Historical_Flow_of_ProductA_from_NZ_DC_to_NZ_Market:
+ OtoD_NZ_DC_ProductA_NZ_Market = 100
+
+Historical_Flow_of_ProductA_from_Shanghai_to_AU_DC:
+ OtoD_Shanghai_ProductA_AU_DC = 200
+
+Historical_Flow_of_ProductA_from_Shanghai_to_NZ_DC:
+ OtoD_Shanghai_ProductA_NZ_DC = 100
+
+VARIABLES
+0 &lt;= DCbin_AU_DC &lt;= 1 Integer
+0 &lt;= DCbin_NZ_DC &lt;= 1 Integer
+0 &lt;= OtoD_AU_DC_ProductA_AU_Market Integer
+0 &lt;= OtoD_AU_DC_ProductA_NZ_Market Integer
+0 &lt;= OtoD_NZ_DC_ProductA_AU_Market Integer
+0 &lt;= OtoD_NZ_DC_ProductA_NZ_Market Integer
+0 &lt;= OtoD_Shanghai_ProductA_AU_DC Integer
+0 &lt;= OtoD_Shanghai_ProductA_NZ_DC Integer
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># The problem data is written to an .lp file
+</span><span class="n">prob</span><span class="p">.</span><span class="n">writeLP</span><span class="p">(</span><span class="s">"TransportationProblem.lp"</span><span class="p">)</span>
+
+<span class="c1"># The problem is solved using PuLP's choice of Solver
+</span><span class="n">prob</span><span class="p">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="c1">#prob.solve('PULP_CHOCO_CMD')
+</span>
+<span class="c1"># The status of the solution is printed to the screen
+</span><span class="k">print</span><span class="p">(</span><span class="s">"Status:"</span><span class="p">,</span> <span class="n">LpStatus</span><span class="p">[</span><span class="n">prob</span><span class="p">.</span><span class="n">status</span><span class="p">])</span>
+
+<span class="c1"># Each of the variables is printed with its resolved optimum value
+</span><span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">prob</span><span class="p">.</span><span class="n">variables</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="s">"="</span><span class="p">,</span> <span class="n">v</span><span class="p">.</span><span class="n">varValue</span><span class="p">)</span>
+
+<span class="c1"># The optimised objective function value is printed to the screen
+</span><span class="k">print</span><span class="p">(</span><span class="s">"Total Logistics Cost = "</span><span class="p">,</span> <span class="n">value</span><span class="p">(</span><span class="n">prob</span><span class="p">.</span><span class="n">objective</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Status: Optimal
+DCbin_AU_DC = 1.0
+DCbin_NZ_DC = 1.0
+OtoD_AU_DC_ProductA_AU_Market = 200.0
+OtoD_AU_DC_ProductA_NZ_Market = 0.0
+OtoD_NZ_DC_ProductA_AU_Market = 0.0
+OtoD_NZ_DC_ProductA_NZ_Market = 100.0
+OtoD_Shanghai_ProductA_AU_DC = 200.0
+OtoD_Shanghai_ProductA_NZ_DC = 100.0
+Total Logistics Cost =  220834.41569991942
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Print violated constraints, if any
+</span><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">prob</span><span class="p">.</span><span class="n">constraints</span><span class="p">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">c</span><span class="p">.</span><span class="n">valid</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">.</span><span class="n">value</span><span class="p">())</span>
+</code></pre></div></div>
+
+<h2 id="data-summaries">Data Summaries</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Create a Pandas Excel writer using XlsxWriter as the engine.
+#writer = pd.ExcelWriter(fn.replace('.xlsx', ' - '+str(scenario_name)+'.xlsx'),
+#                        engine='xlsxwriter')
+</span><span class="n">writer</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="n">fn</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'.xlsm'</span><span class="p">,</span> <span class="s">' - '</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">scenario_name</span><span class="p">)</span><span class="o">+</span><span class="s">'.xlsx'</span><span class="p">),</span>
+                        <span class="n">engine</span><span class="o">=</span><span class="s">'xlsxwriter'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="cost-totals">Cost Totals</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Cost components come from the objective function with the variables evaluated using the value() function
+# Must use value() function twice since lpSum result is not recognized by Pandas
+</span>
+<span class="n">totals</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># Transport cost
+</span><span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">OtoD</span><span class="p">:</span>
+    <span class="n">totals</span><span class="p">[</span><span class="s">'Transport '</span><span class="o">+</span><span class="n">costRename</span><span class="p">(</span><span class="n">cost</span><span class="p">)]</span> <span class="o">=</span> <span class="n">lpSum</span><span class="p">([</span><span class="n">OtoD_v</span><span class="p">[</span><span class="n">o</span><span class="p">][</span><span class="n">p</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="o">*</span> <span class="n">OtoD</span><span class="p">[</span><span class="n">cost</span><span class="p">][</span><span class="n">o</span><span class="p">][</span><span class="n">p</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="k">for</span> <span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="ow">in</span> <span class="n">OtoD_l</span><span class="p">]).</span><span class="n">value</span><span class="p">()</span>
+
+<span class="c1"># DC variable costs (based on inbound)
+</span><span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">DCVar</span><span class="p">:</span>
+    <span class="n">totals</span><span class="p">[</span><span class="s">'Site Variable '</span><span class="o">+</span><span class="n">costRename</span><span class="p">(</span><span class="n">cost</span><span class="p">)]</span> <span class="o">=</span> <span class="n">lpSum</span><span class="p">([</span><span class="n">OtoD_v</span><span class="p">[</span><span class="n">o</span><span class="p">][</span><span class="n">p</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="o">*</span> <span class="n">DCVar</span><span class="p">[</span><span class="n">cost</span><span class="p">][</span><span class="n">d</span><span class="p">][</span><span class="n">p</span><span class="p">]</span> <span class="k">for</span> <span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="ow">in</span> <span class="n">OtoD_l</span><span class="p">]).</span><span class="n">value</span><span class="p">()</span>
+
+<span class="c1"># DC fixed cost
+</span><span class="k">if</span> <span class="n">alwaysFixed</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">DCFix</span><span class="p">:</span>
+        <span class="n">totals</span><span class="p">[</span><span class="s">'Site '</span><span class="o">+</span><span class="n">costRename</span><span class="p">(</span><span class="n">cost</span><span class="p">)]</span> <span class="o">=</span> <span class="n">lpSum</span><span class="p">([</span><span class="n">DCFix</span><span class="p">[</span><span class="n">cost</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">DC</span><span class="p">[</span><span class="s">'SiteID'</span><span class="p">])]).</span><span class="n">value</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">DCFix</span><span class="p">:</span>
+        <span class="n">totals</span><span class="p">[</span><span class="s">'Site '</span><span class="o">+</span><span class="n">costRename</span><span class="p">(</span><span class="n">cost</span><span class="p">)]</span> <span class="o">=</span> <span class="n">lpSum</span><span class="p">([</span><span class="n">DC_bv</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">*</span> <span class="n">DCFix</span><span class="p">[</span><span class="n">cost</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">DC</span><span class="p">[</span><span class="s">'SiteID'</span><span class="p">]]).</span><span class="n">value</span><span class="p">()</span>
+
+<span class="n">totals</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">totals</span><span class="p">,</span>
+                                <span class="n">orient</span><span class="o">=</span><span class="s">'index'</span><span class="p">,</span>
+                                <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'Cost'</span><span class="p">])</span>
+
+<span class="n">totals</span> <span class="o">=</span> <span class="n">totals</span><span class="p">.</span><span class="n">reset_index</span><span class="p">()</span> 
+
+<span class="n">totals</span> <span class="o">=</span> <span class="n">totals</span><span class="p">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s">'index'</span><span class="p">:</span> <span class="s">'Cost Component'</span><span class="p">})</span>
+
+<span class="c1"># Add totals
+</span><span class="n">temp</span> <span class="o">=</span> <span class="n">totals</span><span class="p">.</span><span class="nb">sum</span><span class="p">()</span>
+<span class="n">temp</span><span class="p">[</span><span class="s">'Cost Component'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'Total'</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">totals</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Save to Excel
+</span><span class="n">temp</span><span class="p">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> 
+              <span class="n">sheet_name</span><span class="o">=</span><span class="s">'Totals'</span><span class="p">,</span>
+              <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">temp</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Cost Component</th>
+      <th>Cost</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Transport Freight Cost</td>
+      <td>60.450760</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Transport Drayage Cost</td>
+      <td>10.286091</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Transport Transport Cost</td>
+      <td>128.678849</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Site Variable Receiving Cost</td>
+      <td>74.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Site Variable Storage Cost</td>
+      <td>305.000000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Site Variable VAS Cost</td>
+      <td>240.000000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Site Variable XDock Cost</td>
+      <td>16.000000</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Site Fixed Cost</td>
+      <td>220000.000000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Total</td>
+      <td>220834.415700</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="total-site-flow">Total Site Flow</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Total flow per site
+</span><span class="n">dc_flow</span> <span class="o">=</span> <span class="p">{(</span><span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span> <span class="n">OtoD_v</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">p</span><span class="p">][</span><span class="n">d</span><span class="p">].</span><span class="n">value</span><span class="p">()</span> <span class="k">for</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="ow">in</span> <span class="n">OtoD_l</span><span class="p">}</span>
+
+<span class="n">dc_flow</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">dc_flow</span><span class="p">,</span>
+                                 <span class="n">orient</span><span class="o">=</span><span class="s">'index'</span><span class="p">,</span>
+                                 <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'Flow'</span><span class="p">])</span>
+
+<span class="c1"># Reset index and parse supplier, product, and DC from index
+</span><span class="n">dc_flow</span> <span class="o">=</span> <span class="n">dc_flow</span><span class="p">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">dc_flow</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dc_flow</span><span class="p">[</span><span class="s">'index'</span><span class="p">].</span><span class="n">tolist</span><span class="p">(),</span>
+                       <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'Supplier'</span><span class="p">,</span>
+                                <span class="s">'Product'</span><span class="p">,</span>
+                                <span class="s">'Site'</span><span class="p">]).</span><span class="n">join</span><span class="p">(</span><span class="n">dc_flow</span><span class="p">.</span><span class="n">drop</span><span class="p">([</span><span class="s">'index'</span><span class="p">],</span>
+                                                         <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">dc_flow</span> <span class="o">=</span> <span class="n">dc_flow</span><span class="p">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">'Site'</span><span class="p">,</span>
+                                     <span class="s">'Product'</span><span class="p">],</span>
+                              <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s">'Flow'</span><span class="p">],</span>
+                              <span class="n">aggfunc</span><span class="o">=</span><span class="nb">sum</span><span class="p">)</span>
+
+<span class="n">dc_flow</span> <span class="o">=</span> <span class="n">dc_flow</span><span class="p">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="c1"># Add totals
+</span><span class="n">temp</span> <span class="o">=</span> <span class="n">dc_flow</span><span class="p">.</span><span class="nb">sum</span><span class="p">()</span>
+<span class="n">temp</span><span class="p">[</span><span class="s">'Site'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'Total'</span>
+<span class="n">temp</span><span class="p">[</span><span class="s">'Product'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'Total'</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">dc_flow</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span>
+                      <span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Save to Excel
+</span><span class="n">temp</span><span class="p">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> 
+              <span class="n">sheet_name</span><span class="o">=</span><span class="s">'Site Flow'</span><span class="p">,</span>
+              <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">temp</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Site</th>
+      <th>Product</th>
+      <th>Flow</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AU DC</td>
+      <td>ProductA</td>
+      <td>200.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AU Market</td>
+      <td>ProductA</td>
+      <td>200.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NZ DC</td>
+      <td>ProductA</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NZ Market</td>
+      <td>ProductA</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Total</td>
+      <td>Total</td>
+      <td>600.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="flow-from-origin-to-destination">Flow from Origin to Destination</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Total flow per site
+</span><span class="n">sdc_flow</span> <span class="o">=</span> <span class="p">{(</span><span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span> <span class="n">OtoD_v</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">p</span><span class="p">][</span><span class="n">d</span><span class="p">].</span><span class="n">value</span><span class="p">()</span> <span class="k">for</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="ow">in</span> <span class="n">OtoD_l</span><span class="p">}</span>
+
+<span class="n">sdc_flow</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">sdc_flow</span><span class="p">,</span>
+                                  <span class="n">orient</span><span class="o">=</span><span class="s">'index'</span><span class="p">,</span>
+                                  <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'Flow'</span><span class="p">])</span>
+
+<span class="c1"># Reset index and parse supplier, product, and DC from index
+</span><span class="n">sdc_flow</span> <span class="o">=</span> <span class="n">sdc_flow</span><span class="p">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">sdc_flow</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">sdc_flow</span><span class="p">[</span><span class="s">'index'</span><span class="p">].</span><span class="n">tolist</span><span class="p">(),</span>
+                        <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'Origin'</span><span class="p">,</span>
+                                 <span class="s">'Product'</span><span class="p">,</span>
+                                 <span class="s">'Destination'</span><span class="p">]).</span><span class="n">join</span><span class="p">(</span><span class="n">sdc_flow</span><span class="p">.</span><span class="n">drop</span><span class="p">([</span><span class="s">'index'</span><span class="p">],</span>
+                                                           <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Add totals
+</span><span class="n">temp</span> <span class="o">=</span> <span class="n">sdc_flow</span><span class="p">.</span><span class="nb">sum</span><span class="p">()</span>
+<span class="n">temp</span><span class="p">[</span><span class="s">'Origin'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'Total'</span>
+<span class="n">temp</span><span class="p">[</span><span class="s">'Product'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'Total'</span>
+<span class="n">temp</span><span class="p">[</span><span class="s">'Destination'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'Total'</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">sdc_flow</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span>
+                       <span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Save to Excel
+</span><span class="n">temp</span><span class="p">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> 
+              <span class="n">sheet_name</span><span class="o">=</span><span class="s">'Origin to Destination Flow'</span><span class="p">,</span>
+              <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">temp</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Origin</th>
+      <th>Product</th>
+      <th>Destination</th>
+      <th>Flow</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Shanghai</td>
+      <td>ProductA</td>
+      <td>NZ DC</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Shanghai</td>
+      <td>ProductA</td>
+      <td>AU DC</td>
+      <td>200.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NZ DC</td>
+      <td>ProductA</td>
+      <td>NZ Market</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NZ DC</td>
+      <td>ProductA</td>
+      <td>AU Market</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>AU DC</td>
+      <td>ProductA</td>
+      <td>NZ Market</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>AU DC</td>
+      <td>ProductA</td>
+      <td>AU Market</td>
+      <td>200.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Total</td>
+      <td>Total</td>
+      <td>Total</td>
+      <td>600.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="variable-site-costs">Variable Site Costs</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Table of DC variable costs by product and DC
+</span><span class="n">dc_varcost</span> <span class="o">=</span> <span class="n">dc_flow</span><span class="p">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">'Site'</span><span class="p">,</span> 
+                                        <span class="s">'Product'</span><span class="p">],</span>
+                                 <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s">'Flow'</span><span class="p">],</span>
+                                 <span class="n">aggfunc</span><span class="o">=</span><span class="nb">sum</span><span class="p">)</span>
+
+<span class="n">dc_varcost</span> <span class="o">=</span> <span class="n">dc_varcost</span><span class="p">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="n">dc_varcost</span> <span class="o">=</span> <span class="n">dc_varcost</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'PSite'</span><span class="p">],</span>
+                              <span class="n">left_on</span><span class="o">=</span><span class="p">[</span><span class="s">'Site'</span><span class="p">,</span>
+                                       <span class="s">'Product'</span><span class="p">],</span>
+                              <span class="n">right_on</span><span class="o">=</span><span class="p">[</span><span class="s">'SiteID'</span><span class="p">,</span>
+                                        <span class="s">'ProductID'</span><span class="p">])</span>
+
+<span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">DCVar</span><span class="p">:</span>
+    <span class="n">dc_varcost</span><span class="p">[</span><span class="n">costRename</span><span class="p">(</span><span class="n">cost</span><span class="p">)]</span> <span class="o">=</span> <span class="n">dc_varcost</span><span class="p">[</span><span class="n">cost</span><span class="p">]</span> <span class="o">*</span> <span class="n">dc_varcost</span><span class="p">[</span><span class="s">'Flow'</span><span class="p">]</span>
+
+<span class="c1"># Drop unnecessary columns
+</span><span class="n">colnames</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Site'</span><span class="p">,</span> <span class="s">'Product'</span><span class="p">,</span> <span class="s">'Flow'</span><span class="p">]</span> <span class="o">+</span> \
+           <span class="n">var_cost_cols</span> <span class="o">+</span> \
+           <span class="n">varp_cost_cols</span> <span class="o">+</span> \
+           <span class="p">[</span><span class="n">costRename</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span> <span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">DCVar</span><span class="p">]</span>
+<span class="n">dc_varcost</span> <span class="o">=</span> <span class="n">dc_varcost</span><span class="p">[</span><span class="n">colnames</span><span class="p">]</span>
+
+<span class="c1"># Drop rows with zero flow
+</span><span class="n">dc_varcost</span> <span class="o">=</span> <span class="n">dc_varcost</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dc_varcost</span><span class="p">[</span><span class="s">'Flow'</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Add totals
+</span><span class="n">temp</span> <span class="o">=</span> <span class="n">dc_varcost</span><span class="p">.</span><span class="nb">sum</span><span class="p">()</span>
+<span class="n">temp</span><span class="p">[</span><span class="s">'Site'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'Total'</span>
+<span class="n">temp</span><span class="p">[</span><span class="s">'Product'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'Total'</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">dc_varcost</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span>
+                       <span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Fill NAs with zeros
+</span><span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="p">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Save to Excel
+</span><span class="n">temp</span><span class="p">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> 
+              <span class="n">sheet_name</span><span class="o">=</span><span class="s">'Variable Site Costs'</span><span class="p">,</span>
+              <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">temp</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Site</th>
+      <th>Product</th>
+      <th>Flow</th>
+      <th>ReceivingCPU</th>
+      <th>StorageCPU</th>
+      <th>VASCPU</th>
+      <th>XDockCPU</th>
+      <th>Receiving Cost</th>
+      <th>Storage Cost</th>
+      <th>VAS Cost</th>
+      <th>XDock Cost</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AU DC</td>
+      <td>ProductA</td>
+      <td>200.0</td>
+      <td>0.22</td>
+      <td>0.90</td>
+      <td>0.75</td>
+      <td>0.07</td>
+      <td>44.0</td>
+      <td>180.0</td>
+      <td>150.0</td>
+      <td>14.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AU Market</td>
+      <td>ProductA</td>
+      <td>200.0</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NZ DC</td>
+      <td>ProductA</td>
+      <td>100.0</td>
+      <td>0.30</td>
+      <td>1.25</td>
+      <td>0.90</td>
+      <td>0.02</td>
+      <td>30.0</td>
+      <td>125.0</td>
+      <td>90.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NZ Market</td>
+      <td>ProductA</td>
+      <td>100.0</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Total</td>
+      <td>Total</td>
+      <td>600.0</td>
+      <td>0.52</td>
+      <td>2.15</td>
+      <td>1.65</td>
+      <td>0.09</td>
+      <td>74.0</td>
+      <td>305.0</td>
+      <td>240.0</td>
+      <td>16.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="fixed-site-costs">Fixed Site Costs</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Table of DC fixed costs by DC
+</span><span class="n">dc_fixcost</span> <span class="o">=</span> <span class="n">dc_flow</span><span class="p">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">'Site'</span><span class="p">],</span>
+                                 <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s">'Flow'</span><span class="p">],</span>
+                                 <span class="n">aggfunc</span><span class="o">=</span><span class="nb">sum</span><span class="p">)</span>
+
+<span class="n">dc_fixcost</span> <span class="o">=</span> <span class="n">dc_fixcost</span><span class="p">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="n">dc_fixcost</span> <span class="o">=</span> <span class="n">dc_fixcost</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'Site'</span><span class="p">].</span><span class="n">set_index</span><span class="p">(</span><span class="s">'ID'</span><span class="p">),</span>
+                             <span class="n">on</span><span class="o">=</span><span class="s">'Site'</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">DCFix</span><span class="p">:</span>
+    <span class="n">dc_fixcost</span><span class="p">[</span><span class="n">costRename</span><span class="p">(</span><span class="n">cost</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">dc_fixcost</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dc_fixcost</span><span class="p">[</span><span class="s">'Flow'</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">,</span> <span class="n">costRename</span><span class="p">(</span><span class="n">cost</span><span class="p">)]</span> <span class="o">=</span> <span class="n">dc_fixcost</span><span class="p">[</span><span class="s">'FixedCost'</span><span class="p">]</span>
+
+<span class="c1"># Drop unnecessary columns
+</span><span class="n">colnames</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Site'</span><span class="p">,</span> <span class="s">'Flow'</span><span class="p">,</span> <span class="s">'X'</span><span class="p">,</span> <span class="s">'Y'</span><span class="p">]</span> <span class="o">+</span> \
+           <span class="n">fix_cost_cols</span> <span class="o">+</span> \
+           <span class="p">[</span><span class="n">costRename</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span> <span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">fix_cost_cols</span><span class="p">]</span>
+<span class="n">dc_fixcost</span> <span class="o">=</span> <span class="n">dc_fixcost</span><span class="p">[</span><span class="n">colnames</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">alwaysFixed</span><span class="p">:</span>
+    <span class="c1"># Drop rows with zero flow
+</span>    <span class="n">dc_fixcost</span> <span class="o">=</span> <span class="n">dc_fixcost</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dc_fixcost</span><span class="p">[</span><span class="s">'Flow'</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Add totals
+</span><span class="n">temp</span> <span class="o">=</span> <span class="n">dc_fixcost</span><span class="p">.</span><span class="nb">sum</span><span class="p">()</span>
+<span class="n">temp</span><span class="p">[</span><span class="s">'Site'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'Total'</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">dc_fixcost</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span>
+                         <span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="p">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Save to Excel
+</span><span class="n">temp</span><span class="p">.</span><span class="n">drop</span><span class="p">([</span><span class="s">'X'</span><span class="p">,</span> <span class="s">'Y'</span><span class="p">],</span>
+          <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">).</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> 
+                           <span class="n">sheet_name</span><span class="o">=</span><span class="s">'Site Fixed Costs'</span><span class="p">,</span>
+                           <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">temp</span><span class="p">.</span><span class="n">drop</span><span class="p">([</span><span class="s">'X'</span><span class="p">,</span> <span class="s">'Y'</span><span class="p">],</span>
+          <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Site</th>
+      <th>Flow</th>
+      <th>FixedCost</th>
+      <th>Fixed Cost</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AU DC</td>
+      <td>200.0</td>
+      <td>120000.0</td>
+      <td>120000.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AU Market</td>
+      <td>200.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NZ DC</td>
+      <td>100.0</td>
+      <td>100000.0</td>
+      <td>100000.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NZ Market</td>
+      <td>100.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Total</td>
+      <td>600.0</td>
+      <td>220000.0</td>
+      <td>220000.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="total-site-costs">Total Site Costs</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Total DC costs (fixed and variable) by DC
+</span><span class="n">dc_totalcost</span> <span class="o">=</span> <span class="n">dc_varcost</span><span class="p">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">'Site'</span><span class="p">],</span>
+                                      <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="n">costRename</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span> <span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">DCVar</span><span class="p">],</span>
+                                      <span class="n">aggfunc</span><span class="o">=</span><span class="nb">sum</span><span class="p">)</span>
+<span class="n">dc_totalcost</span> <span class="o">=</span> <span class="n">dc_totalcost</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">dc_fixcost</span><span class="p">.</span><span class="n">set_index</span><span class="p">(</span><span class="s">'Site'</span><span class="p">),</span>
+                                 <span class="n">how</span><span class="o">=</span><span class="s">'outer'</span><span class="p">)</span>
+
+<span class="n">dc_totalcost</span><span class="p">[</span><span class="s">'Var Cost'</span><span class="p">]</span> <span class="o">=</span> <span class="n">dc_totalcost</span><span class="p">[[</span><span class="n">costRename</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span> <span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">DCVar</span><span class="p">]].</span><span class="nb">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">dc_totalcost</span><span class="p">[</span><span class="s">'Site Cost'</span><span class="p">]</span> <span class="o">=</span> <span class="n">dc_totalcost</span><span class="p">[</span><span class="s">'Var Cost'</span><span class="p">]</span> <span class="o">+</span> <span class="n">dc_totalcost</span><span class="p">[</span><span class="s">'Fixed Cost'</span><span class="p">]</span>
+
+<span class="n">dc_totalcost</span> <span class="o">=</span> <span class="n">dc_totalcost</span><span class="p">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="c1"># Drop unnecessary columns
+</span><span class="n">colnames</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Site'</span><span class="p">,</span> <span class="s">'Flow'</span><span class="p">,</span> <span class="s">'X'</span><span class="p">,</span> <span class="s">'Y'</span><span class="p">]</span> <span class="o">+</span> \
+           <span class="p">[</span><span class="n">costRename</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span> <span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">fix_cost_cols</span><span class="p">]</span> <span class="o">+</span> \
+           <span class="p">[</span><span class="n">costRename</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span> <span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">var_cost_cols</span><span class="p">]</span> <span class="o">+</span> \
+           <span class="p">[</span><span class="n">costRename</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span> <span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">varp_cost_cols</span><span class="p">]</span> <span class="o">+</span> \
+           <span class="p">[</span><span class="s">'Var Cost'</span><span class="p">,</span> <span class="s">'Site Cost'</span><span class="p">]</span>
+<span class="n">dc_totalcost</span> <span class="o">=</span> <span class="n">dc_totalcost</span><span class="p">[</span><span class="n">colnames</span><span class="p">]</span>
+
+<span class="c1"># Add totals
+</span><span class="n">temp</span> <span class="o">=</span> <span class="n">dc_totalcost</span><span class="p">.</span><span class="nb">sum</span><span class="p">()</span>
+<span class="n">temp</span><span class="p">[</span><span class="s">'Site'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'Total'</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">dc_totalcost</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span>
+                           <span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="p">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Save to Excel
+</span><span class="n">temp</span><span class="p">.</span><span class="n">drop</span><span class="p">([</span><span class="s">'X'</span><span class="p">,</span> <span class="s">'Y'</span><span class="p">],</span>
+          <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">).</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> 
+                           <span class="n">sheet_name</span><span class="o">=</span><span class="s">'Site Total Costs'</span><span class="p">,</span>
+                           <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">temp</span><span class="p">.</span><span class="n">drop</span><span class="p">([</span><span class="s">'X'</span><span class="p">,</span> <span class="s">'Y'</span><span class="p">],</span>
+          <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Site</th>
+      <th>Flow</th>
+      <th>Fixed Cost</th>
+      <th>Receiving Cost</th>
+      <th>Storage Cost</th>
+      <th>VAS Cost</th>
+      <th>XDock Cost</th>
+      <th>Var Cost</th>
+      <th>Site Cost</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AU DC</td>
+      <td>200.0</td>
+      <td>120000.0</td>
+      <td>44.0</td>
+      <td>180.0</td>
+      <td>150.0</td>
+      <td>14.0</td>
+      <td>388.0</td>
+      <td>120388.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AU Market</td>
+      <td>200.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NZ DC</td>
+      <td>100.0</td>
+      <td>100000.0</td>
+      <td>30.0</td>
+      <td>125.0</td>
+      <td>90.0</td>
+      <td>2.0</td>
+      <td>247.0</td>
+      <td>100247.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NZ Market</td>
+      <td>100.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Total</td>
+      <td>600.0</td>
+      <td>220000.0</td>
+      <td>74.0</td>
+      <td>305.0</td>
+      <td>240.0</td>
+      <td>16.0</td>
+      <td>635.0</td>
+      <td>220635.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="total-transport-costs">Total Transport Costs</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Total supplier to DC transport costs
+</span>
+<span class="n">sdc_cost</span> <span class="o">=</span> <span class="n">sdc_flow</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'PLane'</span><span class="p">],</span>
+                          <span class="n">left_on</span><span class="o">=</span><span class="p">[</span><span class="s">'Origin'</span><span class="p">,</span>
+                                   <span class="s">'Product'</span><span class="p">,</span>
+                                   <span class="s">'Destination'</span><span class="p">],</span>
+                          <span class="n">right_on</span><span class="o">=</span><span class="p">[</span><span class="s">'FromID'</span><span class="p">,</span>
+                                    <span class="s">'ProductID'</span><span class="p">,</span>
+                                    <span class="s">'ToID'</span><span class="p">])</span>
+
+<span class="c1"># Calculate total transport costs based on flow
+</span><span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">tvarp_cost_cols</span><span class="p">:</span>
+    <span class="n">sdc_cost</span><span class="p">[</span><span class="n">costRename</span><span class="p">(</span><span class="n">cost</span><span class="p">)]</span> <span class="o">=</span> <span class="n">sdc_cost</span><span class="p">[</span><span class="s">'Flow'</span><span class="p">]</span> <span class="o">*</span> <span class="n">sdc_cost</span><span class="p">[</span><span class="n">cost</span><span class="p">]</span>
+    
+<span class="c1"># Drop unnecessary columns
+</span><span class="n">colnames</span> <span class="o">=</span> <span class="p">[</span><span class="s">'FromID'</span><span class="p">,</span> <span class="s">'ToID'</span><span class="p">,</span> <span class="s">'Product'</span><span class="p">,</span> <span class="s">'Flow'</span><span class="p">]</span> <span class="o">+</span> \
+           <span class="p">[</span><span class="n">cost</span> <span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">tvarp_cost_cols</span><span class="p">]</span> <span class="o">+</span> \
+           <span class="p">[</span><span class="n">costRename</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span> <span class="k">for</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">tvarp_cost_cols</span><span class="p">]</span>
+<span class="n">sdc_cost</span> <span class="o">=</span> <span class="n">sdc_cost</span><span class="p">[</span><span class="n">colnames</span><span class="p">]</span>
+
+<span class="c1"># Drop rows with zero flow
+</span><span class="n">sdc_cost</span> <span class="o">=</span> <span class="n">sdc_cost</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">sdc_cost</span><span class="p">[</span><span class="s">'Flow'</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Join coordinates (and location name?)
+</span><span class="n">sdc_cost</span> <span class="o">=</span> <span class="n">sdc_cost</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'Site'</span><span class="p">].</span><span class="n">set_index</span><span class="p">(</span><span class="s">'ID'</span><span class="p">)[[</span><span class="s">'X'</span><span class="p">,</span>
+                                                       <span class="s">'Y'</span><span class="p">]],</span>
+                         <span class="n">on</span><span class="o">=</span><span class="s">'FromID'</span><span class="p">)</span>
+<span class="n">sdc_cost</span> <span class="o">=</span> <span class="n">sdc_cost</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'Site'</span><span class="p">].</span><span class="n">set_index</span><span class="p">(</span><span class="s">'ID'</span><span class="p">)[[</span><span class="s">'X'</span><span class="p">,</span>
+                                                       <span class="s">'Y'</span><span class="p">]],</span>
+                         <span class="n">on</span><span class="o">=</span><span class="s">'ToID'</span><span class="p">,</span>
+                         <span class="n">lsuffix</span><span class="o">=</span><span class="s">'_From'</span><span class="p">,</span>
+                         <span class="n">rsuffix</span><span class="o">=</span><span class="s">'_To'</span><span class="p">)</span>
+
+<span class="c1"># Add totals
+</span><span class="n">temp</span> <span class="o">=</span> <span class="n">sdc_cost</span><span class="p">.</span><span class="nb">sum</span><span class="p">()</span>
+<span class="n">temp</span><span class="p">[</span><span class="s">'FromID'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'Total'</span>
+<span class="n">temp</span><span class="p">[</span><span class="s">'ToID'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'Total'</span>
+<span class="n">temp</span><span class="p">[</span><span class="s">'Product'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'Total'</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">sdc_cost</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span>
+                       <span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Save to Excel
+</span><span class="n">temp</span><span class="p">.</span><span class="n">drop</span><span class="p">([</span><span class="s">'X_From'</span><span class="p">,</span> 
+           <span class="s">'Y_From'</span><span class="p">,</span>
+           <span class="s">'X_To'</span><span class="p">,</span>
+           <span class="s">'Y_To'</span><span class="p">],</span>
+          <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">).</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> 
+                           <span class="n">sheet_name</span><span class="o">=</span><span class="s">'Transport Costs'</span><span class="p">,</span>
+                           <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">temp</span><span class="p">.</span><span class="n">drop</span><span class="p">([</span><span class="s">'X_From'</span><span class="p">,</span> 
+           <span class="s">'Y_From'</span><span class="p">,</span>
+           <span class="s">'X_To'</span><span class="p">,</span>
+           <span class="s">'Y_To'</span><span class="p">],</span>
+          <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>FromID</th>
+      <th>ToID</th>
+      <th>Product</th>
+      <th>Flow</th>
+      <th>FreightCPU</th>
+      <th>DrayageCPU</th>
+      <th>TransportCPU</th>
+      <th>Freight Cost</th>
+      <th>Drayage Cost</th>
+      <th>Transport Cost</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Shanghai</td>
+      <td>NZ DC</td>
+      <td>ProductA</td>
+      <td>100.0</td>
+      <td>0.278624</td>
+      <td>0.022397</td>
+      <td>0.000000</td>
+      <td>27.86244</td>
+      <td>2.239721</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Shanghai</td>
+      <td>AU DC</td>
+      <td>ProductA</td>
+      <td>200.0</td>
+      <td>0.162942</td>
+      <td>0.040232</td>
+      <td>0.000000</td>
+      <td>32.58832</td>
+      <td>8.046370</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NZ DC</td>
+      <td>NZ Market</td>
+      <td>ProductA</td>
+      <td>100.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.462276</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>46.227599</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>AU DC</td>
+      <td>AU Market</td>
+      <td>ProductA</td>
+      <td>200.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.412256</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>82.451250</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Total</td>
+      <td>Total</td>
+      <td>Total</td>
+      <td>600.0</td>
+      <td>0.441566</td>
+      <td>0.062629</td>
+      <td>0.874532</td>
+      <td>60.45076</td>
+      <td>10.286091</td>
+      <td>128.678849</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="flow-map">Flow Map</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sdc_cost</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>FromID</th>
+      <th>ToID</th>
+      <th>Product</th>
+      <th>Flow</th>
+      <th>FreightCPU</th>
+      <th>DrayageCPU</th>
+      <th>TransportCPU</th>
+      <th>Freight Cost</th>
+      <th>Drayage Cost</th>
+      <th>Transport Cost</th>
+      <th>X_From</th>
+      <th>Y_From</th>
+      <th>X_To</th>
+      <th>Y_To</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Shanghai</td>
+      <td>NZ DC</td>
+      <td>ProductA</td>
+      <td>100.0</td>
+      <td>0.278624</td>
+      <td>0.022397</td>
+      <td>0.000000</td>
+      <td>27.86244</td>
+      <td>2.239721</td>
+      <td>0.000000</td>
+      <td>121.4967</td>
+      <td>31.2466</td>
+      <td>174.6928</td>
+      <td>-36.8936</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Shanghai</td>
+      <td>AU DC</td>
+      <td>ProductA</td>
+      <td>200.0</td>
+      <td>0.162942</td>
+      <td>0.040232</td>
+      <td>0.000000</td>
+      <td>32.58832</td>
+      <td>8.046370</td>
+      <td>0.000000</td>
+      <td>121.4967</td>
+      <td>31.2466</td>
+      <td>153.0807</td>
+      <td>-27.3760</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NZ DC</td>
+      <td>NZ Market</td>
+      <td>ProductA</td>
+      <td>100.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.462276</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>46.227599</td>
+      <td>174.6928</td>
+      <td>-36.8936</td>
+      <td>174.7645</td>
+      <td>-36.8509</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>AU DC</td>
+      <td>AU Market</td>
+      <td>ProductA</td>
+      <td>200.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.412256</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>82.451250</td>
+      <td>153.0807</td>
+      <td>-27.3760</td>
+      <td>146.9211</td>
+      <td>-31.2532</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Create a map of routes
+</span>
+<span class="c1"># Initialize figure sites
+</span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="p">.</span><span class="n">Figure</span><span class="p">()</span>
+
+<span class="c1"># Add routes from origin to destination
+</span><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">sdc_cost</span><span class="p">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">fig</span><span class="p">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="p">.</span><span class="n">Scattermapbox</span><span class="p">(</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s">'FromID'</span><span class="p">])</span><span class="o">+</span><span class="s">' to '</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s">'ToID'</span><span class="p">]),</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="s">'lines'</span><span class="p">,</span>
+        <span class="c1">#hovertemplate = temp_data['Sequence'].apply(str) + ') ' + temp_data['Ship_To_Location'],
+</span>        <span class="n">lon</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s">'X_From'</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s">'X_To'</span><span class="p">]],</span>
+        <span class="n">lat</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s">'Y_From'</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s">'Y_To'</span><span class="p">]],</span>
+        <span class="c1">#marker = {'size': 10},
+</span>        <span class="n">line</span> <span class="o">=</span> <span class="p">{</span><span class="s">'width'</span><span class="p">:</span> <span class="mi">10</span><span class="o">*</span><span class="n">row</span><span class="p">[</span><span class="s">'Flow'</span><span class="p">]</span><span class="o">/</span><span class="n">sdc_cost</span><span class="p">[</span><span class="s">'Flow'</span><span class="p">].</span><span class="nb">max</span><span class="p">(),</span>
+                <span class="s">'color'</span><span class="p">:</span> <span class="s">'red'</span><span class="p">}))</span>
+<span class="c1"># Add sites
+</span><span class="n">temp</span> <span class="o">=</span> <span class="n">sdc_cost</span><span class="p">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">'FromID'</span><span class="p">,</span>
+                                   <span class="s">'Y_From'</span><span class="p">,</span>
+                                   <span class="s">'X_From'</span><span class="p">],</span>
+                            <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s">'Flow'</span><span class="p">],</span>
+                            <span class="n">aggfunc</span><span class="o">=</span><span class="nb">sum</span><span class="p">)</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="p">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">temp</span><span class="p">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">fig</span><span class="p">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="p">.</span><span class="n">Scattermapbox</span><span class="p">(</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s">'FromID'</span><span class="p">]),</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="s">'markers'</span><span class="p">,</span>
+        <span class="n">lon</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s">'X_From'</span><span class="p">]],</span>
+        <span class="n">lat</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s">'Y_From'</span><span class="p">]],</span>
+        <span class="n">marker</span> <span class="o">=</span> <span class="p">{</span><span class="s">'size'</span><span class="p">:</span> <span class="mi">50</span><span class="o">*</span><span class="n">row</span><span class="p">[</span><span class="s">'Flow'</span><span class="p">]</span><span class="o">/</span><span class="n">sdc_cost</span><span class="p">[</span><span class="s">'Flow'</span><span class="p">].</span><span class="nb">sum</span><span class="p">(),</span>
+                  <span class="s">'color'</span><span class="p">:</span> <span class="s">'red'</span><span class="p">}</span>
+        <span class="p">))</span>
+
+<span class="n">temp_X</span> <span class="o">=</span> <span class="n">sdc_cost</span><span class="p">[</span><span class="s">'X_To'</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">sdc_cost</span><span class="p">[</span><span class="s">'X_From'</span><span class="p">])</span>
+<span class="n">temp_Y</span> <span class="o">=</span> <span class="n">sdc_cost</span><span class="p">[</span><span class="s">'Y_To'</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">sdc_cost</span><span class="p">[</span><span class="s">'Y_From'</span><span class="p">])</span>
+    
+<span class="n">fig</span><span class="p">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">margin</span> <span class="o">=</span><span class="p">{</span><span class="s">'l'</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s">'t'</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s">'b'</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s">'r'</span><span class="p">:</span><span class="mi">0</span><span class="p">},</span>
+    <span class="n">mapbox</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">'accesstoken'</span><span class="p">:</span> <span class="n">mapbox_access_token</span><span class="p">,</span>
+        <span class="s">'center'</span><span class="p">:</span> <span class="p">{</span><span class="s">'lon'</span><span class="p">:</span> <span class="n">temp_X</span><span class="p">.</span><span class="n">mean</span><span class="p">(),</span>
+                   <span class="s">'lat'</span><span class="p">:</span> <span class="n">temp_Y</span><span class="p">.</span><span class="n">mean</span><span class="p">()},</span>
+        <span class="s">'bearing'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s">'zoom'</span><span class="p">:</span> <span class="n">getBoundsZoomLevel</span><span class="p">([</span><span class="n">temp_Y</span><span class="p">.</span><span class="nb">max</span><span class="p">(),</span>
+                                    <span class="n">temp_X</span><span class="p">.</span><span class="nb">max</span><span class="p">(),</span>
+                                    <span class="n">temp_Y</span><span class="p">.</span><span class="nb">min</span><span class="p">(),</span>
+                                    <span class="n">temp_X</span><span class="p">.</span><span class="nb">min</span><span class="p">()],</span>
+                                   <span class="p">{</span><span class="s">'height'</span><span class="p">:</span> <span class="n">map_height</span><span class="p">,</span>
+                                    <span class="s">'width'</span><span class="p">:</span> <span class="n">map_width</span><span class="p">})})</span>
+
+<span class="n">fig</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Close the Pandas Excel writer and output the Excel file.
+</span><span class="n">writer</span><span class="p">.</span><span class="n">save</span><span class="p">()</span>
+<span class="c1"># Save and release handle
+#writer.close()
+#writer.handles = None
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fig</span><span class="p">.</span><span class="n">write_image</span><span class="p">(</span><span class="n">fn</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'.xlsm'</span><span class="p">,</span> <span class="s">' - '</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">scenario_name</span><span class="p">)</span><span class="o">+</span><span class="s">'.jpg'</span><span class="p">),</span>
+                <span class="n">height</span><span class="o">=</span><span class="n">map_height</span><span class="p">,</span>
+                <span class="n">width</span><span class="o">=</span><span class="n">map_width</span><span class="p">)</span>
+</code></pre></div></div>
+
+				</div>
+				
+				<div class="cta-box">
+					
+
+<style>
+#share-buttons {display: inline-block; vertical-align: middle; }
+#share-buttons:after {content: ""; display: block; clear: both;}
+#share-buttons > div {
+    position: relative;
+    text-align: left; 
+    height: 36px; 
+    width: 32px; 
+    float: left; 
+    text-align: center;
+}
+#share-buttons > div > svg {height: 16px; fill: #FFF; margin-top: 10px;}
+#share-buttons > div:hover {cursor: pointer;}
+#share-buttons > div.facebook:hover > svg {fill: #3B5998;}
+#share-buttons > div.twitter:hover > svg {fill: #55ACEE;}
+#share-buttons > div.linkedin:hover > svg {fill: #0077b5;}
+#share-buttons > div.pinterest:hover > svg {fill: #CB2027;}
+#share-buttons > div.gplus:hover > svg {fill: #dd4b39;}
+#share-buttons > div.mail:hover > svg {fill: #7D7D7D;}
+#share-buttons > div.instagram:hover > svg {fill: #C73B92;}
+#share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
+#share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
+#share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
+#share-buttons > div.pinterest > svg {height: 20px; margin-top: 9px;}
+#share-buttons > div.gplus > svg {height: 17px; margin-top: 9px; position: relative; left: 1px;}
+#share-buttons > div.mail > svg {height: 14px; margin-top: 11px;}
+</style>
+
+<span>Share on: </span><div id="share-buttons">
+
+    <div class="linkedin" title="Share this on Linkedin" onclick="window.open('https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/blog/2023/01/21/supply-chain-network-design-python-pulp.html&title=&summary=&source=');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></div>
+
+    <div class="twitter" title="Share this on Twitter" onclick="window.open('http://twitter.com/home?status=http://localhost:4000/blog/2023/01/21/supply-chain-network-design-python-pulp.html');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
+    
+    <div class="facebook" title="Share this on Facebook" onclick="window.open('http://www.facebook.com/share.php?u=http://localhost:4000/blog/2023/01/21/supply-chain-network-design-python-pulp.html');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"/></svg></div>
+
+
+    <!--<div class="pinterest" title="Share this on Pinterest" onclick="window.open('https://pinterest.com/pin/create/button/?url=&media=http://localhost:4000/assets/images/supplychain.jpg&description=');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M256 597q0-108 37.5-203.5t103.5-166.5 152-123 185-78 202-26q158 0 294 66.5t221 193.5 85 287q0 96-19 188t-60 177-100 149.5-145 103-189 38.5q-68 0-135-32t-96-88q-10 39-28 112.5t-23.5 95-20.5 71-26 71-32 62.5-46 77.5-62 86.5l-14 5-9-10q-15-157-15-188 0-92 21.5-206.5t66.5-287.5 52-203q-32-65-32-169 0-83 52-156t132-73q61 0 95 40.5t34 102.5q0 66-44 191t-44 187q0 63 45 104.5t109 41.5q55 0 102-25t78.5-68 56-95 38-110.5 20-111 6.5-99.5q0-173-109.5-269.5t-285.5-96.5q-200 0-334 129.5t-134 328.5q0 44 12.5 85t27 65 27 45.5 12.5 30.5q0 28-15 73t-37 45q-2 0-17-3-51-15-90.5-56t-61-94.5-32.5-108-11-106.5z"/></svg></div>-->
+
+    <!--<div class="gplus" title="Share this on Google Plus" onclick="window.open('https://plus.google.com/share?url=http://localhost:4000/blog/2023/01/21/supply-chain-network-design-python-pulp.html');"><svg viewBox="0 0 2304 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1437 913q0 208-87 370.5t-248 254-369 91.5q-149 0-285-58t-234-156-156-234-58-285 58-285 156-234 234-156 285-58q286 0 491 192l-199 191q-117-113-292-113-123 0-227.5 62t-165.5 168.5-61 232.5 61 232.5 165.5 168.5 227.5 62q83 0 152.5-23t114.5-57.5 78.5-78.5 49-83 21.5-74h-416v-252h692q12 63 12 122zm867-122v210h-209v209h-210v-209h-209v-210h209v-209h210v209h209z"/></svg></div>-->
+
+    <div class="mail" title="Share this through Email" onclick="window.open('mailto:?&body=http://localhost:4000/blog/2023/01/21/supply-chain-network-design-python-pulp.html');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"/></svg></div>
+
+</div>
+				</div>
+				
+			</div>
+			
+			<center>
+				<h2>Read more posts about...</h2>
+				<ul class="tags">
+					
+						<a href='/blog/tag/scnd'><li> scnd </li></a>
+					
+						<a href='/blog/tag/supply chain'><li> supply chain </li></a>
+					
+						<a href='/blog/tag/logistics'><li> logistics </li></a>
+					
+						<a href='/blog/tag/python'><li> python </li></a>
+					
+				</ul>
+				<a href='/blog.html'><p>See all posts</p></a>
+			</center>
+			
+			<footer>
+				<hr>
+				© <script>document.write(new Date().getFullYear())</script><noscript>2022</noscript> Victor Blancada. All Rights Reserved.
+			</footer>
+			<div class="spacer">
+			</div>
+		</div>
+	</body>
+</html>
+
