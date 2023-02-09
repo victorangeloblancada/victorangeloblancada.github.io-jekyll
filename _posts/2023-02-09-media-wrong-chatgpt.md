@@ -53,3 +53,4 @@ While OpenAI was originally a non-profit with a small team, it boasts both:
 2. a highly-regarded and well-compensated research team including OpenAI co-founder and former Google machine learning expert Ilya Sutskever.
 
 In an extremely technical field such as machine learning, team size doesn’t affect results as much as individuals’ expertise. It is therefore come as no surprise that the OpenAI team can produce such impressive models despite being depicted by the media as a minnow compared to Google.
+
