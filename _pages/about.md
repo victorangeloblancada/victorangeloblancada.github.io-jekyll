@@ -31,7 +31,7 @@ An experienced strategy consultant for Fortune 500 companies, I have worked with
 
 As the leading supply chain solutions partner for brands and retailers, Li & Fung is committed to building the supply chain of the future.
 
-#### Senior Data Science Manager, Global Supply Chain Analytics (2019-Present)
+#### Senior Manager, Supply Chain Analytics (2019-Present)
 
 - Responsible for improving the efficiency of Li & Fung’s global supply chain by deploying self-service data science tools.
 - Automated address cleansing by developing a deep learning seq2seq model that extracts standardized address components from unstructured customer address inputs.
@@ -41,7 +41,7 @@ As the leading supply chain solutions partner for brands and retailers, Li & Fun
 
 Publicis Worldwide helps clients lead industry change by combining IT and data analytics with strategic creativity to produce innovative marketing solutions. It is part of the Publicis Groupe, the oldest and one of the largest marketing and communications companies in the world, by revenue.
 
-#### Data Lead, Hong Kong and Greater China (2017-2019)
+#### Data Lead (2017-2019)
 
 - Managed the data team to partner with clients, collect requirements, define strategy, and deliver robust analytics solutions.
 - Created a bag-of-words sentiment scoring model for mixed English and Cantonese text that was used across different social listening and customer feedback analysis projects.
