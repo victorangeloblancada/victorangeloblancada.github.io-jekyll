@@ -18,4 +18,7 @@ gem "nokogiri", ">= 1.13.6"
 gem "addressable", ">= 2.8.0"
 gem "webrick", "~> 1.7"
 
+#gem "jekyll-commonmark-ghpages", ">= 0.4.0"
+#gem "commonmarker", ">= 0.4.0"
+
 #gem "jekyll-toc"
