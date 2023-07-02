@@ -27,11 +27,21 @@ An experienced strategy consultant for Fortune 500 companies, I have worked with
 
 ## Work Experience
 
+### Maersk Contract Logistics
+
+A.P. Moller - Maersk is an integrated logistics company, committed to connecting and simplifying global trade for a growing world.
+
+#### Senior Manager, Supply Chain Analytics (2022-Present)
+
+- Responsible for defining and executing the data strategy for Maersk Contract Logistics, including but not limited to optimizing supply chain networks, measuring sustainability, improving transport, and deploying new data-driven tools such as labor management systems.
+- Streamlined the machine learning application development and deployment process from two months to two weeks by implementing MLOps best practices and automating workflows. 
+- Built regional control tower dashboard systems to improve real-time visibility and control over logistics operations for managers and process owners both within Maersk and from the client.
+
 ### LF Logistics
 
 As the leading supply chain solutions partner for brands and retailers, Li & Fung is committed to building the supply chain of the future.
 
-#### Senior Data Science Manager, Global Supply Chain Analytics (2019-Present)
+#### Senior Data Science Manager, Global Supply Chain Analytics (2019-2022)
 
 - Responsible for improving the efficiency of Li & Fung’s global supply chain by deploying self-service data science tools.
 - Automated address cleansing by developing a deep learning seq2seq model that extracts standardized address components from unstructured customer address inputs.
