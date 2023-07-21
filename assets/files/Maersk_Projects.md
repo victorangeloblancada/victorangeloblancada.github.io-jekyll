@@ -15,8 +15,8 @@
 * Labor management system
 * Language model for address parsing
 * Counterpart of
- * Supply Chain Development - Amita
- * Network Optimization - JZ
- * Business Intelligence - Renu
- * Innovation
+  * Supply Chain Development - Amita
+  * Network Optimization - JZ
+  * Business Intelligence - Renu
+  * Innovation
 * TBD
