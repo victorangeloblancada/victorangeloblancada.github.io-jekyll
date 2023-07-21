@@ -15,6 +15,7 @@
 * Document automation, including certificate of origin
 * Labor management system
 * Language model for address parsing
+* TMS insights
 * Counterpart of
   * Supply Chain Development - Amita
   * Network Optimization - JZ
