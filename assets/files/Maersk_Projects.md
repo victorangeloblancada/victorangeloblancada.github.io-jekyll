@@ -7,6 +7,7 @@
 * Developed and conducted a Tableau training program for over 200 management LF Logistics employees to promote data literacy.
 * Led the multi-temperature supply chain network consolidation of a regional food and beverage conglomerate, resulting in 10% logistics cost reduction.
 # 2021-2023
+* Data Lake initiative
 * Inventory replenishment for The Home Depot
 * COG analysis app
 * SCND Python script
