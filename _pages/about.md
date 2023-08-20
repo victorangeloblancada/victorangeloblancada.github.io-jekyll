@@ -17,9 +17,9 @@ notshareable: True
 
 ## About Me
 
-I am a data science expert with a strong background in strategy consulting. I specialize in providing best possible solutions to business decision-makers using big data analytics. My technical experience across the entire data and analytics pipeline – from data management to quantitative analysis (using mathematical modeling and optimization) to results presentation to stakeholders – covers a wide range of industries from telecommunications to fast-moving consumer goods.
+I am a data science and machine learning expert with a strong background in strategy consulting. I specialize in providing best possible solutions to business decision-makers using big data analytics. My technical experience across the entire data and analytics pipeline – from data engineering to machine learning to results presentation to stakeholders – covers a wide range of industries from telecommunications to marketing and advertising to supply chain management.
 
-In my present capacity working for a global supply chain management company, I am responsible for optimizing global operations by developing data-driven solutions and introducing self-service machine learning-based tools and processes that help promote the company’s competitive advantage and drive strategic business growth.
+In my present capacity working for a global logistics and supply chain company, I am responsible for optimizing global operations by developing data-driven solutions and introducing self-service machine learning-based tools and processes that help promote the company’s competitive advantage and drive strategic business growth.
 
 As Analytics Technology Manager for a leading media conglomerate, I pioneered its global predictive modeling hub and was responsible for optimizing the media portfolios of global brands, i.e., helping clients effectively meet sales targets with customized media portfolio optimization solutions.
 
@@ -35,6 +35,7 @@ A.P. Moller - Maersk is an integrated logistics company, committed to connecting
 
 - Responsible for defining and executing the data strategy for Maersk Contract Logistics, including but not limited to optimizing supply chain networks, measuring sustainability, improving transport, and deploying new data-driven tools such as labor management systems.
 - Streamlined the machine learning application development and deployment process from two months to two weeks by implementing MLOps best practices and automating workflows. 
+- Developed self-service supply chain optimization software including applications for Supply Chain Network Design (SCND), Center of Gravity (CoG) facility location analysis, and Traveling Salesman Problem (TSP) transport optimization.
 - Built regional control tower dashboard systems to improve real-time visibility and control over logistics operations for managers and process owners both within Maersk and from the client.
 
 ### LF Logistics
@@ -95,5 +96,6 @@ Mitchell Madison Group is a management consulting firm that delivers measurable 
 - National Finalist, Indie Eng’g Engineering Competition 2012 sponsored by Tanging Yaman Foundation
 - Awardee, Ten Outstanding Students of Makati City for 2009
 - Published Author, contributing writer to Data-Driven Investor publication on Medium
+- Two-time featured generative AI developer in National Novel Generation Month 2021 and 2022  
 
 *Download the printer-friendly version of my résumé and CV [here](/pages/resume-downloads.html). Visit my LinkedIn page [here](https://www.linkedin.com/in/geloblancada/).*
