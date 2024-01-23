@@ -60,13 +60,13 @@ Publicis Worldwide helps clients lead industry change by combining IT and data a
 
 ### IPG Mediabrands
 
-IPG Mediabrands is the global media and data management arm of Interpublic Group. An industry-leader in terms of analytics, it manages USD 39B of marketing investments on behalf of clients worldwide.
+IPG Mediabrands is the global media and data management arm of Interpublic Group. An industry-leader in terms of analytics, it manages USD 39 billion of marketing investments on behalf of clients worldwide.
 
 #### Analytics Technology Manager, Manila Global Modeling Center (2015-2017)
 
-- Built and managed the global predictive modeling hub in Manila that supported the analytics needs of markets across IPG Mediabrands' global footprint. 
+- Built and managed the global predictive modeling hub in Manila that supported the analytics needs of markets across IPG Mediabrands' global footprint.
+- Developed an intelligent marketing spend optimization platform that resulted in 13% sales lift for clients. The platform uses COByLA (constrained optimization by linear approximation) to automatically determine the optimal media schedule across channels and days.
 - Used Markov Chain Monte Carlo models to measure the effectiveness of advertising spending on client KPIs. Successfully predicted the results of the 2016 Philippine election using a Markov Chain Monte Carlo model created for a client political party.
-- Developed a marketing spend optimization platform that uses COByLA (constrained optimization by linear approximation)  to automatically determine the optimal media schedule across channels and days.
 
 ### Mitchell Madison Group
 
@@ -84,7 +84,7 @@ Mitchell Madison Group is a management consulting firm that delivers measurable 
 
 #### Bachelor of Science in Industrial Engineering (2009-2014)
 
-- Graduated *summa cum laude*, with a grade point average of 1.11, the third highest in the university graduating class of more than 4,000 graduates (US GPA equivalent is 3.84)
+- Graduated *summa cum laude*, with a grade point average of 1.11, the third highest in the university graduating class of more than 4,000 graduates (US GPA equivalent is 3.95, certified by World Education Services)
 - Oblation Scholarship awardee, placing within the top fifty scorers out of 62,111 test takers in the University of the Philippines College Admissions Test
 - National Champion, Operations Research Quiz Competition 2013 and 2014 sponsored by the Operations Research Society of the Philippines
 - National Champion, Industrial Engineering Quiz Competition 2013 sponsored by the Philippine Institute of Industrial Engineers
