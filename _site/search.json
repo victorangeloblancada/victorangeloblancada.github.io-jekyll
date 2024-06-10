@@ -1,6 +1,22 @@
 [
   
     {
+      "title"    : "The Negative Effect of Pruning Large Language Models on Finetuning",
+      "category" : "blog",
+      "tags"     : "ai, artificial intelligence, llm, large language model, pruning, fine-tuning",
+      "url"      : "/blog/2024/05/31/llm-pruning-finetuning.html",
+      "date"     : "2024-05-31 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "Fuzzy Matching in Python",
+      "category" : "blog",
+      "tags"     : "python, data science, data analysis",
+      "url"      : "/blog/2024/03/02/fuzzy-matching-in-python.html",
+      "date"     : "2024-03-02 00:00:00 +0800"
+    } ,
+  
+    {
       "title"    : "What The Media Gets Wrong About ChatGPT",
       "category" : "blog",
       "tags"     : "nlp, llm, openai, chatgpt, google, microsoft, python",

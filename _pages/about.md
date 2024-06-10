@@ -6,14 +6,18 @@ tags:
 - about
 - Victor Angelo Blancada
 - me
-image: /assets/images/Victor_3.jpg
+image: /assets/images/Victor_5.jpg
 notshareable: True
 ---
 <!--
 # Victor Angelo Blancada
 -->
 
+<!--
 *Download the printer-friendly version of my résumé and CV [here](/pages/resume-downloads.html). Visit my LinkedIn page [here](https://www.linkedin.com/in/geloblancada/).*
+-->
+
+*Visit my LinkedIn page [here](https://www.linkedin.com/in/geloblancada/).*
 
 ## About Me
 
@@ -31,9 +35,13 @@ An experienced strategy consultant for Fortune 500 companies, I have worked with
 
 A.P. Moller - Maersk is an integrated logistics company, committed to connecting and simplifying global trade for a growing world.
 
-#### Senior Manager, Supply Chain Analytics (2022-Present)
+#### Divisional Manager, Supply Chain Analytics (2024-Present)
 
-- Responsible for defining and executing the data strategy for Maersk Contract Logistics, including but not limited to optimizing supply chain networks, measuring sustainability, improving transport, and deploying new data-driven tools such as labor management systems.
+- Lead the Supply Chain Analytics function for Maersk Contract Logistics in the Global Solution Engineering team.
+- Responsible for defining and executing the data science and analytics strategy for Maersk Contract Logistics, including but not limited to optimizing supply chain networks, measuring sustainability, improving transport, and deploying new data-driven tools such as labor management systems.
+
+#### Senior Manager, Supply Chain Analytics (2022-2024)
+
 - Streamlined the machine learning application development and deployment process from two months to two weeks by implementing MLOps best practices and automating workflows. 
 - Developed self-service supply chain optimization software including applications for Supply Chain Network Design (SCND), Center of Gravity (CoG) facility location analysis, and Traveling Salesman Problem (TSP) transport optimization.
 - Built regional control tower dashboard systems to improve real-time visibility and control over logistics operations for managers and process owners both within Maersk and from the client.
@@ -45,6 +53,7 @@ As the leading supply chain solutions partner for brands and retailers, Li & Fun
 #### Senior Data Science Manager, Global Supply Chain Analytics (2019-2022)
 
 - Responsible for improving the efficiency of Li & Fung’s global supply chain by deploying self-service data science tools.
+- Developed an industry-first data science platform for Li & Fung’s strategic sourcing costing centre of excellence to provide merchandisers with insights for vendor negotiation.
 - Automated address cleansing by developing a deep learning seq2seq model that extracts standardized address components from unstructured customer address inputs.
 - Improved labor and space requirements planning by creating an SKU-level inventory prediction system for seasonal SKUs. The system uses K-Shape clustering to combine SKUs based on the shapes of their inventory curves before fitting regression models for each cluster.
 
@@ -52,7 +61,7 @@ As the leading supply chain solutions partner for brands and retailers, Li & Fun
 
 Publicis Worldwide helps clients lead industry change by combining IT and data analytics with strategic creativity to produce innovative marketing solutions. It is part of the Publicis Groupe, the oldest and one of the largest marketing and communications companies in the world, by revenue.
 
-#### Data Lead, Hong Kong and Greater China (2017-2019)
+#### Lead Analyst, Hong Kong and Greater China (2017-2019)
 
 - Managed the data team to partner with clients, collect requirements, define strategy, and deliver robust analytics solutions.
 - Created a bag-of-words sentiment scoring model for mixed English and Cantonese text that was used across different social listening and customer feedback analysis projects.
@@ -62,9 +71,9 @@ Publicis Worldwide helps clients lead industry change by combining IT and data a
 
 IPG Mediabrands is the global media and data management arm of Interpublic Group. An industry-leader in terms of analytics, it manages USD 39 billion of marketing investments on behalf of clients worldwide.
 
-#### Analytics Technology Manager, Manila Global Modeling Center (2015-2017)
+#### APAC Analytics Technology Manager (2015-2017)
 
-- Built and managed the global predictive modeling hub in Manila that supported the analytics needs of markets across IPG Mediabrands' global footprint.
+- Built and managed the APAC predictive modeling hub in Manila that supported the analytics needs of markets across IPG Mediabrands' APAC and global footprint.
 - Developed an intelligent marketing spend optimization platform that resulted in 13% sales lift for clients. The platform uses COByLA (constrained optimization by linear approximation) to automatically determine the optimal media schedule across channels and days.
 - Used Markov Chain Monte Carlo models to measure the effectiveness of advertising spending on client KPIs. Successfully predicted the results of the 2016 Philippine election using a Markov Chain Monte Carlo model created for a client political party.
 
@@ -98,4 +107,9 @@ Mitchell Madison Group is a management consulting firm that delivers measurable 
 - Published Author, contributing writer to Data-Driven Investor publication on Medium
 - Two-time featured generative AI developer in National Novel Generation Month 2021 and 2022  
 
+*Visit my LinkedIn page [here](https://www.linkedin.com/in/geloblancada/).*
+
+
+<!--
 *Download the printer-friendly version of my résumé and CV [here](/pages/resume-downloads.html). Visit my LinkedIn page [here](https://www.linkedin.com/in/geloblancada/).*
+-->
