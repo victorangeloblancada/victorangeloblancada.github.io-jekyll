@@ -1,4 +1,110 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://victorangeloblancada.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://victorangeloblancada.github.io/" rel="alternate" type="text/html" /><updated>2024-06-11T00:13:52+08:00</updated><id>https://victorangeloblancada.github.io/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">The Negative Effect of Pruning Large Language Models on Finetuning</title><link href="https://victorangeloblancada.github.io/blog/2024/05/31/llm-pruning-finetuning.html" rel="alternate" type="text/html" title="The Negative Effect of Pruning Large Language Models on Finetuning" /><published>2024-05-31T00:00:00+08:00</published><updated>2024-05-31T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2024/05/31/llm-pruning-finetuning</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2024/05/31/llm-pruning-finetuning.html"><![CDATA[<p>Large language models (LLMs) such as Llama and Falcon often serve as foundational models, the bedrock upon which more specialized AI applications are built through finetuning. However, the computational demands of these models pose a significant challenge for both inference and finetuning. Techniques in optimizing neural networks, particularly pruning, may offer a solution by reducing the number of model parameters for more efficient inference without a consequent large negative effect on accuracy. However, while pruning reduces computational requirements for inference, it also reduces a model’s ability to be finetuned, as will be explained in this article. This poses a challenge for organizations wishing to leverage AI language models for specialized use.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://victorangeloblancada.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://victorangeloblancada.github.io/" rel="alternate" type="text/html" /><updated>2025-02-28T22:42:33+08:00</updated><id>https://victorangeloblancada.github.io/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">Dissecting a Power BI Dashboard</title><link href="https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html" rel="alternate" type="text/html" title="Dissecting a Power BI Dashboard" /><published>2024-12-13T00:00:00+08:00</published><updated>2024-12-13T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html"><![CDATA[<p>In this article, we will thoroughly explore the structure and contents of a Power BI dashboard (PBIX) file. Like most Microsoft Office file formats, a PBIX file is actually a zipped folder containing various directories and files which work together to form the dashboard we see. Understanding the underlying architecture of a Power BI report is crucial for both users and developers, as it enables a deeper appreciation of how data is structured, processed, and displayed.</p>
+
+<p>This guide will break down the various directories and files found inside the zipped folder of a PBIX file, explain their purpose, and show how these elements work together to create the final dashboard. We will also delve into the core <code class="language-plaintext highlighter-rouge">Layout</code> file, which plays a key role in defining how data is translated into charts, tables, and other visualizations within the dashboard.</p>
+
+<h2 id="overview-of-a-power-bi-report-package-structure">Overview of a Power BI Report Package Structure</h2>
+
+<p>A PBIX file is typically organized in a package with a clearly defined directory structure. This structure can be exposed by changing the file extension from PBIX to ZIP, then unzipping the resulting zipped folder to reveal its contents.</p>
+
+<p>Each folder and file within this structure serves a specific purpose in making the dashboard work the way it does. Below is an overview of the key directories and files in the report package:</p>
+
+<p><em>rels<br />
+|</em> .rels<br />
+docProps<br />
+|_ custom.xml<br />
+Report<br />
+|_ Layout<br />
+|_ StaticResources\SharedResources\BaseThemes<br />
+   |_ CY24SU08.json<br />
+[Content_Types].xml<br />
+DataModel<br />
+DiagramLayout<br />
+Metadata<br />
+SecurityBindings<br />
+Settings<br />
+Version</p>
+
+<p>Each of these components plays a vital role in ensuring that the report is displayed and interacts as intended. We will break down each section to understand what it contains and how it contributes to the functionality of the dashboard.</p>
+
+<h3 id="the_relsdirectory">The <code class="language-plaintext highlighter-rouge">_rels</code> Directory</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">_rels</code> directory is one of the most critical directories in the Power BI report package. It contains the <code class="language-plaintext highlighter-rouge">.rels</code> file, which manages the relationships between different parts of the report.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">.rels</code> file stores the relationships between various elements of the report. For example, it could define how the layout file is connected to the static resources or how the report interacts with external data models. The <code class="language-plaintext highlighter-rouge">.rels</code> file ensures that when the report is opened, the application knows how to load and render the different parts of the report package correctly.</p>
+
+<h3 id="thedocpropsdirectory">The <code class="language-plaintext highlighter-rouge">docProps</code> Directory</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">docProps</code> directory contains metadata files that provide additional information about the report. Metadata is essential for defining the context and properties of the report, which can be helpful for tracking and reporting purposes.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">custom.xml</code> file stores user-defined properties, such as the author of the report, version number, or other custom attributes relevant to the report. For example, it could store details about the report’s creation date, the business unit it pertains to, or custom fields that help categorize and filter the report.</p>
+
+<h3 id="thereportdirectory">The <code class="language-plaintext highlighter-rouge">Report</code> Directory</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">Report</code> directory is where the majority of the report’s configuration and layout components are found. It contains the layout file, static resources, and any base themes that are used to define the visual look and feel of the report. These elements are key in defining how the data is visually presented.</p>
+
+<h4 id="layout">Layout</h4>
+
+<p>The layout file is the core of the report. It defines the visual structure of the report, specifying how the data will be displayed in charts, tables, and other visual elements. The layout file determines the positions of various components on the report canvas and ensures that the visual elements are placed and sized correctly.</p>
+
+<p>As an example, the <code class="language-plaintext highlighter-rouge">Layout</code> file may define the report’s main visual container, which could hold a chart, such as a column chart. The chart may be configured to display data from a table named <code class="language-plaintext highlighter-rouge">Table1</code>, and the layout also specifies how the data is grouped by different time periods (such as year, quarter, month, and day). It also defines how specific measures, like the quantity of items sold, are aggregated and visualized in the chart.</p>
+
+<p>The layout file also specifies the data projections (i.e., the data elements to be displayed in the chart), the filters that should be applied to restrict the data, and how different data roles (such as categories, series, and rows) are mapped to the visual components.</p>
+
+<h4 id="staticresourcessharedresourcesbasethemes">StaticResources\SharedResources\BaseThemes</h4>
+
+<p>The <code class="language-plaintext highlighter-rouge">CY24SU08.json</code> file defines the visual theme for the report. Themes are used to maintain consistency in design across different reports and dashboards. This JSON file stores information about color schemes, fonts, and other stylistic choices that apply throughout the report. By using a theme like <code class="language-plaintext highlighter-rouge">CY24SU08.json</code>, the report ensures that all visual elements are cohesive and adhere to a specific design aesthetic, whether for brand consistency or user experience.</p>
+
+<h3 id="other-key-files-in-the-report-package">Other Key Files in the Report Package</h3>
+
+<p>In addition to the layout and theme resources, there are several other important files that contribute to the functionality of the report.</p>
+
+<h3 id="content_typesxml">[Content_Types].xml</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">[Content_Types].xml</code> file is essential for defining the MIME types for the various parts of the report package. It helps the report-rendering system determine how to process different file types within the package, such as XML files, images, or JSON files. This file serves as a map for the content and ensures that each component is handled correctly.</p>
+
+<h3 id="datamodel">DataModel</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">DataModel</code> binary contains the underlying schema and data definitions that drive the report. It includes details such as tables, columns, and relationships between different datasets. This folder is vital because it defines the data structure that feeds into the visual components, allowing the dashboard to present relevant and accurate information. This file usually cannot be read because its encoding is not supported by most text editors.</p>
+
+<h3 id="diagramlayout">DiagramLayout</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">DiagramLayout</code> directory may contain files that define additional visual elements, such as diagrams, flowcharts, or other graphical representations that complement the report’s main data visuals. While the core report may focus on charts and tables, diagram layouts can help explain complex data relationships or workflows visually.</p>
+
+<h3 id="metadata">Metadata</h3>
+
+<p>Metadata files store information about the report itself, such as the author, version history, creation date, and other contextual information. These files are crucial for tracking changes and updates to the report, ensuring that the correct version is always used and providing information about the report’s lifecycle.</p>
+
+<h3 id="securitybindings">SecurityBindings</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">SecurityBindings</code> binary handles the security aspects of the report, ensuring that sensitive data is protected. It defines access control and permissions, specifying which users or groups can view certain sections or interact with specific data points within the report. This is particularly important for reports containing sensitive or confidential information. This file usually cannot be read because its encoding is not supported by most text editors.</p>
+
+<h3 id="settings">Settings</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">Settings</code> directory contains configuration files that manage preferences or environment-specific settings for the report. These settings ensure that the report behaves as expected across different platforms and environments, whether it’s running locally or being accessed via a web service.</p>
+
+<h3 id="version">Version</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">Version</code> file indicates the current version of the report or report package. This is important for version control, ensuring that users are working with the most up-to-date version of the report and helping to prevent the use of outdated or deprecated files.</p>
+
+<h3 id="parsing-and-interpreting-the-layout-file">Parsing and Interpreting the Layout File</h3>
+
+<p>Let’s take a closer look at the <code class="language-plaintext highlighter-rouge">Layout</code> file, which is at the heart of how the report’s visual elements are configured. The layout file is a configuration file, often in JSON format, that dictates the presentation and interaction of the data in the report.</p>
+
+<h3 id="key-aspects-of-the-layout-file">Key Aspects of the Layout File</h3>
+
+<ol>
+  <li><strong>Visual Containers</strong>: The layout file defines a visual container (e.g., a chart or table) that holds the report’s data. For example, in this case, the container holds a column chart, and the file specifies its position, size, and dimensions on the report canvas.</li>
+  <li><strong>Projections and Querying</strong>: The <code class="language-plaintext highlighter-rouge">projections</code> section in the layout file specifies which data elements should be displayed. This includes categories, series, and rows, as well as aggregation functions (e.g., sum, count). This section ensures that the right data is selected and formatted for visualization.</li>
+  <li><strong>Filters</strong>: Filters are used to limit which data points are shown in the report. These filters can be based on specific criteria (e.g., dates, categories, or regions) to ensure that the report displays only relevant information.</li>
+  <li><strong>Data Role Mapping</strong>: The <code class="language-plaintext highlighter-rouge">Layout</code> file maps the data roles to the visual components. For instance, categories might be mapped to the x-axis, while series could be used for color-coding the data. These mappings help translate raw data into meaningful visualizations.</li>
+  <li><strong>Execution Metrics</strong>: The layout file may also include execution metrics that track how efficiently the report is rendering, especially when dealing with large datasets. This ensures that the report performs well and loads quickly.</li>
+</ol>
+
+<h2 id="summary">Summary</h2>
+
+<p>Understanding the inner workings of a Power BI report requires more than just familiarity with the visual components. The underlying structure, including the directories and files that make up the report package, plays a crucial role in ensuring that the report functions correctly. Each file, from the layout to metadata and security settings, contributes to the overall experience of the report, ensuring that the data is presented clearly, accurately, and securely.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">Layout</code> file, in particular, is essential for defining how data is visualized. By carefully structuring the report’s visuals and ensuring that the data is aggregated and displayed correctly, the layout file is a key component in transforming raw data into actionable insights. When working with or developing Power BI reports, understanding these elements will help you navigate and optimize the report for both users and analysts alike.</p>]]></content><author><name></name></author><category term="blog" /><category term="power bi" /><category term="dashboard" /><category term="microsoft" /><summary type="html"><![CDATA[PBIX files are zipped folders and examining their contents can shed light on how Power BI translates data into visualizations.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/dissect.webp" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/dissect.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">The Negative Effect of Pruning Large Language Models on Finetuning</title><link href="https://victorangeloblancada.github.io/blog/2024/05/31/llm-pruning-finetuning.html" rel="alternate" type="text/html" title="The Negative Effect of Pruning Large Language Models on Finetuning" /><published>2024-05-31T00:00:00+08:00</published><updated>2024-05-31T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2024/05/31/llm-pruning-finetuning</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2024/05/31/llm-pruning-finetuning.html"><![CDATA[<p>Large language models (LLMs) such as Llama and Falcon often serve as foundational models, the bedrock upon which more specialized AI applications are built through finetuning. However, the computational demands of these models pose a significant challenge for both inference and finetuning. Techniques in optimizing neural networks, particularly pruning, may offer a solution by reducing the number of model parameters for more efficient inference without a consequent large negative effect on accuracy. However, while pruning reduces computational requirements for inference, it also reduces a model’s ability to be finetuned, as will be explained in this article. This poses a challenge for organizations wishing to leverage AI language models for specialized use.</p>
 
 <p>Pruning aims to make neural networks more efficient by removing unnecessary connections within the model. Common pruning methods include:</p>
 
@@ -427,554 +533,4 @@
 
 <p>Of course, given sufficient data points (art and their judged scores) from competitions, we can always just build an AI model that creates the optimal artwork to win a competition, but this just replaces the human input away from text prompts to judges’ scores. This then would be the state of the art of found art, until the next advancement comes along.</p>
 
-<p><em>This article was also posted on <a href="https://medium.com/@gelo.blancada/state-of-the-art-creativity-in-the-age-of-stable-diffusion-407bd2b98776">Medium</a>.</em></p>]]></content><author><name></name></author><category term="blog" /><category term="blog" /><category term="ai" /><category term="artificial intelligence" /><category term="art" /><category term="creativity" /><category term="machine learning" /><category term="opinion" /><summary type="html"><![CDATA[The first prize at the recently-held 2022 Colorado State Fair’s art competition in the digital category controversially went to a work created using Midjourney, an AI-powered text-to-image generator. Artists were understandably upset but I would argue that society at large should welcome such a development.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://miro.medium.com/max/1400/1*OMKOu2adjb0WjYEej9ap3A.jpeg" /><media:content medium="image" url="https://miro.medium.com/max/1400/1*OMKOu2adjb0WjYEej9ap3A.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Finance from First Principles</title><link href="https://victorangeloblancada.github.io/blog/2022/03/20/finance-from-first-principles.html" rel="alternate" type="text/html" title="Finance from First Principles" /><published>2022-03-20T00:00:00+08:00</published><updated>2022-03-20T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2022/03/20/finance-from-first-principles</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2022/03/20/finance-from-first-principles.html"><![CDATA[<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
-</script>
-
-<p>As developers and data scientists rise in rank and expand their scope, finance becomes an unavoidable part of their responsibilities. This post is meant to serve as a reference of basic finance formulas with annotations designed to make the formulas easier to grok for engineers.</p>
-
-<h2 id="annual-time-value-of-money">Annual Time Value of Money</h2>
-
-<h4 id="future-value">Future Value</h4>
-
-<!--$$FV = PV (1+r)^n$$-->
-<p>` FV = PV(1+r)^n `</p>
-
-<p>This just means that the future value of a present sum of money must be adjusted by the rate.</p>
-
-<h4 id="present-value">Present Value</h4>
-
-<!--$$PV=\frac{FV}{(1+r)^n}$$-->
-<p>` PV = (FV)/(1+r)^n `</p>
-
-<p>See future value above.</p>
-
-<h4 id="rate">Rate</h4>
-
-<!--$$r=(\frac{FV}{PV})^\frac{1}{n}−1$$-->
-<p>` r = ((FV)/(PV))^(1/n)-1 `</p>
-
-<p>The rate can be calculated by getting the ratio of the future value compared to the present value then taking its nth root, where n is the number of compounding periods (usually in years).</p>
-
-<h4 id="years">Years</h4>
-
-<!--$$n=\frac{log(\frac{FV}{PV})}{log(1+r)}$$-->
-<p>` n = (log((FV)/(PV))) / (log(1+r)) `</p>
-
-<p>The number of years can be calculated by first getting the ratio of the future value compared to the present value. Based on the previous formulas, this ratio is equivalent to one plus the rate raised by the number of compounding periods.</p>
-
-<p>` (1+r)^n=(FV)/(PV)`</p>
-
-<p>Take the logarithm of both sides with base (1+r).</p>
-
-<h6 id="-nlog_1r1rlog_1rfvpv">` n*log_(1+r)(1+r)=log_(1+r)((FV)/(PV))`</h6>
-
-<p>` log_(1+r)(1+r)` cancels out to one and n is now isolated on the left hand side. Use the logarithm change of base rule to evaluate the right hand side.</p>
-
-<p>` n = (log((FV)/(PV))) / (log(1+r)) `</p>
-
-<h2 id="sub-annual-time-value-of-money">Sub-Annual Time Value of Money</h2>
-
-<p>This section is almost exactly the same as the Annual Time Value of Money formulas except that the compounding periods are not strictly annual.</p>
-
-<h4 id="future-value-1">Future Value</h4>
-
-<!--FV=PV(1+(rp))npFV=PV(1+(rp))np-->
-<p>` FV = PV(1+(r/p))^(np) `</p>
-
-<h4 id="future-value-with-continuous-compounding">Future Value with Continuous Compounding</h4>
-
-<p>` FV = PV*(e^(rn)) `</p>
-
-<h4 id="present-value-1">Present Value</h4>
-
-<p>` PV = (FV)/(1+(r/p))^(np) `</p>
-
-<h4 id="stated-annual-rate">Stated Annual Rate</h4>
-
-<p>` r = p[((FV)/(PV))^(1/(np))-1] `</p>
-
-<h4 id="period-rate">Period Rate</h4>
-
-<p>` r/p = ((FV)/(PV))^(1/(np))-1 `</p>
-
-<h4 id="effective-annual-rate">Effective Annual Rate</h4>
-
-<p>` r_(effective) = (1+(r_(stated)/p))^p-1 `</p>
-
-<h4 id="periods">Periods</h4>
-
-<p>` np = (log((FV)/(PV))) / (log(1+(r/p))) `</p>
-
-<h4 id="years-1">Years</h4>
-
-<p>` n = (log((FV)/(PV))) / (plog(1+(r/p))) `</p>
-
-<h2 id="constant-annuityperpetuity">Constant Annuity/Perpetuity</h2>
-
-<h4 id="constant-perpetuity-present-value">Constant Perpetuity Present Value</h4>
-
-<p>` PV = (PMT)/r `</p>
-
-<h4 id="constant-perpetuity-payment">Constant Perpetuity Payment</h4>
-
-<p>` PMT = PV*r `</p>
-
-<h4 id="constant-annuity-present-value">Constant Annuity Present Value</h4>
-
-<p>` PV = ((PMT)/r)*[1-(1/(1+r)^n)] `</p>
-
-<p><em>where n is the number of years of payments</em></p>
-
-<h4 id="sub-annual-constant-annuity-present-value">Sub-Annual Constant Annuity Present Value</h4>
-
-<p>` PV = ((PMT)/(r/p))<em>[1-(1/(1+(r/p))^(n</em>p))] `</p>
-
-<p><em>where n is the number of years of payments and p is the number of payments per year</em></p>
-
-<h4 id="constant-annuity-payment">Constant Annuity Payment</h4>
-
-<p>` PMT = (PV*r)/[1-(1/(1+r)^n)] `</p>
-
-<p><em>where n is the number of years of payments</em></p>
-
-<h4 id="sub-annual-constant-annuity-payment">Sub-Annual Constant Annuity Payment</h4>
-
-<p>` PMT = (PV(r/p))/[1-(1/(1+(r/p))^(np))] `</p>
-
-<p><em>where n is the number of years of payments and p is the number of payments per year</em></p>
-
-<h2 id="growing-annuityperpetuity">Growing Annuity/Perpetuity</h2>
-
-<h4 id="growing-perpetuity-present-value">Growing Perpetuity Present Value</h4>
-
-<p>` PV = (PMT)/(r-g) `</p>
-
-<p>for r&gt;g</p>
-
-<h4 id="growing-perpetuity-payment">Growing Perpetuity Payment</h4>
-
-<p>` PMT = PV*(r-g) `</p>
-
-<p>for r&gt;g</p>
-
-<h4 id="growing-annuity-present-value">Growing Annuity Present Value</h4>
-
-<p>` PV = (PMT)/(r-g) * [1-((1+g)/(1+r))^n] `</p>
-
-<p>for r&gt;g</p>
-
-<p><em>where n is the number of years of payments</em></p>
-
-<h4 id="sub-annual-growing-annuity-present-value">Sub-Annual Growing Annuity Present Value</h4>
-
-<p>` PV = ((PMT)/(r/p-g/p))[1-((1+g/p)/(1+r/p))^(np)] `</p>
-
-<p>for r&gt;g</p>
-
-<p><em>where n is the number of years of payments and p is the number of payments per year</em></p>
-
-<h4 id="growing-annuity-payment">Growing Annuity Payment</h4>
-
-<p>` PMT = (PV*(r-g)) / [1-((1+g)/(1+r))^n] `</p>
-
-<p>for r&gt;g</p>
-
-<p><em>where n is the number of years of payments</em></p>
-
-<h4 id="sub-annual-growing-annuity-payment">Sub-Annual Growing Annuity Payment</h4>
-
-<p>` PMT = (PV(r/p-g/p))/[1-((1+g/p)/(1+r/p))^(np)] `</p>
-
-<p>for r&gt;g</p>
-
-<p><em>where n is the number of years of payments and p is the number of payments per year</em></p>
-
-<h2 id="bonds">Bonds</h2>
-
-<h4 id="present-value-annual">Present Value (Annual)</h4>
-
-<p>` PV = (FV)/(1+r)^n `</p>
-
-<h4 id="present-value-sub-annual">Present Value (Sub-Annual)</h4>
-
-<p>` PV = (FV)/(1+(r/p))^(np) `</p>
-
-<h4 id="annuity-present-value-annual">Annuity Present Value (Annual)</h4>
-
-<p>` PV = ((PMT)/r) * [1-(1/(1+r)^n)] `</p>
-
-<p><em>where n is the number of years of payments</em></p>
-
-<h4 id="annuity-present-value-sub-annual">Annuity Present Value (Sub-Annual)</h4>
-
-<p>` PV = ((PMT)/(r/p)) * [1-(1/(1+(r/p))^(np))] `</p>
-
-<p><em>where n is the number of years of payments and p is the number of payments per year</em></p>
-
-<h2 id="net-present-value">Net Present Value</h2>
-
-<h4 id="net-present-value-1">Net Present Value</h4>
-
-<p>` NPV = FV_0 + ((FV_1)/(1+r)) + ((FV_2)/(1+r)^2) + ((FV_3)/(1+r)^3) + … + ((FV_n)/(1+r)^n) `</p>
-
-<h2 id="marginal-analysis">Marginal Analysis</h2>
-
-<h4 id="marginal-cost">Marginal Cost</h4>
-<p>` MC_n = TC_n - TC_(n-1) `</p>
-
-<h4 id="total-cost">Total Cost</h4>
-<p>` TC = VC + FC `</p>
-
-<h4 id="average-total-cost">Average Total Cost</h4>
-<p>` ATC = (TC)/Q `</p>
-
-<h4 id="average-variable-cost">Average Variable Cost</h4>
-<p>` AVC = (VC)/Q `</p>
-
-<h4 id="average-fixed-cost">Average Fixed Cost</h4>
-<p>` AFC = (FC)/Q `</p>
-
-<h4 id="marginal-revenue">Marginal Revenue</h4>
-<p>` MR_n = TR_n - TR_(n-1) `</p>
-
-<h4 id="total-revenue">Total Revenue</h4>
-<p>` TR = Q * p `</p>
-
-<h4 id="marginal-profit">Marginal Profit</h4>
-<p>` MP = MR - MC `
-or
-` MP_n = TP_n - TP_(n-1) `</p>
-
-<h4 id="total-profit">Total Profit</h4>
-<p>` TP = TR - TC `</p>
-
-<h2 id="marginal-analysis-with-calculus">Marginal Analysis (with Calculus)</h2>
-
-<p>Derivative of a Polynomial (Formulas)
-if y = axn then dy/dx = y’ = naxn-1</p>
-
-<p>if y = a then dy/dx = y’ = 0</p>
-
-<p>Derivative of a Polynomial (Term-by-Term Instructions)</p>
-<ol>
-  <li>If the term is a constant then derivative is zero</li>
-  <li>Otherwise, write sign of term</li>
-  <li>Bring down exponent</li>
-  <li>Multiply exponent by coefficient (the constant)</li>
-  <li>Repeat variable (e.g., x)</li>
-  <li>Reduce exponent by 1</li>
-  <li>Move to step 1 for next term</li>
-</ol>
-
-<p>Example (from lecture):
-y = 7x4 - 5x3 + 9x2 - 3x + 6</p>
-
-<p>y’ = 4<em>7x4-1 - 3</em>5x3-1 + 2<em>9x2-1 - 1</em>3x1-1 + 0</p>
-
-<p>y’ = 28x3 - 15x2 + 18x1 - 3x0</p>
-
-<p>y’ = 28x3 - 15x2 + 18x - 3</p>
-
-<p>Total Revenue</p>
-
-<p>` TR = p * Q `</p>
-
-<p>Marginal Revenue</p>
-
-<p>` MR = (dTR)/(dq) `</p>
-
-<p>first derivative of total revenue with respect to quantity</p>
-
-<p>Total Cost</p>
-
-<p>` TC = VC + FC `</p>
-
-<p>Marginal Cost</p>
-
-<p>` MC = (dTC)/(dq) `</p>
-
-<p>first derivative of total cost with respect to quantity</p>
-
-<p>Total Profit</p>
-
-<p>` TP = TR − TC `</p>
-
-<p>Marginal Profit</p>
-
-<p>` MP = MR − MC `</p>
-
-<p>or</p>
-
-<p>` MP = (dTP)/(dq) `</p>
-
-<p>first derivative of total profit with respect to quantity</p>
-
-<h2 id="supply-and-demand">Supply and Demand</h2>
-
-<p><img src="/assets/images/supply-and-demand.png" alt="img" /></p>
-
-<h4 id="supply-curve">Supply Curve</h4>
-
-<p>A chart or formula of the relationship between price and quantity supplied by producers</p>
-
-<h4 id="demand-curve">Demand Curve</h4>
-
-<p>A chart or formula of the relationship between price and quantity demanded by consumers</p>
-
-<h4 id="equilibrium-point">Equilibrium Point</h4>
-
-<p>The price and quantity at which the quantity demanded is just equal to the quantity supplied. Graphically, the equilibrium point is the intersection of the supply and demand curves.</p>
-
-<h4 id="equilibrium-quantity-q-or-q">Equilibrium Quantity (q* or Q*)</h4>
-
-<p>The price at which the quantity demanded is just equal to the quantity supplied.</p>
-
-<h4 id="equilibrium-price-p">Equilibrium Price (p*)</h4>
-
-<p>The price at which the quantity demanded is just equal to the quantity supplied.</p>
-
-<h4 id="market-clearing-price-p">Market Clearing Price (p*)</h4>
-
-<p>Another term for equilibrium price. “Market clearing” refers to the fact that at this price all willing sellers in the market can find willing buyers and vice versa.</p>
-
-<h4 id="total-revenue-tr">Total Revenue (TR)</h4>
-
-<p>The sum of the prices for the quantity sold. Because in most situations there is a constant market price, the total revenue is usually price times quantity. Graphically, total revenue at equilibrium is the area of the rectangle defined by the origin and the equilibrium point.</p>
-
-<h4 id="consumer-surplus">Consumer Surplus</h4>
-
-<p>The incremental revenue that consumers were willing to pay for a product or service but which they were able to keep because the equilibrium price is less than their willingness to pay. Graphically, the consumer surplus is the area of the triangle above the equilibrium price and below the demand curve.</p>
-
-<h4 id="producer-surplus">Producer Surplus</h4>
-
-<p>The incremental revenue that producers received for a product or service above their lowest price they at which they were willing to supply. Graphically, the producer surplus is the area of the triangle below the equilibrium price and above the supply curve.</p>
-
-<h4 id="unmet-demand">Unmet Demand</h4>
-
-<p>The revenue that consumers were willing to spend but didn’t because the equilibrium price is higher than their willingness to pay. Graphically, the unmet demand is the area of the triangle to the right of the equilibrium quantity and below the demand curve.</p>
-
-<h4 id="price-elasticity-of-demand">Price Elasticity of Demand</h4>
-
-<p>Price elasticity of demand measures the how sensitive the quantity supplied is to a change in price. Elasticity is defined as the percentage change in quantity divided by the percentage change in price.</p>
-
-<p>The elasticity formula is:</p>
-
-<p>` text(Elasticity) = m * (p / Q) `</p>
-
-<p>where m is the slope of the demand curve equation, p is the equilibrium price, and Q is the equilibrium quantity.</p>
-
-<h4 id="price-elasticity-of-supply">Price Elasticity of Supply</h4>
-
-<p>Price elasticity of supply measures the how sensitive the quantity supplied is to a change in price. Elasticity is defined as the percentage change in quantity divided by the percentage change in price.</p>
-
-<p>The elasticity formula is:</p>
-
-<p>` text(Elasticity) = m * (p / Q) `</p>
-
-<p>where m is the slope of the supply curve equation, p is the equilibrium price, and Q is the equilibrium quantity.</p>
-
-<h2 id="basic-statistics-for-finance">Basic Statistics for Finance</h2>
-
-<h4 id="median">Median</h4>
-
-<p>The middle of an ordered set of values. For an even number of values, the median is the average of the two middle values of an ordered sequence.</p>
-
-<h4 id="mode">Mode</h4>
-
-<p>The most frequently occurring value in a set of values. There may be more than one mode.</p>
-
-<h4 id="range">Range</h4>
-
-<p>The difference between the maximum and minimum of a set of values</p>
-
-<h4 id="mean-population">Mean (Population)</h4>
-
-<p>` mu_x = ((sum_(i=1)^n x_i))/n `</p>
-
-<h4 id="variance-population">Variance (Population)</h4>
-
-<p>` sigma_x^2 = ( sum_(i=1)^n(x_i-mu_x)^2 )/n `</p>
-
-<h4 id="standard-deviation-population">Standard Deviation (Population)</h4>
-
-<p>` sigma_x = sqrt{sigma_x^2} `</p>
-
-<h4 id="mean-sample">Mean (Sample)</h4>
-
-<p>` overline{x} = (( sum_(i=1)^nx_i ))/n `</p>
-
-<h4 id="variance-sample">Variance (Sample)</h4>
-
-<p>` s_x^2 = ( sum_(i=1)^n(x_i-overline{x})^2 ) / (n-1) `</p>
-
-<h4 id="standard-deviation-sample">Standard Deviation (Sample)</h4>
-
-<p>`  s_x = sqrt{s_x^2}`</p>
-
-<h4 id="location-of-quartile">Location of Quartile</h4>
-
-<p>` L_q = (n+1)q/4 `</p>
-
-<p>where q is the quartile index (e.g., q=1 for the first quartile) and n is the number of data points.</p>
-
-<p><em>Note: Other quartile location definitions are in common use.</em></p>
-
-<h4 id="interquartile-range-iqr">Interquartile Range (IQR)</h4>
-
-<p><strong>The difference between the third quartile and the first quartile of a set of values.</strong> Multiple definitions for quartile are in common use, with differences most significant for small data sets. Unlike the range, which is defined by the extreme outliers, the interquartile range captures the size of the middle 50 percent by subtracting the 25th percentile from the 75th percentile.</p>
-
-<h4 id="location-of-percentile">Location of Percentile</h4>
-
-<p>` L_p = (n+1)p/(100) `</p>
-
-<p><em>Note: Other percentile location definitions are in common use.</em></p>
-
-<h4 id="pearsons-coefficient-of-skewness">Pearson’s Coefficient of Skewness</h4>
-
-<p>A statistical measure of the extent of asymmetry in a set of values. Defines skewness as a multiple of the standard deviation of a set of values. Negative values signify a data set with greater weight given to values below the median while positive values signify the opposite.</p>
-
-<p>` sk_p = 3( (\text{mean}-\text{median})/(\text{standard deviation}) ) `</p>
-
-<h4 id="excels-skew-function-sample">Excel’s SKEW Function (Sample)</h4>
-
-<p>A statistical measure of the extent of asymmetry in a set of values. Defines skewness as, approximately, the average cubed number of standard deviations each point falls from the mean.</p>
-
-<p>` sk = n/((n-1)(n-2)) sum_(i=1)^n( (x_i- overline{x} ) /s_x)^3 `</p>
-
-<h2 id="linear-combinations-for-finance">Linear Combinations for Finance</h2>
-
-<h4 id="covariance">Covariance</h4>
-
-<p>A statistical measure of the extent to which two variables move together above and below their respective means.</p>
-
-<p>` COV_(xy) = ( sum_(i=1)^n(x_i-mu_x)(y_i-mu_y) )/n `</p>
-
-<p><em>Note: This is a population covariance. The sample covariance would have n-1 in the denominator rather than n. This lesson uses population data.</em></p>
-
-<h4 id="correlation">Correlation</h4>
-
-<p>A normalized version of covariance with a range from -1 to +1. Positive values reflect positive correlation while negative values reflect inverse correlation, with values approaching 0 reflecting weak correlation.</p>
-
-<p>` \text{Correlation} = (COV_(xy)) / (sigma_xsigma_y) `</p>
-
-<h4 id="linear-combination">Linear Combination</h4>
-
-<p>` w = ax + by `</p>
-
-<h4 id="mean-linear-combination">Mean (Linear Combination)</h4>
-
-<p>` mu_w = amu_x + bmu_y `</p>
-
-<h4 id="variance-linear-combination">Variance (Linear Combination)</h4>
-
-<p>` sigma_w^2 = a^2sigma_x^2 + 2abCOV_(xy) + b^2sigma_y^2 `</p>
-
-<p>This formula is useful when the individual values of x and y are unknown but their variances and covariance are known.</p>
-
-<h4 id="standard-deviation-linear-combination">Standard Deviation (Linear Combination)</h4>
-
-<p>` sigma_w = sqrt{sigma_w^2} `</p>
-
-<h2 id="probability">Probability</h2>
-
-<h4 id="mean-from-probability-table">Mean (from probability table)</h4>
-
-<p>` mu_x = sum_(i=1)^np_ix_i `</p>
-
-<h4 id="variance-from-probability-table">Variance (from probability table)</h4>
-
-<p>` sigma_x^2 = sum_(i=1)^np_i(( x_i - mu_x )^2) `</p>
-
-<h4 id="standard-deviation">Standard Deviation</h4>
-
-<p><code class="language-plaintext highlighter-rouge">sigma_x = sqrt{sigma_x^2}</code></p>
-
-<h2 id="regression">Regression</h2>
-
-<p>Regression is  the statistical technique for finding the best line through a scatter plot of two variables. The most common form is least squares regression. “Least squares” refers to a criteria for determining the best-fit line through a two-variable data set. The criteria is to minimize the sum of the squares of the distance between each point and the line.</p>
-
-<h4 id="regression-line">Regression Line</h4>
-
-<p>` y = mx + b `</p>
-
-<h4 id="regression-line-slope">Regression Line Slope</h4>
-
-<p>` m = (COV_(xy)) / (sigma_x^2) `</p>
-
-<h4 id="regression-line-y-intercept">Regression Line Y-Intercept</h4>
-
-<p>` b = mu_y - m*mu_x `</p>
-
-<h4 id="correlation-1">Correlation</h4>
-
-<p>` R = (COV_(xy)) / (sigma_xsigma_y) `</p>
-
-<p>A normalized version of covariance (a statistical measure of the extent to which two variables move together above and below their respective means) with a range from -1 to +1. Positive values reflect positive correlation while negative values reflect inverse correlation, with values approaching 0 reflecting weak correlation.</p>
-
-<h4 id="r-squared">R-Squared</h4>
-
-<p>` R^2 = \text{Correlation}^2 `</p>
-
-<p>A normalized version of correlation with a range from 0 to +1. R-squared, also referred to as the coefficient of determination, is the square of correlation. Values near 1 reflect strong correlation and values approaching 0 reflect weak correlation.</p>
-
-<h2 id="normal-distribution">Normal Distribution</h2>
-
-<h4 id="uniform-distribution">Uniform Distribution</h4>
-
-<p>A continuous probability distribution with minimum and maximum values, with all values in between of equal probability</p>
-
-<h4 id="normal-distribution-1">Normal Distribution</h4>
-
-<p>A continuous probability distribution whose shape closely approximates the symmetrical “bell curve”. A normal distribution is completely specified by providing its mean and standard deviation.</p>
-
-<h4 id="standard-normal-distribution">Standard Normal Distribution</h4>
-
-<p>A normal distribution with mean 0 and standard deviation 1</p>
-
-<h4 id="z-value">Z-Value</h4>
-
-<p>The value on the standard normal distribution that corresponds to the value x on a non-standard normal distribution</p>
-
-<h4 id="x-value">X-Value</h4>
-
-<p>The value x on a non-standard normal distribution. In the case of a problem stated in terms of the standard normal distribution, the z-value and x-value are the same.</p>
-
-<h4 id="normal-distribution-x-to-z-conversion">Normal Distribution X-to-Z Conversion</h4>
-
-<p>` z = (x-m)/s `</p>
-
-<h4 id="normal-distribution-z-to-x-conversion">Normal Distribution Z-to-X Conversion</h4>
-
-<p>` x = zs+m `</p>
-
-<h4 id="z-target-linear-interpolation">Z Target Linear Interpolation</h4>
-
-<p>` z_(targ et) = (((p_(targ et) - p_(low))/(p_(high) - p_(low))) * (z_(high) - z_(low))) + z_(low) `</p>
-
-<!--<script>
-	function calcPercent(a, b) {
-		// The function displays text expressing the relation between two numbers as percentages
-		if (isNaN(parseFloat(a))|isNaN(parseFloat(b))){
-			document.getElementById('results').innerHTML = 'Please enter numeric values only'
-		} else {
-			document.getElementById('results').innerHTML = 'The following percentage relationships are true:'
-			document.getElementById('results').innerHTML += '<p>'+a+' is '+100*parseFloat(a)/parseFloat(b)+'% of '+b+'.</p>'
-			document.getElementById('results').innerHTML += '<p>'+b+' is '+100*parseFloat(b)/parseFloat(a)+'% of '+a+'.</p>'
-			if (parseFloat(a)>parseFloat(b)) {
-				document.getElementById('results').innerHTML += '<p>'+a+' is '+100*(parseFloat(a)-parseFloat(b))/parseFloat(b)+'% larger than '+b+'.</p>'
-				document.getElementById('results').innerHTML += '<p>'+b+' is '+100*(parseFloat(a)-parseFloat(b))/parseFloat(a)+'% smaller than '+a+'.</p>'
-			} else {
-				document.getElementById('results').innerHTML += '<p>'+a+' is '+100*(parseFloat(b)-parseFloat(a))/parseFloat(b)+'% smaller than '+b+'.</p>'
-				document.getElementById('results').innerHTML += '<p>'+b+' is '+100*(parseFloat(b)-parseFloat(a))/parseFloat(a)+'% larger than '+a+'.</p>'
-			}
-		}
-	}
-</script>
-
-<form onload="calcPercent(document.getElementById('a').value, document.getElementById('b').value)">
-	<p>Number A: <input type="text" id="a" value="10" onchange="calcPercent(document.getElementById('a').value, document.getElementById('b').value)"></p>
-	<p>Number B: <input type="text" id="b" value="5" onchange="calcPercent(document.getElementById('a').value, document.getElementById('b').value)"></p>
-	<div id="results">
-		Results will show here 
-	</div>
-</form>-->]]></content><author><name></name></author><category term="blog" /><category term="blog" /><category term="math" /><category term="mathematics" /><category term="business" /><category term="finance" /><category term="economics" /><summary type="html"><![CDATA[]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/finance.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/finance.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+<p><em>This article was also posted on <a href="https://medium.com/@gelo.blancada/state-of-the-art-creativity-in-the-age-of-stable-diffusion-407bd2b98776">Medium</a>.</em></p>]]></content><author><name></name></author><category term="blog" /><category term="blog" /><category term="ai" /><category term="artificial intelligence" /><category term="art" /><category term="creativity" /><category term="machine learning" /><category term="opinion" /><summary type="html"><![CDATA[The first prize at the recently-held 2022 Colorado State Fair’s art competition in the digital category controversially went to a work created using Midjourney, an AI-powered text-to-image generator. Artists were understandably upset but I would argue that society at large should welcome such a development.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://miro.medium.com/max/1400/1*OMKOu2adjb0WjYEej9ap3A.jpeg" /><media:content medium="image" url="https://miro.medium.com/max/1400/1*OMKOu2adjb0WjYEej9ap3A.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

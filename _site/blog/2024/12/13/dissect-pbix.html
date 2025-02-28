@@ -1,0 +1,405 @@
+<!doctype html>
+<html>
+	<head>
+		<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5S5WB7M');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ERJECQ081H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ERJECQ081H');
+</script>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Dissecting a Power BI Dashboard</title>
+		<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Dissecting a Power BI Dashboard | Victor Angelo Blancada</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Dissecting a Power BI Dashboard" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="PBIX files are zipped folders and examining their contents can shed light on how Power BI translates data into visualizations." />
+<meta property="og:description" content="PBIX files are zipped folders and examining their contents can shed light on how Power BI translates data into visualizations." />
+<link rel="canonical" href="https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html" />
+<meta property="og:url" content="https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html" />
+<meta property="og:site_name" content="Victor Angelo Blancada" />
+<meta property="og:image" content="https://victorangeloblancada.github.io/assets/images/dissect.webp" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-12-13T00:00:00+08:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://victorangeloblancada.github.io/assets/images/dissect.webp" />
+<meta property="twitter:title" content="Dissecting a Power BI Dashboard" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-12-13T00:00:00+08:00","datePublished":"2024-12-13T00:00:00+08:00","description":"PBIX files are zipped folders and examining their contents can shed light on how Power BI translates data into visualizations.","headline":"Dissecting a Power BI Dashboard","image":"https://victorangeloblancada.github.io/assets/images/dissect.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html"},"url":"https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+		<link rel="stylesheet" href="https://indestructibletype.com/fonts/Jost.css" type="text/css" charset="utf-8" />
+
+<link rel="stylesheet" href="/assets/css/styles.css">
+<link rel="stylesheet" href="/assets/css/syntax.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+	</head>
+	<body>
+		<script type="text/javascript">
+  window.onscroll = function() {myScrollIndicator()};
+
+  function myScrollIndicator() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+<div class="header">
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</div>
+		<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5S5WB7M"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+		<div class="wrapper">
+			<link rel="stylesheet" href="/assets/css/speech-input.css">
+<script src="/assets/js/nav.js" type="text/javascript"></script>
+<script src="/assets/js/speech-input.js" type="text/javascript"></script>
+<div class="navbar transition" id="navbar">
+	<nav>
+		<a onClick="expand('navbar', 'search-input')">
+			<svg width="50" height="50" aria-label="search" class="octicon octicon-search" viewBox="0 0 24 24" version="1.1" role="img"><path d="M10.25 2a8.25 8.25 0 0 1 6.34 13.53l5.69 5.69a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215l-5.69-5.69A8.25 8.25 0 1 1 10.25 2ZM3.5 10.25a6.75 6.75 0 1 0 13.5 0 6.75 6.75 0 0 0-13.5 0Z"></path></svg>
+			<p>Search</p>
+		</a>
+		
+			<a href="/" >
+				<svg width="50" height="50" aria-label="home" class="octicon octicon-home" viewBox="0 0 24 24" version="1.1" role="img"><path d="M11.03 2.59a1.501 1.501 0 0 1 1.94 0l7.5 6.363a1.5 1.5 0 0 1 .53 1.144V19.5a1.5 1.5 0 0 1-1.5 1.5h-5.75a.75.75 0 0 1-.75-.75V14h-2v6.25a.75.75 0 0 1-.75.75H4.5A1.5 1.5 0 0 1 3 19.5v-9.403c0-.44.194-.859.53-1.144ZM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v6.25h5v-9.403Z"></path></svg>
+				<p>Home</p>
+			</a>
+		
+			<a href="/pages/about.html" >
+				<svg width="50" height="50" aria-label="person" class="octicon octicon-person" viewBox="0 0 24 24" version="1.1" role="img"><path d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9.005 9.005 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z"></path></svg>
+				<p>About</p>
+			</a>
+		
+			<a href="/blog.html" >
+				<svg width="50" height="50" aria-label="book" class="octicon octicon-book" viewBox="0 0 24 24" version="1.1" role="img"><path d="M0 3.75A.75.75 0 0 1 .75 3h7.497c1.566 0 2.945.8 3.751 2.014A4.495 4.495 0 0 1 15.75 3h7.5a.75.75 0 0 1 .75.75v15.063a.752.752 0 0 1-.755.75l-7.682-.052a3 3 0 0 0-2.142.878l-.89.891a.75.75 0 0 1-1.061 0l-.902-.901a2.996 2.996 0 0 0-2.121-.879H.75a.75.75 0 0 1-.75-.75Zm12.75 15.232a4.503 4.503 0 0 1 2.823-.971l6.927.047V4.5h-6.75a3 3 0 0 0-3 3ZM11.247 7.497a3 3 0 0 0-3-2.997H1.5V18h6.947c1.018 0 2.006.346 2.803.98Z"></path></svg>
+				<p>Blog</p>
+			</a>
+		
+			<a href="/pages/resume-downloads.html" >
+				<svg width="50" height="50" aria-label="file" class="octicon octicon-file" viewBox="0 0 24 24" version="1.1" role="img"><path d="M3 3a2 2 0 0 1 2-2h9.982a2 2 0 0 1 1.414.586l4.018 4.018A2 2 0 0 1 21 7.018V21a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm2-.5a.5.5 0 0 0-.5.5v18a.5.5 0 0 0 .5.5h14a.5.5 0 0 0 .5-.5V8.5h-4a2 2 0 0 1-2-2v-4Zm10 0v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 0-.146-.336l-4.018-4.018A.5.5 0 0 0 15 2.5Z"></path></svg>
+				<p>Résumé</p>
+			</a>
+		
+	</nav>
+
+	<!-- Html Elements for Search -->
+	<div id="search-container" class="search-container">
+		<center>
+			<input type="text" id="search-input" class="speech-input" placeholder="Search this site" style="width: 100%;">
+			<ol id="results-container"></ol>
+		</center>
+	</div>
+
+	<!-- Script pointing to search.js -->
+	<script src="/assets/js/search.js" type="text/javascript"></script>
+
+	<!-- Configuration -->
+	<script>
+	SimpleJekyllSearch({
+	  searchInput: document.getElementById('search-input'),
+	  resultsContainer: document.getElementById('results-container'),
+	  json: '/search.json'
+	})
+	</script>
+</div>
+
+</div>
+
+			<div class="hero-img"  style="background-image: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url( /assets/images/dissect.webp );"  >
+				<div class="center-content">
+					<span class="on-bg">
+						<h1> Dissecting a Power BI Dashboard </h1>
+						<!--
+						<p>13 Dec 2024</p>
+						-->
+						<a href="#start">
+							<div style="-webkit-animation-name: pulse; -webkit-animation-duration: 2s; animation-name: pulse;animation-duration: 2s; animation-direction: alternate;">
+								<!--<p>Reading time: 
+
+
+  8 mins
+</p>-->
+								
+								<p>December 13, 2024</p>
+								
+								<p>scroll for more</p>
+								<svg width="50" height="50" fill="white" aria-label="down" class="octicon octicon-arrow-down" viewBox="0 0 24 24" version="1.1" role="img"><path d="M4.97 13.22a.75.75 0 0 1 1.06 0L11 18.19V3.75a.75.75 0 0 1 1.5 0v14.44l4.97-4.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734l-6.25 6.25a.75.75 0 0 1-1.06 0l-6.25-6.25a.75.75 0 0 1 0-1.06Z"></path></svg>
+							</div>
+						</a>
+						
+						<div>
+							
+
+<style>
+#share-buttons {display: inline-block; vertical-align: middle; }
+#share-buttons:after {content: ""; display: block; clear: both;}
+#share-buttons > div {
+    position: relative;
+    text-align: left; 
+    height: 36px; 
+    width: 32px; 
+    float: left; 
+    text-align: center;
+}
+#share-buttons > div > svg {height: 16px; fill: #FFF; margin-top: 10px;}
+#share-buttons > div:hover {cursor: pointer;}
+#share-buttons > div.facebook:hover > svg {fill: #3B5998;}
+#share-buttons > div.twitter:hover > svg {fill: #55ACEE;}
+#share-buttons > div.linkedin:hover > svg {fill: #0077b5;}
+#share-buttons > div.pinterest:hover > svg {fill: #CB2027;}
+#share-buttons > div.gplus:hover > svg {fill: #dd4b39;}
+#share-buttons > div.mail:hover > svg {fill: #7D7D7D;}
+#share-buttons > div.instagram:hover > svg {fill: #C73B92;}
+#share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
+#share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
+#share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
+#share-buttons > div.pinterest > svg {height: 20px; margin-top: 9px;}
+#share-buttons > div.gplus > svg {height: 17px; margin-top: 9px; position: relative; left: 1px;}
+#share-buttons > div.mail > svg {height: 14px; margin-top: 11px;}
+</style>
+
+<span>Share on: </span><div id="share-buttons">
+
+    <div class="linkedin" title="Share this on Linkedin" onclick="window.open('https://www.linkedin.com/shareArticle?mini=true&url=https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html&title=&summary=&source=');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></div>
+
+    <div class="twitter" title="Share this on Twitter" onclick="window.open('http://twitter.com/home?status=https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
+    
+    <div class="facebook" title="Share this on Facebook" onclick="window.open('http://www.facebook.com/share.php?u=https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"/></svg></div>
+
+
+    <!--<div class="pinterest" title="Share this on Pinterest" onclick="window.open('https://pinterest.com/pin/create/button/?url=&media=https://victorangeloblancada.github.io/assets/images/dissect.webp&description=');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M256 597q0-108 37.5-203.5t103.5-166.5 152-123 185-78 202-26q158 0 294 66.5t221 193.5 85 287q0 96-19 188t-60 177-100 149.5-145 103-189 38.5q-68 0-135-32t-96-88q-10 39-28 112.5t-23.5 95-20.5 71-26 71-32 62.5-46 77.5-62 86.5l-14 5-9-10q-15-157-15-188 0-92 21.5-206.5t66.5-287.5 52-203q-32-65-32-169 0-83 52-156t132-73q61 0 95 40.5t34 102.5q0 66-44 191t-44 187q0 63 45 104.5t109 41.5q55 0 102-25t78.5-68 56-95 38-110.5 20-111 6.5-99.5q0-173-109.5-269.5t-285.5-96.5q-200 0-334 129.5t-134 328.5q0 44 12.5 85t27 65 27 45.5 12.5 30.5q0 28-15 73t-37 45q-2 0-17-3-51-15-90.5-56t-61-94.5-32.5-108-11-106.5z"/></svg></div>-->
+
+    <!--<div class="gplus" title="Share this on Google Plus" onclick="window.open('https://plus.google.com/share?url=https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html');"><svg viewBox="0 0 2304 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1437 913q0 208-87 370.5t-248 254-369 91.5q-149 0-285-58t-234-156-156-234-58-285 58-285 156-234 234-156 285-58q286 0 491 192l-199 191q-117-113-292-113-123 0-227.5 62t-165.5 168.5-61 232.5 61 232.5 165.5 168.5 227.5 62q83 0 152.5-23t114.5-57.5 78.5-78.5 49-83 21.5-74h-416v-252h692q12 63 12 122zm867-122v210h-209v209h-210v-209h-209v-210h209v-209h210v209h209z"/></svg></div>-->
+
+    <div class="mail" title="Share this through Email" onclick="window.open('mailto:?&body=https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"/></svg></div>
+
+</div>
+						</div>
+						
+					</span>
+				</div>
+			</div>
+			<div id="hero-img-spacer" style="height: 100vh;">
+			</div>
+			<div id="start">
+			</div>
+			<div class="content">
+				
+				<h1>Dissecting a Power BI Dashboard</h1>
+				
+				<!--
+				<h1> Dissecting a Power BI Dashboard </h1>
+				
+				<p style="font-style:italic">December 13, 2024</p>
+				
+				-->
+
+				<div class="article  dropcap ">
+					<p>In this article, we will thoroughly explore the structure and contents of a Power BI dashboard (PBIX) file. Like most Microsoft Office file formats, a PBIX file is actually a zipped folder containing various directories and files which work together to form the dashboard we see. Understanding the underlying architecture of a Power BI report is crucial for both users and developers, as it enables a deeper appreciation of how data is structured, processed, and displayed.</p>
+
+<p>This guide will break down the various directories and files found inside the zipped folder of a PBIX file, explain their purpose, and show how these elements work together to create the final dashboard. We will also delve into the core <code class="language-plaintext highlighter-rouge">Layout</code> file, which plays a key role in defining how data is translated into charts, tables, and other visualizations within the dashboard.</p>
+
+<h2 id="overview-of-a-power-bi-report-package-structure">Overview of a Power BI Report Package Structure</h2>
+
+<p>A PBIX file is typically organized in a package with a clearly defined directory structure. This structure can be exposed by changing the file extension from PBIX to ZIP, then unzipping the resulting zipped folder to reveal its contents.</p>
+
+<p>Each folder and file within this structure serves a specific purpose in making the dashboard work the way it does. Below is an overview of the key directories and files in the report package:</p>
+
+<p><em>rels<br />
+|</em> .rels<br />
+docProps<br />
+|_ custom.xml<br />
+Report<br />
+|_ Layout<br />
+|_ StaticResources\SharedResources\BaseThemes<br />
+   |_ CY24SU08.json<br />
+[Content_Types].xml<br />
+DataModel<br />
+DiagramLayout<br />
+Metadata<br />
+SecurityBindings<br />
+Settings<br />
+Version</p>
+
+<p>Each of these components plays a vital role in ensuring that the report is displayed and interacts as intended. We will break down each section to understand what it contains and how it contributes to the functionality of the dashboard.</p>
+
+<h3 id="the_relsdirectory">The <code class="language-plaintext highlighter-rouge">_rels</code> Directory</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">_rels</code> directory is one of the most critical directories in the Power BI report package. It contains the <code class="language-plaintext highlighter-rouge">.rels</code> file, which manages the relationships between different parts of the report.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">.rels</code> file stores the relationships between various elements of the report. For example, it could define how the layout file is connected to the static resources or how the report interacts with external data models. The <code class="language-plaintext highlighter-rouge">.rels</code> file ensures that when the report is opened, the application knows how to load and render the different parts of the report package correctly.</p>
+
+<h3 id="thedocpropsdirectory">The <code class="language-plaintext highlighter-rouge">docProps</code> Directory</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">docProps</code> directory contains metadata files that provide additional information about the report. Metadata is essential for defining the context and properties of the report, which can be helpful for tracking and reporting purposes.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">custom.xml</code> file stores user-defined properties, such as the author of the report, version number, or other custom attributes relevant to the report. For example, it could store details about the report’s creation date, the business unit it pertains to, or custom fields that help categorize and filter the report.</p>
+
+<h3 id="thereportdirectory">The <code class="language-plaintext highlighter-rouge">Report</code> Directory</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">Report</code> directory is where the majority of the report’s configuration and layout components are found. It contains the layout file, static resources, and any base themes that are used to define the visual look and feel of the report. These elements are key in defining how the data is visually presented.</p>
+
+<h4 id="layout">Layout</h4>
+
+<p>The layout file is the core of the report. It defines the visual structure of the report, specifying how the data will be displayed in charts, tables, and other visual elements. The layout file determines the positions of various components on the report canvas and ensures that the visual elements are placed and sized correctly.</p>
+
+<p>As an example, the <code class="language-plaintext highlighter-rouge">Layout</code> file may define the report’s main visual container, which could hold a chart, such as a column chart. The chart may be configured to display data from a table named <code class="language-plaintext highlighter-rouge">Table1</code>, and the layout also specifies how the data is grouped by different time periods (such as year, quarter, month, and day). It also defines how specific measures, like the quantity of items sold, are aggregated and visualized in the chart.</p>
+
+<p>The layout file also specifies the data projections (i.e., the data elements to be displayed in the chart), the filters that should be applied to restrict the data, and how different data roles (such as categories, series, and rows) are mapped to the visual components.</p>
+
+<h4 id="staticresourcessharedresourcesbasethemes">StaticResources\SharedResources\BaseThemes</h4>
+
+<p>The <code class="language-plaintext highlighter-rouge">CY24SU08.json</code> file defines the visual theme for the report. Themes are used to maintain consistency in design across different reports and dashboards. This JSON file stores information about color schemes, fonts, and other stylistic choices that apply throughout the report. By using a theme like <code class="language-plaintext highlighter-rouge">CY24SU08.json</code>, the report ensures that all visual elements are cohesive and adhere to a specific design aesthetic, whether for brand consistency or user experience.</p>
+
+<h3 id="other-key-files-in-the-report-package">Other Key Files in the Report Package</h3>
+
+<p>In addition to the layout and theme resources, there are several other important files that contribute to the functionality of the report.</p>
+
+<h3 id="content_typesxml">[Content_Types].xml</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">[Content_Types].xml</code> file is essential for defining the MIME types for the various parts of the report package. It helps the report-rendering system determine how to process different file types within the package, such as XML files, images, or JSON files. This file serves as a map for the content and ensures that each component is handled correctly.</p>
+
+<h3 id="datamodel">DataModel</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">DataModel</code> binary contains the underlying schema and data definitions that drive the report. It includes details such as tables, columns, and relationships between different datasets. This folder is vital because it defines the data structure that feeds into the visual components, allowing the dashboard to present relevant and accurate information. This file usually cannot be read because its encoding is not supported by most text editors.</p>
+
+<h3 id="diagramlayout">DiagramLayout</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">DiagramLayout</code> directory may contain files that define additional visual elements, such as diagrams, flowcharts, or other graphical representations that complement the report’s main data visuals. While the core report may focus on charts and tables, diagram layouts can help explain complex data relationships or workflows visually.</p>
+
+<h3 id="metadata">Metadata</h3>
+
+<p>Metadata files store information about the report itself, such as the author, version history, creation date, and other contextual information. These files are crucial for tracking changes and updates to the report, ensuring that the correct version is always used and providing information about the report’s lifecycle.</p>
+
+<h3 id="securitybindings">SecurityBindings</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">SecurityBindings</code> binary handles the security aspects of the report, ensuring that sensitive data is protected. It defines access control and permissions, specifying which users or groups can view certain sections or interact with specific data points within the report. This is particularly important for reports containing sensitive or confidential information. This file usually cannot be read because its encoding is not supported by most text editors.</p>
+
+<h3 id="settings">Settings</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">Settings</code> directory contains configuration files that manage preferences or environment-specific settings for the report. These settings ensure that the report behaves as expected across different platforms and environments, whether it’s running locally or being accessed via a web service.</p>
+
+<h3 id="version">Version</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">Version</code> file indicates the current version of the report or report package. This is important for version control, ensuring that users are working with the most up-to-date version of the report and helping to prevent the use of outdated or deprecated files.</p>
+
+<h3 id="parsing-and-interpreting-the-layout-file">Parsing and Interpreting the Layout File</h3>
+
+<p>Let’s take a closer look at the <code class="language-plaintext highlighter-rouge">Layout</code> file, which is at the heart of how the report’s visual elements are configured. The layout file is a configuration file, often in JSON format, that dictates the presentation and interaction of the data in the report.</p>
+
+<h3 id="key-aspects-of-the-layout-file">Key Aspects of the Layout File</h3>
+
+<ol>
+  <li><strong>Visual Containers</strong>: The layout file defines a visual container (e.g., a chart or table) that holds the report’s data. For example, in this case, the container holds a column chart, and the file specifies its position, size, and dimensions on the report canvas.</li>
+  <li><strong>Projections and Querying</strong>: The <code class="language-plaintext highlighter-rouge">projections</code> section in the layout file specifies which data elements should be displayed. This includes categories, series, and rows, as well as aggregation functions (e.g., sum, count). This section ensures that the right data is selected and formatted for visualization.</li>
+  <li><strong>Filters</strong>: Filters are used to limit which data points are shown in the report. These filters can be based on specific criteria (e.g., dates, categories, or regions) to ensure that the report displays only relevant information.</li>
+  <li><strong>Data Role Mapping</strong>: The <code class="language-plaintext highlighter-rouge">Layout</code> file maps the data roles to the visual components. For instance, categories might be mapped to the x-axis, while series could be used for color-coding the data. These mappings help translate raw data into meaningful visualizations.</li>
+  <li><strong>Execution Metrics</strong>: The layout file may also include execution metrics that track how efficiently the report is rendering, especially when dealing with large datasets. This ensures that the report performs well and loads quickly.</li>
+</ol>
+
+<h2 id="summary">Summary</h2>
+
+<p>Understanding the inner workings of a Power BI report requires more than just familiarity with the visual components. The underlying structure, including the directories and files that make up the report package, plays a crucial role in ensuring that the report functions correctly. Each file, from the layout to metadata and security settings, contributes to the overall experience of the report, ensuring that the data is presented clearly, accurately, and securely.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">Layout</code> file, in particular, is essential for defining how data is visualized. By carefully structuring the report’s visuals and ensuring that the data is aggregated and displayed correctly, the layout file is a key component in transforming raw data into actionable insights. When working with or developing Power BI reports, understanding these elements will help you navigate and optimize the report for both users and analysts alike.</p>
+
+				</div>
+				
+				<div class="cta-box">
+					
+
+<style>
+#share-buttons {display: inline-block; vertical-align: middle; }
+#share-buttons:after {content: ""; display: block; clear: both;}
+#share-buttons > div {
+    position: relative;
+    text-align: left; 
+    height: 36px; 
+    width: 32px; 
+    float: left; 
+    text-align: center;
+}
+#share-buttons > div > svg {height: 16px; fill: #FFF; margin-top: 10px;}
+#share-buttons > div:hover {cursor: pointer;}
+#share-buttons > div.facebook:hover > svg {fill: #3B5998;}
+#share-buttons > div.twitter:hover > svg {fill: #55ACEE;}
+#share-buttons > div.linkedin:hover > svg {fill: #0077b5;}
+#share-buttons > div.pinterest:hover > svg {fill: #CB2027;}
+#share-buttons > div.gplus:hover > svg {fill: #dd4b39;}
+#share-buttons > div.mail:hover > svg {fill: #7D7D7D;}
+#share-buttons > div.instagram:hover > svg {fill: #C73B92;}
+#share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
+#share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
+#share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
+#share-buttons > div.pinterest > svg {height: 20px; margin-top: 9px;}
+#share-buttons > div.gplus > svg {height: 17px; margin-top: 9px; position: relative; left: 1px;}
+#share-buttons > div.mail > svg {height: 14px; margin-top: 11px;}
+</style>
+
+<span>Share on: </span><div id="share-buttons">
+
+    <div class="linkedin" title="Share this on Linkedin" onclick="window.open('https://www.linkedin.com/shareArticle?mini=true&url=https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html&title=&summary=&source=');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></div>
+
+    <div class="twitter" title="Share this on Twitter" onclick="window.open('http://twitter.com/home?status=https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
+    
+    <div class="facebook" title="Share this on Facebook" onclick="window.open('http://www.facebook.com/share.php?u=https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"/></svg></div>
+
+
+    <!--<div class="pinterest" title="Share this on Pinterest" onclick="window.open('https://pinterest.com/pin/create/button/?url=&media=https://victorangeloblancada.github.io/assets/images/dissect.webp&description=');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M256 597q0-108 37.5-203.5t103.5-166.5 152-123 185-78 202-26q158 0 294 66.5t221 193.5 85 287q0 96-19 188t-60 177-100 149.5-145 103-189 38.5q-68 0-135-32t-96-88q-10 39-28 112.5t-23.5 95-20.5 71-26 71-32 62.5-46 77.5-62 86.5l-14 5-9-10q-15-157-15-188 0-92 21.5-206.5t66.5-287.5 52-203q-32-65-32-169 0-83 52-156t132-73q61 0 95 40.5t34 102.5q0 66-44 191t-44 187q0 63 45 104.5t109 41.5q55 0 102-25t78.5-68 56-95 38-110.5 20-111 6.5-99.5q0-173-109.5-269.5t-285.5-96.5q-200 0-334 129.5t-134 328.5q0 44 12.5 85t27 65 27 45.5 12.5 30.5q0 28-15 73t-37 45q-2 0-17-3-51-15-90.5-56t-61-94.5-32.5-108-11-106.5z"/></svg></div>-->
+
+    <!--<div class="gplus" title="Share this on Google Plus" onclick="window.open('https://plus.google.com/share?url=https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html');"><svg viewBox="0 0 2304 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1437 913q0 208-87 370.5t-248 254-369 91.5q-149 0-285-58t-234-156-156-234-58-285 58-285 156-234 234-156 285-58q286 0 491 192l-199 191q-117-113-292-113-123 0-227.5 62t-165.5 168.5-61 232.5 61 232.5 165.5 168.5 227.5 62q83 0 152.5-23t114.5-57.5 78.5-78.5 49-83 21.5-74h-416v-252h692q12 63 12 122zm867-122v210h-209v209h-210v-209h-209v-210h209v-209h210v209h209z"/></svg></div>-->
+
+    <div class="mail" title="Share this through Email" onclick="window.open('mailto:?&body=https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"/></svg></div>
+
+</div>
+				</div>
+				
+			</div>
+			
+			<center>
+				<h2>Read more posts about...</h2>
+				<ul class="tags">
+					
+						<a href='/blog/tag/power bi'><li> power bi </li></a>
+					
+						<a href='/blog/tag/dashboard'><li> dashboard </li></a>
+					
+						<a href='/blog/tag/microsoft'><li> microsoft </li></a>
+					
+				</ul>
+				<a href='/blog.html'><p>See all posts</p></a>
+			</center>
+			
+			<footer>
+				<hr>
+				© <script>document.write(new Date().getFullYear())</script><noscript>2022</noscript> Victor Blancada. All Rights Reserved.
+			</footer>
+			<div class="spacer">
+			</div>
+		</div>
+	</body>
+</html>
+

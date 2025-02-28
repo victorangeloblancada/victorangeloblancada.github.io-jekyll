@@ -1,6 +1,14 @@
 [
   
     {
+      "title"    : "Dissecting a Power BI Dashboard",
+      "category" : "blog",
+      "tags"     : "power bi, dashboard, microsoft",
+      "url"      : "/blog/2024/12/13/dissect-pbix.html",
+      "date"     : "2024-12-13 00:00:00 +0800"
+    } ,
+  
+    {
       "title"    : "The Negative Effect of Pruning Large Language Models on Finetuning",
       "category" : "blog",
       "tags"     : "ai, artificial intelligence, llm, large language model, pruning, fine-tuning",
