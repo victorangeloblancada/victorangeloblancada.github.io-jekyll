@@ -16,7 +16,7 @@ gem "jekyll-sitemap"
 gem "kramdown", ">= 2.3.1"
 #gem "nokogiri", "== 1.15.5", force_ruby_platform: true
 gem "addressable", ">= 2.8.0"
-gem "webrick", "~> 1.7"
+gem "webrick", "~> 1.8"
 
 #gem "jekyll-commonmark-ghpages", ">= 0.4.0"
 #gem "commonmarker", ">= 0.4.0"
