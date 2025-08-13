@@ -8,18 +8,20 @@ layout: default-full
 </center>
 <div class="flex-container">
 	{% for post in site.posts %}
-		{% for tag in post.tags %}
-			{% if tag == page.tag %}
-				<a href="{{ post.url }}">
-					<div class="square-img transition" {% if post.image %} style="background-image: linear-gradient(rgba(0,0,0,.1), rgba(0,0,0,.1)), url( {{ post.image }} );" {% endif %} >
-						<div class="center-content">
-							<span class="on-bg">
-								<h3>{% if post.header %} {{ post.header }} {% else %} {{ post.title }} {% endif %}</h3>
-							</span>
+		{% unless post.draft %}
+			{% for tag in post.tags %}
+				{% if tag == page.tag %}
+					<a href="{{ post.url }}">
+						<div class="square-img transition" {% if post.image %} style="background-image: linear-gradient(rgba(0,0,0,.1), rgba(0,0,0,.1)), url( {{ post.image }} );" {% endif %} >
+							<div class="center-content">
+								<span class="on-bg">
+									<h3>{% if post.header %} {{ post.header }} {% else %} {{ post.title }} {% endif %}</h3>
+								</span>
+							</div>
 						</div>
-					</div>
-				</a>
-			{% endif %}
-		{% endfor %}
+					</a>
+				{% endif %}
+			{% endfor %}
+		{% endunless %}
 	{% endfor %}
 </div>

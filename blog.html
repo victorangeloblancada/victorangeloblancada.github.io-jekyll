@@ -29,11 +29,33 @@ title: Blog
 	<h1>Post Tags</h1>
 </center>
 
+
 <ul class="tags">
 	{% for tag in site.tags %}
 		{% assign t = tag | first %}
 		{% assign posts = tag | last %}
-		<!--<li>{{t | downcase | replace:" ","-" }} has {{ posts | size }} posts</li>-->
 		<a href='/blog/tag/{{ t }}'><li>{{t | downcase}} ({{ posts | size }})</li></a>
 	{% endfor %}
 </ul>
+
+
+<!--
+{% assign published_posts = site.posts | reject: "draft", true %}
+
+{% assign tag_pages = site.pages | where: "layout", "tag_index" %}
+
+<ul class="tags">
+  {% for page in tag_pages %}
+    {% assign tag   = page.data.tag %}
+    {% assign posts = published_posts | where_exp: "post", "post.tags contains tag" %}
+
+    {% if posts.size > 0 %}
+      <li>
+        <a href="{{ page.url }}">
+          {{ tag | downcase }} ({{ posts.size }})
+        </a>
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul> 
+-->

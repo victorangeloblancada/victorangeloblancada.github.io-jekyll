@@ -1,12 +1,13 @@
 [
   
+  
     {
       "title"    : "Dissecting a Power BI Dashboard",
       "category" : "blog",
       "tags"     : "power bi, dashboard, microsoft",
       "url"      : "/blog/2024/12/13/dissect-pbix.html",
       "date"     : "2024-12-13 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "The Negative Effect of Pruning Large Language Models on Finetuning",
@@ -14,7 +15,7 @@
       "tags"     : "ai, artificial intelligence, llm, large language model, pruning, fine-tuning",
       "url"      : "/blog/2024/05/31/llm-pruning-finetuning.html",
       "date"     : "2024-05-31 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "Fuzzy Matching in Python",
@@ -22,7 +23,7 @@
       "tags"     : "python, data science, data analysis",
       "url"      : "/blog/2024/03/02/fuzzy-matching-in-python.html",
       "date"     : "2024-03-02 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "What The Media Gets Wrong About ChatGPT",
@@ -30,15 +31,7 @@
       "tags"     : "nlp, llm, openai, chatgpt, google, microsoft, python",
       "url"      : "/blog/2023/02/09/media-wrong-chatgpt.html",
       "date"     : "2023-02-09 00:00:00 +0800"
-    } ,
-  
-    {
-      "title"    : "Supply Chain Network Design in Python",
-      "category" : "blog",
-      "tags"     : "scnd, supply chain, logistics, python",
-      "url"      : "/blog/2023/01/21/supply-chain-network-design-python-pulp.html",
-      "date"     : "2023-01-21 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "Marketing Mix Modeling for Engineers",
@@ -46,15 +39,7 @@
       "tags"     : "ai, ml, artificial intelligence, machine learning, marketing, marketing mix modeling, python",
       "url"      : "/blog/2023/01/10/mmm-for-engineers.html",
       "date"     : "2023-01-10 00:00:00 +0800"
-    } ,
-  
-    {
-      "title"    : "AI Alignment: How I Learned to Stop Worrying and Love AI",
-      "category" : "blog",
-      "tags"     : "artificial intelligence, ai, ai alignment, economics",
-      "url"      : "/blog/2022/12/08/ai-alignment-for-business-owners.html",
-      "date"     : "2022-12-08 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "Cropping an MS Teams Recording",
@@ -62,7 +47,7 @@
       "tags"     : "blog, python, video processing, coding, automation",
       "url"      : "/blog/2022/12/07/teams-recording-resize.html",
       "date"     : "2022-12-07 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "NaNoGenMo 2022",
@@ -70,7 +55,7 @@
       "tags"     : "blog, nlp, nanogenmo",
       "url"      : "/blog/2022/12/01/nanogenmo-2022.html",
       "date"     : "2022-12-01 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "Resize an Image to 4R",
@@ -78,7 +63,7 @@
       "tags"     : "blog, python, image processing, coding, automation",
       "url"      : "/blog/2022/09/21/image-resize.html",
       "date"     : "2022-09-21 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "Adding a Date Watermark to an Image",
@@ -86,7 +71,7 @@
       "tags"     : "blog, python, image processing, coding, automation",
       "url"      : "/blog/2022/09/20/image-watermark.html",
       "date"     : "2022-09-20 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "State of the Art: Creativity in the Age of Stable Diffusion",
@@ -94,7 +79,7 @@
       "tags"     : "blog, ai, artificial intelligence, art, creativity, machine learning, opinion",
       "url"      : "/blog/2022/09/06/state-of-the-art-creativity-in-the-age-of-stable-diffusion.html",
       "date"     : "2022-09-06 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "Finance from First Principles",
@@ -102,7 +87,7 @@
       "tags"     : "blog, math, mathematics, business, finance, economics",
       "url"      : "/blog/2022/03/20/finance-from-first-principles.html",
       "date"     : "2022-03-20 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "NaNoGenMo 2021",
@@ -110,7 +95,7 @@
       "tags"     : "blog, nlp, nanogenmo",
       "url"      : "/blog/2021/10/09/nanogenmo-2021.html",
       "date"     : "2021-10-09 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "Interactive Web Apps Using Python",
@@ -118,7 +103,7 @@
       "tags"     : "blog, python, web apps, web frameworks, dash",
       "url"      : "/blog/2021/06/22/dash-apps.html",
       "date"     : "2021-06-22 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "Decision Making Under Uncertainty: Multi-Armed Bandit",
@@ -126,7 +111,7 @@
       "tags"     : "blog, math, mathematics, reinforcement learning, rl, multi-armed bandit, mab, optimization",
       "url"      : "/blog/2021/06/16/multi-armed-bandit.html",
       "date"     : "2021-06-16 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "Percentage Calculator",
@@ -134,7 +119,7 @@
       "tags"     : "blog, math, mathematics, business, percentage, change",
       "url"      : "/blog/2021/01/31/percentage-calculator.html",
       "date"     : "2021-01-31 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "NaNoGenMo 2020",
@@ -142,7 +127,7 @@
       "tags"     : "blog, nlp, nanogenmo",
       "url"      : "/blog/2020/11/30/nanogenmo-2020.html",
       "date"     : "2020-11-30 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "Abakcus.com",
@@ -150,15 +135,7 @@
       "tags"     : "blog, math, mathematics, ai, data",
       "url"      : "/blog/2020/11/08/abakcus.html",
       "date"     : "2020-11-08 00:00:00 +0800"
-    } ,
-  
-    {
-      "title"    : "Logistics Center of Gravity Analysis in Python",
-      "category" : "blog",
-      "tags"     : "logistics, python, combinations, itertools, kmeans, clustering",
-      "url"      : "/blog/2020/09/07/center-of-gravity-analysis.html",
-      "date"     : "2020-09-07 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "Hyperparameter Optimization or The Science of Automating Model Iteration",
@@ -166,7 +143,7 @@
       "tags"     : "python, hyperopt, hyperparameter, optimization, predictive, statistics, model, iteration, automation, Bayesian, Bayes",
       "url"      : "/blog/2020/06/23/hyperparameter-optimization.html",
       "date"     : "2020-06-23 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "Color Palettes Using K-Means Clustering",
@@ -174,7 +151,7 @@
       "tags"     : "color palette, image processing, kmeans, clustering",
       "url"      : "/blog/2019/10/01/color-palette-clustering.html",
       "date"     : "2019-10-01 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "Gifs from Command Line",
@@ -182,7 +159,7 @@
       "tags"     : "gif, command line, coding, gifs, tumblr",
       "url"      : "/blog/2019/09/20/command-line-gifs.html",
       "date"     : "2019-09-20 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "AI Paintings",
@@ -190,7 +167,7 @@
       "tags"     : "artificial intelligence, image processing, ai, paintings, art, gradient descent",
       "url"      : "/blog/2019/09/01/ai-art-gallery.html",
       "date"     : "2019-09-01 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "AI in Medicine",
@@ -198,7 +175,7 @@
       "tags"     : "ai, ml, artificial intelligence, machine learning, medicine, health",
       "url"      : "/blog/2019/08/23/ai-in-medicine.html",
       "date"     : "2019-08-23 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "DIY Website Development in 2019",
@@ -206,7 +183,7 @@
       "tags"     : "html, web development, ux, ui, user experience, interface, ergonomics",
       "url"      : "/blog/2019/07/01/diy-site-development.html",
       "date"     : "2019-07-01 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "10,000 Hours, Artificial Intelligence, and the Democratization of Expertise",
@@ -214,7 +191,7 @@
       "tags"     : "ai, artificial intelligence, training, featured",
       "url"      : "/blog/2019/03/25/democritization-of-expertise.html",
       "date"     : "2019-03-25 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "AI Biases and Independent Variables",
@@ -222,7 +199,7 @@
       "tags"     : "artificial intelligence, ai, statistics, mathematics",
       "url"      : "/blog/2019/01/20/ai-biases-and-independent-variables.html",
       "date"     : "2019-01-20 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "Channel Attribution in Python",
@@ -230,7 +207,7 @@
       "tags"     : "python, marketing, attribution, online, network, markov chain",
       "url"      : "/blog/2019/01/01/channel-attribution-in-python.html",
       "date"     : "2019-01-01 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "GDPR Day 0: Data-Savvy Marketers Can Still Derive Insights Without Relying on Personal Data",
@@ -238,7 +215,7 @@
       "tags"     : "data science, marketing, gdpr, privacy, featured",
       "url"      : "/blog/2018/05/25/gdpr-day-zero.html",
       "date"     : "2018-05-25 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "Ten Outstanding Students of Makati 2009",
@@ -246,7 +223,7 @@
       "tags"     : "victor, makati, tosm",
       "url"      : "/blog/2018/03/20/ten-outstanding-students-of-makati.html",
       "date"     : "2018-03-20 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "Innovation, Human Productivity, &amp; Machine Productivity",
@@ -254,7 +231,7 @@
       "tags"     : "technology, innovation, economy, data science",
       "url"      : "/blog/2017/12/13/innovation-human-productivity-and-machine-productivity.html",
       "date"     : "2017-12-13 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "A Network Expansion Strategy Case Study",
@@ -262,7 +239,7 @@
       "tags"     : "case study, internet, fiber network, consulting, optimization, featured",
       "url"      : "/blog/2017/11/16/a-network-expansion-strategy-case-study.html",
       "date"     : "2017-11-16 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "Elegance, Sophistication, and Complexity",
@@ -270,7 +247,7 @@
       "tags"     : "math, mathematics, language, data science",
       "url"      : "/blog/2017/10/26/elegance-sophistication-and-complexity.html",
       "date"     : "2017-10-26 00:00:00 +0800"
-    } ,
+    },
   
     {
       "title"    : "Mathematics, Language, and Lies",
@@ -278,10 +255,10 @@
       "tags"     : "math, mathematics, language, data science",
       "url"      : "/blog/2017/10/24/mathematics-language-and-lies.html",
       "date"     : "2017-10-24 00:00:00 +0800"
-    } 
+    }
   
-	
-	,
+
+  ,
 	
 		{
 			"title"    : "About Victor Angelo Blancada",

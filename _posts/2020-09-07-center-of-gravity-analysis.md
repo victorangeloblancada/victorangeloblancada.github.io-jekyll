@@ -12,6 +12,7 @@ tags:
 date: 2020-09-07
 image: /assets/images/truck.jpg
 dropcap: True
+draft: True
 ---
 
 <script type="text/javascript" async
