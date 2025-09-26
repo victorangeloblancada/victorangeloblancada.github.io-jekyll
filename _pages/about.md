@@ -21,9 +21,11 @@ notshareable: True
 
 ## About Me
 
+I am a strategic data science leader with a track record of delivering multimillion dollar business impact for Fortune 500 companies and an expert in building and leading high-performing analytics teams to optimize global supply chains, drive business growth, and foster data-driven cultures.
+
 I am a data science and machine learning expert with a strong background in strategy consulting. I specialize in providing best possible solutions to business decision-makers using big data analytics. My technical experience across the entire data and analytics pipeline – from data engineering to machine learning to results presentation to stakeholders – covers a wide range of industries from telecommunications to marketing and advertising to supply chain management.
 
-In my present capacity working for a global logistics and supply chain company, I am responsible for optimizing global operations by developing data-driven solutions and introducing self-service machine learning-based tools and processes that help promote the company’s competitive advantage and drive strategic business growth.
+As Head of Supply Chain Analytics at Maersk Contract Logistics, I lead a global team in optimizing logistics operations by developing data-driven solutions and introducing self-service machine learning-based tools and processes that help promote the company's competitive advantage and drive strategic business growth.
 
 As Analytics Technology Manager for a leading media conglomerate, I pioneered its global predictive modeling hub and was responsible for optimizing the media portfolios of global brands, i.e., helping clients effectively meet sales targets with customized media portfolio optimization solutions.
 
@@ -33,7 +35,7 @@ An experienced strategy consultant for Fortune 500 companies, I have worked with
 
 ### Maersk Contract Logistics
 
-A.P. Moller - Maersk is an integrated logistics company, committed to connecting and simplifying global trade for a growing world.
+A.P. Moller - Maersk is one of the world's leading shipping and integrated logistics companies, committed to connecting and simplifying global trade for a growing world.
 
 #### Divisional Manager, Supply Chain Analytics (2024-Present)
 
