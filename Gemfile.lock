@@ -279,7 +279,7 @@ DEPENDENCIES
   jekyll-octicons
   jekyll-sitemap
   kramdown (>= 2.3.1)
-  webrick (~> 1.7)
+  webrick (~> 1.8)
 
 BUNDLED WITH
    2.5.9
