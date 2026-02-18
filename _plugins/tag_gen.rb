@@ -10,7 +10,7 @@ module Jekyll
       self.process(@name)
       self.read_yaml(File.join(base, '_layouts'), 'tag_index.html')
       self.data['tag'] = tag
-      self.data['title'] = "Posts Tagged &ldquo;"+tag+"&rdquo;"
+      self.data['title'] = "Posts Tagged &ldquo;#{tag}&rdquo;"
     end
   end
 
@@ -20,7 +20,11 @@ module Jekyll
     def generate(site)
       if site.layouts.key? 'tag_index'
         dir = 'blog/tag'
-        site.tags.keys.each do |tag|
+        site.tags.each do |tag, posts|
+          # Filter out draft posts
+          published_posts = posts.reject { |post| post.data['draft'] == true }
+          next if published_posts.empty?
+
           write_tag_index(site, File.join(dir, tag), tag)
         end
       end
