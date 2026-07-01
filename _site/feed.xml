@@ -1,4 +1,291 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://victorangeloblancada.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://victorangeloblancada.github.io/" rel="alternate" type="text/html" /><updated>2026-02-18T11:51:42+08:00</updated><id>https://victorangeloblancada.github.io/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">Dissecting a Power BI Dashboard</title><link href="https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html" rel="alternate" type="text/html" title="Dissecting a Power BI Dashboard" /><published>2024-12-13T00:00:00+08:00</published><updated>2024-12-13T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html"><![CDATA[<p>In this article, we will thoroughly explore the structure and contents of a Power BI dashboard (PBIX) file. Like most Microsoft Office file formats, a PBIX file is actually a zipped folder containing various directories and files which work together to form the dashboard we see. Understanding the underlying architecture of a Power BI report is crucial for both users and developers, as it enables a deeper appreciation of how data is structured, processed, and displayed.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://victorangeloblancada.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://victorangeloblancada.github.io/" rel="alternate" type="text/html" /><updated>2026-07-01T22:13:58+08:00</updated><id>https://victorangeloblancada.github.io/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">What Even is an Agent?</title><link href="https://victorangeloblancada.github.io/blog/2026/06/30/what-even-is-an-agent.html" rel="alternate" type="text/html" title="What Even is an Agent?" /><published>2026-06-30T00:00:00+08:00</published><updated>2026-06-30T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2026/06/30/what-even-is-an-agent</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2026/06/30/what-even-is-an-agent.html"><![CDATA[<p>Microsoft Copilot uses the word “agent” to name assistants inside Microsoft 365: Researcher, Word Agent, Excel Agent, PowerPoint Agent, and others. The usage is reasonable. A user deciding how to draft a document, analyze a workbook, build a deck, or produce a research brief needs a clear product label, not an architecture diagram. Microsoft’s term works well at that layer: it tells the user which kind of help to invoke.</p>
+
+<p>Engineers, however, need a stricter definition. In current frontier practice, an agent is not merely a named assistant. An agent is an language model-driven execution loop: a system that can reason about a goal, choose tools, act on an environment, observe the result, update state, and continue until the work is done or stopped. OpenAI’s agent documentation describes agents around models, instructions, tools, guardrails, handoffs, MCP servers, and structured outputs; its broader framing treats agents as applications that plan, call tools, collaborate, and maintain state for multi-step work.</p>
+
+<p>The difference is not a quarrel over words. It changes what engineers can build, evaluate, govern, and trust. A Copilot agent is usually a packaged productivity capability. An agentic workflow is an architecture for delegated work.</p>
+
+<h2 id="the-original-definition-of-an-agent-was-useful-but-incomplete">The Original Definition of an Agent was Useful but Incomplete</h2>
+
+<p>The original LLM-era definition of an agent was simple: an agent is a language model prompted with a persona that modifies its behavior.</p>
+
+<p>Under that definition, an agent was a model prompted to behave as something: a researcher, analyst, planner, tutor, engineer, or critic. The system prompt gave the model its role, tone, goals, and boundaries. A “data engineering agent” would respond like a data engineer. A “research agent” would reply like a researcher.</p>
+
+<p>In hindsight, that definition was useful but would turn out to be incomplete.</p>
+
+<p>A persona changes the model’s stance. It does not give the system hands. A model with a researcher persona can write in the style of a researcher.</p>
+
+<p>A true agentic workflow, however, can search, retrieve, compare, cite, draft, revise, call tools, inspect files, execute code, and decide whether another step is needed.</p>
+
+<p>The old definition described behavior at the language layer, but the modern definition describes behavior at the system layer.</p>
+
+<h2 id="a-modern-agent-is-a-loop">A Modern Agent is a Loop</h2>
+
+<p>A more precise working definition for an agent would be:</p>
+
+<blockquote>
+  <p>An agent is an LLM-centered control system that uses instructions, tools, state, and an execution loop to make progress toward a goal under constraints.</p>
+</blockquote>
+
+<p>The decisive word here in this definition of an agent is <strong>loop</strong>.</p>
+
+<p>Modern agentic workflows follow the following rhythm:</p>
+
+<ol>
+  <li>The user supplies a goal</li>
+  <li>The model interprets the goal</li>
+  <li>The system exposes tools and context</li>
+  <li>The model chooses an action</li>
+  <li>The environment feedbacks an observation</li>
+  <li>The model updates its plan</li>
+  <li>The loop continues until the system reaches a stopping condition such as meeting the goal</li>
+</ol>
+
+<p>The illustrious Claude Code is a useful, well-known, concrete example. Anthropic describes Claude Code as an agent that reads a codebase, edits files, and runs commands across a terminal, IDE, desktop app, and browser.  Anthropic also describes it as an agentic coding system that searches codebases, edits across files, executes through the toolchain, runs tests, and handles CI failures.</p>
+
+<p>Claude Code as an example marks a useful boundary: a chatbot can discuss a repository, but an agentic coding system can work inside one.</p>
+
+<p>The model supplies judgment, but the harness supplies agency.</p>
+
+<h2 id="microsofts-usage-is-not-wrong-but-it-is-product-oriented">Microsoft’s Usage is Not Wrong, but it is Product-Oriented</h2>
+
+<p>Microsoft’s use of “agent” is best viewed as a product abstraction for marketing purposes.</p>
+
+<p>Researcher in Microsoft 365 Copilot is described as an intelligent assistant for complex, multi-step research that can draw from work content and the web and produce source-cited reports.  Microsoft also describes Word, Excel, and PowerPoint Agents as chat-first co-creators that help create documents, spreadsheets, and presentations inside Microsoft 365 Copilot.</p>
+
+<p>This naming convention makes sense for non-technical users. Someone choosing between standard Copilot chat and Researcher does not need a lecture on orchestration. The product label instead says, in effect, “Use this assistant for this kind of work.”</p>
+
+<p>A problem, however, appears when engineers carry that product meaning into architecture discussions.</p>
+
+<p>A Copilot agent may potentially contain agentic techniques internally. It may possibly retrieve context, reason over sources, use internal tools, ask clarifying questions, generate artifacts, and operate within Microsoft 365’s security and compliance boundaries. Researcher, for example, is positioned as deeper and more multi-step than standard Copilot chat.</p>
+
+<p>The user-facing name, however, does not specify the machinery: it does not tell the engineer what tools are exposed, which actions are possible, how state is represented, whether the loop is inspectable, what approvals are enforced, how failures are retried, or whether the workflow can be extended with custom skills, MCP servers, sub-agents, or sandboxes.</p>
+
+<p>Microsoft’s term is useful. It is also not exactly wrong, but it is simply broader and looser than the technical term.</p>
+
+<h2 id="a-better-metaphor-for-agents-are-workcells">A Better Metaphor for Agents are Workcells</h2>
+
+<p>If a persona is a costume and a Copilot agent is a specialist desk, then an agentic workflow is a workcell.</p>
+
+<p>In lean manufacturing, a workcell has tools, inputs, procedures, safety rules, inspection points, escalation paths, and output criteria. Its behavior comes not from the name on the station but from the system built around it.</p>
+
+<p>The same logic from lean manufacturing also applies to agents. A serious agentic workflow needs:</p>
+
+<ul>
+  <li>a model selected for the task</li>
+  <li>instructions that define role, constraints, and output contract</li>
+  <li>tools that let the system read, write, compute, search, execute, or delegate</li>
+  <li>state that records progress, intermediate artifacts, and prior observations</li>
+  <li>permissions that decide what the model may do</li>
+  <li>guardrails that block unsafe or low-confidence actions</li>
+  <li>checkpoints and rollback for recoverability</li>
+  <li>traces and logs for inspection</li>
+  <li>evaluations that judge completed work, not fluent prose</li>
+</ul>
+
+<p>OpenAI’s tooling makes these concerns explicit through tools, guardrails, handoffs, sessions, tracing, sandbox agents, and human-in-the-loop mechanisms.  Anthropic’s Claude Code work similarly emphasizes IDE integration, checkpointing, subagents, hooks, and SDK-level customization for more autonomous operation.</p>
+
+<p>An agent is therefore less like a clever yet isolated employee and more like a governed machine with a model in the control center.</p>
+
+<h2 id="mcp-makes-the-boundary-visible">MCP Makes the Boundary Visible</h2>
+
+<p>The Model Context Protocol helps explain why modern agentic systems feel different from application assistants.</p>
+
+<p>Anthropic introduced MCP as an open standard for connecting AI assistants to systems where data lives, including repositories, business tools, and development environments.  The MCP specification describes a standard way for LLM applications to integrate with external data sources and tools, with servers exposing resources, prompts, and tools to clients.</p>
+
+<p>MCP turns an agent from a prompt into a participant in an ecosystem.</p>
+
+<p>Before MCP and MCP-like patterns, each tool connection tended to be bespoke. After MCP, an agentic system can attach to standardized capabilities: repositories, databases, ticketing systems, filesystems, browsers, internal APIs, business tools, etc.</p>
+
+<p>MCP is not the agent, but MCP is its plumbing. The agent is the controller that decides which pipe to use, when to use it, and what to do with the result.</p>
+
+<p>The shift to MCP changes the engineering questions. The interesting questions are no longer limited to what the assistant should say, what tone it should use, or what content it should generate. The more important questions are now:</p>
+
+<ul>
+  <li>What can the system read?</li>
+  <li>What can the system change?</li>
+  <li>Which tools are available at each step?</li>
+  <li>What state persists across steps?</li>
+  <li>What actions require approval?</li>
+  <li>How are tool calls logged?</li>
+  <li>How does the loop recover from error?</li>
+  <li>What proves that the task is complete?</li>
+</ul>
+
+<p>Those are questions that define agentic work.</p>
+
+<h2 id="why-does-this-distinction-even-matter">Why Does This Distinction Even Matter?</h2>
+
+<p>Teams that live in enterprise platforms such as Microsoft 365, Teams, SharePoint, Power Platform, Fabric, Azure, Purview, and Graph can easily conclude that they already understand agents because Copilot exposes an Agents menu. That conclusion is partly true but also partly limiting.</p>
+
+<p>Copilot agents are useful for work that naturally ends in a Microsoft 365 artifact: a report, deck, spreadsheet, meeting summary, email, or structured answer. They are purpose-built for the productivity surface.</p>
+
+<p>Agents, in the context of agentic workflows, address a different class of problem: tasks where the system must operate across tools, inspect intermediate results, repair mistakes, and continue. Examples include:</p>
+
+<ul>
+  <li>refactoring a codebase</li>
+  <li>migrating a data pipeline</li>
+  <li>debugging CI failures</li>
+  <li>reconciling semantic model changes</li>
+  <li>generating and testing SQL transformations</li>
+  <li>validating data quality rules</li>
+  <li>repairing orchestration jobs</li>
+  <li>creating pull requests</li>
+  <li>querying multiple operational systems</li>
+  <li>coordinating several specialized workers</li>
+</ul>
+
+<p>A Copilot agent may help with pieces of these tasks, but an actual agentic workflow is designed to own the loop.</p>
+
+<p>For engineers, the risk is not that the terminology is wrong. The risk is category error: agents as a product label and a runtime architecture answer different questions.</p>
+
+<p>The product question is: <strong>Which assistant should the user invoke?</strong><br />
+The engineering question is: <strong>What system can safely perform this work?</strong></p>
+
+<h2 id="a-practical-test">A Practical Test</h2>
+
+<p>A simple test separates the two meanings:</p>
+
+<blockquote>
+  <p>If the system mainly gives a named assistant for a bounded user task, “agent” is being used in the product sense.<br />
+If the system can choose tools, act on an environment, observe results, update state, and iterate toward a goal, “agent” is being used in the technical sense.</p>
+</blockquote>
+
+<p>This test is mechanical by design: it avoids arguments about branding and focuses on capability.</p>
+
+<p>A model with a persona is not enough, a chat interface is not enough, a menu item called “Agent” is not enough - a truly agentic workflow only exists when the model participates in a governed action loop.</p>
+
+<h2 id="a-glossary-of-cleaner-vocabulary">A Glossary of Cleaner Vocabulary</h2>
+
+<p>The precise vocabulary below prevents confusion without forcing anyone to abandon useful product terms.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Term</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Persona</td>
+      <td>The role, tone, and behavioral frame given to a model through instructions.</td>
+    </tr>
+    <tr>
+      <td>Assistant</td>
+      <td>A conversational system that helps a user produce an answer or artifact.</td>
+    </tr>
+    <tr>
+      <td>Copilot agent</td>
+      <td>A Microsoft-branded, task-oriented Copilot capability inside a product surface.</td>
+    </tr>
+    <tr>
+      <td>Tool</td>
+      <td>A callable capability that lets the system read, write, compute, retrieve, execute, or delegate.</td>
+    </tr>
+    <tr>
+      <td>MCP server</td>
+      <td>A standardized provider of context, prompts, or tools to an AI application.</td>
+    </tr>
+    <tr>
+      <td>Harness</td>
+      <td>The runtime code that manages tools, state, permissions, retries, approvals, and stopping rules.</td>
+    </tr>
+    <tr>
+      <td>Sub-agent</td>
+      <td>A specialized agent or worker invoked by another agent or orchestrator.</td>
+    </tr>
+    <tr>
+      <td>Agentic workflow</td>
+      <td>The full loop in which an LLM uses tools and state to act iteratively toward a goal.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This glossary keeps both meanings intact.</p>
+
+<p>Copilot agents are agents in the Microsoft product sense. Agents in agentic workflows are agents in the engineering-system sense. The second meaning is the one engineers should use when designing systems.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>The word “agent” began as a light abstraction: a language model with a persona. Enterprise software such as Microsoft then made the word accessible by applying it to named Copilot experiences that help users perform specific kinds of work inside Microsoft 365. That product usage is understandable and often helpful.</p>
+
+<p>The technical frontier has made the word stricter.</p>
+
+<p>A modern agent is not defined by its name, persona, or chat surface. A modern agent is defined by a loop: model, tools, state, action, observation, control, and termination.</p>
+
+<p>Copilot agents package assistance, while agentic workflows execute governed work.</p>
+
+<p>Both these definitions matter and they should not be conflated.</p>
+
+<p>The cleanest formulation today is:</p>
+
+<blockquote>
+  <p>A persona tells a model how to behave.<br />
+A Copilot agent tells a user which assistant to use.<br />
+An agentic workflow gives a model the machinery to act.</p>
+</blockquote>
+
+<p>This is the bridge between the two worlds of product and engineering.</p>
+
+<h2 id="summary-comparison-table">Summary Comparison Table</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Dimension</th>
+      <th>Microsoft Copilot “Agent”</th>
+      <th>Agentic Workflow</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Primary meaning</td>
+      <td>A named Microsoft 365 Copilot experience for a bounded class of work.</td>
+      <td>A system in which a model acts through an iterative loop.</td>
+    </tr>
+    <tr>
+      <td>Best mental model</td>
+      <td>A specialist inside a productivity suite.</td>
+      <td>A controlled execution loop.</td>
+    </tr>
+    <tr>
+      <td>User experience</td>
+      <td>Copilot Chat, Word, Excel, PowerPoint, Researcher, or another Microsoft 365 surface.</td>
+      <td>Terminal, IDE, sandbox, MCP client, workflow engine, browser, CI system, or custom application.</td>
+    </tr>
+    <tr>
+      <td>Core abstraction</td>
+      <td>Product capability.</td>
+      <td>Runtime architecture.</td>
+    </tr>
+    <tr>
+      <td>Tool use</td>
+      <td>Often present but hidden behind the product boundary.</td>
+      <td>Explicit, inspectable, extensible, and governed.</td>
+    </tr>
+    <tr>
+      <td>Autonomy</td>
+      <td>Scoped to the Microsoft 365 task and application model.</td>
+      <td>Scoped by tools, permissions, state, approvals, sandboxing, and stopping rules.</td>
+    </tr>
+    <tr>
+      <td>Extensibility</td>
+      <td>Mostly through Microsoft-provided surfaces and enterprise integrations.</td>
+      <td>Through harnesses, MCP servers, skills, sub-agents, code sandboxes, structured outputs, guardrails, and orchestration logic.</td>
+    </tr>
+    <tr>
+      <td>Correct technical sense of “agent”</td>
+      <td>A useful product term, but not the strict engineering definition.</td>
+      <td>The strict engineering definition: an LLM-driven system that can act, observe, and iterate toward a goal.</td>
+    </tr>
+    <tr>
+      <td>Practical test</td>
+      <td>“Which Copilot capability should I use?”</td>
+      <td>“What loop, tools, state, and controls let the model complete the task?”</td>
+    </tr>
+  </tbody>
+</table>]]></content><author><name></name></author><category term="blog" /><category term="ai" /><category term="agent" /><category term="agentic ai" /><category term="claude" /><category term="copilot" /><summary type="html"><![CDATA[Everyone talks about AI agents, but very few people mean the same thing when they do.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/robot-piano.webp" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/robot-piano.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Dissect Pbix copy.md:zone</title><link href="https://victorangeloblancada.github.io/2024/12/13/dissect-pbix-Copy.md-Zone.Identifier" rel="alternate" type="text/html" title="Dissect Pbix copy.md:zone" /><published>2024-12-13T00:00:00+08:00</published><updated>2024-12-13T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/2024/12/13/dissect-pbix%20-%20Copy.md:Zone</id><content type="html" xml:base="https://victorangeloblancada.github.io/2024/12/13/dissect-pbix-Copy.md-Zone.Identifier"><![CDATA[[ZoneTransfer]
+ZoneId=3]]></content><author><name></name></author><summary type="html"><![CDATA[[ZoneTransfer] ZoneId=3]]></summary></entry><entry><title type="html">Dissecting a Power BI Dashboard</title><link href="https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html" rel="alternate" type="text/html" title="Dissecting a Power BI Dashboard" /><published>2024-12-13T00:00:00+08:00</published><updated>2024-12-13T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html"><![CDATA[<p>In this article, we will thoroughly explore the structure and contents of a Power BI dashboard (PBIX) file. Like most Microsoft Office file formats, a PBIX file is actually a zipped folder containing various directories and files which work together to form the dashboard we see. Understanding the underlying architecture of a Power BI report is crucial for both users and developers, as it enables a deeper appreciation of how data is structured, processed, and displayed.</p>
 
 <p>This guide will break down the various directories and files found inside the zipped folder of a PBIX file, explain their purpose, and show how these elements work together to create the final dashboard. We will also delve into the core <code class="language-plaintext highlighter-rouge">Layout</code> file, which plays a key role in defining how data is translated into charts, tables, and other visualizations within the dashboard.</p>
 
@@ -458,79 +745,4 @@ Version</p>
     <span class="c1"># Save image
 </span>    <span class="n">im1</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="n">mypath</span><span class="o">+</span><span class="s">'/'</span><span class="o">+</span><span class="n">myfile</span><span class="p">)</span>
 
-</code></pre></div></div>]]></content><author><name></name></author><category term="blog" /><category term="blog" /><category term="python" /><category term="image processing" /><category term="coding" /><category term="automation" /><summary type="html"><![CDATA[This is part of a series of short blog posts about automating boring repetitive work using Python.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/frames.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/frames.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Adding a Date Watermark to an Image</title><link href="https://victorangeloblancada.github.io/blog/2022/09/20/image-watermark.html" rel="alternate" type="text/html" title="Adding a Date Watermark to an Image" /><published>2022-09-20T00:00:00+08:00</published><updated>2022-09-20T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2022/09/20/image-watermark</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2022/09/20/image-watermark.html"><![CDATA[<p><em>This is part of a series of short blog posts about automating <s>boring</s> repetitive work using Python.</em></p>
-
-<p>The following code automatically adds a date watermark to all images in the directory specified in <code class="language-plaintext highlighter-rouge">mypath</code>.</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Import libraries
-</span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageFont</span><span class="p">,</span> <span class="n">ImageDraw</span>
-<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">listdir</span>
-<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">isfile</span><span class="p">,</span> <span class="n">join</span>
-
-<span class="k">def</span> <span class="nf">get_date_taken</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-    <span class="s">"""Function to get the date taken EXIF data.
-    path: File path of image.
-    """</span>
-    <span class="k">return</span> <span class="n">Image</span><span class="p">.</span><span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">).</span><span class="n">_getexif</span><span class="p">()[</span><span class="mi">36867</span><span class="p">]</span>
-
-<span class="c1"># Specify directory
-</span><span class="n">mypath</span> <span class="o">=</span> <span class="s">'Photos-001'</span>
-
-<span class="c1"># Get list of files in the specified directory
-</span><span class="n">onlyfiles</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">listdir</span><span class="p">(</span><span class="n">mypath</span><span class="p">)</span> <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">mypath</span><span class="p">,</span> <span class="n">f</span><span class="p">))]</span>
-
-<span class="c1"># Loop through list of files
-</span><span class="k">for</span> <span class="n">image_fn</span> <span class="ow">in</span> <span class="n">onlyfiles</span><span class="p">:</span>
-    <span class="c1"># Open image
-</span>    <span class="n">watermark_image</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="nb">open</span><span class="p">(</span><span class="n">mypath</span><span class="o">+</span><span class="s">'/'</span><span class="o">+</span><span class="n">image_fn</span><span class="p">)</span> 
-
-    <span class="c1"># Get image dimensions
-</span>    <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">watermark_image</span><span class="p">.</span><span class="n">size</span>
-
-    <span class="c1"># Initialize ImageDraw
-</span>    <span class="n">draw</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="p">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">watermark_image</span><span class="p">)</span>
-
-    <span class="c1"># Set font size to around 3% of height (height divided by 33)
-</span>    <span class="n">font</span> <span class="o">=</span> <span class="n">ImageFont</span><span class="p">.</span><span class="n">truetype</span><span class="p">(</span><span class="s">"arial.ttf"</span><span class="p">,</span> <span class="n">height</span><span class="o">//</span><span class="mi">33</span><span class="p">)</span>
-
-    <span class="c1"># Add watermark
-</span>    <span class="n">draw</span><span class="p">.</span><span class="n">text</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">height</span> <span class="o">-</span> <span class="p">(</span><span class="n">height</span><span class="o">//</span><span class="mi">33</span><span class="p">)),</span> 
-              <span class="n">get_date_taken</span><span class="p">(</span><span class="n">mypath</span><span class="o">+</span><span class="s">'/'</span><span class="o">+</span><span class="n">image_fn</span><span class="p">),</span> 
-              <span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">,</span>
-              <span class="n">fill</span><span class="o">=</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>
-
-    <span class="c1"># Save image
-</span>    <span class="n">watermark_image</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="n">mypath</span><span class="o">+</span><span class="s">' Labeled/'</span><span class="o">+</span><span class="n">image_fn</span><span class="p">)</span>
-</code></pre></div></div>]]></content><author><name></name></author><category term="blog" /><category term="blog" /><category term="python" /><category term="image processing" /><category term="coding" /><category term="automation" /><summary type="html"><![CDATA[This is part of a series of short blog posts about automating boring repetitive work using Python.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/prints.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/prints.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">State of the Art: Creativity in the Age of Stable Diffusion</title><link href="https://victorangeloblancada.github.io/blog/2022/09/06/state-of-the-art-creativity-in-the-age-of-stable-diffusion.html" rel="alternate" type="text/html" title="State of the Art: Creativity in the Age of Stable Diffusion" /><published>2022-09-06T00:00:00+08:00</published><updated>2022-09-06T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2022/09/06/state-of-the-art-creativity-in-the-age-of-stable-diffusion</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2022/09/06/state-of-the-art-creativity-in-the-age-of-stable-diffusion.html"><![CDATA[<p><a href="https://www.smithsonianmag.com/smart-news/artificial-intelligence-art-wins-colorado-state-fair-180980703/">The first prize at the recently-held 2022 Colorado State Fair’s art competition in the digital category controversially went to a work created using Midjourney, an AI-powered text-to-image generator.</a> Artists were understandably upset but I would argue that society at large should welcome such a development.</p>
-
-<p><img src="https://miro.medium.com/max/1400/0*t7Mv5hAMt_daMRml.jpg" alt="img" /></p>
-
-<p>A number of people seem to think that using AI to produce art is tantamount to cheating because it supposedly devalues the human effort artists put into creating art, specifically the years and years spent honing their craft, <em>id est</em>, committing brush stroke technique to muscle memory, getting an almost instinctive intuition of color theory, <em>et cetera</em>. <a href="https://victorangeloblancada.github.io/blog/2019/03/25/democritization-of-expertise.html">As I have stated before, AI is so effective because machine learning models can simulate years of human practice into several hours of continuous training.</a> This means that given enough data and compute, AI will always eventually overtake humanity when it comes to reliably delivering perfect — nay superhuman — technique, including that which is used when it comes to crafting art.</p>
-
-<blockquote>
-  <p>The cutting edge is called state of the art for a reason.</p>
-</blockquote>
-
-<p>Given this fact, one possibility is to separate AI-augmented digital art from those that purely use what are considered standard (as of the time of this writing) tools such as digital artists’ favorite Adobe Photoshop, limited to a certain version. Ironically, nearly all software companies have been racing to incorporate AI into their products — <a href="https://www.makeuseof.com/what-is-adobe-sensei/">Adobe has touted Sensei’s artificial intelligence and machine learning models as an integral feature of Photoshop moving forward</a>, thereby making AI tools ubiquitous and requiring artists to use outdated versions of their software if they wish to to avoid AI altogether. By creating distinct categories based on how advanced the tools digital artists use are, we can ensure that artists compete on the same playing field. An AI classification model can be trained to differentiate between human-created digital art and image model outputs from Midjourney, Stable Diffusion, and DALL-E to enforce these categories.</p>
-
-<p>More importantly though, there is much more to art than craft. Craft may involve putting in hours to develop technique, but it can be argued that taste — the ability to differentiate true art and envision such a project — is more valuable.</p>
-
-<p>It is essential to note that Midjourney, along with other AI image generators in vogue such as Stable Diffusion and DALL-E, is a text-to-image model which means that users still need to specify text prompts. People do not simply press a button to create art, unlike how some people have been misinformed. Text-to-image models take in text prompts, such as “chiaroscuro masterpiece portrait of Steve Jobs by Caravaggio”, and require tuning certain parameters such as a guidance scale to generate an image based on the prompt.</p>
-
-<p><img src="https://miro.medium.com/max/1400/1*74sVNvrV7JBkDG3PpdGzfg.jpeg" alt="img" /></p>
-
-<p>Today’s state of the art text-to-image AI models use a neural network architecture to convert text inputs to images. This line of research originated from image captioning models, which take images inputs and generate appropriate descriptive captions. Computer scientists then attempted to build a model that can do the reverse — a model that can take in descriptive text inputs and output the appropriate image. While image search algorithms on search engines such as Google use keywords to select appropriate images from a universe of existing images on the Internet based on something like a similarity score, text-to-image models instead start with an image of random noise and algorithmically modify it to generate the image that maximizes its similarity to the provided text prompt. The datasets used in training these models, such as Stable Diffusion’s <a href="https://laion.ai/blog/laion-5b/">LAION-5B dataset</a>, comes from image-text-pairs scraped from the Internet, leading to idiosyncrasies such as celebrity social media handles working as stand-ins for their actual names.</p>
-
-<p><img src="https://miro.medium.com/max/1400/0*B9dfrkAzCYBY-Gi_" alt="img" /></p>
-
-<p>Crafting text prompts is therefore a science and an art(!) unto itself —<a href="https://paperswithcode.com/task/prompt-engineering"> there are numerous scientific papers published on the nuances of prompt engineering.</a></p>
-
-<p>Given this, artists who use text-to-image models such as Midjourney still have an active role to play in creating art.<a href="https://victorangeloblancada.github.io/blog/2019/03/25/democritization-of-expertise.html"> As I have written previously, corporate workers of tomorrow must take on more of a managerial mindset as AI automates an increasing number of mundane operational tasks.</a> The same is true in art: the artists of tomorrow must take on more of an editorial mindset and guide AI as it takes care of tasks requiring craft and technique.</p>
-
-<p>Many of history’s most celebrated artists — from Picasso to Duchamp to Warhol — have embraced the idea of <a href="https://www.moma.org/learn/moma_learning/themes/dada/marcel-duchamp-and-the-readymade/">found art</a>. For the uninitiated, found art, also known as found objects or ready-mades, are existing objects that are selected by artists and are recognized as art by merit of having been identified as art by an artist. Found art does not have to be crafted by an artist; instead, the artist’s contribution comes from possessing the tasteful eye to identify found art as art. Found art is an exceptional case of art emerging from taste rather than craft. AI-generated art is not as extreme as found art — users still need to craft text prompts and refine model parameters — but is just as valid as art.</p>
-
-<p>The great artist Michaelangelo said it best: “Every block of stone has a statue inside it and it is the task of the sculptor to discover it.” In the olden days, this required artists to hone their technique in the use of tools such as chisels and brushes. As recently as two decades ago, computers have turned these tools digital as artists began using software such as Photoshop and Blender. It should therefore come as no surprise that artists today use AI-powered tools to produce award-winning artwork. The cutting edge is called state of the art for a reason.</p>
-
-<p>Of course, given sufficient data points (art and their judged scores) from competitions, we can always just build an AI model that creates the optimal artwork to win a competition, but this just replaces the human input away from text prompts to judges’ scores. This then would be the state of the art of found art, until the next advancement comes along.</p>
-
-<p><em>This article was also posted on <a href="https://medium.com/@gelo.blancada/state-of-the-art-creativity-in-the-age-of-stable-diffusion-407bd2b98776">Medium</a>.</em></p>]]></content><author><name></name></author><category term="blog" /><category term="blog" /><category term="ai" /><category term="artificial intelligence" /><category term="art" /><category term="creativity" /><category term="machine learning" /><category term="opinion" /><summary type="html"><![CDATA[The first prize at the recently-held 2022 Colorado State Fair’s art competition in the digital category controversially went to a work created using Midjourney, an AI-powered text-to-image generator. Artists were understandably upset but I would argue that society at large should welcome such a development.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://miro.medium.com/max/1400/1*OMKOu2adjb0WjYEej9ap3A.jpeg" /><media:content medium="image" url="https://miro.medium.com/max/1400/1*OMKOu2adjb0WjYEej9ap3A.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+</code></pre></div></div>]]></content><author><name></name></author><category term="blog" /><category term="blog" /><category term="python" /><category term="image processing" /><category term="coding" /><category term="automation" /><summary type="html"><![CDATA[This is part of a series of short blog posts about automating boring repetitive work using Python.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/frames.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/frames.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

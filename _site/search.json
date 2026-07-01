@@ -2,10 +2,26 @@
   
   
     {
+      "title"    : "What Even is an Agent?",
+      "category" : "blog",
+      "tags"     : "ai, agent, agentic ai, claude, copilot",
+      "url"      : "/blog/2026/06/30/what-even-is-an-agent.html",
+      "date"     : "2026-06-30 00:00:00 +0800"
+    },
+  
+    {
       "title"    : "Dissecting a Power BI Dashboard",
       "category" : "blog",
       "tags"     : "power bi, dashboard, microsoft",
       "url"      : "/blog/2024/12/13/dissect-pbix.html",
+      "date"     : "2024-12-13 00:00:00 +0800"
+    },
+  
+    {
+      "title"    : "Dissect Pbix   copy.md:zone",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/2024/12/13/dissect-pbix-Copy.md-Zone.Identifier",
       "date"     : "2024-12-13 00:00:00 +0800"
     },
   
