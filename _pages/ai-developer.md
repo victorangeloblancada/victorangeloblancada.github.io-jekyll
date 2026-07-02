@@ -13,12 +13,17 @@ image: /assets/images/coding.jpg
 notshareable: True
 ---
 
-I am a full stack AI developer who has overseen projects to completion. I specialize in data science and machine learning using Python, R, and C but am also knowledgable in Java and web development. I am equally comfortable as an individual contributor or as a project manager.
+I am a full stack AI developer and engineering leader specializing in deploying production-grade Generative AI agents, MLOps automation, and web platforms (Python, SQL, R, Spark, AWS). I bridge complex statistical algorithms with enterprise-grade software delivery.
 
 My achievements include:
 
-- Developing automated flu tracking software to guide the Australian marketing campaign schedule for a leading FMCG company's cough and flu medication. The tracker automatically sends the marketing team an alert email whenever a flu outbreak is predicted to begin, giving them ample time to prepare inventory and boost advertising.
-- Reaching the national finals of the Trend Micro Big Data Programming competition by creating a Natural Language Processing bot that takes in text, summarizes the general ideas, and identifies logical and factual inconsistencies.
-- Developing automated media optimization algorithms resulting in client sales lift of up to 13%. The algorithm applies linear and non-linear optimization to a predictive model of client sales to recommend an annual media spending plan by channel on a weekly level.
+- Designing and building **Mimir**, a production Generative AI agent (utilizing LLMs, RAG, and tool calling) that automates global RFP reviews and accelerates solution design globally for Maersk Contract Logistics.
+- Creating the **SCA Toolbox**, a containerized self-service Python web application (Akamai-hosted) that provides geocoding, Center of Gravity analysis, and Traveling Salesman optimization directly to country-level engineering teams.
+- Structuring an AI-powered RFP knowledge base optimization pipeline using NLP deduplication and answer synthesis across 1,524 entries to improve response quality.
+- Dropping machine learning application development cycles by 75% (from two months to two weeks) by implementing robust MLOps practices, modular statistical libraries, retraining scripts, and Dash GUIs.
+- Developing an automated flu tracking software (NLP and predictive analytics) that alerts marketing and inventory teams in advance of seasonal flu outbreaks.
+- Creating a deep learning seq2seq model for automated address cleansing to extract standardized components from unstructured inputs.
+- Building a few-shot learning SKU-level demand prediction system to improve seasonal inventory planning.
+- Reaching the national finals of the Trend Micro Big Data Programming competition by building a Natural Language Processing bot that summarizes text and identifies factual inconsistencies.
 
 Reach out on [LinkedIn](https://www.linkedin.com/in/geloblancada/) or via [Email](mailto:naturalproblemsolver@gmail.com) to partner with me today.
