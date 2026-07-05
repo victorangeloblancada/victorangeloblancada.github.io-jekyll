@@ -1,3 +1,4 @@
+/* Force recompilation of main.scss imports */
 @font-face {
   font-family: Fanwood;
   src: url("/assets/fonts/fanwood_text-webfont.woff");
@@ -70,6 +71,9 @@
 html {
   scroll-behavior: smooth; }
 
+.text-center {
+  text-align: center; }
+
 body {
   font-family: Merriweather, Georgia, Garamond, serif;
   font-size: 16px;
@@ -89,54 +93,30 @@ h1, h2, h3 {
 h4, h5, h6 {
   font-weight: 300; }
 
-@media screen and (min-width: 320px) {
-  body {
-    font-size: 2.2vmax; }
+body {
+  font-size: clamp(0.95rem, calc(0.4vw + 0.85rem), 1.05rem); }
 
-  h1 {
-    font-size: 5vmax; }
+h1 {
+  font-size: clamp(2rem, calc(3.2vw + 1rem), 3.125rem); }
 
-  h2 {
-    font-size: 3.33vmax; }
+h2 {
+  font-size: clamp(1.5rem, calc(2.2vw + 0.8rem), 2.125rem); }
 
-  h3 {
-    font-size: 2.93vmax; }
+h3 {
+  font-size: clamp(1.35rem, calc(1.8vw + 0.8rem), 1.875rem); }
 
-  h4 {
-    font-size: 2.5vmax; }
+h4 {
+  font-size: clamp(1.2rem, calc(1.4vw + 0.8rem), 1.5625rem); }
 
-  h5 {
-    font-size: 2.08vmax; }
+h5 {
+  font-size: clamp(1.1rem, calc(1.1vw + 0.8rem), 1.3125rem); }
 
-  h6 {
-    font-size: 1.68vmax; }
+h6 {
+  font-size: clamp(1rem, calc(0.8vw + 0.8rem), 1.0625rem); }
 
-  blockquote {
-    font-size: 5vmax; } }
-@media screen and (min-width: 1000px) {
-  body {
-    font-size: 16px; }
+blockquote {
+  font-size: clamp(1.2rem, calc(1.4vw + 0.8rem), 1.5625rem); }
 
-  h1 {
-    font-size: 50px; }
-
-  h2 {
-    font-size: 34px; }
-
-  h3 {
-    font-size: 30px; }
-
-  h4 {
-    font-size: 25px; }
-
-  h5 {
-    font-size: 21px; }
-
-  h6 {
-    font-size: 17px; }
-
-  blockquote {
-    font-size: 34px; } }
 a {
   color: #084887;
   fill: #084887; }
@@ -241,8 +221,11 @@ div.navbar {
   z-index: 2;
   position: fixed;
   width: 100%;
-  background-color: #FFF;
-  box-shadow: 0 10px 20px -4px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.05);
   left: 0px;
   right: 0px;
   overflow: hidden;
@@ -292,7 +275,7 @@ input[type=text]:focus {
 div.content {
   display: block;
   height: auto;
-  width: 80vw;
+  width: 60vw;
   margin-left: auto;
   margin-right: auto; }
 
@@ -372,6 +355,8 @@ div.square-img {
   line-height: 320px;
   max-height: 320px;
   max-width: 320px;
+  border-radius: 12px;
+  overflow: hidden;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -380,12 +365,20 @@ div.square-img {
   left: 0px;
   z-index: 0;
   margin: 18px;
-  align-items: center; }
+  align-items: center;
+  background-color: rgba(34, 24, 28, 0.45);
+  /* Cleaner dark overlay tint */
+  background-blend-mode: multiply;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
 
 div.square-img:hover {
-  box-shadow: 0 15px 25px -4px rgba(0, 0, 0, 0.7);
-  transform: scale(1.1);
-  z-index: 1; }
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px) scale(1.03);
+  /* Modern translateY lift instead of large scale zoom */
+  z-index: 1;
+  background-color: rgba(34, 24, 28, 0.15);
+  background-blend-mode: multiply; }
 
 .center-content {
   display: inline-block;
@@ -407,23 +400,19 @@ div.square-img:hover {
   text-decoration: none;
   font-style: italic; }
 
-.yt-container {
-  position: relative;
-  overflow: hidden;
+/* Scroll Indicator */
+/* The progress container (grey background) */
+.progress-container {
   width: 100%;
-  padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
-}
+  height: 8px;
+  background: #ccc; }
 
-/* Then style the iframe to fit in the container div with full height and width */
-.responsive-iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-}
+/* The progress bar (scroll indicator) */
+.progress-bar {
+  height: 8px;
+  background: #F58A07;
+  width: 0%; }
+
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes pulse {
   from {
@@ -443,8 +432,11 @@ div.square-img:hover {
     padding-bottom: 10px;
     bottom: 0px;
     margin-bottom: env(safe-area-inset-bottom, 0px);
-    background-color: #FFF;
-    box-shadow: 0 -1px 20px -4px rgba(0, 0, 0, 0.1); }
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 -4px 20px -4px rgba(0, 0, 0, 0.05); }
 
   div.hero-img {
     background-attachment: scroll; }
@@ -465,7 +457,15 @@ div.square-img:hover {
     height: 50vh;
     width: 100%;
     left: 0px;
-    right: 0px; } }
+    right: 0px; }
+
+  /* Style the scroll indicator header: fixed position (always stay at the top) */
+  .header {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    background-color: #084887; } }
 @media (min-width: 600px) {
   div.navbar {
     height: 50px;
@@ -496,4 +496,50 @@ div.square-img:hover {
     height: 70vh;
     width: 70vh;
     float: right;
-    padding-left: 10vh; } }
+    padding-left: 10vh; }
+
+  /* Style the scroll indicator header: fixed position (always stay at the top) */
+  .header {
+    position: fixed;
+    top: 0px;
+    /* Hide scroll indicator on desktop */
+    z-index: 1;
+    width: 100%;
+    background-color: #084887; } }
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: #E0E0E0; }
+
+  div.navbar {
+    background-color: rgba(18, 18, 18, 0.85);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.2); } }
+@media only screen and (prefers-color-scheme: dark) and (max-width: 600px) {
+  div.navbar {
+    background-color: rgba(18, 18, 18, 0.85) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 -4px 20px -4px rgba(0, 0, 0, 0.2); } }
+@media (prefers-color-scheme: dark) {
+  input[type=text] {
+    background-color: #1a1a1a;
+    color: #FFF;
+    border-bottom: 2px solid #F58A07; }
+
+  a {
+    color: #539bf5;
+    fill: #539bf5; }
+
+  a:hover {
+    color: #ff9f1c;
+    fill: #ff9f1c; }
+
+  hr {
+    border-color: rgba(255, 255, 255, 0.15); }
+
+  div.square-img {
+    background-color: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.06); }
+
+  div.square-img:hover {
+    background-color: rgba(0, 0, 0, 0.2); } }
