@@ -2,6 +2,14 @@
   
   
     {
+      "title"    : "The Prompt Template Is Part of the Runtime Now",
+      "category" : "blog",
+      "tags"     : "ai, agent, agentic ai, gemma, google",
+      "url"      : "/blog/2026/07/06/gemma-4.html",
+      "date"     : "2026-07-06 00:00:00 +0800"
+    },
+  
+    {
       "title"    : "What Even is an Agent?",
       "category" : "blog",
       "tags"     : "ai, agent, agentic ai, claude, copilot",

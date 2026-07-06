@@ -74,7 +74,7 @@ All good? The code demonstrates how the model's parameters adapt to the input ve
 
 Funnily enough, while this algorithm is theoretically elegant, implementing it at scale is computationally prohibitive. 
 
-In our [previous analysis on the Roofline Model](file:///c:/Users/natur/Downloads/projects/victorangeloblancada.github.io-jekyll/_posts/2026-07-14-roofline-analysis-communication-bottleneck.md), we established that AI performance is constrained by communication (memory bandwidth), not computation:
+In our [previous analysis on the Roofline Model](roofline-analysis-communication-bottleneck.html), we established that AI performance is constrained by communication (memory bandwidth), not computation:
 
 $$\text{Time} = \max(\text{Compute Time}, \text{Communication Time})$$
 

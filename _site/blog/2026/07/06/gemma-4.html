@@ -1,0 +1,649 @@
+<!doctype html>
+<html>
+	<head>
+		<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5S5WB7M');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ERJECQ081H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ERJECQ081H');
+</script>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>The Prompt Template Is Part of the Runtime Now</title>
+		<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>The Prompt Template Is Part of the Runtime Now | Victor Angelo Blancada</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="The Prompt Template Is Part of the Runtime Now" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The Gemma 4 prompt-template dust-up was not really about Jinja syntax or special tokens. It was about a deeper shift in AI systems - as LLMs move from chatbots to agents, the prompt template becomes part of the runtime contract. When that contract is even slightly wrong, tools fail, reasoning leaks, multimodal inputs fall out of alignment, and a capable model can look broken." />
+<meta property="og:description" content="The Gemma 4 prompt-template dust-up was not really about Jinja syntax or special tokens. It was about a deeper shift in AI systems - as LLMs move from chatbots to agents, the prompt template becomes part of the runtime contract. When that contract is even slightly wrong, tools fail, reasoning leaks, multimodal inputs fall out of alignment, and a capable model can look broken." />
+<link rel="canonical" href="https://victorangeloblancada.github.io/blog/2026/07/06/gemma-4.html" />
+<meta property="og:url" content="https://victorangeloblancada.github.io/blog/2026/07/06/gemma-4.html" />
+<meta property="og:site_name" content="Victor Angelo Blancada" />
+<meta property="og:image" content="https://victorangeloblancada.github.io/assets/images/puzzle.webp" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-07-06T00:00:00+08:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://victorangeloblancada.github.io/assets/images/puzzle.webp" />
+<meta property="twitter:title" content="The Prompt Template Is Part of the Runtime Now" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-07-06T00:00:00+08:00","datePublished":"2026-07-06T00:00:00+08:00","description":"The Gemma 4 prompt-template dust-up was not really about Jinja syntax or special tokens. It was about a deeper shift in AI systems - as LLMs move from chatbots to agents, the prompt template becomes part of the runtime contract. When that contract is even slightly wrong, tools fail, reasoning leaks, multimodal inputs fall out of alignment, and a capable model can look broken.","headline":"The Prompt Template Is Part of the Runtime Now","image":"https://victorangeloblancada.github.io/assets/images/puzzle.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://victorangeloblancada.github.io/blog/2026/07/06/gemma-4.html"},"url":"https://victorangeloblancada.github.io/blog/2026/07/06/gemma-4.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+		<link rel="stylesheet" href="https://indestructibletype.com/fonts/Jost.css" type="text/css" charset="utf-8" />
+
+<link rel="stylesheet" href="/assets/css/styles.css">
+<link rel="stylesheet" href="/assets/css/syntax.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+	</head>
+	<body>
+		<script type="text/javascript">
+  window.onscroll = function() {myScrollIndicator()};
+
+  function myScrollIndicator() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+<div class="header">
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</div>
+		<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5S5WB7M"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+		<div class="wrapper">
+			<link rel="stylesheet" href="/assets/css/speech-input.css">
+<script src="/assets/js/nav.js" type="text/javascript"></script>
+<script src="/assets/js/speech-input.js" type="text/javascript"></script>
+<div class="navbar transition" id="navbar">
+	<nav>
+		<a onClick="expand('navbar', 'search-input')">
+			<svg width="50" height="50" aria-label="search" class="octicon octicon-search" viewBox="0 0 24 24" version="1.1" role="img"><path d="M10.25 2a8.25 8.25 0 0 1 6.34 13.53l5.69 5.69a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215l-5.69-5.69A8.25 8.25 0 1 1 10.25 2ZM3.5 10.25a6.75 6.75 0 1 0 13.5 0 6.75 6.75 0 0 0-13.5 0Z"></path></svg>
+			<p>Search</p>
+		</a>
+		
+			<a href="/" >
+				<svg width="50" height="50" aria-label="home" class="octicon octicon-home" viewBox="0 0 24 24" version="1.1" role="img"><path d="M11.03 2.59a1.501 1.501 0 0 1 1.94 0l7.5 6.363a1.5 1.5 0 0 1 .53 1.144V19.5a1.5 1.5 0 0 1-1.5 1.5h-5.75a.75.75 0 0 1-.75-.75V14h-2v6.25a.75.75 0 0 1-.75.75H4.5A1.5 1.5 0 0 1 3 19.5v-9.403c0-.44.194-.859.53-1.144ZM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v6.25h5v-9.403Z"></path></svg>
+				<p>Home</p>
+			</a>
+		
+			<a href="/pages/about.html" >
+				<svg width="50" height="50" aria-label="person" class="octicon octicon-person" viewBox="0 0 24 24" version="1.1" role="img"><path d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9.005 9.005 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z"></path></svg>
+				<p>About</p>
+			</a>
+		
+			<a href="/blog.html" >
+				<svg width="50" height="50" aria-label="book" class="octicon octicon-book" viewBox="0 0 24 24" version="1.1" role="img"><path d="M0 3.75A.75.75 0 0 1 .75 3h7.497c1.566 0 2.945.8 3.751 2.014A4.495 4.495 0 0 1 15.75 3h7.5a.75.75 0 0 1 .75.75v15.063a.752.752 0 0 1-.755.75l-7.682-.052a3 3 0 0 0-2.142.878l-.89.891a.75.75 0 0 1-1.061 0l-.902-.901a2.996 2.996 0 0 0-2.121-.879H.75a.75.75 0 0 1-.75-.75Zm12.75 15.232a4.503 4.503 0 0 1 2.823-.971l6.927.047V4.5h-6.75a3 3 0 0 0-3 3ZM11.247 7.497a3 3 0 0 0-3-2.997H1.5V18h6.947c1.018 0 2.006.346 2.803.98Z"></path></svg>
+				<p>Blog</p>
+			</a>
+		
+			<a href="/pages/resume-downloads.html" >
+				<svg width="50" height="50" aria-label="file" class="octicon octicon-file" viewBox="0 0 24 24" version="1.1" role="img"><path d="M3 3a2 2 0 0 1 2-2h9.982a2 2 0 0 1 1.414.586l4.018 4.018A2 2 0 0 1 21 7.018V21a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm2-.5a.5.5 0 0 0-.5.5v18a.5.5 0 0 0 .5.5h14a.5.5 0 0 0 .5-.5V8.5h-4a2 2 0 0 1-2-2v-4Zm10 0v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 0-.146-.336l-4.018-4.018A.5.5 0 0 0 15 2.5Z"></path></svg>
+				<p>Résumé</p>
+			</a>
+		
+	</nav>
+
+	<!-- Html Elements for Search -->
+	<div id="search-container" class="search-container">
+		<div class="text-center">
+			<input type="text" id="search-input" class="speech-input" placeholder="Search this site" style="width: 100%;">
+			<ol id="results-container"></ol>
+		</div>
+	</div>
+
+	<!-- Script pointing to search.js -->
+	<script src="/assets/js/search.js" type="text/javascript"></script>
+
+	<!-- Configuration -->
+	<script>
+	SimpleJekyllSearch({
+	  searchInput: document.getElementById('search-input'),
+	  resultsContainer: document.getElementById('results-container'),
+	  json: '/search.json'
+	})
+	</script>
+</div>
+
+</div>
+
+			<div class="hero-img"  style="background-image: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url( /assets/images/puzzle.webp );"  >
+				<div class="center-content">
+					<span class="on-bg">
+						<h1> The Prompt Template Is Part of the Runtime Now </h1>
+						<!--
+						<p>06 Jul 2026</p>
+						-->
+						<a href="#start">
+							<div style="-webkit-animation-name: pulse; -webkit-animation-duration: 2s; animation-name: pulse;animation-duration: 2s; animation-direction: alternate;">
+								<!--<p>Reading time: 
+
+
+  15 mins
+</p>-->
+								
+								<p>July 06, 2026</p>
+								
+								<p>scroll for more</p>
+								<svg width="50" height="50" fill="white" aria-label="down" class="octicon octicon-arrow-down" viewBox="0 0 24 24" version="1.1" role="img"><path d="M4.97 13.22a.75.75 0 0 1 1.06 0L11 18.19V3.75a.75.75 0 0 1 1.5 0v14.44l4.97-4.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734l-6.25 6.25a.75.75 0 0 1-1.06 0l-6.25-6.25a.75.75 0 0 1 0-1.06Z"></path></svg>
+							</div>
+						</a>
+						
+						<div>
+							
+
+<style>
+#share-buttons {display: inline-block; vertical-align: middle; }
+#share-buttons:after {content: ""; display: block; clear: both;}
+#share-buttons > div {
+    position: relative;
+    text-align: left; 
+    height: 36px; 
+    width: 32px; 
+    float: left; 
+    text-align: center;
+}
+#share-buttons > div > svg {height: 16px; fill: #FFF; margin-top: 10px;}
+#share-buttons > div:hover {cursor: pointer;}
+#share-buttons > div.facebook:hover > svg {fill: #3B5998;}
+#share-buttons > div.twitter:hover > svg {fill: #55ACEE;}
+#share-buttons > div.linkedin:hover > svg {fill: #0077b5;}
+#share-buttons > div.pinterest:hover > svg {fill: #CB2027;}
+#share-buttons > div.gplus:hover > svg {fill: #dd4b39;}
+#share-buttons > div.mail:hover > svg {fill: #7D7D7D;}
+#share-buttons > div.instagram:hover > svg {fill: #C73B92;}
+#share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
+#share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
+#share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
+#share-buttons > div.pinterest > svg {height: 20px; margin-top: 9px;}
+#share-buttons > div.gplus > svg {height: 17px; margin-top: 9px; position: relative; left: 1px;}
+#share-buttons > div.mail > svg {height: 14px; margin-top: 11px;}
+</style>
+
+<span>Share on: </span><div id="share-buttons">
+
+    <div class="linkedin" title="Share this on Linkedin" onclick="window.open('https://www.linkedin.com/shareArticle?mini=true&url=https://victorangeloblancada.github.io/blog/2026/07/06/gemma-4.html&title=&summary=&source=');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></div>
+
+    <div class="twitter" title="Share this on Twitter" onclick="window.open('http://twitter.com/home?status=https://victorangeloblancada.github.io/blog/2026/07/06/gemma-4.html');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
+    
+    <div class="facebook" title="Share this on Facebook" onclick="window.open('http://www.facebook.com/share.php?u=https://victorangeloblancada.github.io/blog/2026/07/06/gemma-4.html');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"/></svg></div>
+
+
+    <!--<div class="pinterest" title="Share this on Pinterest" onclick="window.open('https://pinterest.com/pin/create/button/?url=&media=https://victorangeloblancada.github.io/assets/images/puzzle.webp&description=');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M256 597q0-108 37.5-203.5t103.5-166.5 152-123 185-78 202-26q158 0 294 66.5t221 193.5 85 287q0 96-19 188t-60 177-100 149.5-145 103-189 38.5q-68 0-135-32t-96-88q-10 39-28 112.5t-23.5 95-20.5 71-26 71-32 62.5-46 77.5-62 86.5l-14 5-9-10q-15-157-15-188 0-92 21.5-206.5t66.5-287.5 52-203q-32-65-32-169 0-83 52-156t132-73q61 0 95 40.5t34 102.5q0 66-44 191t-44 187q0 63 45 104.5t109 41.5q55 0 102-25t78.5-68 56-95 38-110.5 20-111 6.5-99.5q0-173-109.5-269.5t-285.5-96.5q-200 0-334 129.5t-134 328.5q0 44 12.5 85t27 65 27 45.5 12.5 30.5q0 28-15 73t-37 45q-2 0-17-3-51-15-90.5-56t-61-94.5-32.5-108-11-106.5z"/></svg></div>-->
+
+    <!--<div class="gplus" title="Share this on Google Plus" onclick="window.open('https://plus.google.com/share?url=https://victorangeloblancada.github.io/blog/2026/07/06/gemma-4.html');"><svg viewBox="0 0 2304 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1437 913q0 208-87 370.5t-248 254-369 91.5q-149 0-285-58t-234-156-156-234-58-285 58-285 156-234 234-156 285-58q286 0 491 192l-199 191q-117-113-292-113-123 0-227.5 62t-165.5 168.5-61 232.5 61 232.5 165.5 168.5 227.5 62q83 0 152.5-23t114.5-57.5 78.5-78.5 49-83 21.5-74h-416v-252h692q12 63 12 122zm867-122v210h-209v209h-210v-209h-209v-210h209v-209h210v209h209z"/></svg></div>-->
+
+    <div class="mail" title="Share this through Email" onclick="window.open('mailto:?&body=https://victorangeloblancada.github.io/blog/2026/07/06/gemma-4.html');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"/></svg></div>
+
+</div>
+						</div>
+						
+					</span>
+				</div>
+			</div>
+			<div id="hero-img-spacer" style="height: 100vh;">
+			</div>
+			<div id="start">
+			</div>
+			<div class="content">
+				
+				<h1>The Prompt Template Is Part of the Runtime Now</h1>
+				
+				<!--
+				<h1> The Prompt Template Is Part of the Runtime Now </h1>
+				
+				<p style="font-style:italic">July 06, 2026</p>
+				
+				-->
+
+				<div class="article  dropcap ">
+					<p>When chat models first became widely useful, a prompt template was easy to think of as a wrapper. You had a system message, a user message, and an assistant response. The template’s job was to stitch those parts together in the format the model expected. If the formatting was a little off, the model might sound awkward, ignore an instruction, or print an extra <code class="language-plaintext highlighter-rouge">Assistant:</code> prefix. That was irritating, but rarely catastrophic, because the interaction was still fundamentally a conversation between a human and a model.</p>
+
+<p>Gemma 4 showed why that mental model is now out of date. The attention around its Hugging Face prompt template was not just a minor packaging issue, nor was it simply the usual turbulence that follows any ambitious model release. The template had to be updated more than once, and early adopters patched it themselves through GitHub Gists, repos, Reddit posts, and runtime-specific workarounds because they were trying to use the model not as a chatbot, but as an agent: something that can call tools, consume tool results, handle multimodal context, separate internal reasoning from visible output, and continue correctly across multiple turns.</p>
+
+<p>That is the important shift. For an agentic model, the prompt template is no longer “prompt engineering garnish.” It is closer to a protocol definition. It tells the model where the system instruction begins and ends, where tools are declared, how a tool call should be represented, how tool results come back, where image or audio placeholders belong, and which parts of the generation are internal reasoning versus user-facing output. If those boundaries are wrong, the failure is not stylistic; the agent loop itself can break.</p>
+
+<p>A simple Gemma-style chat exchange might look something like this:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;bos&gt;
+&lt;|turn&gt;system
+You are a helpful assistant.
+&lt;turn|&gt;
+
+&lt;|turn&gt;user
+Explain container orchestration.
+&lt;turn|&gt;
+
+&lt;|turn&gt;model
+</code></pre></div></div>
+
+<p>This still resembles a normal chat format. There are roles, turn delimiters, and an assistant continuation point. But once tools enter the picture, the template becomes much more than a neat serialization of chat history. It becomes a structured message passed between the model and the runtime.</p>
+
+<p>For example, a tool declaration might be rendered as:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;|turn&gt;system
+You are a helpful assistant.
+
+&lt;|tool&gt;
+declaration:get_current_temperature{
+  description:&lt;|"|&gt;Gets the current temperature for a given location.&lt;|"|&gt;,
+  parameters:{
+    properties:{
+      location:{
+        description:&lt;|"|&gt;The city name, e.g. London&lt;|"|&gt;,
+        type:&lt;|"|&gt;STRING&lt;|"|&gt;
+      }
+    },
+    required:[&lt;|"|&gt;location&lt;|"|&gt;],
+    type:&lt;|"|&gt;OBJECT&lt;|"|&gt;
+  }
+}
+&lt;tool|&gt;
+&lt;turn|&gt;
+</code></pre></div></div>
+
+<p>A model tool call might then appear as:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;|turn&gt;model
+&lt;|tool_call&gt;
+get_current_temperature{
+  location:&lt;|"|&gt;London&lt;|"|&gt;
+}
+&lt;tool_call|&gt;
+&lt;turn|&gt;
+</code></pre></div></div>
+
+<p>And the runtime may return the result like this:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;|turn&gt;user
+&lt;|tool_response&gt;
+get_current_temperature{
+  temperature:&lt;|"|&gt;18°C&lt;|"|&gt;,
+  condition:&lt;|"|&gt;Cloudy&lt;|"|&gt;
+}
+&lt;tool_response|&gt;
+&lt;turn|&gt;
+
+&lt;|turn&gt;model
+The current temperature in London is 18°C and cloudy.
+&lt;turn|&gt;
+</code></pre></div></div>
+
+<p>The exact tokens may vary by model and serving stack, but the underlying point is the same: the template is now carrying state. It is not only formatting prose; it is preserving boundaries between tool definitions, tool invocations, tool results, user messages, assistant messages, hidden reasoning, and assistant continuation points. A misplaced delimiter can mean the difference between a functioning agent and one that refuses to call a tool, leaks internal scaffolding, or loses track of the previous step.</p>
+
+<h3 id="the-failures-were-small-but-the-consequences-were-not">The Failures Were Small, but The Consequences Were Not</h3>
+
+<p>The fixes and community patches around Gemma 4 clustered around a few categories. One class involved system-instruction and tool-call handling. That sounds mundane until you remember what a system instruction often contains in an agentic setting: when to use tools, how to handle destructive actions, how to report execution results, whether to ask for confirmation, and how to avoid pretending that a tool ran when it did not. If the tool declarations are rendered outside the expected control region, or if the assistant continuation is placed incorrectly, the model may not reliably see the operating contract it is supposed to follow.</p>
+
+<p>A fragile rendering might separate the tool declaration from the system instruction in a way the model did not learn well:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;|turn&gt;system
+You are a helpful assistant.
+&lt;turn|&gt;
+
+&lt;|tool&gt;
+declaration:bash{...}
+&lt;tool|&gt;
+</code></pre></div></div>
+
+<p>A more appropriate rendering may need to keep the tool declaration in the system-managed portion of the prompt, so the model receives the instruction and the available tools as one coherent operating context:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;|turn&gt;system
+You are a helpful assistant. Use tools when needed, but do not claim that a command has run until the tool response is returned.
+
+&lt;|tool&gt;
+declaration:bash{
+  description:&lt;|"|&gt;Execute a shell command.&lt;|"|&gt;,
+  parameters:{
+    properties:{
+      command:{
+        description:&lt;|"|&gt;The shell command to execute.&lt;|"|&gt;,
+        type:&lt;|"|&gt;STRING&lt;|"|&gt;
+      }
+    },
+    required:[&lt;|"|&gt;command&lt;|"|&gt;],
+    type:&lt;|"|&gt;OBJECT&lt;|"|&gt;
+  }
+}
+&lt;tool|&gt;
+&lt;turn|&gt;
+</code></pre></div></div>
+
+<p>This kind of difference can look small in a pull request, but it is large in behavior. To the model, the template is part of the language of interaction. If the language changes, the model may still produce fluent text, but it may no longer produce the machine-readable action the runtime expects.</p>
+
+<p>Another class of failures involved reasoning-channel leakage. Gemma 4-style agentic workflows can distinguish between internal reasoning and external output. Conceptually, a model might produce something like this:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;|channel&gt;thought
+The user is asking for a live directory listing, so I should use the shell tool rather than answer from memory.
+&lt;channel|&gt;
+
+&lt;|tool_call&gt;
+bash{
+  command:&lt;|"|&gt;ls /tmp&lt;|"|&gt;
+}
+&lt;tool_call|&gt;
+</code></pre></div></div>
+
+<p>In a well-integrated stack, the runtime would separate the reasoning from the tool call and expose only the appropriate fields to the application:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"reasoning_content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The user is asking for a live directory listing, so I should use the shell tool rather than answer from memory."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tool_calls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bash"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"arguments"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ls /tmp"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>But in some setups, reasoning markers or reasoning text appeared in the visible assistant output. Sometimes special tokens were stripped before the parser saw them; sometimes the template replayed reasoning fields in a runtime that did not know how to hide them. The result could be output like:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thought
+The user is asking for a live directory listing, so I should use the shell tool rather than answer from memory.
+
+I will now list the files.
+</code></pre></div></div>
+
+<p>For a chatbot, this is embarrassing. For an agent, it is worse, because downstream parsers may interpret the leaked text as normal assistant content, the user interface may display internal scaffolding, and the system may lose the distinction between deliberation, action, and final answer. Some community patches handled this pragmatically by suppressing reasoning replay in environments that did not support reasoning channels correctly:</p>
+
+<div class="language-jinja highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c">{# Avoid replaying reasoning fields in runtimes that leak them #}</span>
+<span class="cp">{%</span> <span class="k">if</span> <span class="nv">message.role</span> <span class="o">==</span> <span class="s2">"assistant"</span> <span class="cp">%}</span>
+  <span class="cp">{%</span> <span class="k">if</span> <span class="nv">message.content</span> <span class="cp">%}</span>
+    <span class="cp">{{</span> <span class="nv">message.content</span> <span class="cp">}}</span>
+  <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+  <span class="cp">{%</span> <span class="k">if</span> <span class="nv">message.tool_calls</span> <span class="cp">%}</span>
+    <span class="cp">{{</span> <span class="nv">render_tool_calls</span><span class="p">(</span><span class="nv">message.tool_calls</span><span class="p">)</span> <span class="cp">}}</span>
+  <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+
+</code></pre></div></div>
+
+<p>That kind of patch is sensible, but it also shows the deeper ambiguity: who owns reasoning separation? Is it the chat template, the tokenizer, the inference server, the OpenAI-compatible shim, or the agent framework? In practice, it is a cross-layer contract, and when the layers disagree, the user sees a broken agent rather than a distributed systems problem.</p>
+
+<p>A third class involved multimodal placeholders inside tool responses. This is easy to underestimate until you imagine an agent that calls a screenshot tool. The tool might return structured content:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tool"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"take_screenshot"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Screenshot captured."</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>A template that only extracts text could render the response as:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;|tool_response&gt;
+take_screenshot{
+  result:&lt;|"|&gt;Screenshot captured.&lt;|"|&gt;
+}
+&lt;tool_response|&gt;
+</code></pre></div></div>
+
+<p>The image has not merely been ignored; it has been disconnected from the prompt. The multimodal processor may still have an image tensor ready, but the prompt contains no placeholder telling the model where that image belongs. The corrected rendering needs to preserve the placeholder:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;|tool_response&gt;
+take_screenshot{
+  result:&lt;|"|&gt;Screenshot captured.&lt;|"|&gt;
+}
+&lt;|image|&gt;
+&lt;tool_response|&gt;
+</code></pre></div></div>
+
+<p>This is the kind of issue that makes clear why prompt templates are now infrastructure. In a text-only chatbot, dropping a non-text part might degrade an answer. In a multimodal agent, it can break alignment between the serialized prompt and the model inputs.</p>
+
+<p>Streaming created its own class of problems. A non-streaming tool call is often easy to parse because the runtime receives the whole object at once:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"finish_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tool_calls"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"tool_calls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"function"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bash"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"arguments"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{</span><span class="se">\"</span><span class="s2">command</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">ls /tmp</span><span class="se">\"</span><span class="s2">}"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>In streaming mode, however, the same call may arrive in pieces:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"choices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"delta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"tool_calls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"function"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bash"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Then:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"choices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"delta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"tool_calls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"function"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"arguments"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{</span><span class="se">\"</span><span class="s2">command</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">ls"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Then:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"choices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"delta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"tool_calls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"function"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"arguments"</span><span class="p">:</span><span class="w"> </span><span class="s2">" /tmp</span><span class="se">\"</span><span class="s2">}"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"finish_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tool_calls"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>If the client or agent framework does not reconstruct those fragments correctly, the model may appear to have failed to use tools even though the tool call was produced. The bug is then not in the model’s capability, but in the protocol bridge between model output and agent action.</p>
+
+<h3 id="the-old-template-was-prose-the-new-template-is-an-interface">The Old Template was Prose; The New Template is an Interface</h3>
+
+<p>The easiest way to frame this is to borrow a concept from systems programming. An ABI defines how compiled components call each other: which values go where, how arguments are passed, how return values are represented, and which conventions both sides must obey. If the ABI is wrong, two correct components can fail together.</p>
+
+<p>Agentic LLMs now have a similar boundary. The model has learned a control language. The serving runtime has parsers. The tool framework has schemas. The client may expect OpenAI-style tool calls. The UI may expect visible content and hidden reasoning to be separated. The chat template sits in the middle, translating conversation state into the model’s expected language and back again.</p>
+
+<p>A typical agent loop depends on this sequence being exact: the runtime renders the system instruction, renders available tools, appends the user request, waits for either a final answer or a tool call, parses the tool call, executes the tool, renders the tool result, and prompts the model to continue. If the tool declaration is malformed, the model may not know what it can call. If the reasoning boundary is mishandled, hidden text can leak. If the tool response is rendered incorrectly, the model may not understand the result. If the assistant continuation marker is wrong, the model may continue the wrong turn.</p>
+
+<p>This is why early adopters patched templates themselves. They were not arguing about punctuation. They were repairing the interface between the model and the rest of the system.</p>
+
+<h3 id="so-what">So What?</h3>
+
+<p>The practical lesson is straightforward: if you are building agents, treat the chat template as part of the model artifact. Do not treat it as sample code, documentation, or a convenience snippet copied from a model card. It is part of the runtime contract, and it should be pinned, tested, reviewed, and versioned along with the weights, tokenizer, serving engine, tool parser, reasoning parser, client SDK, and agent framework.</p>
+
+<p>A serious agent deployment should know exactly which versions of these components belong together:</p>
+<ul>
+  <li>model weights;</li>
+  <li>tokenizer;</li>
+  <li>chat template;</li>
+  <li>serving runtime;</li>
+  <li>tool parser;</li>
+  <li>reasoning parser;</li>
+  <li>structured-output backend;</li>
+  <li>client SDK;</li>
+  <li>agent framework; and</li>
+  <li>frontend or IDE integration.</li>
+</ul>
+
+<p>Changing any one of them can break the others. A new runtime may strip special tokens earlier than before. A new template may render tool responses differently. A client SDK may alter streaming reconstruction. A model conversion may preserve weights but lose the original template. A quantized local package may work for chat but fail in multi-turn tool use. These are not theoretical worries; they are the ordinary failure modes of agentic systems.</p>
+
+<p>The test plan should change accordingly. It is not enough to ask whether the model gives a good answer to a prompt. Teams should test whether the full loop works:</p>
+
+<ul>
+  <li>Single-turn chat renders correctly.</li>
+  <li>Multi-turn chat preserves roles and turn boundaries.</li>
+  <li>System instructions remain in the expected control region.</li>
+  <li>Tool declarations render with valid schemas.</li>
+  <li>The model emits a valid tool call when a tool is needed.</li>
+  <li>The runtime parses that tool call correctly.</li>
+  <li>Streaming tool calls are reconstructed correctly.</li>
+  <li>Tool responses are rendered back into the conversation correctly.</li>
+  <li>The model resumes after a tool response instead of starting over.</li>
+  <li>Reasoning content is separated from user-visible content.</li>
+  <li>Thinking-off mode does not break structured output.</li>
+  <li>Multimodal user input preserves image/audio placeholders.</li>
+  <li>Multimodal tool responses preserve image/audio placeholders.</li>
+  <li>JSON schema constraints are actually enforced.</li>
+  <li>A five-turn tool-using workflow survives without format drift.</li>
+</ul>
+
+<p>The important question is not merely, “Can the model answer?” It is, “Can the system act, observe, continue, and stay inside the contract?”</p>
+
+<h3 id="why-this-episode-matters-beyond-gemma-4">Why This Episode Matters Beyond Gemma 4</h3>
+
+<p>The Gemma 4 template issue is interesting because it captures a broader transition in LLM engineering. The industry is moving from chat to action. In chat, the human is the parser of last resort; if the model says something slightly odd, the user can infer what it meant. In agentic workflows, the next consumer is often code. Code is less forgiving. It needs typed calls, reliable delimiters, valid schemas, and predictable stop conditions.</p>
+
+<p>That difference raises the engineering standard. A model may have strong reasoning ability, long context, good multimodal understanding, and impressive benchmark results, yet still feel unreliable if the protocol around it is loose. The reverse is also true: a smaller model with a clean, well-tested tool interface can feel more useful in production than a stronger model wrapped in a brittle integration layer.</p>
+
+<p>This is the quiet lesson behind the prompt-template fiasco. We often talk about prompts as if they are natural language instructions, and sometimes they are. But in modern agent systems, the most important parts of the prompt are often not natural language at all. They are delimiters, schemas, placeholders, channel markers, continuation tokens, and parser assumptions. They are the parts humans barely notice and machines cannot forgive.</p>
+
+<p>The final takeaway is not “be careful with Gemma 4,” nor is it “large model releases are hard.” The takeaway is more general and more useful: as LLM applications become agents, the interface between model and runtime becomes a first-class engineering surface. The prompt template is one of those interfaces. Treat it with the same seriousness you would give to an API contract, because in an agentic system, that is what it has become.</p>
+
+				</div>
+				
+				<div class="cta-box">
+					
+
+<style>
+#share-buttons {display: inline-block; vertical-align: middle; }
+#share-buttons:after {content: ""; display: block; clear: both;}
+#share-buttons > div {
+    position: relative;
+    text-align: left; 
+    height: 36px; 
+    width: 32px; 
+    float: left; 
+    text-align: center;
+}
+#share-buttons > div > svg {height: 16px; fill: #FFF; margin-top: 10px;}
+#share-buttons > div:hover {cursor: pointer;}
+#share-buttons > div.facebook:hover > svg {fill: #3B5998;}
+#share-buttons > div.twitter:hover > svg {fill: #55ACEE;}
+#share-buttons > div.linkedin:hover > svg {fill: #0077b5;}
+#share-buttons > div.pinterest:hover > svg {fill: #CB2027;}
+#share-buttons > div.gplus:hover > svg {fill: #dd4b39;}
+#share-buttons > div.mail:hover > svg {fill: #7D7D7D;}
+#share-buttons > div.instagram:hover > svg {fill: #C73B92;}
+#share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
+#share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
+#share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
+#share-buttons > div.pinterest > svg {height: 20px; margin-top: 9px;}
+#share-buttons > div.gplus > svg {height: 17px; margin-top: 9px; position: relative; left: 1px;}
+#share-buttons > div.mail > svg {height: 14px; margin-top: 11px;}
+</style>
+
+<span>Share on: </span><div id="share-buttons">
+
+    <div class="linkedin" title="Share this on Linkedin" onclick="window.open('https://www.linkedin.com/shareArticle?mini=true&url=https://victorangeloblancada.github.io/blog/2026/07/06/gemma-4.html&title=&summary=&source=');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></div>
+
+    <div class="twitter" title="Share this on Twitter" onclick="window.open('http://twitter.com/home?status=https://victorangeloblancada.github.io/blog/2026/07/06/gemma-4.html');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
+    
+    <div class="facebook" title="Share this on Facebook" onclick="window.open('http://www.facebook.com/share.php?u=https://victorangeloblancada.github.io/blog/2026/07/06/gemma-4.html');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"/></svg></div>
+
+
+    <!--<div class="pinterest" title="Share this on Pinterest" onclick="window.open('https://pinterest.com/pin/create/button/?url=&media=https://victorangeloblancada.github.io/assets/images/puzzle.webp&description=');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M256 597q0-108 37.5-203.5t103.5-166.5 152-123 185-78 202-26q158 0 294 66.5t221 193.5 85 287q0 96-19 188t-60 177-100 149.5-145 103-189 38.5q-68 0-135-32t-96-88q-10 39-28 112.5t-23.5 95-20.5 71-26 71-32 62.5-46 77.5-62 86.5l-14 5-9-10q-15-157-15-188 0-92 21.5-206.5t66.5-287.5 52-203q-32-65-32-169 0-83 52-156t132-73q61 0 95 40.5t34 102.5q0 66-44 191t-44 187q0 63 45 104.5t109 41.5q55 0 102-25t78.5-68 56-95 38-110.5 20-111 6.5-99.5q0-173-109.5-269.5t-285.5-96.5q-200 0-334 129.5t-134 328.5q0 44 12.5 85t27 65 27 45.5 12.5 30.5q0 28-15 73t-37 45q-2 0-17-3-51-15-90.5-56t-61-94.5-32.5-108-11-106.5z"/></svg></div>-->
+
+    <!--<div class="gplus" title="Share this on Google Plus" onclick="window.open('https://plus.google.com/share?url=https://victorangeloblancada.github.io/blog/2026/07/06/gemma-4.html');"><svg viewBox="0 0 2304 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1437 913q0 208-87 370.5t-248 254-369 91.5q-149 0-285-58t-234-156-156-234-58-285 58-285 156-234 234-156 285-58q286 0 491 192l-199 191q-117-113-292-113-123 0-227.5 62t-165.5 168.5-61 232.5 61 232.5 165.5 168.5 227.5 62q83 0 152.5-23t114.5-57.5 78.5-78.5 49-83 21.5-74h-416v-252h692q12 63 12 122zm867-122v210h-209v209h-210v-209h-209v-210h209v-209h210v209h209z"/></svg></div>-->
+
+    <div class="mail" title="Share this through Email" onclick="window.open('mailto:?&body=https://victorangeloblancada.github.io/blog/2026/07/06/gemma-4.html');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"/></svg></div>
+
+</div>
+				</div>
+				
+			</div>
+			
+			<div class="text-center">
+				<h2>Read more posts about...</h2>
+				<ul class="tags">
+					
+						<a href='/blog/tag/ai'><li> ai </li></a>
+					
+						<a href='/blog/tag/agent'><li> agent </li></a>
+					
+						<a href='/blog/tag/agentic ai'><li> agentic ai </li></a>
+					
+						<a href='/blog/tag/gemma'><li> gemma </li></a>
+					
+						<a href='/blog/tag/google'><li> google </li></a>
+					
+				</ul>
+				<a href='/blog.html'><p>See all posts</p></a>
+			</div>
+			
+			<footer>
+				<hr>
+				© <script>document.write(new Date().getFullYear())</script><noscript>2022</noscript> Victor Blancada. All Rights Reserved.
+			</footer>
+			<div class="spacer">
+			</div>
+		</div>
+	</body>
+</html>
+
