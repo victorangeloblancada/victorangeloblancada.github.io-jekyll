@@ -104,7 +104,7 @@
 	font-display: swap;
 }
 
-$nav-count: 5;
+$nav-count: 6;
 
 $sans-serif-font: Avenir, 'Jost', Futura, 'Century Gothic', sans-serif;
 $serif-font: Merriweather, Georgia, Garamond, serif;
@@ -706,8 +706,7 @@ div.square-img:hover {
 	/* Style the scroll indicator header: fixed position (always stay at the top) */
 	.header {
 	  position: fixed;
-	  //top: $nav-height-desktop + 20px; 
-	  top: 0px; /* Hide scroll indicator on desktop */
+	  top: 70px; /* Position below the 70px desktop navbar */
 	  z-index: 1;
 	  width: 100%;
 	  background-color: $accent-1-color;
@@ -715,7 +714,7 @@ div.square-img:hover {
 
 }
 
-@media (prefers-color-scheme: dark) {
+html.dark-theme {
 	body {
 		background-color: #121212;
 		color: #E0E0E0;
@@ -754,5 +753,23 @@ div.square-img:hover {
 	}
 	div.square-img:hover {
 		background-color: rgba(0, 0, 0, 0.2);
+	}
+}
+
+html.dark-theme {
+	.sun-icon {
+		display: inline-block;
+	}
+	.moon-icon {
+		display: none;
+	}
+}
+
+html.light-theme {
+	.sun-icon {
+		display: none;
+	}
+	.moon-icon {
+		display: inline-block;
 	}
 }

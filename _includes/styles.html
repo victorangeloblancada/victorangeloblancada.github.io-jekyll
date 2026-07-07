@@ -1,3 +1,17 @@
+<script type="text/javascript">
+  (function() {
+    var savedTheme = localStorage.getItem('theme');
+    var userPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (savedTheme === 'dark' || (!savedTheme && userPrefersDark)) {
+      document.documentElement.classList.add('dark-theme');
+      document.documentElement.classList.remove('light-theme');
+    } else {
+      document.documentElement.classList.add('light-theme');
+      document.documentElement.classList.remove('dark-theme');
+    }
+  })();
+</script>
+
 <link rel="stylesheet" href="https://indestructibletype.com/fonts/Jost.css" type="text/css" charset="utf-8" />
 
 <link rel="stylesheet" href="/assets/css/styles.css">

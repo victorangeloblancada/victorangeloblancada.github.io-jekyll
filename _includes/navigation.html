@@ -13,6 +13,11 @@
 				<p>{{ item.name }}</p>
 			</a>
 		{% endfor %}
+		<a id="theme-toggle" onClick="toggleTheme()" style="cursor: pointer;">
+			<span class="sun-icon">{% octicon sun width:50 height:50 aria-label:sun %}</span>
+			<span class="moon-icon">{% octicon moon width:50 height:50 aria-label:moon %}</span>
+			<p>Theme</p>
+		</a>
 	</nav>
 
 	<!-- Html Elements for Search -->
@@ -33,6 +38,19 @@
 	  resultsContainer: document.getElementById('results-container'),
 	  json: '/search.json'
 	})
+
+	function toggleTheme() {
+	  var isDark = document.documentElement.classList.contains('dark-theme');
+	  if (isDark) {
+	    document.documentElement.classList.remove('dark-theme');
+	    document.documentElement.classList.add('light-theme');
+	    localStorage.setItem('theme', 'light');
+	  } else {
+	    document.documentElement.classList.remove('light-theme');
+	    document.documentElement.classList.add('dark-theme');
+	    localStorage.setItem('theme', 'dark');
+	  }
+	}
 	</script>
 </div>
 
