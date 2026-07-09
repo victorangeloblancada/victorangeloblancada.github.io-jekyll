@@ -20,7 +20,7 @@ draft: false
 
 In 1890, the psychologist William James characterized attention as "the taking possession by the mind, in clear and vivid form, of one out of what seem several simultaneously possible objects or trains of thought." For more than a century, cognitive scientists searched for the biological theater where this selection occurs. Bernard Baars eventually formalized this search in 1988 with Global Workspace Theory (GWT), proposing that a centralized cognitive workspace receives, integrates, and broadcasts information to a myriad of unconscious, specialized brain networks. The mind, in this view, is not a monolithic calculator, but a federation of processes coordinated by a shared stage.
 
-On July 6, 2026, Anthropic's interpretability team published a landmark paper: *"Verbalizable Representations Form a Global Workspace in Language Models."* Supported by open-source code and replication data, the paper makes a startling empirical claim: frontier large language models (LLMs) spontaneously develop a functional analog to Baars' global workspace during training. 
+On July 6, 2026, Anthropic's interpretability team published a landmark paper: *["Verbalizable Representations Form a Global Workspace in Language Models."](https://transformer-circuits.pub/2026/workspace/index.html)* Supported by open-source code and replication data, the paper makes a startling empirical claim: frontier large language models (LLMs) spontaneously develop a functional analog to Baars' global workspace during training. 
 
 By applying a novel diagnostic tool—the Jacobian lens (J-lens)—the researchers demonstrated that LLMs maintain a compact "cognitive space" that holds intermediate variables during a forward pass. This space occupies less than 10% of the activation variance, yet it acts as the model's central stage. Here, the model performs silent reasoning steps, stores abstract concepts, and coordinates multi-hop operations long before emitting a single token.
 
@@ -102,7 +102,7 @@ Replications published within days of Anthropic's paper show that the global wor
 
 | Model | J-Space Present? | Key Findings & Replications |
 | :---: | :---: | :---: |
-| **Qwen 3.6-27B** | Yes | Replicated by Neel Nanda's team. Verbal report, directed modulation, and multilingual effects reproduced. Poetry and arithmetic failed to replicate. |
+| **Qwen 3.6-27B** | Yes | [Replicated by Neel Nanda's team.](https://www-cdn.anthropic.com/files/4zrzovbb/website/cc4be2488d65e54a6ed06492f8968398ddc18ebe.pdf) Verbal report, directed modulation, and multilingual effects reproduced. Poetry and arithmetic failed to replicate. |
 | **Gemma 4 E4B** | Yes | Replicated on a 16GB consumer GPU. Replicated two-hop reasoning and demonstrated covert emotion probing (workspace shows *fury* while output remains neutral). |
 | **GPT-2 (124M–355M)** | No | No advantage over the logit lens across next-token recovery or causal steering. The J-space is entirely absent. |
 
