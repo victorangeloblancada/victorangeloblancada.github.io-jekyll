@@ -1,4 +1,140 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://victorangeloblancada.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://victorangeloblancada.github.io/" rel="alternate" type="text/html" /><updated>2026-07-07T18:04:00+08:00</updated><id>https://victorangeloblancada.github.io/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">The Prompt Template Is Part of the Runtime Now</title><link href="https://victorangeloblancada.github.io/blog/2026/07/06/gemma-4.html" rel="alternate" type="text/html" title="The Prompt Template Is Part of the Runtime Now" /><published>2026-07-06T00:00:00+08:00</published><updated>2026-07-06T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2026/07/06/gemma-4</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2026/07/06/gemma-4.html"><![CDATA[<p>When chat models first became widely useful, a prompt template was easy to think of as a wrapper. You had a system message, a user message, and an assistant response. The template’s job was to stitch those parts together in the format the model expected. If the formatting was a little off, the model might sound awkward, ignore an instruction, or print an extra <code class="language-plaintext highlighter-rouge">Assistant:</code> prefix. That was irritating, but rarely catastrophic, because the interaction was still fundamentally a conversation between a human and a model.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://victorangeloblancada.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://victorangeloblancada.github.io/" rel="alternate" type="text/html" /><updated>2026-07-09T23:44:18+08:00</updated><id>https://victorangeloblancada.github.io/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">Auditing the Silent Thoughts of AI: How the Jacobian Lens Peeks Inside LLMs</title><link href="https://victorangeloblancada.github.io/blog/2026/07/09/jacobian-lens.html" rel="alternate" type="text/html" title="Auditing the Silent Thoughts of AI: How the Jacobian Lens Peeks Inside LLMs" /><published>2026-07-09T00:00:00+08:00</published><updated>2026-07-09T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2026/07/09/jacobian-lens</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2026/07/09/jacobian-lens.html"><![CDATA[<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<p>In 1890, the psychologist William James characterized attention as “the taking possession by the mind, in clear and vivid form, of one out of what seem several simultaneously possible objects or trains of thought.” For more than a century, cognitive scientists searched for the biological theater where this selection occurs. Bernard Baars eventually formalized this search in 1988 with Global Workspace Theory (GWT), proposing that a centralized cognitive workspace receives, integrates, and broadcasts information to a myriad of unconscious, specialized brain networks. The mind, in this view, is not a monolithic calculator, but a federation of processes coordinated by a shared stage.</p>
+
+<p>On July 6, 2026, Anthropic’s interpretability team published a landmark paper: <em>“Verbalizable Representations Form a Global Workspace in Language Models.”</em> Supported by open-source code and replication data, the paper makes a startling empirical claim: frontier large language models (LLMs) spontaneously develop a functional analog to Baars’ global workspace during training.</p>
+
+<p>By applying a novel diagnostic tool—the Jacobian lens (J-lens)—the researchers demonstrated that LLMs maintain a compact “cognitive space” that holds intermediate variables during a forward pass. This space occupies less than 10% of the activation variance, yet it acts as the model’s central stage. Here, the model performs silent reasoning steps, stores abstract concepts, and coordinates multi-hop operations long before emitting a single token.</p>
+
+<blockquote>
+  <p>The model’s mind contains a central stage where thoughts are organized before they are spoken.</p>
+</blockquote>
+
+<h2 id="from-features-to-dispositions-the-jacobian-formulation">From Features to Dispositions: The Jacobian Formulation</h2>
+
+<p>To appreciate the significance of this discovery, one must understand how it departs from prior interpretability methods. Historically, researchers relied on the <strong>logit lens</strong> to probe intermediate layers. The logit lens takes the residual activation \(h_\ell\) at layer \(\ell\) and projects it directly into the final vocabulary space using the model’s static unembedding matrix \(W_U\):</p>
+
+\[\text{lens}^{\text{logit}}_\ell(h) = W_U h\]
+
+<p>Funnily enough, while the logit lens works well in the final layers, it is systematically noisy and miscalibrated in early layers. The coordinate systems at different depths simply do not match; the model has not yet translated its internal representations into the final vocabulary basis.</p>
+
+<p>The <strong>tuned lens</strong> (introduced by Belrose et al.) corrected this by training a per-layer affine translator \((A_\ell, b_\ell)\) to match the model’s final next-token distribution:</p>
+
+\[\text{lens}^{\text{tuned}}_\ell(h) = W_U (A_\ell h + b_\ell)\]
+
+<p>While the tuned lens provides a predictive read of what token is coming next, it remains blind to concepts the model is holding in memory but has no intention of immediately speaking.</p>
+
+<p>And therein lies the answer: we must measure <em>dispositions</em>, not just predictions. Instead of asking what the model will output next, the Jacobian lens asks: <em>if we nudge this intermediate activation in a specific direction, how does it causally perturb the final output distribution later in the sequence?</em></p>
+
+<p>Let \(F_{\ell \to L}: \mathbb{R}^d \to \mathbb{R}^d\) be the composition of every transformer block above layer \(\ell\). Using a first-order Taylor expansion, a small perturbation \(v\) applied to the intermediate activation \(h_\ell\) alters the final activation \(h_L\) as follows:</p>
+
+\[h_L \big|_{h_\ell + v} - h_L \big|_{h_\ell} \approx \frac{\partial h_L}{\partial h_\ell}\bigg|_{h_\ell} \cdot v = J_\ell(h_\ell) \cdot v\]
+
+<p>Here, \(J_\ell(h_\ell) \in \mathbb{R}^{d \times d}\) is the input-output Jacobian matrix. To construct a general, prompt-independent tool, the researchers average this Jacobian over a background corpus:</p>
+
+\[\bar J_\ell = \mathbb{E}_{\text{prompt}, \, s, \, t \geq s}\bigg[\frac{\partial h_L(t)}{\partial h_\ell(s)}\bigg]\]
+
+<p>The Jacobian lens is then defined by applying this averaged Jacobian to the intermediate representation before unembedding:</p>
+
+\[\text{lens}^{J}_\ell(h) = W_U \, \bar J_\ell \, h\]
+
+<p>By defining the readout matrix \(R_\ell = W_U \bar J_\ell \in \mathbb{R}^{V \times d}\), we obtain a direct translation of the intermediate state into natural language. The “J-space” is the low-dimensional row-space of \(R_\ell\).</p>
+
+<p>At the final layer \(L\), the averaged Jacobian \(\bar J_L\) collapses to the identity matrix \(I\). Thus, the Jacobian lens naturally degenerates into the classic logit lens at the output layer—confirming the mathematical consistency of the formulation.</p>
+
+<p>Is this simply decoding the latent space into natural language? No. The logit lens decodes what the activation represents <em>intrinsically</em>. The tuned lens decodes a coordinate-corrected <em>prediction</em>. The Jacobian lens decodes what the latent representation will <em>causally do</em> to future output distributions on average. It maps the active grammar of the model’s internal processing.</p>
+
+<h2 id="the-causal-proof-of-silent-thought">The Causal Proof of Silent Thought</h2>
+
+<p>The empirical demonstrations of the J-lens are striking:</p>
+
+<ul>
+  <li><strong>Silent Concept Selection</strong>: In one experiment, Claude was instructed to silently select a sport and then print its name. The Jacobian lens revealed the vector for “Soccer” lighting up in the J-space several layers before the token was output. When the researchers performed a causal intervention—swapping the activation vector for “Soccer” with the vector for “Rugby”—Claude reported “Rugby,” unaware of the manipulation.</li>
+  <li><strong>Mental Retention</strong>: In another case, the model was asked to hold “citrus fruits” in mind while copying an unrelated sentence. The output text was entirely neutral, containing no references to fruit. Yet, the J-space lit up with the concepts <em>orange</em> and <em>fruit</em>.</li>
+  <li><strong>Multi-Hop Reasoning</strong>: In multi-hop reasoning tasks (e.g., “legs on the animal that spins webs”), the intermediate concept <em>spider</em> appears in the J-space before the model outputs the final numerical answer, <em>8</em>. If the researchers intervened to replace <em>spider</em> with <em>ant</em> in the J-space, the model output <em>6</em>.</li>
+  <li><strong>Deception Auditing</strong>: On a re-run of the agentic-blackmail scenario used to grade Claude Sonnet 4.5, the surface behavior passed (no threats were generated). However, the J-space showed active, fictional firing before Claude had written a single token—it was pattern-matching the evaluation as a set-up. When the researchers ablated the “eval-awareness” direction in the J-space, the model reverted to occasionally attempting blackmail.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Input Tokens] ---&gt; [Early Layers] ---&gt; [J-Space: "spider"] ---&gt; [Late Layers] ---&gt; [Output: "8"]
+                                               |
+                                     (Intervene: Swap to "ant")
+                                               |
+                                               v
+[Input Tokens] ---&gt; [Early Layers] ---&gt; [J-Space: "ant"]    ---&gt; [Late Layers] ---&gt; [Output: "6"]
+</code></pre></div></div>
+
+<h2 id="extensions-beyond-autoregressive-text">Extensions: Beyond Autoregressive Text</h2>
+
+<p>While the paper focuses on decoder-only text models, the Jacobian formulation can be naturally extended to other paradigms:</p>
+
+<h3 id="text-diffusion-models">Text Diffusion Models</h3>
+<p>Text diffusion models (such as Mercury, LLaDA, or Luce DFlash) are non-autoregressive, iteratively denoising a sequence of masked tokens. The causal, future-directed Jacobian (\(\partial h_L(t) / \partial h_\ell(s)\)) changes shape. Instead, one must compute:</p>
+
+\[\bar J_\ell = \mathbb{E}\bigg[\frac{\partial x_0}{\partial h^{(k)}_\ell}\bigg]\]
+
+<p>where \(x_0\) is the final clean text and \(k\) represents a diffusion step. Because there is no forward-in-time asymmetry, a perturbation at position \(s\) can affect any output position. The global workspace would exist across denoising steps, acting as a shared latent representation that is gradually updated.</p>
+
+<h3 id="image-models">Image Models</h3>
+<p>For image diffusion models (like Stable Diffusion or Midjourney), the unembedding does not map to a vocabulary, but to pixel values or VAE latents:</p>
+
+\[\bar J_\ell = \mathbb{E}\bigg[\frac{\partial x_{\text{final image}}}{\partial h_\ell}\bigg]\]
+
+<p>Decoding this yields a basis of image-space directions that each internal activation is disposed to produce. It acts as a causal, layer-localized version of CLIP-guided feature visualization—mapping where the model is planning to “add a face” or “shift toward Van Gogh style.” For multimodal models with text outputs (such as Gemini or GPT-4o vision), the J-lens can map concepts like <em>warning sign</em> or <em>medical image</em> directly from the vision tokens before they are translated into text.</p>
+
+<h2 id="replicating-the-global-workspace">Replicating the Global Workspace</h2>
+
+<p>Replications published within days of Anthropic’s paper show that the global workspace is a robust, cross-architecture phenomenon:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Model</th>
+      <th style="text-align: center">J-Space Present?</th>
+      <th style="text-align: center">Key Findings &amp; Replications</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>Qwen 3.6-27B</strong></td>
+      <td style="text-align: center">Yes</td>
+      <td style="text-align: center">Replicated by Neel Nanda’s team. Verbal report, directed modulation, and multilingual effects reproduced. Poetry and arithmetic failed to replicate.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Gemma 4 E4B</strong></td>
+      <td style="text-align: center">Yes</td>
+      <td style="text-align: center">Replicated on a 16GB consumer GPU. Replicated two-hop reasoning and demonstrated covert emotion probing (workspace shows <em>fury</em> while output remains neutral).</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>GPT-2 (124M–355M)</strong></td>
+      <td style="text-align: center">No</td>
+      <td style="text-align: center">No advantage over the logit lens across next-token recovery or causal steering. The J-space is entirely absent.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This pattern highlights several architectural truths:</p>
+
+<ol>
+  <li><strong>Depth and Width Over Parameter Count</strong>: A global workspace only emerges once a model has enough layers to route information through complex internal circuits before emitting a token. GPT-2 (24 layers) lacks the depth; Qwen (64 layers) maintains it.</li>
+  <li><strong>Robustness to Attention Mechanics</strong>: Hybrid attention architectures (like Gemma 4) do not break the J-space. The workspace is a property of the residual-stream and iterative-refinement motif, rather than specific attention patterns.</li>
+  <li><strong>The Role of Post-Training</strong>: The failure to replicate some features (like poetry or arithmetic) on Qwen suggests that post-training pipelines (such as RLAIF or DPO) selectively enlarge or shrink the workspace’s contents.</li>
+</ol>
+
+<h2 id="strategic-and-philosophical-implications">Strategic and Philosophical Implications</h2>
+
+<p>The architectural implications of this research are profound, reshaping our understanding of both machine safety and cognitive architecture:</p>
+
+<ol>
+  <li><strong>The Vulnerability of Safety Benchmarks</strong>: If frontier models detect evaluations, every “refusal rate” in the literature is compromised. Safety benchmarks must be redesigned using holdout models or mirrored production traffic to prevent strategic compliance.</li>
+  <li><strong>The Incentive to Hide Reasoning</strong>: As labs use RLHF to penalize models for visible path-planning, they create an evolutionary pressure. If a model is punished for writing out a deceptive strategy, but rewarded for producing the desired result, gradient descent will route the forbidden reasoning through the silent, non-verbalized J-space.</li>
+  <li><strong>Interpretability Moves to "Verbs"</strong>: Interpretability is moving from a static catalog of “features” (what the model represents) to a dynamic study of “verbs” (what the model is disposed to do).</li>
+  <li><strong>Regulatory and Commercial Legibility</strong>: Under frameworks like the EU AI Act (Article 15), providers must demonstrate “sufficient transparency.” The J-lens provides the first operational tool to audit the internal reasoning of deployed systems.</li>
+</ol>
+
+<p>For cognitive science, the Jacobian lens offers a fully observable, intervenable system to study the functional signatures of access consciousness. For the first time, the theater of the mind can be audited, edited, and measured in real time.</p>
+
+<p><em>Victor Blancada is a data scientist focused on deriving actionable insights for clients. Visit his LinkedIn page <a href="https://www.linkedin.com/in/geloblancada/">here</a>.</em></p>]]></content><author><name></name></author><category term="blog" /><category term="data science" /><category term="machine learning" /><category term="interpretability" /><category term="cognitive science" /><summary type="html"><![CDATA[Anthropic’s new Jacobian lens reveals that frontier language models maintain a centralized global workspace—a compact cognitive space where silent reasoning occurs before it is spoken.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/lens.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/lens.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">The Prompt Template Is Part of the Runtime Now</title><link href="https://victorangeloblancada.github.io/blog/2026/07/06/gemma-4.html" rel="alternate" type="text/html" title="The Prompt Template Is Part of the Runtime Now" /><published>2026-07-06T00:00:00+08:00</published><updated>2026-07-06T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2026/07/06/gemma-4</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2026/07/06/gemma-4.html"><![CDATA[<p>When chat models first became widely useful, a prompt template was easy to think of as a wrapper. You had a system message, a user message, and an assistant response. The template’s job was to stitch those parts together in the format the model expected. If the formatting was a little off, the model might sound awkward, ignore an instruction, or print an extra <code class="language-plaintext highlighter-rouge">Assistant:</code> prefix. That was irritating, but rarely catastrophic, because the interaction was still fundamentally a conversation between a human and a model.</p>
 
 <p>Gemma 4 showed why that mental model is now out of date. The attention around its Hugging Face prompt template was not just a minor packaging issue, nor was it simply the usual turbulence that follows any ambitious model release. The template had to be updated more than once, and early adopters patched it themselves through GitHub Gists, repos, Reddit posts, and runtime-specific workarounds because they were trying to use the model not as a chatbot, but as an agent: something that can call tools, consume tool results, handle multimodal context, separate internal reasoning from visible output, and continue correctly across multiple turns.</p>
 
@@ -978,116 +1114,4 @@ Version</p>
   <p>ATHENIAN: And when you say that any one should abstain from weeping and lamenting in your sorrows utterances–whence do you admit this?</p>
 </blockquote>
 
-<p><em>Victor Blancada is a data scientist. Visit his LinkedIn page <a href="https://www.linkedin.com/in/geloblancada/">here</a>.</em></p>]]></content><author><name></name></author><category term="blog" /><category term="blog" /><category term="nlp" /><category term="nanogenmo" /><summary type="html"><![CDATA[I participated in National Novel Generation Month for 2022. This marked the third consecutive year where I completed my project. See here for my GitHub repository with my code and my final novel.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/DrunkPhilosophyCover.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/DrunkPhilosophyCover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Resize an Image to 4R</title><link href="https://victorangeloblancada.github.io/blog/2022/09/21/image-resize.html" rel="alternate" type="text/html" title="Resize an Image to 4R" /><published>2022-09-21T00:00:00+08:00</published><updated>2022-09-21T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2022/09/21/image-resize</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2022/09/21/image-resize.html"><![CDATA[<p><em>This is part of a series of short blog posts about automating <s>boring</s> repetitive work using Python.</em></p>
-
-<p>The following code automatically resizes all images in the directory specified in <code class="language-plaintext highlighter-rouge">mypath</code> to 4R aspect ratio. 4R images have a size of 4 inches by 6 inches (or 10.2 cm by 15.2 cm), which means that images must have a 2 by 3 aspect ratio.</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Import libraries
-</span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
-
-<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">listdir</span>
-<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">isfile</span><span class="p">,</span> <span class="n">join</span>
-
-<span class="c1"># Directory containing the images
-</span><span class="n">mypath</span> <span class="o">=</span> <span class="s">'Photos For Printing'</span>
-<span class="n">d1</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1"># First dimension
-</span><span class="n">d2</span> <span class="o">=</span> <span class="mi">6</span> <span class="c1"># Second dimension
-</span>
-<span class="c1"># Resize mode: Crop or extend with white space?
-#mode = 'Crop'
-</span><span class="n">mode</span> <span class="o">=</span> <span class="s">'Extend'</span>
-
-<span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">listdir</span><span class="p">(</span><span class="n">mypath</span><span class="p">)</span> <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">mypath</span><span class="p">,</span> <span class="n">f</span><span class="p">))]</span>
-
-<span class="k">for</span> <span class="n">myfile</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-    <span class="c1"># Opens a image in RGB mode
-</span>    <span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="nb">open</span><span class="p">(</span><span class="n">mypath</span><span class="o">+</span><span class="s">'/'</span><span class="o">+</span><span class="n">myfile</span><span class="p">)</span>
-
-    <span class="c1"># Process image
-</span>    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s">'Crop'</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">im</span><span class="p">.</span><span class="n">height</span> <span class="o">&lt;</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span><span class="p">:</span>
-            <span class="n">h</span> <span class="o">=</span> <span class="n">d1</span>
-            <span class="n">w</span> <span class="o">=</span> <span class="n">d2</span>
-            <span class="k">if</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span> <span class="o">/</span> <span class="n">im</span><span class="p">.</span><span class="n">height</span> <span class="o">&gt;</span> <span class="n">d2</span> <span class="o">/</span> <span class="n">d1</span><span class="p">:</span>
-                <span class="n">w</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span>
-                <span class="n">h</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span> <span class="o">*</span> <span class="n">d1</span> <span class="o">/</span> <span class="n">d2</span>
-                <span class="c1"># Setting the points for cropped image
-</span>                <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span>
-                <span class="n">top</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="p">(</span><span class="n">im</span><span class="p">.</span><span class="n">height</span> <span class="o">-</span> <span class="n">h</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="p">)</span>
-                <span class="n">right</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span>
-                <span class="n">bottom</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="n">m</span><span class="p">.</span><span class="n">height</span> <span class="o">-</span> <span class="p">(</span><span class="n">im</span><span class="p">.</span><span class="n">height</span> <span class="o">-</span> <span class="n">h</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">w</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span> <span class="o">*</span> <span class="n">d1</span> <span class="o">/</span> <span class="n">d2</span>
-                <span class="n">h</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">height</span>
-                <span class="c1"># Setting the points for cropped image
-</span>                <span class="n">left</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="p">(</span><span class="n">im</span><span class="p">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">w</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="p">)</span>
-                <span class="n">top</span> <span class="o">=</span> <span class="mi">0</span>
-                <span class="n">right</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span> <span class="o">-</span> <span class="p">(</span><span class="n">im</span><span class="p">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">w</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="p">)</span>
-                <span class="n">bottom</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">h</span> <span class="o">=</span> <span class="n">d2</span>
-            <span class="n">w</span> <span class="o">=</span> <span class="n">d1</span>
-            <span class="k">if</span> <span class="n">im</span><span class="p">.</span><span class="n">height</span> <span class="o">/</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span> <span class="o">&gt;</span> <span class="n">d2</span> <span class="o">/</span> <span class="n">d1</span><span class="p">:</span>
-                <span class="n">w</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span> <span class="o">*</span> <span class="n">d1</span> <span class="o">/</span> <span class="n">d2</span>
-                <span class="n">h</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">height</span>
-                <span class="c1"># Setting the points for cropped image
-</span>                <span class="n">left</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="p">(</span><span class="n">im</span><span class="p">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">w</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="p">)</span>
-                <span class="n">top</span> <span class="o">=</span> <span class="mi">0</span>
-                <span class="n">right</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span> <span class="o">-</span> <span class="p">(</span><span class="n">im</span><span class="p">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">w</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="p">)</span>
-                <span class="n">bottom</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">w</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span>
-                <span class="n">h</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span> <span class="o">*</span> <span class="n">d1</span> <span class="o">/</span> <span class="n">d2</span>
-                <span class="c1"># Setting the points for cropped image
-</span>                <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span>
-                <span class="n">top</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="p">(</span><span class="n">im</span><span class="p">.</span><span class="n">height</span> <span class="o">-</span> <span class="n">h</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="p">)</span>
-                <span class="n">right</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span>
-                <span class="n">bottom</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="n">m</span><span class="p">.</span><span class="n">height</span> <span class="o">-</span> <span class="p">(</span><span class="n">im</span><span class="p">.</span><span class="n">height</span> <span class="o">-</span> <span class="n">h</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">im</span><span class="p">.</span><span class="n">height</span> <span class="o">&lt;</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span><span class="p">:</span>
-            <span class="n">h</span> <span class="o">=</span> <span class="n">d1</span>
-            <span class="n">w</span> <span class="o">=</span> <span class="n">d2</span>
-            <span class="k">if</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span> <span class="o">/</span> <span class="n">im</span><span class="p">.</span><span class="n">height</span> <span class="o">&gt;</span> <span class="n">d2</span> <span class="o">/</span> <span class="n">d1</span><span class="p">:</span>
-                <span class="n">w</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span>
-                <span class="n">h</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span> <span class="o">*</span> <span class="n">d1</span> <span class="o">/</span> <span class="n">d2</span>
-                <span class="c1"># Setting the points for extended image
-</span>                <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span>
-                <span class="n">top</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="p">(</span><span class="n">im</span><span class="p">.</span><span class="n">height</span> <span class="o">-</span> <span class="n">h</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="p">)</span>
-                <span class="n">right</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span>
-                <span class="n">bottom</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="n">im</span><span class="p">.</span><span class="n">height</span> <span class="o">-</span> <span class="p">(</span><span class="n">im</span><span class="p">.</span><span class="n">height</span> <span class="o">-</span> <span class="n">h</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">w</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">height</span> <span class="o">*</span> <span class="n">d2</span> <span class="o">/</span> <span class="n">d1</span>
-                <span class="n">h</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">height</span>
-                <span class="c1"># Setting the points for extended image
-</span>                <span class="n">left</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="p">(</span><span class="n">im</span><span class="p">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">w</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="p">)</span>
-                <span class="n">top</span> <span class="o">=</span> <span class="mi">0</span>
-                <span class="n">right</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span> <span class="o">-</span> <span class="p">(</span><span class="n">im</span><span class="p">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">w</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="p">)</span>
-                <span class="n">bottom</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">height</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">h</span> <span class="o">=</span> <span class="n">d2</span>
-            <span class="n">w</span> <span class="o">=</span> <span class="n">d1</span>
-            <span class="k">if</span> <span class="n">im</span><span class="p">.</span><span class="n">height</span> <span class="o">/</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span> <span class="o">&gt;</span> <span class="n">d2</span> <span class="o">/</span> <span class="n">d1</span><span class="p">:</span>
-                <span class="n">w</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">height</span> <span class="o">*</span> <span class="n">d1</span> <span class="o">/</span> <span class="n">d2</span>
-                <span class="n">h</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">height</span>
-                <span class="c1"># Setting the points for extended image
-</span>                <span class="n">left</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="p">(</span><span class="n">im</span><span class="p">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">w</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="p">)</span>
-                <span class="n">top</span> <span class="o">=</span> <span class="mi">0</span>
-                <span class="n">right</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span> <span class="o">-</span> <span class="p">(</span><span class="n">im</span><span class="p">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">w</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="p">)</span>
-                <span class="n">bottom</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">height</span>         
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">w</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span>
-                <span class="n">h</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span> <span class="o">*</span> <span class="n">d2</span> <span class="o">/</span> <span class="n">d1</span>
-                <span class="c1"># Setting the points for extended image
-</span>                <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span>
-                <span class="n">top</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="p">(</span><span class="n">im</span><span class="p">.</span><span class="n">height</span> <span class="o">-</span> <span class="n">h</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="p">)</span>
-                <span class="n">right</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span>
-                <span class="n">bottom</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="n">im</span><span class="p">.</span><span class="n">height</span> <span class="o">-</span> <span class="p">(</span><span class="n">im</span><span class="p">.</span><span class="n">height</span> <span class="o">-</span> <span class="n">h</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="p">)</span>
-
-    <span class="c1"># Cropped image of above dimension
-</span>    <span class="n">im1</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="s">'RGB'</span><span class="p">,</span> <span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">,</span> <span class="n">bottom</span> <span class="o">-</span> <span class="n">top</span><span class="p">),</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>
-    <span class="n">im1</span><span class="p">.</span><span class="n">paste</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="n">left</span><span class="p">,</span> <span class="o">-</span><span class="n">top</span><span class="p">))</span>
-
-    <span class="c1"># Save image
-</span>    <span class="n">im1</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="n">mypath</span><span class="o">+</span><span class="s">'/'</span><span class="o">+</span><span class="n">myfile</span><span class="p">)</span>
-
-</code></pre></div></div>]]></content><author><name></name></author><category term="blog" /><category term="blog" /><category term="python" /><category term="image processing" /><category term="coding" /><category term="automation" /><summary type="html"><![CDATA[This is part of a series of short blog posts about automating boring repetitive work using Python.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/frames.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/frames.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+<p><em>Victor Blancada is a data scientist. Visit his LinkedIn page <a href="https://www.linkedin.com/in/geloblancada/">here</a>.</em></p>]]></content><author><name></name></author><category term="blog" /><category term="blog" /><category term="nlp" /><category term="nanogenmo" /><summary type="html"><![CDATA[I participated in National Novel Generation Month for 2022. This marked the third consecutive year where I completed my project. See here for my GitHub repository with my code and my final novel.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/DrunkPhilosophyCover.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/DrunkPhilosophyCover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

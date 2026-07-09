@@ -16,7 +16,7 @@ notshareable: True
 
 ### Downloads & Links
 
-- <a href="/assets/files/CV of Victor Blancada.pdf" target="_blank">Curriculum Vitae</a>
+- <a href="/assets/files/CV - Victor Angelo Blancada.pdf" target="_blank">Curriculum Vitae</a>
 
 <!--
 - <a href="/assets/files/Victor Angelo Blancada One-Page Resume.pdf" target="_blank">Résumé (1 Page)</a>

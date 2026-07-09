@@ -2,6 +2,14 @@
   
   
     {
+      "title"    : "Auditing the Silent Thoughts of AI: How the Jacobian Lens Peeks Inside LLMs",
+      "category" : "blog",
+      "tags"     : "data science, machine learning, interpretability, cognitive science",
+      "url"      : "/blog/2026/07/09/jacobian-lens.html",
+      "date"     : "2026-07-09 00:00:00 +0800"
+    },
+  
+    {
       "title"    : "The Prompt Template Is Part of the Runtime Now",
       "category" : "blog",
       "tags"     : "ai, agent, agentic ai, gemma, google",
