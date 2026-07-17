@@ -7,7 +7,6 @@ tags:
 - marketing 
 - gdpr 
 - privacy 
-- featured
 image: /assets/images/private.jpg
 description: Data science has moved beyond relying exclusively on data collection, and the marketing industry can too.
 date: 2018-05-25

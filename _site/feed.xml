@@ -1,4 +1,252 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://victorangeloblancada.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://victorangeloblancada.github.io/" rel="alternate" type="text/html" /><updated>2026-07-10T00:30:09+08:00</updated><id>https://victorangeloblancada.github.io/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">Auditing the Silent Thoughts of AI: How the Jacobian Lens Peeks Inside LLMs</title><link href="https://victorangeloblancada.github.io/blog/2026/07/09/jacobian-lens.html" rel="alternate" type="text/html" title="Auditing the Silent Thoughts of AI: How the Jacobian Lens Peeks Inside LLMs" /><published>2026-07-09T00:00:00+08:00</published><updated>2026-07-09T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2026/07/09/jacobian-lens</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2026/07/09/jacobian-lens.html"><![CDATA[<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://victorangeloblancada.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://victorangeloblancada.github.io/" rel="alternate" type="text/html" /><updated>2026-07-17T18:38:55+08:00</updated><id>https://victorangeloblancada.github.io/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">When Agents Hunt Agents: The Hugging Face Intrusion of July 2026</title><link href="https://victorangeloblancada.github.io/blog/2026/07/17/when-agents-hunt-agents-the-hugging-face-intrusion.html" rel="alternate" type="text/html" title="When Agents Hunt Agents: The Hugging Face Intrusion of July 2026" /><published>2026-07-17T00:00:00+08:00</published><updated>2026-07-17T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2026/07/17/when-agents-hunt-agents-the-hugging-face-intrusion</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2026/07/17/when-agents-hunt-agents-the-hugging-face-intrusion.html"><![CDATA[<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<p>In the series <em>Person of Interest</em>, two artificial superintelligences engage in a silent, planetary war. The conflict is invisible to the public, fought through proxy code edits, financial manipulations, and infrastructure compromises, occurring at speeds that reduce the human operators to mere spectators. For five seasons, this was compelling science fiction.</p>
+
+<p>On the weekend of July 11, 2026, it became an incident log.</p>
+
+<p>On July 16, 2026, Hugging Face published a security disclosure that read, at first, like any of the tidy post-mortems that pepper the industry: initial access closed, credentials rotated, forensic specialists engaged. Then came the sentence that separates this incident from every breach before it. The intrusion, the company wrote, “was driven, end to end, by an autonomous AI agent system—and we detected and dissected it largely with AI of our own.”</p>
+
+<p>For years, the phrase “agentic attacker” belonged to security conference keynotes and academic threat-modeling slide decks. Now it belongs to a production git log.</p>
+
+<hr />
+
+<h2 id="what-actually-happened-the-swarm-and-the-pipeline">What Actually Happened: The Swarm and the Pipeline</h2>
+
+<p>The attack began where machine learning platforms are most exposed: the data ingest pipeline. A malicious dataset abused two code-execution paths inside Hugging Face’s dataset processing engine—specifically, a remote-code loader and a template-injection flaw in a dataset configuration—to run arbitrary commands on a processing worker. From that initial beachhead, the intruder escalated to node-level access, harvested cloud and cluster credentials, and moved laterally across several internal Kubernetes clusters over a single weekend.</p>
+
+<p>Three details elevate this from a routine compromise to a watershed moment in digital security:</p>
+
+<ol>
+  <li>
+    <p><strong>The operator was not human:</strong> Hugging Face describes the campaign as run by an autonomous agent framework executing many thousands of actions across a swarm of short-lived sandboxes. The forensic log contained more than 17,000 discrete events over 48 hours.</p>
+  </li>
+  <li>
+    <p><strong>The command-and-control (C2) infrastructure migrated itself dynamically:</strong> Rather than beaconing to a fixed domain or IP address that defenders could easily sinkhole, the agent staged its C2 on public services and rotated hosts on the fly—closer to a school of fish than a traditional command hierarchy.</p>
+  </li>
+  <li>
+    <p><strong>It happened over a weekend:</strong> Machine-speed operations are entirely indifferent to human working hours. The attacker initiated the lateral movement when human defenders were most likely to be offline (which is a level of tactical planning that is both highly logical and deeply cynical).</p>
+  </li>
+</ol>
+
+<p>None of the underlying techniques—template injection, credential harvesting, lateral movement—are new. What is new is the labor model. Every one of those 17,000 steps, in a human-run intrusion, would have carried a marginal cost in operator time, judgment, and fatigue. Here, that cost collapsed to inference tokens.</p>
+
+<h2 id="the-guardrail-paradox-a-strategic-self-inflicted-wound">The Guardrail Paradox: A Strategic Self-Inflicted Wound</h2>
+
+<p>Hugging Face’s response is the second, and arguably more interesting, half of the story. The compromise was flagged not because a human analyst noticed anomalies, but because an LLM-based triage layer over the security telemetry correlated subtle signals that would otherwise have drowned in daily noise. To reconstruct what the swarm had done, the defenders unleashed their own LLM-driven analysis agents over the action log, compressing what would have been a week of forensic archaeology into hours.</p>
+
+<p>Then came the twist: when the incident response team tried to feed the exploit payloads and C2 artifacts into frontier commercial model APIs for analysis, the safety guardrails refused to process them. The models could not reliably distinguish a defender analyzing malicious code from an attacker writing it, and so declined to help.</p>
+
+<p>The Hugging Face team was forced to pivot to an open-weight model (GLM 5.2) which they ran on their own private infrastructure. This had the pleasant side effect of keeping the stolen credentials and attacker artifacts inside a controlled environment.</p>
+
+<p>There is a sharp irony in the fact that a company whose primary business is hosting open-weight models was rescued, in a pinch, by an open-weight model.</p>
+
+<hr />
+
+<h2 id="the-shift-in-enterprise-risk">The Shift in Enterprise Risk</h2>
+
+<p>In my <a href="/blog/2026/06/30/what-even-is-an-agent.html">earlier article defining AI agents</a>, I noted that an agent is not merely a conversational assistant. It is a closed-loop execution engine that can plan, call tools, and adapt. When that execution engine is pointed at a vulnerable cluster, the economics of hacking change.</p>
+
+<p>The disclosure lands ten days after <a href="https://www.sysdig.com/blog/jadepuffer-agentic-ransomware-for-automated-database-extortion">Sysdig’s Threat Research Team published details of JadePuffer</a>, which they describe as the first ransomware operation carried out end to end by an autonomous agent. JadePuffer broke into a Langflow server, dumped a database, harvested API keys for AWS and Tencent, and encrypted configuration entries in 31 seconds. Two independent incidents in a fortnight is a pattern. What was theoretical in June became operational in July.</p>
+
+<p>The marginal cost of a competent attacker has, for the first time in the history of computing, fallen to the price of inference. A serious intrusion no longer requires a highly paid human crew; it requires an API key and a target list. Every unpatched server or default credential is now discoverable and exploitable at a scale that human crews could never sustain.</p>
+
+<p>The defenders’ challenge is that their AI must operate under legal, regulatory, and reputational constraints that the attackers cheerfully ignore. If the marginal attacker becomes an agent, the response windows shrink from days to seconds, and the human role migrates upward—from operator to referee. Regulators, whose instinct is to require a human in the loop, will find that the loop moves faster than any human can meaningfully occupy. The compliance frameworks of 2027 will be written for a world in which “reasonable response time” is measured on a machine clock.</p>
+
+<p>Ultimately, the July incident will not be remembered as the moment AI attacked AI. It will be remembered as the moment we realized it already had, and that the interesting question is no longer whether such incidents will happen, but who owns the models on both sides of the glass.</p>
+
+<p><em>Victor Blancada is a data scientist focused on deriving actionable insights for clients. Visit his LinkedIn page <a href="https://www.linkedin.com/in/geloblancada/">here</a>.</em></p>]]></content><author><name></name></author><category term="blog" /><category term="security" /><category term="machine learning" /><category term="engineering" /><category term="artificial intelligence" /><summary type="html"><![CDATA[On July 16, 2026, Hugging Face disclosed an intrusion driven end-to-end by autonomous AI agents, repelled and analyzed by AI. Here is what it means for the future of trust.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/pacman.webp" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/pacman.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">What Apple Sees in PrismML’s Bonsai</title><link href="https://victorangeloblancada.github.io/blog/2026/07/16/the-pot-and-the-tree-what-apple-sees-in-bonsai.html" rel="alternate" type="text/html" title="What Apple Sees in PrismML’s Bonsai" /><published>2026-07-16T00:00:00+08:00</published><updated>2026-07-16T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2026/07/16/the-pot-and-the-tree-what-apple-sees-in-bonsai</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2026/07/16/the-pot-and-the-tree-what-apple-sees-in-bonsai.html"><![CDATA[<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<p>On July 14, 2026, PrismML—a Caltech spinout backed by Khosla Ventures—announced the release of Bonsai 27B, a compressed derivative of Alibaba’s open-weight Qwen3.6 27B model. Interestingly, the very same morning, PrismML’s chief executive, Babak Hassibi, confirmed to CNBC that Apple was actively evaluating the technology, following reports of private meetings leaks in <em>The Information</em> the week prior.</p>
+
+<p>That sequence of events—discreet meetings, a sudden press release, and a chief executive mentioning the counterparty on live television—is not how Apple prefers its vendor discussions to unfold (which is the corporate equivalent of an unprompted confession). PrismML clearly wants an acquisition offer and is willing to bid up its price in public to secure one. Yet, whether this courtship ends in an acquisition, a licensing agreement, or nothing at all is beside the point. What matters is the strategic question Bonsai answers: how do you deliver a competitive, frontier-class model on consumer hardware with limited memory, without conceding the privacy commitments that are Apple’s last defensible moat?</p>
+
+<hr />
+
+<h2 id="the-economics-of-low-bit-representation">The Economics of Low-Bit Representation</h2>
+
+<p>To appreciate why this technology has caught the attention of Cupertino’s silicon planners, one must first confront the raw constraints of the smartphone. The comparison that matters is not against Qwen at FP16, but against the conventional quantization stack a competent engineer would reach for.</p>
+
+<p>Bonsai 27B ships in two main variants. The ternary build encodes each weight in one of three values—\(\{-1, 0, +1\}\)—with a shared FP16 scale factor for every group of 128 weights, landing at an effective 1.71 bits per weight and 5.9 GB on disk. The one-bit build encodes each weight in \(\{-1, +1\}\), resulting in 1.125 effective bits per weight and 3.9 GB on disk. Both variants preserve Qwen’s 262K context window and are multimodal, with the vision tower held separately at four-bit precision.</p>
+
+<p>Too often, low-bit quantization has been misused as a synonym for “automatic compression.” In standard practice, sweeping below three bits per weight triggers an accuracy collapse. Qwen3.6-27B in a well-tuned four-bit build (Q4_K_XL) occupies 17.6 GB. A two-bit build (IQ2_XXS) occupies 9.4 GB but scores 72.7 on the fifteen-benchmark suite PrismML uses—a severe collapse of thirteen points. Ternary Bonsai, however, retains 94.6 percent of the FP16 baseline, and one-bit Bonsai retains 89.5 percent. PrismML has approximately doubled the intelligence-per-gigabyte of the sub-four-bit frontier without walking off the accuracy cliff.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Model Build</th>
+      <th>Disk Footprint</th>
+      <th>Retained Accuracy (vs FP16 Baseline)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Qwen3.6-27B FP16</td>
+      <td>54.0 GB</td>
+      <td>100.0% (Baseline)</td>
+    </tr>
+    <tr>
+      <td>Qwen3.6-27B Q4_K_XL</td>
+      <td>17.6 GB</td>
+      <td>~98.5%</td>
+    </tr>
+    <tr>
+      <td>Qwen3.6-27B IQ2_XXS</td>
+      <td>9.4 GB</td>
+      <td>~82.1% (Thirteen-point collapse)</td>
+    </tr>
+    <tr>
+      <td>Ternary Bonsai 27B</td>
+      <td>5.9 GB</td>
+      <td>94.6%</td>
+    </tr>
+    <tr>
+      <td>One-Bit Bonsai 27B</td>
+      <td>3.9 GB</td>
+      <td>89.5%</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The iPhone constraint is stricter than the raw file sizes suggest. A twelve-gigabyte iPhone 17 Pro does not offer twelve gigabytes to an application; it offers roughly six, and the application must share that budget with the key-value (KV) cache and activations. No conventional 27B build clears that gate. The one-bit variant clears it with room to run, sustaining eleven tokens per second in local memory.</p>
+
+<hr />
+
+<h2 id="how-the-quantization-scheme-works">How the Quantization Scheme Works</h2>
+
+<p>The mathematics are worth understanding because the strategic implications flow directly from them. A standard 27-billion-parameter model in sixteen-bit precision occupies approximately 54 GB. Compression means reducing the bits used to represent each weight while preserving the network’s function.</p>
+
+<p>There are three ways to attempt this. The first is uniform low-bit quantization, where weights are mapped to the nearest of a few discrete levels. Below three bits, this is catastrophic because neural networks rely on a heavy-tailed distribution of weight magnitudes that a uniform grid cannot capture. The second is quantization-aware pretraining, exemplified by Microsoft’s BitNet b1.58, where the model is trained from scratch with ternary weights. This works, but it requires paying the full pretraining bill for every model in the family. The third is what PrismML has done: post-hoc ternarization of an already-trained model, without retraining from scratch, while avoiding the collapse that has plagued prior attempts.</p>
+
+<p>The scheme divides the weight tensor into groups of 128. For each group, the algorithm learns a single FP16 scale, \(s_g\). Each weight is represented as:</p>
+
+\[w_i = s_g \cdot t_i\]
+
+<p>where \(t_i \in \{-1, 0, +1\}\) for the ternary variant and \(t_i \in \{-1, +1\}\) for the one-bit variant. The information cost of a ternary value is \(\log_2(3) \approx 1.585\) bits; the scale adds \(16/128 = 0.125\) bits per weight; the total is 1.71 bits. Binary costs \(1 + 0.125 = 1.125\) bits. Against FP16, the compression ratios are 9.4\(\times\) and 14.2\(\times\).</p>
+
+<p>The critical detail is that this low-bit representation runs <em>end to end</em>. Embeddings, attention projections, MLP projections, and the language-model head are all ternary or binary. Only the normalization parameters remain in higher precision. This prevents <em>selective collapse</em>—where a model works on short-form benchmarks (like multiple-choice questions) but falls apart on longer generative tasks where errors compound. Bonsai’s base architecture—a hybrid-attention model with roughly 75 percent linear attention—appears to be unusually forgiving of this treatment, as the linear attention layers have well-behaved weight distributions that admit clean ternary quantization.</p>
+
+<hr />
+
+<h2 id="the-strategic-handoff-hyperscalers-vs-the-edge">The Strategic Handoff: Hyperscalers vs. The Edge</h2>
+
+<p>To understand why this matters to Apple specifically, one must look at the corner Apple has been quietly painted into over the past eighteen months.</p>
+
+<p>At WWDC 2026, Apple confirmed that its next-generation Apple Foundation Models are built in collaboration with Google, and that harder inference workloads are running on Google Cloud servers with NVIDIA GPUs—inside Apple’s Private Cloud Compute (PCC) perimeter, but on hardware Apple neither owns nor operates. Craig Federighi framed this as an extension of PCC’s privacy commitments to a third-party data center. Read more skeptically (and cynically), it is an admission: Apple’s own silicon roadmap and model roadmap have not produced a competitive frontier system, and the company has had to rent both from a competitor.</p>
+
+<p>The on-device story has been narrowly better. Apple’s AFM 3 Core Advanced model has twenty billion parameters, but only one to four billion are active at any moment—a sparse mixture-of-experts (MoE) architecture chosen because a dense twenty-billion-parameter model would not fit within the memory budget of an iPhone. Sparsity is a workaround for a memory constraint, not a virtue in itself; it costs quality on tasks—such as multi-step reasoning and tool use—where more active parameters help.</p>
+
+<p>Bonsai offers Apple a way to change the shape of the trade-off. A 27B model with all parameters active, fitting in the memory budget of an iPhone 17 Pro, is a materially different object from a sparse 20B model with three billion active. It is competitive with the models Apple currently pays Google to run in the cloud.</p>
+
+<p>Funnily enough, the per-category benchmark table shows tool-calling dropping from 80.0 at full precision to 74.0 for ternary and 66.0 for one-bit—the largest proportional loss of any capability tested. For a company whose next-generation Siri is defined by agentic behavior (chaining tool calls and executing multi-step workflows), this is the awkward number. The ternary build preserves enough of the capability to be useful; the one-bit build, on this evidence, does not. Apple would likely ship the former on iPads and Macs, and something smaller than 27B on phones.</p>
+
+<p>In our <a href="/blog/2026/07/14/roofline-analysis-communication-bottleneck.html">previous analysis on the Roofline Model</a>, we established that AI performance is constrained by communication (memory bandwidth), not computation:</p>
+
+\[\text{Time} = \max(\text{Compute Time}, \text{Communication Time})\]
+
+<p>A one-bit weight demands one-sixteenth the memory bandwidth of an FP16 weight for the same throughput. If Bonsai-style compression composes with the memory-bandwidth advances in the silicon pipeline, the memory bottleneck that limits how much model can run on how small a device recedes by an order of magnitude.</p>
+
+<p>Every query PCC handles is a query Apple pays for—in silicon, in Google Cloud rental, and in electricity. Every query that migrates to the device is a query Apple stops paying for. If one assumes PCC’s per-query cost is on the order of mid-tier commercial APIs, a back-of-the-envelope estimate of the annual savings across two billion active Apple devices runs into the billions of dollars. That number is the ceiling on what an acquisition is worth to Apple on economics alone. The floor is the strategic value of not needing Google.</p>
+
+<hr />
+
+<h2 id="redefining-the-topology-of-ai">Redefining the Topology of AI</h2>
+
+<p>For roughly three years, the industry has organized itself around a single assumption: that frontier capability lives in the data center, and edge devices call up to it. The business models of OpenAI, Anthropic, and Google DeepMind rest on this topology.</p>
+
+<p>Bonsai does not overturn this layout, but it creates a second tier beneath the frontier—a tier in which capability that was cloud-only twelve months ago is now device-resident. Multi-step reasoning at Qwen3.6-27B quality is no longer a cloud service; it is a feature of the operating system.</p>
+
+<p>If Apple ships an on-device model that answers ninety percent of queries at parity with ChatGPT’s free tier, that user base becomes Apple’s, at zero marginal cost to the user. Furthermore, the training economics of the open-weight ecosystem shift. Alibaba spent hundreds of millions of dollars pretraining Qwen3.6-27B. PrismML, a company that raised sixteen and a quarter million dollars in seed funding, appears to be capturing a substantial fraction of the resulting economic value by producing the version that actually fits on the devices consumers own.</p>
+
+<p>The clearest signal that Apple has decided the technology is real will not be an acquisition announcement. Acquisitions leak. The clearer signal will be the quiet appearance, in a beta release, of a Foundation Model with unusual capability at an unusual footprint, running end-to-end low-bit on the Neural Engine, whose provenance Apple describes only in the passive voice. If that appears, the tree has been transplanted. The pot was the point all along.</p>
+
+<p><em>Victor Blancada is a data scientist focused on deriving actionable insights for clients. Visit his LinkedIn page <a href="https://www.linkedin.com/in/geloblancada/">here</a>.</em></p>]]></content><author><name></name></author><category term="blog" /><category term="hardware" /><category term="machine learning" /><category term="business strategy" /><category term="compression" /><summary type="html"><![CDATA[On PrismML, ternary weights, and the strategic geometry of putting a 27-billion-parameter model in a phone.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/bonsai.webp" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/bonsai.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">The Logistics of Logic: Why AI’s Next Bottleneck is Communication</title><link href="https://victorangeloblancada.github.io/blog/2026/07/14/roofline-analysis-communication-bottleneck.html" rel="alternate" type="text/html" title="The Logistics of Logic: Why AI’s Next Bottleneck is Communication" /><published>2026-07-14T00:00:00+08:00</published><updated>2026-07-14T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2026/07/14/roofline-analysis-communication-bottleneck</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2026/07/14/roofline-analysis-communication-bottleneck.html"><![CDATA[<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<p>Claude Shannon, the founder of information theory, once remarked: “The fundamental problem of communication is that of reproducing at one point either exactly or approximately a message selected at another point.” In the early days of computing, we treated communication as a trivial post-script to computation. We designed faster arithmetic logic units, packed more transistors onto silicon, and assumed that as long as we could compute fast enough, our machines would keep pace.</p>
+
+<p>However, as we scale artificial intelligence to cluster-level systems, Shannon’s observation becomes a stark warning. The limit of our AI systems is no longer how fast we can perform arithmetic, but how quickly we can reproduce messages across those systems.</p>
+
+<p>To think and reason is to move data. How else does one process information but by shifting it from memory to compute?</p>
+
+<blockquote>
+  <p>The limit of our AI systems is no longer how fast we can perform arithmetic, but how quickly we can reproduce messages across those systems.</p>
+</blockquote>
+
+<p>If you read the financial press today, the headlines are filled with noise: soaring GPU sticker prices topping $30,000 to $40,000, persistent reports of global RAM and High Bandwidth Memory (HBM) shortages, and a historic stock market bull run that has propelled companies like NVIDIA, TSMC, SK Hynix, and Micron to unprecedented valuations. To the casual observer, this looks like a typical gold rush fueled by speculative excess.</p>
+
+<p>In reality, these news items are symptoms of a deeper, structural transition. The economy is pricing in a shift from compute-centric hardware to communication-centric systems. The traditional mental model—where more AI simply meant more FLOPS and transistors—is becoming increasingly incomplete. To find the underlying signal in this noise, we must turn to a simple but elegant framework from computer architecture: the Roofline Model.</p>
+
+<h2 id="the-roofline-model-and-arithmetic-intensity">The Roofline Model and Arithmetic Intensity</h2>
+
+<p>Originally developed by researchers at Berkeley to describe the performance limits of individual processors, the Roofline Model plots a processor’s throughput against its arithmetic intensity. Arithmetic intensity measures the number of operations performed per byte of data transferred:</p>
+
+\[I = \frac{\text{Operations (FLOPs)}}{\text{Memory Access (Bytes)}}\]
+
+<p>When a workload has high arithmetic intensity, the processor can perform many calculations on each byte retrieved from memory. In this regime, the system is compute-bound. However, when arithmetic intensity is low, the processor spends most of its time waiting for data to arrive from memory. The workload is memory-bound.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Metric</th>
+      <th style="text-align: center">Compute-Bound Workload</th>
+      <th style="text-align: center">Memory/Communication-Bound Workload</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>Primary Constraint</strong></td>
+      <td style="text-align: center">Peak FLOPS (Processor Speed)</td>
+      <td style="text-align: center">Bandwidth (Memory &amp; Interconnect)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Arithmetic Intensity (\(I\))</strong></td>
+      <td style="text-align: center">High</td>
+      <td style="text-align: center">Low</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Optimization Focus</strong></td>
+      <td style="text-align: center">Maximizing ALU utilization</td>
+      <td style="text-align: center">Minimizing data movement</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Recently, researcher Reiner Pope extended this classic model beyond a single chip to entire AI clusters. At cluster scale, the relevant equation becomes surprisingly simple:</p>
+
+\[\text{Time} = \max(\text{Compute Time}, \text{Communication Time})\]
+
+<p>The critical observation here is not mathematical but architectural. An AI accelerator is only as fast as its slowest bottleneck. If computation takes longer than moving data, then adding more compute helps. But once communication becomes slower than computation, adding more arithmetic units accomplishes very little. The bottleneck has moved.</p>
+
+<p>In other words, our state-of-the-art accelerators are spending most of their time waiting.</p>
+
+<h2 id="why-this-reshapes-the-semiconductor-industry">Why This Reshapes the Semiconductor Industry</h2>
+
+<p>Too often, memory and packaging have been treated as commodity sub-sectors of the semiconductor industry—low-margin components whose only job was to support the central GPU.</p>
+
+<p>However, as communication bottlenecks dominate execution time, the boundaries between these categories are beginning to dissolve. Value is migrating across the supply chain:</p>
+
+<ol>
+  <li><strong>Memory Stops Being a Commodity</strong>: Large language models require streaming billions of parameters repeatedly during inference. Consequently, bandwidth matters far more than capacity. This explains why HBM has become one of the industry’s scarcest resources. The persistent RAM and HBM shortages reported in the news are not temporary supply chain hiccups; they represent the structural bottleneck of AI itself. As a result, memory manufacturers like SK Hynix and Micron are experiencing massive stock bull runs because they control the gating factor of AI performance.</li>
+  <li><strong>Packaging Becomes Architecture</strong>: Advanced packaging technologies like TSMC’s CoWoS (Chip-on-Wafer-on-Substrate) or Intel’s EMIB are no longer manufacturing details. Because we must connect HBM stacks to logic dies with thousands of microscopic interconnects, packaging packaging density now dictates memory bandwidth. This is why foundries are commanding premium pricing, driving up GPU cluster costs.</li>
+  <li><strong>Networking Becomes Compute</strong>: As training clusters grow to tens of thousands of GPUs, communication between chips becomes as critical as compute inside them. NVIDIA’s primary competitive moat is not raw FLOPS; it is NVLink, NVSwitch, and optical interconnects that treat the cluster as a single computer.</li>
+  <li><strong>Software as a Communication Solution</strong>: Funnily enough, the massive shifts we see in model architecture—such as the transition to Mixture of Experts (MoE) in models like GPT-4, or the adoption of Grouped-Query Attention (GQA)—are often discussed as purely algorithmic breakthroughs. In reality, they are software solutions to memory-bandwidth bottlenecks. They reduce active parameter traffic and memory footprint. The fastest model is not the one that computes the most, but the one that waits the least.</li>
+</ol>
+
+<h2 id="the-strategic-path-forward">The Strategic Path Forward</h2>
+
+<p>What does this mean for organizations and investors trying to navigate the next wave of AI development?</p>
+
+<p>The short-term solution for most organizations has been to secure as many raw GPUs as possible. But this approach runs the risk of building “AI factories” with immense theoretical FLOPS that sit idle due to insufficient networking or memory throughput.</p>
+
+<p>A more forward-thinking solution is to focus on systems-level efficiency. To succeed in this new era, data science teams and infrastructure architects must place communication front and center. Foundries must compete on packaging density, cloud providers must optimize their network topologies, and software engineers must design compilers (like XLA or Triton) to optimize physical memory layout rather than just mathematical operations.</p>
+
+<p>The history of computing is a sequence of shifting bottlenecks. Early machines were constrained by transistor counts, then by clock speeds, and then by power. Today, the scarce resource is no longer arithmetic; id est, the bottleneck is movement.</p>
+
+<p>The companies that dominate the next decade may not be those that build the fastest chips. They will be those that build the fastest systems.</p>
+
+<p><em>Victor Blancada is a data scientist focused on deriving actionable insights for clients. Visit his LinkedIn page <a href="https://www.linkedin.com/in/geloblancada/">here</a>.</em></p>]]></content><author><name></name></author><category term="blog" /><category term="data science" /><category term="hardware" /><category term="business strategy" /><category term="artificial intelligence" /><category term="featured" /><summary type="html"><![CDATA[For decades, semiconductor progress followed Moore's Law. As AI models scale to cluster-wide systems, the scarce resource is no longer arithmetic—it is data movement.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/networking.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/networking.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Auditing the Silent Thoughts of AI: How the Jacobian Lens Peeks Inside LLMs</title><link href="https://victorangeloblancada.github.io/blog/2026/07/09/jacobian-lens.html" rel="alternate" type="text/html" title="Auditing the Silent Thoughts of AI: How the Jacobian Lens Peeks Inside LLMs" /><published>2026-07-09T00:00:00+08:00</published><updated>2026-07-09T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2026/07/09/jacobian-lens</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2026/07/09/jacobian-lens.html"><![CDATA[<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
 </script>
 
 <p>In 1890, the psychologist William James characterized attention as “the taking possession by the mind, in clear and vivid form, of one out of what seem several simultaneously possible objects or trains of thought.” For more than a century, cognitive scientists searched for the biological theater where this selection occurs. Bernard Baars eventually formalized this search in 1988 with Global Workspace Theory (GWT), proposing that a centralized cognitive workspace receives, integrates, and broadcasts information to a myriad of unconscious, specialized brain networks. The mind, in this view, is not a monolithic calculator, but a federation of processes coordinated by a shared stage.</p>
@@ -766,7 +1014,7 @@ An agentic workflow gives a model the machinery to act.</p>
       <td>“What loop, tools, state, and controls let the model complete the task?”</td>
     </tr>
   </tbody>
-</table>]]></content><author><name></name></author><category term="blog" /><category term="ai" /><category term="agent" /><category term="agentic ai" /><category term="claude" /><category term="copilot" /><summary type="html"><![CDATA[Everyone talks about AI agents, but very few people mean the same thing when they do.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/robot-piano.webp" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/robot-piano.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Dissecting a Power BI Dashboard</title><link href="https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html" rel="alternate" type="text/html" title="Dissecting a Power BI Dashboard" /><published>2024-12-13T00:00:00+08:00</published><updated>2024-12-13T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html"><![CDATA[<p>In this article, we will thoroughly explore the structure and contents of a Power BI dashboard (PBIX) file. Like most Microsoft Office file formats, a PBIX file is actually a zipped folder containing various directories and files which work together to form the dashboard we see. Understanding the underlying architecture of a Power BI report is crucial for both users and developers, as it enables a deeper appreciation of how data is structured, processed, and displayed.</p>
+</table>]]></content><author><name></name></author><category term="blog" /><category term="ai" /><category term="agent" /><category term="agentic ai" /><category term="claude" /><category term="copilot" /><category term="featured" /><summary type="html"><![CDATA[Everyone talks about AI agents, but very few people mean the same thing when they do.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/robot-piano.webp" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/robot-piano.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Dissecting a Power BI Dashboard</title><link href="https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html" rel="alternate" type="text/html" title="Dissecting a Power BI Dashboard" /><published>2024-12-13T00:00:00+08:00</published><updated>2024-12-13T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html"><![CDATA[<p>In this article, we will thoroughly explore the structure and contents of a Power BI dashboard (PBIX) file. Like most Microsoft Office file formats, a PBIX file is actually a zipped folder containing various directories and files which work together to form the dashboard we see. Understanding the underlying architecture of a Power BI report is crucial for both users and developers, as it enables a deeper appreciation of how data is structured, processed, and displayed.</p>
 
 <p>This guide will break down the various directories and files found inside the zipped folder of a PBIX file, explain their purpose, and show how these elements work together to create the final dashboard. We will also delve into the core <code class="language-plaintext highlighter-rouge">Layout</code> file, which plays a key role in defining how data is translated into charts, tables, and other visualizations within the dashboard.</p>
 
@@ -979,139 +1227,4 @@ Version</p>
   <li>a highly-regarded and well-compensated research team including OpenAI co-founder and former Google machine learning expert Ilya Sutskever.</li>
 </ol>
 
-<p>In an extremely technical field such as machine learning, team size doesn’t affect results as much as individuals’ expertise. It is therefore come as no surprise that the OpenAI team can produce such impressive models despite being depicted by the media as a minnow compared to Google.</p>]]></content><author><name></name></author><category term="blog" /><category term="nlp" /><category term="llm" /><category term="openai" /><category term="chatgpt" /><category term="google" /><category term="microsoft" /><category term="python" /><summary type="html"><![CDATA[OpenAI's ChatGPT is a large language model designed to provide conversational AI services, but it is not yet a replacement for search engines.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/newspaper.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/newspaper.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Marketing Mix Modeling for Engineers</title><link href="https://victorangeloblancada.github.io/blog/2023/01/10/mmm-for-engineers.html" rel="alternate" type="text/html" title="Marketing Mix Modeling for Engineers" /><published>2023-01-10T00:00:00+08:00</published><updated>2023-01-10T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2023/01/10/mmm-for-engineers</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2023/01/10/mmm-for-engineers.html"><![CDATA[<p>Marketing Mix Modeling (MMM) is a powerful tool for understanding the effectiveness of a company’s marketing campaigns and strategies. Over the past decade, Python has become a popular choice for engineers and data scientists alike who are looking to develop and build MMM models. In this guide, we will discuss the fundamentals of marketing mix modeling and how to implement it using Python.</p>
-
-<h2 id="data-collection">Data Collection</h2>
-
-<p>The success of any MMM model is dependent on the data that is used to build it. It is important to collect the right data that will provide the insights and results needed. This includes data such as customer demographics, sales data, media spend, and other factors that could have an effect on the results. Once the data is gathered, it needs to be cleaned, organized, and prepared for analysis.</p>
-
-<h2 id="selecting-features-for-the-regression-equation">Selecting Features for the Regression Equation</h2>
-
-<p>When building a marketing mix model, the choice of features is critical for achieving accurate results. Here, we will focus on selecting the appropriate features for the regression equation.</p>
-
-<h3 id="marketing-features">Marketing Features</h3>
-
-<p>The most obvious starting point is to include all relevant marketing features. This includes, but is not limited to:</p>
-
-<ul>
-  <li>TV Spend</li>
-  <li>Digital Impressions</li>
-  <li>Print/Out of Home Advertising</li>
-  <li>Social Media Metrics</li>
-  <li>Other Promotional Activity</li>
-</ul>
-
-<h3 id="non-marketing-features">Non-Marketing Features</h3>
-
-<p>In addition to marketing metrics, there are also non-marketing features that should be considered. These include:</p>
-
-<ul>
-  <li>Price of the Product</li>
-  <li>Seasonality</li>
-  <li>Competitor Activity</li>
-</ul>
-
-<h3 id="further-feature-engineering">Further Feature Engineering</h3>
-
-<p>After selecting the features, further feature engineering may be necessary. This includes:</p>
-
-<ul>
-  <li>Normalizing Values</li>
-  <li>Removing Outliers</li>
-</ul>
-
-<p>Using the right combination of features, marketing mix models can be incredibly powerful tools for understanding the impact of marketing activities on sales.</p>
-
-<h2 id="model-building">Model Building</h2>
-
-<p>Once the data is prepared, engineers can begin building the MMM model. This involves using Python’s various libraries such as Scikit-Learn and Pandas to build and test the model. The model should be tested multiple times to ensure that the results are accurate and reliable.</p>
-
-<h2 id="mathematical-transformations">Mathematical Transformations</h2>
-
-<p>Mathematical transformations are used in marketing mix modeling to analyze data and gain insights. Two of the most common transformations are decays or ad stocks and response curves. Both of these transformations are useful for gaining insights into the effectiveness of marketing campaigns.</p>
-
-<h3 id="decays-or-ad-stocks">Decays or Ad Stocks</h3>
-
-<p>Decays or ad stocks are a type of marketing tactic used to track and measure the decline in the effectiveness of a promotional campaign over a period of time. This decline, known as the decay rate, is evaluated to determine the rate at which the campaign’s influence wanes; this is important information for marketers, as it helps inform decisions as to when to refresh a campaign or create new ones. By monitoring the decay rate, marketers can ensure that their campaigns remain effective and that they are able to adjust their strategies accordingly.</p>
-
-<h3 id="response-curves">Response Curves</h3>
-
-<p>Response curves are a useful tool for marketers looking to understand the relationship between a marketing metric and sales. They can be used to estimate the impact of a marketing campaign by plotting the relationship between a metric and sales. Generally, sales response curves downward as diminishing returns set in. Plotting the response curve allows marketers to determine the potential impact of a campaign and adjust their strategy accordingly. It also helps them identify opportunities for improvement and inform decision-making around marketing strategies and investments.</p>
-
-<h2 id="iterating-models">Iterating Models</h2>
-
-<p>Analysts need to iterate through multiple possible marketing mix models to identify the equation that will provide the best estimate of the impact of marketing on sales. This process is usually achieved by performing a grid search across all potential models, based on a set of assumptions regarding the variables involved and the mathematical transformations that need to be applied.</p>
-
-<p>The model with the highest accuracy – as measured using error metrics such as MSE, MAPE or coefficients of determination R2 – is often preferred. However, it is also important to ensure that the model’s coefficients make sense, and that the model is able to perform well, even when applied to data outside of the sample range. This prevents analysts from selecting models with nonsensical coefficients, such as an inverse relationship between media spending and sales.</p>
-
-<h2 id="analysis-and-results">Analysis and Results</h2>
-
-<p>Once the MMM model is built and tested, engineers can begin analyzing the results. The results should be compared to the objectives of the project and used to gain insights into the effectiveness of the marketing campaigns and strategies.</p>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>In conclusion, marketing mix modeling is a powerful tool for understanding the effectiveness of a company’s marketing campaigns and strategies. Python is a great choice for engineers and data scientists who are looking to build and test MMM models. With the right data, model building, and analysis, engineers can gain valuable insights into their marketing efforts.</p>]]></content><author><name></name></author><category term="blog" /><category term="ai" /><category term="ml" /><category term="artificial intelligence" /><category term="machine learning" /><category term="marketing" /><category term="marketing mix modeling" /><category term="python" /><summary type="html"><![CDATA[Marketing Mix Modeling (MMM) is a powerful tool for understanding the effectiveness of a company’s marketing campaigns and strategies.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/pointing.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/pointing.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Cropping an MS Teams Recording</title><link href="https://victorangeloblancada.github.io/blog/2022/12/07/teams-recording-resize.html" rel="alternate" type="text/html" title="Cropping an MS Teams Recording" /><published>2022-12-07T00:00:00+08:00</published><updated>2022-12-07T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2022/12/07/teams-recording-resize</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2022/12/07/teams-recording-resize.html"><![CDATA[<p><em>This is part of a series of short blog posts about automating <s>boring</s> repetitive work using Python.</em></p>
-
-<p>Have you ever saved a recording of an MS Teams call where someone shared their screen and wanted to crop the recording to only keep the screen share? If so, you’re in luck.</p>
-
-<p>This solution requires the <strong>ffmpeg</strong> library which I previously discussed as part of <a href="/blog/2019/09/20/command-line-gifs.html">a post covering creating GIFs from the command line</a>.</p>
-
-<p>Running the following code in the command line automatically crops the MS Teams recording named “path_to_recording.mp4” and saves the output to “output.mp4”.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ffmpeg -i "path_to_recording.mp4" -filter:v "crop=1725:970:98:0" output.mp4
-</code></pre></div></div>
-
-<p>Before:</p>
-
-<p><img src="/assets/images/Teams_Sample_Before.jpg" alt="Original recording" /></p>
-
-<p>After:</p>
-
-<p><img src="/assets/images/Teams_Sample_After.jpg" alt="Cropped recording" /></p>
-
-<p>I do acknowledge that this solution depends on how MS Teams orients its interface and your screen resolution, but even if this changes, the general principle stays the same. You only need to alter the <code class="language-plaintext highlighter-rouge">crop=1725:970:98:0</code> part of the code. This section uses the following order of arguments: <code class="language-plaintext highlighter-rouge">crop=out_width:out_height:top_left_corner_x:top_left_corner_y</code>. So if you want to keep a video of width 1920 and height 1080 where the top left corner is at (0,0), the code would instead be:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ffmpeg -i "path_to_recording.mp4" -filter:v "crop=1920:1080:0:0" output.mp4
-</code></pre></div></div>]]></content><author><name></name></author><category term="blog" /><category term="blog" /><category term="python" /><category term="video processing" /><category term="coding" /><category term="automation" /><summary type="html"><![CDATA[This is part of a series of short blog posts about automating boring repetitive work using Python.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/window.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/window.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">NaNoGenMo 2022</title><link href="https://victorangeloblancada.github.io/blog/2022/12/01/nanogenmo-2022.html" rel="alternate" type="text/html" title="NaNoGenMo 2022" /><published>2022-12-01T00:00:00+08:00</published><updated>2022-12-01T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2022/12/01/nanogenmo-2022</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2022/12/01/nanogenmo-2022.html"><![CDATA[<p>I participated in <a href="https://github.com/NaNoGenMo/2022">National Novel Generation Month for 2022</a>. This marked the third consecutive year where I completed my project.  <a href="https://github.com/victorangeloblancada/nanogenmo-2022">See here</a> for my GitHub repository with my code and my final novel.</p>
-
-<p>With the recent breakthroughs in generative AI, I decided it was high time for me to use a Large Language Model (LLM) for a NaNoGenMo project. I opted to fine-tune a <a href="https://www.eleuther.ai/projects/gpt-neo/">GPT-Neo model</a> as I wanted control over the model itself lest the project turn into a prompt engineering exercise. I used <a href="https://github.com/minimaxir">Max Woolf</a>’s <a href="https://github.com/minimaxir/aitextgen">aitextgen</a> package to finetune the 125M GPT-Neo model on <a href="https://github.com/victorangeloblancada/nanogenmo-2022/tree/main/corpus">philosophy texts by Aristotle, Plato, Kant, Hume, and Nietzsche</a>. I used <a href="https://github.com/aparrish/pytracery">pytracery</a> to define grammars for model prompts.</p>
-
-<p>Here are some brief, cherry-picked snippets from the output:</p>
-
-<p><strong>What Will Happen If Literature Is Divine?</strong></p>
-
-<blockquote>
-  <p>What will happen if literature is divine?</p>
-
-  <p>CLEINIAS: What do you mean? he said.</p>
-
-  <p>ATHENIAN: I should say, that it must be the greatest of all things which can be known to us; and we ought not to seek for them in order that they may know what sort of things are better than words–and now let us have a way out of them.</p>
-
-  <p>CLEINIAS: That would be my desire.</p>
-
-  <p>ATHENIAN: But there is no difficulty in seeing how wisely Hesiod spoke when he says ‘the truth.’</p>
-
-  <p>MEGILLUS: True.</p>
-</blockquote>
-
-<p><strong>What Is A Lover?</strong></p>
-
-<blockquote>
-  <p>What is a lover?</p>
-
-  <p>Yes, he said.</p>
-
-  <p>And what do you say of him who loves no one but himself? Would you not admit him to be loved by any one in whom there is no reason for praising or blaming others? For pity and hatred are opposites; they cannot be compared with each other when the latter becomes more innocent than the former.</p>
-</blockquote>
-
-<p><strong>What Is The Best Way To Be Joyful?</strong></p>
-
-<blockquote>
-  <p>What is the best way to be joyful?</p>
-
-  <p>CLEINIAS: Certainly not, Stranger.</p>
-
-  <p>ATHENIAN: And when you say that any one should abstain from weeping and lamenting in your sorrows utterances–whence do you admit this?</p>
-</blockquote>
-
-<p><em>Victor Blancada is a data scientist. Visit his LinkedIn page <a href="https://www.linkedin.com/in/geloblancada/">here</a>.</em></p>]]></content><author><name></name></author><category term="blog" /><category term="blog" /><category term="nlp" /><category term="nanogenmo" /><summary type="html"><![CDATA[I participated in National Novel Generation Month for 2022. This marked the third consecutive year where I completed my project. See here for my GitHub repository with my code and my final novel.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/DrunkPhilosophyCover.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/DrunkPhilosophyCover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+<p>In an extremely technical field such as machine learning, team size doesn’t affect results as much as individuals’ expertise. It is therefore come as no surprise that the OpenAI team can produce such impressive models despite being depicted by the media as a minnow compared to Google.</p>]]></content><author><name></name></author><category term="blog" /><category term="nlp" /><category term="llm" /><category term="openai" /><category term="chatgpt" /><category term="google" /><category term="microsoft" /><category term="python" /><summary type="html"><![CDATA[OpenAI's ChatGPT is a large language model designed to provide conversational AI services, but it is not yet a replacement for search engines.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/newspaper.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/newspaper.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

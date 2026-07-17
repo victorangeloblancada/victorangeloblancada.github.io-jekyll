@@ -8,7 +8,6 @@ tags:
 - fiber network 
 - consulting 
 - optimization 
-- featured
 date: 2017-11-16
 image: /assets/images/fiber.jpg
 description: In 2014, I was part of a six person team that developed a big data optimization to guide the $400MM USD fiber network infrastructure expansion project of a North American telecommunications company.

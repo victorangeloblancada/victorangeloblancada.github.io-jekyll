@@ -8,6 +8,7 @@ tags:
 - agentic ai
 - claude
 - copilot
+- featured
 date: 2026-06-30
 image: /assets/images/robot-piano.webp
 description: Everyone talks about AI agents, but very few people mean the same thing when they do.

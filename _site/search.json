@@ -2,6 +2,30 @@
   
   
     {
+      "title"    : "When Agents Hunt Agents: The Hugging Face Intrusion of July 2026",
+      "category" : "blog",
+      "tags"     : "security, machine learning, engineering, artificial intelligence",
+      "url"      : "/blog/2026/07/17/when-agents-hunt-agents-the-hugging-face-intrusion.html",
+      "date"     : "2026-07-17 00:00:00 +0800"
+    },
+  
+    {
+      "title"    : "What Apple Sees in PrismML&#39;s Bonsai",
+      "category" : "blog",
+      "tags"     : "hardware, machine learning, business strategy, compression",
+      "url"      : "/blog/2026/07/16/the-pot-and-the-tree-what-apple-sees-in-bonsai.html",
+      "date"     : "2026-07-16 00:00:00 +0800"
+    },
+  
+    {
+      "title"    : "The Logistics of Logic: Why AI&#39;s Next Bottleneck is Communication",
+      "category" : "blog",
+      "tags"     : "data science, hardware, business strategy, artificial intelligence, featured",
+      "url"      : "/blog/2026/07/14/roofline-analysis-communication-bottleneck.html",
+      "date"     : "2026-07-14 00:00:00 +0800"
+    },
+  
+    {
       "title"    : "Auditing the Silent Thoughts of AI: How the Jacobian Lens Peeks Inside LLMs",
       "category" : "blog",
       "tags"     : "data science, machine learning, interpretability, cognitive science",
@@ -20,7 +44,7 @@
     {
       "title"    : "What Even is an Agent?",
       "category" : "blog",
-      "tags"     : "ai, agent, agentic ai, claude, copilot",
+      "tags"     : "ai, agent, agentic ai, claude, copilot, featured",
       "url"      : "/blog/2026/06/30/what-even-is-an-agent.html",
       "date"     : "2026-06-30 00:00:00 +0800"
     },
@@ -244,7 +268,7 @@
     {
       "title"    : "GDPR Day 0: Data-Savvy Marketers Can Still Derive Insights Without Relying on Personal Data",
       "category" : "blog",
-      "tags"     : "data science, marketing, gdpr, privacy, featured",
+      "tags"     : "data science, marketing, gdpr, privacy",
       "url"      : "/blog/2018/05/25/gdpr-day-zero.html",
       "date"     : "2018-05-25 00:00:00 +0800"
     },
@@ -268,7 +292,7 @@
     {
       "title"    : "A Network Expansion Strategy Case Study",
       "category" : "blog",
-      "tags"     : "case study, internet, fiber network, consulting, optimization, featured",
+      "tags"     : "case study, internet, fiber network, consulting, optimization",
       "url"      : "/blog/2017/11/16/a-network-expansion-strategy-case-study.html",
       "date"     : "2017-11-16 00:00:00 +0800"
     },

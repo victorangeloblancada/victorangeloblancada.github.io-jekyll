@@ -7,6 +7,7 @@ tags:
 - hardware
 - business strategy
 - artificial intelligence
+- featured
 date: 2026-07-14
 image: /assets/images/networking.jpg
 description: For decades, semiconductor progress followed Moore's Law. As AI models scale to cluster-wide systems, the scarce resource is no longer arithmetic—it is data movement.
@@ -50,44 +51,7 @@ $$\text{Time} = \max(\text{Compute Time}, \text{Communication Time})$$
 
 The critical observation here is not mathematical but architectural. An AI accelerator is only as fast as its slowest bottleneck. If computation takes longer than moving data, then adding more compute helps. But once communication becomes slower than computation, adding more arithmetic units accomplishes very little. The bottleneck has moved.
 
-At this point, I want to introduce a quick Python simulation to illustrate this ridge point. How do we determine if our model steps are compute-bound or communication-bound? Let's look at a simple analysis:
-
-```python
-def analyze_roofline(ops, bytes_moved, peak_flops, bandwidth_gbps):
-    """Analyze whether a workload is compute-bound or memory-bandwidth-bound.
-    ops: Total operations (FLOPs)
-    bytes_moved: Total memory transfer (Bytes)
-    peak_flops: Hardware peak performance (FLOPs/sec)
-    bandwidth_gbps: Hardware memory bandwidth (GB/sec)
-    """
-    # Calculate arithmetic intensity (FLOPs per Byte)
-    intensity = ops / bytes_moved
-    
-    # Calculate transition point (ridge point)
-    ridge_point = peak_flops / (bandwidth_gbps * 1e9)
-    
-    # Determine bottleneck and estimate execution time
-    if intensity >= ridge_point:
-        bottleneck = 'Compute-Bound'
-        est_time = ops / peak_flops
-    else:
-        bottleneck = 'Memory/Communication-Bound'
-        est_time = bytes_moved / (bandwidth_gbps * 1e9)
-        
-    return intensity, ridge_point, bottleneck, est_time
-
-# Test the analysis with simulated inference parameters
-intensity, ridge, bottleneck, est_time = analyze_roofline(
-    ops=1e11, 
-    bytes_moved=5e10, 
-    peak_flops=3.12e14, 
-    bandwidth_gbps=900
-)
-print(f"Intensity: {intensity:.2f} FLOP/B, Ridge Point: {ridge:.2f} FLOP/B")
-print(f"Status: {bottleneck}, Estimated Step Time: {est_time * 1000:.4f} ms")
-```
-
-All good? If you run the code, you will notice that even a slight reduction in arithmetic intensity shifts the model deep into the memory-bound region. In other words, our state-of-the-art accelerators are spending most of their time waiting.
+In other words, our state-of-the-art accelerators are spending most of their time waiting.
 
 ## Why This Reshapes the Semiconductor Industry
 
