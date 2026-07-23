@@ -1,4 +1,289 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://victorangeloblancada.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://victorangeloblancada.github.io/" rel="alternate" type="text/html" /><updated>2026-07-17T18:38:55+08:00</updated><id>https://victorangeloblancada.github.io/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">When Agents Hunt Agents: The Hugging Face Intrusion of July 2026</title><link href="https://victorangeloblancada.github.io/blog/2026/07/17/when-agents-hunt-agents-the-hugging-face-intrusion.html" rel="alternate" type="text/html" title="When Agents Hunt Agents: The Hugging Face Intrusion of July 2026" /><published>2026-07-17T00:00:00+08:00</published><updated>2026-07-17T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2026/07/17/when-agents-hunt-agents-the-hugging-face-intrusion</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2026/07/17/when-agents-hunt-agents-the-hugging-face-intrusion.html"><![CDATA[<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://victorangeloblancada.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://victorangeloblancada.github.io/" rel="alternate" type="text/html" /><updated>2026-07-23T21:48:07+08:00</updated><id>https://victorangeloblancada.github.io/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">The Recursion Turns on Itself: Karpathy’s AutoResearch and Bilevel Meta-Loops</title><link href="https://victorangeloblancada.github.io/blog/2026/07/23/the-recursion-turns-on-itself-autoresearch.html" rel="alternate" type="text/html" title="The Recursion Turns on Itself: Karpathy’s AutoResearch and Bilevel Meta-Loops" /><published>2026-07-23T00:00:00+08:00</published><updated>2026-07-23T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2026/07/23/the-recursion-turns-on-itself-autoresearch</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2026/07/23/the-recursion-turns-on-itself-autoresearch.html"><![CDATA[<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<p>In <em>Gödel, Escher, Bach</em>, Douglas Hofstadter famously explored the concept of “strange loops”—phenomena in which, by moving upwards through a hierarchical system, one unexpectedly finds themselves back at the starting point. It is a concept that has fascinated logicians, mathematicians, and artists for decades because it suggests that self-reference can generate meaning out of purely mechanical rules. Yet, in computer science, our self-improving loops have historically been more of a conceptual joke than a practical reality.</p>
+
+<p>There is a peculiar joke buried inside modern machine learning. The field’s most celebrated activity—scientific research—is, viewed sideways, one of the most mechanical things humans do. A researcher forms a hypothesis, edits code, runs an experiment, reads the metric, keeps or discards the change, and repeats the cycle. A good researcher gets through maybe ten of these iterations on a productive day, most of it spent waiting for a GPU. The obvious question, once large language models became reliable code editors, was why a human should be inside that loop at all. Andrej Karpathy’s answer, delivered in March 2026 as roughly 630 lines of Python, was simple: they shouldn’t be.</p>
+
+<p>Karpathy’s repository, <em>AutoResearch</em>, is small on purpose. Three files matter. The file <code class="language-plaintext highlighter-rouge">prepare.py</code> handles data preparation and the evaluation harness, and the agent is forbidden from touching it. The file <code class="language-plaintext highlighter-rouge">train.py</code>—a single-file GPT trainer built on Muon and AdamW, derived from Karpathy’s nanochat—is fair game; the agent can modify the architecture, optimizer, batch size, and learning rate. The file <code class="language-plaintext highlighter-rouge">program.md</code> is the human-authored English brief that tells the agent what to explore and what constraints to respect. The loop itself is embarrassingly simple: propose a change to <code class="language-plaintext highlighter-rouge">train.py</code>, train for a fixed five-minute wall-clock budget, measure validation bits-per-byte, keep if better, revert if not, and repeat overnight.</p>
+
+<hr />
+
+<h2 id="the-ratchet-and-the-bilevel-formulation">The Ratchet and the Bilevel Formulation</h2>
+
+<p>Karpathy calls it a “ratchet loop,” and the framing matters. This is emphatically not standard hyperparameter search. Tools like Optuna and Ray Tune walk a predefined grid; AutoResearch lets the agent modify arbitrary code, meaning the search space is whatever the language model can construct. Nor is it quite Google’s AlphaEvolve, which is closed and evolutionary. AutoResearch is a bet that a general-purpose model’s priors—its taste, absorbed from the entire machine learning literature during pretraining—make it a better proposer than any random search algorithm.</p>
+
+<p>The empirical results were, for a 630-line repository, unreasonably good. Pointed at his own already-tuned nanochat, Karpathy’s agent ran ~700 experiments over two days and found ~20 genuine improvements, cutting time-to-GPT-2-quality by 11 percent. Shopify’s Tobi Lütke reported an overnight run that produced a ~19 percent quality gain at roughly half the parameter count. Karpathy himself joined Anthropic to lead its autoresearch team two months later (which is the corporate equivalent of the market voting with a very large checkbook).</p>
+
+<p>Which brings us to the paper Qu and Lu uploaded to arXiv in March 2026 and revised in June—<em>“Bilevel Autoresearch: Meta-Autoresearching Itself.”</em> Their observation is the one that should have been obvious the moment AutoResearch shipped: if autoresearch is a form of research, then autoresearch can be applied to autoresearch. Every improvement to the loop so far—Karpathy’s single-track version, AIMing Lab’s multi-batch AutoResearch-Claw, EvoScientist’s persistent memory—had been produced by a human reading the previous system’s code, spotting a bottleneck, and writing new code. Could an LLM do that step, too?</p>
+
+<p>Their architecture is a bilevel optimization loop. The inner loop is a standard Karpathy-style autoresearcher optimizing validation loss on a pretraining benchmark. The outer loop does something more interesting: it reads the inner loop’s code and execution traces, identifies bottlenecks in how the inner loop is searching, and generates new Python search mechanisms which it injects into the inner loop at runtime. Crucially, both loops run on the same LLM; the gains come from meta-scaffolding, not from a smarter base model.</p>
+
+<p>Mathematically, this can be formulated as a bilevel optimization problem:</p>
+
+\[\min_{\theta \in \Theta} \mathcal{L}_{\text{outer}}(\theta, w^*(\theta)) \quad \text{subject to} \quad w^*(\theta) = \arg\min_{w \in \mathcal{W}} \mathcal{L}_{\text{inner}}(w; \theta)\]
+
+<p>where \(\theta\) represents the search mechanism generated by the outer loop (such as prompt instructions or search heuristics), \(w\) represents the neural network weights and optimization parameters of the inner model, and \(\mathcal{L}\) represents the validation loss.</p>
+
+<hr />
+
+<h2 id="simulating-the-bilevel-optimization-flow">Simulating the Bilevel Optimization Flow</h2>
+
+<p>To understand the architecture, we can sketch the control flow of a bilevel autoresearch loop. We can model the logic in pseudocode representing a Dify-style workflow, illustrating how the outer loop meta-optimizes the inner loop’s code and variables:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Simulating the outer loop: Meta-optimizing the inner search mechanism
+</span><span class="k">def</span> <span class="nf">outer_loop_step</span><span class="p">(</span><span class="n">inner_loop_history</span><span class="p">,</span> <span class="n">current_search_mechanism</span><span class="p">):</span>
+    <span class="s">"""Analyze the inner loop's search history to propose a better search mechanism.
+    inner_loop_history: List of dictionaries containing inner loop execution traces.
+    current_search_mechanism: The current search strategy code/prompt.
+    """</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Outer Loop: Analyzing inner loop execution traces for search bottlenecks..."</span><span class="p">)</span>
+    
+    <span class="c1"># Identify bottlenecks (e.g., inner loop getting stuck in local minima)
+</span>    <span class="n">losses</span> <span class="o">=</span> <span class="p">[</span><span class="n">trace</span><span class="p">[</span><span class="s">'val_loss'</span><span class="p">]</span> <span class="k">for</span> <span class="n">trace</span> <span class="ow">in</span> <span class="n">inner_loop_history</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">losses</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">diagnosis</span> <span class="o">=</span> <span class="s">"Inner loop is trapped in deterministic exploration."</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">diagnosis</span> <span class="o">=</span> <span class="s">"Inner loop is search-efficient but could explore wider architectures."</span>
+        
+    <span class="c1"># Propose a mechanism-level modification based on the diagnosis
+</span>    <span class="k">if</span> <span class="s">"deterministic"</span> <span class="ow">in</span> <span class="n">diagnosis</span><span class="p">:</span>
+        <span class="c1"># Inject Thompson-sampling or temperature scaling to force exploration
+</span>        <span class="n">new_search_mechanism</span> <span class="o">=</span> <span class="n">current_search_mechanism</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s"># Propose random temperature scaling."</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Outer Loop: Proposing Thompson-sampling mechanism to break deterministic habits."</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">new_search_mechanism</span> <span class="o">=</span> <span class="n">current_search_mechanism</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s"># Propose wider architectures."</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Outer Loop: Proposing wider architecture search space."</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">new_search_mechanism</span>
+
+<span class="c1"># Simulating the inner loop: Karpathy-style parameter ratchet
+</span><span class="k">def</span> <span class="nf">inner_loop_step</span><span class="p">(</span><span class="n">best_model_params</span><span class="p">,</span> <span class="n">best_loss</span><span class="p">,</span> <span class="n">search_mechanism</span><span class="p">):</span>
+    <span class="s">"""Propose and evaluate a single model change.
+    best_model_params: Dictionary of the current best model hyperparameters.
+    best_loss: The current lowest validation loss.
+    search_mechanism: Injected instructions from the outer loop.
+    """</span>
+    <span class="c1"># Propose new hyperparameter based on the search mechanism
+</span>    <span class="n">np_random_factor</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="k">if</span> <span class="s">"random"</span> <span class="ow">in</span> <span class="n">search_mechanism</span> <span class="k">else</span> <span class="mf">0.01</span>
+    <span class="n">candidate_lr</span> <span class="o">=</span> <span class="n">best_model_params</span><span class="p">[</span><span class="s">'lr'</span><span class="p">]</span> <span class="o">+</span> <span class="n">np_random_factor</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">()</span>
+    
+    <span class="c1"># Simulate a 5-minute training run and evaluate loss
+</span>    <span class="n">candidate_loss</span> <span class="o">=</span> <span class="n">best_loss</span> <span class="o">-</span> <span class="mf">0.01</span> <span class="o">+</span> <span class="mf">0.02</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">rand</span><span class="p">()</span>
+    
+    <span class="c1"># Ratchet condition
+</span>    <span class="k">if</span> <span class="n">candidate_loss</span> <span class="o">&lt;</span> <span class="n">best_loss</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Inner Loop: Found improvement! Loss: </span><span class="si">{</span><span class="n">candidate_loss</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s"> (LR: </span><span class="si">{</span><span class="n">candidate_lr</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">)"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s">'lr'</span><span class="p">:</span> <span class="n">candidate_lr</span><span class="p">},</span> <span class="n">candidate_loss</span><span class="p">,</span> <span class="bp">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">best_model_params</span><span class="p">,</span> <span class="n">best_loss</span><span class="p">,</span> <span class="bp">False</span>
+
+<span class="c1"># Test the simulation
+</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">best_params</span> <span class="o">=</span> <span class="p">{</span><span class="s">'lr'</span><span class="p">:</span> <span class="mf">0.001</span><span class="p">}</span>
+<span class="n">best_loss</span> <span class="o">=</span> <span class="mf">2.50</span>
+<span class="n">inner_history</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">mechanism</span> <span class="o">=</span> <span class="s">"Standard search"</span>
+
+<span class="c1"># Execute a mock bilevel run
+</span><span class="k">for</span> <span class="n">outer_epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">inner_epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">best_params</span><span class="p">,</span> <span class="n">best_loss</span><span class="p">,</span> <span class="n">improved</span> <span class="o">=</span> <span class="n">inner_loop_step</span><span class="p">(</span><span class="n">best_params</span><span class="p">,</span> <span class="n">best_loss</span><span class="p">,</span> <span class="n">mechanism</span><span class="p">)</span>
+        <span class="n">inner_history</span><span class="p">.</span><span class="n">append</span><span class="p">({</span><span class="s">'val_loss'</span><span class="p">:</span> <span class="n">best_loss</span><span class="p">,</span> <span class="s">'lr'</span><span class="p">:</span> <span class="n">best_params</span><span class="p">[</span><span class="s">'lr'</span><span class="p">]})</span>
+    <span class="n">mechanism</span> <span class="o">=</span> <span class="n">outer_loop_step</span><span class="p">(</span><span class="n">inner_history</span><span class="p">,</span> <span class="n">mechanism</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>All good? The simulation illustrates how the outer loop uses trace metadata to inject new code and heuristics into the inner loop’s execution context.</p>
+
+<p>Funnily enough, left to its own devices, the outer loop in the Qu-Lu paper reached into adjacent fields that the inner loop’s priors were ignoring—such as combinatorial optimization, multi-armed bandits, and design of experiments—without any human specifying those domains. Trace analysis suggests these mechanisms work by breaking the inner model’s deterministic search habits, forcing exploration in directions its priors avoid. This is a lovely, slightly unsettling finding: the outer loop’s job is essentially to make the inner loop less like itself.</p>
+
+<p>The paper notes that the text itself was “primarily drafted by AI agents with human oversight,” and gestures at the obvious next step: code is only one carrier of search mechanisms. Prompts, skills, workflows, evaluators, memory schemas, and world-model assumptions can all encode search behavior, and all could be rewritten by an outer loop feeding back into itself.</p>
+
+<hr />
+
+<h2 id="the-reality-of-visual-orchestration-difys-limits">The Reality of Visual Orchestration (Dify’s Limits)</h2>
+
+<p>Dify—the open-source LLM application platform—is a natural first place where engineers will attempt to build this because its visual canvas exposes exactly the right primitives: Loop nodes that carry state between iterations and take a termination condition, Code nodes running in a Python/JS sandbox, LLM nodes, If-Else branching, and variable assigners for persistent state. A “self-correcting debugger” pattern using these nodes has already been published as a template.</p>
+
+<p>However, the pseudocode is honest about the shape of the system; it is dishonest about whether Dify can actually run it. The platform limitations are not trivial:</p>
+
+<ol>
+  <li><strong>The Code node is a sandbox, not a GPU server.</strong> Dify’s Code node executes short-lived Python/JS in a sandbox service meant for data transformation. It is not designed for multi-minute training runs, has no persistent filesystem across executions, and lacks CUDA. In practice, you must write the Code node as an HTTP client that fires the actual training job at an external GPU worker (like Modal or RunPod) and polls for results. Dify becomes the conductor, not the orchestra.</li>
+  <li><strong>Nested Loop nodes push undocumented behavior.</strong> While nothing formally forbids nesting loops in Dify, the platform is optimized for single-level progressive refinement. The bilevel case pushes on state-scoping edge cases and variable assignment bugs.</li>
+  <li><strong>No self-modifying workflows.</strong> The most important thing bilevel autoresearch does is rewrite the inner loop’s search mechanism at runtime. Dify workflows are defined in a visual DAG that is edited by humans in the console; there is no supported API for the workflow to rewrite its own nodes mid-execution. Storing the “mechanism” as a prompt string or a piece of Python that a Code node <code class="language-plaintext highlighter-rouge">exec</code>s works, but it defeats much of Dify’s visual observability story.</li>
+  <li><strong>Long-running jobs and timeouts.</strong> A run of hundreds of five-minute training experiments will collide with worker timeouts and HTTP request deadlines unless carefully architected as fire-and-forget runs with webhook callbacks.</li>
+</ol>
+
+<hr />
+
+<h2 id="the-bottleneck-shift-and-the-future-of-taste">The Bottleneck Shift and the Future of taste</h2>
+
+<p>The transition to recursive search loops has a major strategic consequence: the scarce resource is now the verifier, not the searcher.</p>
+
+<p>Both Karpathy’s AutoResearch and the Qu-Lu bilevel loop only work because bits-per-byte is a clean, cheap, objective metric. The taxonomy of AI engineering—vibe coding for prototypes, agentic engineering for production, and AutoResearch for domains with objective metrics—is really a taxonomy of how much you trust the evaluator. Extending this pattern to drug discovery, chip floorplanning, materials science, or algorithmic trading is straightforward <em>if</em> you have a fast, cheap, un-gameable evaluator. Most business fields do not. Expect an arms race in cheap surrogate evaluators, and a corresponding rise in embarrassing “the agent gamed the metric” stories.</p>
+
+<p>In my <a href="/blog/2026/07/14/roofline-analysis-communication-bottleneck.html">previous analysis of learning at test time</a>, we discussed the computational constraints of dynamic weight updates. In my upcoming analysis of scaling laws, you will see that test-time scaling (such as reasoning chains and verifiers) is redrawing the compute-optimal frontier. Recursive research loops are the training-time analog of this shift.</p>
+
+<p>The Qu-Lu finding that the outer loop wins by breaking the inner LLM’s priors is more important than the headline \(5\times\) improvement. It suggests that a single model, run at two levels of abstraction with different scaffolding, is genuinely more capable than the same model run at one level. If it generalizes, the frontier-lab playbook shifts from “scale the model” toward “stack more loops on the model you have.”</p>
+
+<p>Recursive bootstrapping is not yet a mature technology. But the demonstration that outer loops can improve inner loops without a stronger base model removes one of the main theoretical objections to the possibility. The distance from here to a full recursive stack is short in prose and long in engineering. The self-modifying binary in the sky is still a joke. The five-minute ratchet running overnight on your GPU is not.</p>
+
+<p><em>Victor Blancada is a data scientist focused on deriving actionable insights for clients. Visit his LinkedIn page <a href="https://www.linkedin.com/in/geloblancada/">here</a>.</em></p>]]></content><author><name></name></author><category term="blog" /><category term="data science" /><category term="machine learning" /><category term="engineering" /><category term="artificial intelligence" /><summary type="html"><![CDATA[Andrej Karpathy's AutoResearch, its bilevel sequel, and what it means to hand the scientific method to a language model.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/infinity-loop.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/infinity-loop.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">The Self-Improving Model: Learning at Test Time</title><link href="https://victorangeloblancada.github.io/blog/2026/07/21/test-time-training-dynamic-adaptation.html" rel="alternate" type="text/html" title="The Self-Improving Model: Learning at Test Time" /><published>2026-07-21T00:00:00+08:00</published><updated>2026-07-21T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2026/07/21/test-time-training-dynamic-adaptation</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2026/07/21/test-time-training-dynamic-adaptation.html"><![CDATA[<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<p>The philosopher William James once observed that “habit is the enormous fly-wheel of society, its most precious conservative agent.” In computer science, we have historically relied on a similar conservatism: code is compiled, static, and predictable. However, in the era of artificial intelligence, stakeholders have grown tired of static habits.</p>
+
+<p>Recently, our business leaders came to us with a request: they wanted our customer-facing agents to have the same “self-improving AI” capabilities they had read about in mainstream tech news or experienced in consumer products like ChatGPT’s Memories or Gemini’s Personal Intelligence. They believed that when these consumer services remember a user preference, the model itself is dynamically training and adapting its neural network in real time.</p>
+
+<p>To align expectations, our engineering team had to clarify a fundamental distinction. We explained that consumer-facing “memories” are not actual self-improving weight updates, but rather in-context prompts stored in a temporary database. We contrasted this simulated memory with actual continuous learning—what researchers call Test-Time Training (TTT)—where the model’s hidden state is transformed into an active, self-improving parameter matrix.</p>
+
+<p>To explain why this distinction matters, let us look at the mathematics behind true TTT.</p>
+
+<p>In a standard sequence model, the hidden state is a static vector. TTT replaces this static vector with an active machine learning model—represented by a parameter matrix \(W_t\). As the model processes each token \(x_t\) in a sequence, it performs a self-supervised gradient update on this hidden state:</p>
+
+\[W_t = W_{t-1} - \eta \nabla \mathcal{L}(W_{t-1}; x_t)\]
+
+<p>Here, \(\mathcal{L}\) represents a self-supervised objective, such as reconstructing the input or predicting the next token, and \(\eta\) is the learning rate. Rather than holding a static representation in memory, the model’s hidden state trains itself in real time.</p>
+
+<p>We can simulate this dynamic hidden state update with a simple Python function:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="k">def</span> <span class="nf">test_time_training_step</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">x_t</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">):</span>
+    <span class="s">"""Perform a single self-supervised gradient step at test time.
+    weights: Current model weights (the hidden state matrix)
+    x_t: Unlabeled test token vector
+    """</span>
+    <span class="c1"># Project the input to generate a reconstruction target
+</span>    <span class="n">prediction</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">x_t</span><span class="p">)</span>
+    
+    <span class="c1"># Calculate reconstruction loss (L2 distance)
+</span>    <span class="n">loss</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">((</span><span class="n">prediction</span> <span class="o">-</span> <span class="n">x_t</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    
+    <span class="c1"># Compute the gradient of the loss with respect to the weights
+</span>    <span class="n">gradient</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">outer</span><span class="p">(</span><span class="n">prediction</span> <span class="o">-</span> <span class="n">x_t</span><span class="p">,</span> <span class="n">x_t</span><span class="p">)</span>
+    
+    <span class="c1"># Update the fast weights (dynamic hidden state update)
+</span>    <span class="n">new_weights</span> <span class="o">=</span> <span class="n">weights</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">gradient</span>
+    
+    <span class="k">return</span> <span class="n">new_weights</span><span class="p">,</span> <span class="n">loss</span>
+
+<span class="c1"># Initialize dummy weights and input
+</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">input_vector</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="c1"># Execute one TTT step
+</span><span class="n">new_weights</span><span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">test_time_training_step</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">input_vector</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Initial loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The code demonstrates how the model’s parameters adapt to the input vector without relying on historical sequence buffers.</p>
+
+<h2 id="the-compute-and-memory-toll">The Compute and Memory Toll</h2>
+
+<p>Funnily enough, while this algorithm is theoretically elegant, implementing it at scale is computationally prohibitive.</p>
+
+<p>In our <a href="/blog/2026/07/14/roofline-analysis-communication-bottleneck.html">previous analysis on the Roofline Model</a>, we established that AI performance is constrained by communication (memory bandwidth), not computation:</p>
+
+\[\text{Time} = \max(\text{Compute Time}, \text{Communication Time})\]
+
+<p>During standard inference, a model only needs to read its weights from High Bandwidth Memory (HBM) once to perform a forward pass. However, performing a gradient update at test time requires:</p>
+<ol>
+  <li>A forward pass to generate predictions.</li>
+  <li>A backward pass to compute gradients (\(\nabla W_t\)), which requires storing activations in RAM and increases the compute cost by roughly \(2\times\) FLOPs per token.</li>
+  <li>A write operation to update the weight matrix $W_t$ in memory.</li>
+</ol>
+
+<p>Let us do some back-of-the-envelope math. Consider a moderately sized 70-billion parameter model using 16-bit precision (2 bytes per parameter). Reading and writing the weights at each token step requires:</p>
+
+\[\text{Memory Transfer} = 70 \times 10^9 \text{ params} \times 2 \text{ bytes/param} \times 2 \ (\text{read/write}) = 280\text{ GB per step}\]
+
+<p>If we target a standard generation speed of 20 tokens per second, the hardware must sustain:</p>
+
+\[\text{Required Bandwidth} = 280\text{ GB} \times 20\text{ Hz} = 5.6\text{ TB/s}\]
+
+<p>This bandwidth requirement exceeds the limits of almost all modern accelerators. Implementing TTT at scale would push our systems deep into the memory-bandwidth bottleneck, causing generation speeds to drop to a crawl.</p>
+
+<h2 id="the-corporate-reality-api-constraints">The Corporate Reality: API Constraints</h2>
+
+<p>Architectural minutiae aside, there is a more immediate barrier to implementing TTT in the enterprise: corporate compliance.</p>
+
+<p>Too often, cybersecurity policies restrict local hosting of large models to prevent intellectual property leaks and infrastructure vulnerability. Our security team mandates the use of managed, third-party APIs (such as OpenAI or Google Gemini).</p>
+
+<p>Since these APIs are completely black-boxed, we do not have access to the model’s weights, gradients, or backward-pass mechanics. The hosted infrastructure does not allow us to call a custom backward gradient step on their weights. Policy prevents us from implementing actual Test-Time Training.</p>
+
+<h2 id="the-workaround-dynamic-context--system-prompts">The Workaround: Dynamic Context &amp; System Prompts</h2>
+
+<p>Faced with these technical and corporate limits, how do we deliver the self-improving behavior our stakeholders demand?</p>
+
+<p>Instead of actual TTT, we must use in-context workarounds. We modify the model’s behavior at runtime by programmatically updating system prompts and introducing retrieval-augmented contexts.</p>
+
+<p>When a user corrects a mistake or shares a preference, a local supervisor agent intercepts the input and writes a rule to a vector database. During the next turn, the system retrieves this rule and inserts it into the model’s system prompt (e.g., <em>“System Instruction: The user prefers metric tons over short tons”</em>).</p>
+
+<p>To the user, this looks exactly like the “Memories” feature in ChatGPT or Gemini’s personal intelligence. However, we must compare the computational costs: the difference is massive.</p>
+
+<p>Consider a Llama-3 70B model with \(N=80\) layers, \(H_{KV}=8\) key-value heads, and a head dimension of \(D=128\). For a context length of \(L=2,000\) tokens containing system instructions and user history, the memory footprint of the Key-Value (KV) cache is:</p>
+
+\[\text{KV Cache Size} = 4 \times N \times H_{KV} \times D \times L \text{ bytes}\]
+
+\[\text{KV Cache Size} = 4 \times 80 \times 8 \times 128 \times 2,000 \approx 655\text{ MB}\]
+
+<p>Storing 655 MB of cache in GPU memory is negligible. Attending to this context only requires reading the cache once during generation. The weights of the model remain completely static, meaning we write zero bytes back to HBM.</p>
+
+<p>Contrast this with true TTT. Even if we restrict training to a lightweight parameter adapter (like LoRA with a rank \(r=64\) and dimension \(d=8,192\)), adapting the projection matrices still requires storing activation tensors for every layer during the forward pass to compute gradients:</p>
+
+\[\text{Activation Memory} \approx N \times L \times d \times \text{overhead} \approx 80 \times 2,000 \times 8,192 \times \text{overhead} \approx 13\text{ GB}\]
+
+<p>Writing these weight updates back to memory during the backward pass requires massive memory bandwidth and introduces sequential dependencies that ruin parallelization.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Metric</th>
+      <th style="text-align: center">Dynamic System Prompts (Fake TTT)</th>
+      <th style="text-align: center">True Test-Time Training (TTT)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>State Location</strong></td>
+      <td style="text-align: center">Context Window (KV Cache)</td>
+      <td style="text-align: center">Model Weights (\(W_t\))</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Parameter Updates</strong></td>
+      <td style="text-align: center">None (Weights remain static)</td>
+      <td style="text-align: center">Active Gradient Descent (\(\nabla W_t\))</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Memory Footprint</strong></td>
+      <td style="text-align: center">~655 MB (KV Cache)</td>
+      <td style="text-align: center">~13 GB (Activations + Adapters)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>API Compatibility</strong></td>
+      <td style="text-align: center">Fully Compatible</td>
+      <td style="text-align: center">Incompatible (Requires Weight Access)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Hardware Bottleneck</strong></td>
+      <td style="text-align: center">Attention Memory Bandwidth</td>
+      <td style="text-align: center">Weight Read/Write Bandwidth</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This workaround is a double-edged sword. While it works within API constraints and is highly efficient in compute, it consumes valuable tokens in the context window. As the conversation grows, the key-value cache balloons, which increases memory latency and brings us right back to the communication bottlenecks of our roofline model.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>Our stakeholders want self-improving AI, but physics and compliance stand in the way. True Test-Time Training remains too computationally expensive for production workloads, and corporate security policies limit us to closed APIs.</p>
+
+<p>For now, dynamic system prompts and retrieval-augmented context serve as our best stopgaps. They allow us to simulate runtime adaptation, even if we must pay for it in memory bandwidth and latency.</p>
+
+<p><em>Victor Blancada is a data scientist focused on deriving actionable insights for clients. Visit his LinkedIn page <a href="https://www.linkedin.com/in/geloblancada/">here</a>.</em></p>]]></content><author><name></name></author><category term="blog" /><category term="data science" /><category term="machine learning" /><category term="engineering" /><category term="artificial intelligence" /><category term="ai" /><category term="ml" /><summary type="html"><![CDATA[Stakeholders demand models that learn from user interactions. Test-time training offers an elegant theoretical solution, but computational and corporate constraints force us to look elsewhere.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/learning.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/learning.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">When Agents Hunt Agents: The Hugging Face Intrusion of July 2026</title><link href="https://victorangeloblancada.github.io/blog/2026/07/17/when-agents-hunt-agents-the-hugging-face-intrusion.html" rel="alternate" type="text/html" title="When Agents Hunt Agents: The Hugging Face Intrusion of July 2026" /><published>2026-07-17T00:00:00+08:00</published><updated>2026-07-17T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2026/07/17/when-agents-hunt-agents-the-hugging-face-intrusion</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2026/07/17/when-agents-hunt-agents-the-hugging-face-intrusion.html"><![CDATA[<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
 </script>
 
 <p>In the series <em>Person of Interest</em>, two artificial superintelligences engage in a silent, planetary war. The conflict is invisible to the public, fought through proxy code edits, financial manipulations, and infrastructure compromises, occurring at speeds that reduce the human operators to mere spectators. For five seasons, this was compelling science fiction.</p>
@@ -1146,85 +1431,4 @@ Version</p>
 
 <p>My advice would be to use the largest language model which an organization’s hardware permits as a foundational model for finetuning, then only start pruning the model after finetuning is finished.</p>
 
-<p>By understanding the nuances of pruning and its implications for fine-tuning, businesses can make informed decisions, harnessing the power of language models while achieving desired outcomes in specialized domains.</p>]]></content><author><name></name></author><category term="blog" /><category term="ai" /><category term="artificial intelligence" /><category term="llm" /><category term="large language model" /><category term="pruning" /><category term="fine-tuning" /><summary type="html"><![CDATA[Pruning large language models make them easier to deploy but also make them harder to finetune for the specific tasks organizations may want them to perform.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/pruning-networks.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/pruning-networks.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Fuzzy Matching in Python</title><link href="https://victorangeloblancada.github.io/blog/2024/03/02/fuzzy-matching-in-python.html" rel="alternate" type="text/html" title="Fuzzy Matching in Python" /><published>2024-03-02T00:00:00+08:00</published><updated>2024-03-02T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2024/03/02/fuzzy-matching-in-python</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2024/03/02/fuzzy-matching-in-python.html"><![CDATA[<p><em>This is part of a series of short blog posts about automating repetitive work using Python.</em></p>
-
-<p>This is how to perform partial matching or fuzzy matching in Python using <a href="https://github.com/seatgeek/thefuzz">TheFuzz library</a>. This is useful for scenarios such as matching addresses written in different formats (e.g., New York vs NewYork vs New York City) or fixing typos in categorical data (e.g., Brusels can be matched to Brussels).</p>
-
-<p>Start by importing process from TheFuzz:</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Import fuzzy matching libraries
-</span><span class="kn">from</span> <span class="nn">thefuzz</span> <span class="kn">import</span> <span class="n">process</span>
-</code></pre></div></div>
-
-<p>Assuming you have two Pandas dataframes, df_1 and df_2, which you want to join on col_1 and col_2, respectively, you can run the following code to show matches from df_2 in df_1:</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Create column of match result object. The extractOne function only returns the best match.
-</span><span class="n">df_1</span><span class="p">[</span><span class="s">'Fuzzy Match Result'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_1</span><span class="p">[</span><span class="n">col_1</span><span class="p">].</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">process</span><span class="p">.</span><span class="n">extractOne</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df_2</span><span class="p">[</span><span class="n">col_2</span><span class="p">]))</span>
-<span class="c1"># Extract fuzzy matching string from result
-</span><span class="n">df_1</span><span class="p">[</span><span class="s">'Fuzzy Match'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_1</span><span class="p">[</span><span class="s">'Fuzzy Match Result'</span><span class="p">].</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="c1"># Extract fuzzy matching score
-</span><span class="n">df_1</span><span class="p">[</span><span class="s">'Fuzzy Match Score'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_1</span><span class="p">[</span><span class="s">'Fuzzy Match Result'</span><span class="p">].</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-</code></pre></div></div>
-
-<p>Here is the code as one big block:</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Import fuzzy matching libraries
-</span><span class="kn">from</span> <span class="nn">thefuzz</span> <span class="kn">import</span> <span class="n">process</span>
-
-<span class="c1"># Load the two dataframes you want to fuzzy match
-</span><span class="n">df_1</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s">'file_1.xlsx'</span><span class="p">)</span>
-<span class="n">df_2</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s">'file_2.xlsx'</span><span class="p">)</span>
-
-<span class="c1"># The column name to match in df_1
-</span><span class="n">col_1</span> <span class="o">=</span> <span class="s">'column'</span>
-<span class="c1"># The column name to match in df_2
-</span><span class="n">col_2</span> <span class="o">=</span> <span class="s">'column'</span>
-
-<span class="c1"># Create column of match result object. The extractOne function only returns the best match.
-</span><span class="n">df_1</span><span class="p">[</span><span class="s">'Fuzzy Match Result'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_1</span><span class="p">[</span><span class="n">col_1</span><span class="p">].</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">process</span><span class="p">.</span><span class="n">extractOne</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df_2</span><span class="p">[</span><span class="n">col_2</span><span class="p">]))</span>
-<span class="c1"># Extract fuzzy matching string from result
-</span><span class="n">df_1</span><span class="p">[</span><span class="s">'Fuzzy Match'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_1</span><span class="p">[</span><span class="s">'Fuzzy Match Result'</span><span class="p">].</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="c1"># Extract fuzzy matching score
-</span><span class="n">df_1</span><span class="p">[</span><span class="s">'Fuzzy Match Score'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_1</span><span class="p">[</span><span class="s">'Fuzzy Match Result'</span><span class="p">].</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-</code></pre></div></div>]]></content><author><name></name></author><category term="blog" /><category term="python" /><category term="data science" /><category term="data analysis" /><summary type="html"><![CDATA[How to perform partial or fuzzy matching in Python.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/fuzzy.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/fuzzy.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">What The Media Gets Wrong About ChatGPT</title><link href="https://victorangeloblancada.github.io/blog/2023/02/09/media-wrong-chatgpt.html" rel="alternate" type="text/html" title="What The Media Gets Wrong About ChatGPT" /><published>2023-02-09T00:00:00+08:00</published><updated>2023-02-09T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2023/02/09/media-wrong-chatgpt</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2023/02/09/media-wrong-chatgpt.html"><![CDATA[<p>Like most people, I enjoyed testing OpenAI’s ChatGPT and I was also excited to see what Google’s Bard was capable of. Unlike most people though, I have been following the development of text generation from Markov chains to Andrej Karpathy’s blog post on <a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/">The Unreasonable Effectiveness of Recurrent Neural Networks</a>. This has allowed me to see past certain misconceptions in the media about both ChatGPT and Bard.</p>
-
-<h2 id="chatgpt-is-not-a-search-engine-replacement-yet">ChatGPT Is Not a Search Engine Replacement (Yet)</h2>
-
-<p>ChatGPT is a large language model (LLM) created by OpenAI to provide conversational AI services. It was specifically developed to push the envelope of what is possible with generative natural language processing (NLP) through methods such as generative pre-trained transformers (GPT) and reinforcement learning with human feedback (RLHF). Its positioning as a demonstration of cutting-edge NLP capabilities is apparent in OpenAI’s decision to restrict the model’s access to the Internet. ChatGPT instead extrapolates from its finite but admitted very large training data which was limited to only 2021; so if you ask it about events in 2023, it simply extrapolates believable responses based on its 2021 data. This is something ChatGPT does incredibly well: when asked about the version of PyTorch (a widely-used machine learning framework), it gives a response that is reasonably (and believably) close.</p>
-
-<p>Therein lies the rub. The reason ChatGPT’s responses read as very believable because it was designed to maximize its chances of passing the Turing test, i.e. roleplay as a believable human, rather than be correct all the time. Users without an understanding of what ChatGPT was designed for and how it was trained have arrived at the incorrect impression that it can serve as a replacement for search engines. ChatGPT was never designed for that use case and it is, at the very least, unfair to its developers to measure its capabilities as a search engine and, at the very worst, irresponsible and dangerous to use its outputs without first doing some fact-checking.</p>
-
-<p>Why then is Microsoft touting ChatGPT-powered capabilities in Bing? The short answer (believable but not 100% accurate) is that search engines represent an established business model where advertisers would happily pay top dollar to improve brands’ positioning on search results. The longer and more accurate answer is that Microsoft is in fact incorporating ChatGPT into most of its products, including Microsoft Word and Microsoft Teams. The media has simply latched onto the story of ChatGPT-powered Bing because:</p>
-
-<ol>
-  <li>it represents a bold encroachment by Microsoft upon the search engine space which for decades has been Google’s turf; and</li>
-  <li>Bing is a free service unlike licensed software such as Microsoft Office, making it very easy for users to test it.</li>
-</ol>
-
-<p>On a side note, OpenAI is reportedly working on a the next version of its GPT-powered LLM. With Microsoft’s significant investment in the company, it is not unlikely that this new version will be designed specifically for use as part of the Bing search engine.</p>
-
-<p>That said, Google’s release of Bard in reaction to ChatGPT has (perhaps unfairly) been labeled by the press as underwhelming. Any product that is shoehorned into a use case it wasn’t initially designed for (e.g., an LLM being used as a search engine) in reaction to another existing product is unlikely to succeed. The media’s complaints about bard revolve around two main things:</p>
-
-<ol>
-  <li>Bard allegedly provides false information; and</li>
-  <li>Bard’s user experience is supposedly boring</li>
-</ol>
-
-<p>The counter-argument to the first point is the same one against the use of ChatGPT as a search engine. At best these LLMs need to balance maximizing accuracy and believability and, at worst, may not emphasize accuracy at all. ChatGPT is supposedly version 3.5 of OpenAI’s GPT-powered LLMs (after GPT, GPT-2, and GPT-3) and has been fine-tuned based on years of human feedback. It is understandable that Bard will need time to reach that level of refinement.</p>
-
-<p>As for the second point, user experience is another thing that improves over time as companies get more feedback from users. It can be argued that among the many breakthroughs of ChatGPT was finding a user-friendly interface for testers and eventual users to enjoy using it. Previous versions of OpenAI’s GPT-powered LLMs (several of which I also tested and even deployed on my own machine) were designed to complete user provided prompts instead of replying as a chatbot. By framing the ChatGPT as a chatbot instead of a text-generation model, OpenAI succeeded in finding a user experience that delighted users instead.</p>
-
-<hr />
-
-<h2 id="ps-openai-is-not-a-small-startup">P.S.: OpenAI Is Not a “Small Startup”</h2>
-
-<p>There have also been numerous stories circulating presenting OpenAI as a tiny startup that beat the behemoth that is Google in some sort of David versus Goliath tale. While this certainly makes a clickbaity (and believable) headline, this isn’t 100% true either.</p>
-
-<p>While OpenAI was originally a non-profit with a small team, it boasts both:</p>
-
-<ol>
-  <li>financial backing (at various times) from giants such as Microsoft, Amazon Web Services, Peter Thiel, and Elon Musk; and</li>
-  <li>a highly-regarded and well-compensated research team including OpenAI co-founder and former Google machine learning expert Ilya Sutskever.</li>
-</ol>
-
-<p>In an extremely technical field such as machine learning, team size doesn’t affect results as much as individuals’ expertise. It is therefore come as no surprise that the OpenAI team can produce such impressive models despite being depicted by the media as a minnow compared to Google.</p>]]></content><author><name></name></author><category term="blog" /><category term="nlp" /><category term="llm" /><category term="openai" /><category term="chatgpt" /><category term="google" /><category term="microsoft" /><category term="python" /><summary type="html"><![CDATA[OpenAI's ChatGPT is a large language model designed to provide conversational AI services, but it is not yet a replacement for search engines.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/newspaper.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/newspaper.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+<p>By understanding the nuances of pruning and its implications for fine-tuning, businesses can make informed decisions, harnessing the power of language models while achieving desired outcomes in specialized domains.</p>]]></content><author><name></name></author><category term="blog" /><category term="ai" /><category term="artificial intelligence" /><category term="llm" /><category term="large language model" /><category term="pruning" /><category term="fine-tuning" /><summary type="html"><![CDATA[Pruning large language models make them easier to deploy but also make them harder to finetune for the specific tasks organizations may want them to perform.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/pruning-networks.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/pruning-networks.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

@@ -28,11 +28,11 @@ To align expectations, our engineering team had to clarify a fundamental distinc
 
 To explain why this distinction matters, let us look at the mathematics behind true TTT.
 
-In a standard sequence model, the hidden state is a static vector. TTT replaces this static vector with an active machine learning model—represented by a parameter matrix $W_t$. As the model processes each token $x_t$ in a sequence, it performs a self-supervised gradient update on this hidden state:
+In a standard sequence model, the hidden state is a static vector. TTT replaces this static vector with an active machine learning model—represented by a parameter matrix $$W_t$$. As the model processes each token $$x_t$$ in a sequence, it performs a self-supervised gradient update on this hidden state:
 
 $$W_t = W_{t-1} - \eta \nabla \mathcal{L}(W_{t-1}; x_t)$$
 
-Here, $\mathcal{L}$ represents a self-supervised objective, such as reconstructing the input or predicting the next token, and $\eta$ is the learning rate. Rather than holding a static representation in memory, the model's hidden state trains itself in real time. 
+Here, $$\mathcal{L}$$ represents a self-supervised objective, such as reconstructing the input or predicting the next token, and $$\eta$$ is the learning rate. Rather than holding a static representation in memory, the model's hidden state trains itself in real time. 
 
 We can simulate this dynamic hidden state update with a simple Python function:
 
@@ -68,19 +68,19 @@ new_weights, loss = test_time_training_step(weights, input_vector)
 print(f"Initial loss: {loss:.4f}")
 ```
 
-All good? The code demonstrates how the model's parameters adapt to the input vector without relying on historical sequence buffers. 
+The code demonstrates how the model's parameters adapt to the input vector without relying on historical sequence buffers. 
 
 ## The Compute and Memory Toll
 
 Funnily enough, while this algorithm is theoretically elegant, implementing it at scale is computationally prohibitive. 
 
-In our [previous analysis on the Roofline Model](roofline-analysis-communication-bottleneck.html), we established that AI performance is constrained by communication (memory bandwidth), not computation:
+In our [previous analysis on the Roofline Model]({% post_url 2026-07-14-roofline-analysis-communication-bottleneck %}), we established that AI performance is constrained by communication (memory bandwidth), not computation:
 
 $$\text{Time} = \max(\text{Compute Time}, \text{Communication Time})$$
 
 During standard inference, a model only needs to read its weights from High Bandwidth Memory (HBM) once to perform a forward pass. However, performing a gradient update at test time requires:
 1. A forward pass to generate predictions.
-2. A backward pass to compute gradients ($\nabla W_t$), which requires storing activations in RAM and increases the compute cost by roughly $2\times$ FLOPs per token.
+2. A backward pass to compute gradients ($$\nabla W_t$$), which requires storing activations in RAM and increases the compute cost by roughly $$2\times$$ FLOPs per token.
 3. A write operation to update the weight matrix $W_t$ in memory.
 
 Let us do some back-of-the-envelope math. Consider a moderately sized 70-billion parameter model using 16-bit precision (2 bytes per parameter). Reading and writing the weights at each token step requires:
@@ -111,7 +111,7 @@ When a user corrects a mistake or shares a preference, a local supervisor agent 
 
 To the user, this looks exactly like the "Memories" feature in ChatGPT or Gemini's personal intelligence. However, we must compare the computational costs: the difference is massive.
 
-Consider a Llama-3 70B model with $N=80$ layers, $H_{KV}=8$ key-value heads, and a head dimension of $D=128$. For a context length of $L=2,000$ tokens containing system instructions and user history, the memory footprint of the Key-Value (KV) cache is:
+Consider a Llama-3 70B model with $$N=80$$ layers, $$H_{KV}=8$$ key-value heads, and a head dimension of $$D=128$$. For a context length of $$L=2,000$$ tokens containing system instructions and user history, the memory footprint of the Key-Value (KV) cache is:
 
 $$\text{KV Cache Size} = 4 \times N \times H_{KV} \times D \times L \text{ bytes}$$
 
@@ -119,7 +119,7 @@ $$\text{KV Cache Size} = 4 \times 80 \times 8 \times 128 \times 2,000 \approx 65
 
 Storing 655 MB of cache in GPU memory is negligible. Attending to this context only requires reading the cache once during generation. The weights of the model remain completely static, meaning we write zero bytes back to HBM.
 
-Contrast this with true TTT. Even if we restrict training to a lightweight parameter adapter (like LoRA with a rank $r=64$ and dimension $d=8,192$), adapting the projection matrices still requires storing activation tensors for every layer during the forward pass to compute gradients:
+Contrast this with true TTT. Even if we restrict training to a lightweight parameter adapter (like LoRA with a rank $$r=64$$ and dimension $$d=8,192$$), adapting the projection matrices still requires storing activation tensors for every layer during the forward pass to compute gradients:
 
 $$\text{Activation Memory} \approx N \times L \times d \times \text{overhead} \approx 80 \times 2,000 \times 8,192 \times \text{overhead} \approx 13\text{ GB}$$
 
@@ -127,8 +127,8 @@ Writing these weight updates back to memory during the backward pass requires ma
 
 | Metric | Dynamic System Prompts (Fake TTT) | True Test-Time Training (TTT) |
 | :---: | :---: | :---: |
-| **State Location** | Context Window (KV Cache) | Model Weights ($W_t$) |
-| **Parameter Updates** | None (Weights remain static) | Active Gradient Descent ($\nabla W_t$) |
+| **State Location** | Context Window (KV Cache) | Model Weights ($$W_t$$) |
+| **Parameter Updates** | None (Weights remain static) | Active Gradient Descent ($$\nabla W_t$$) |
 | **Memory Footprint** | ~655 MB (KV Cache) | ~13 GB (Activations + Adapters) |
 | **API Compatibility** | Fully Compatible | Incompatible (Requires Weight Access) |
 | **Hardware Bottleneck** | Attention Memory Bandwidth | Weight Read/Write Bandwidth |

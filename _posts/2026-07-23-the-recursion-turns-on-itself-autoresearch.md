@@ -8,7 +8,7 @@ tags:
 - engineering
 - artificial intelligence
 date: 2026-07-23
-image: /assets/images/recursion.jpg
+image: /assets/images/infinity-loop.jpg
 description: Andrej Karpathy's AutoResearch, its bilevel sequel, and what it means to hand the scientific method to a language model.
 dropcap: True
 draft: false
@@ -22,7 +22,7 @@ In *Gödel, Escher, Bach*, Douglas Hofstadter famously explored the concept of "
 
 There is a peculiar joke buried inside modern machine learning. The field's most celebrated activity—scientific research—is, viewed sideways, one of the most mechanical things humans do. A researcher forms a hypothesis, edits code, runs an experiment, reads the metric, keeps or discards the change, and repeats the cycle. A good researcher gets through maybe ten of these iterations on a productive day, most of it spent waiting for a GPU. The obvious question, once large language models became reliable code editors, was why a human should be inside that loop at all. Andrej Karpathy's answer, delivered in March 2026 as roughly 630 lines of Python, was simple: they shouldn't be.
 
-Karpathy's repository, *AutoResearch*, is small on purpose. Three files matter. The file `prepare.py` handles data preparation and the evaluation harness, and the agent is forbidden from touching it. The file `train.py`—a single-file GPT trainer built on Muon and AdamW, derived from Karpathy's nanochat—is fair game; the agent can modify the architecture, optimizer, batch size, and learning rate. The file `program.md` is the human-authored English brief that tells the agent what to explore and what constraints to respect. The loop itself is embarrassingly simple: propose a change to `train.py`, train for a fixed five-minute wall-clock budget, measure validation bits-per-byte ($$\text{val\_bpb}$$), keep if better, revert if not, and repeat overnight.
+Karpathy's repository, *AutoResearch*, is small on purpose. Three files matter. The file `prepare.py` handles data preparation and the evaluation harness, and the agent is forbidden from touching it. The file `train.py`—a single-file GPT trainer built on Muon and AdamW, derived from Karpathy's nanochat—is fair game; the agent can modify the architecture, optimizer, batch size, and learning rate. The file `program.md` is the human-authored English brief that tells the agent what to explore and what constraints to respect. The loop itself is embarrassingly simple: propose a change to `train.py`, train for a fixed five-minute wall-clock budget, measure validation bits-per-byte, keep if better, revert if not, and repeat overnight.
 
 ---
 
@@ -139,7 +139,7 @@ The transition to recursive search loops has a major strategic consequence: the 
 
 Both Karpathy's AutoResearch and the Qu-Lu bilevel loop only work because bits-per-byte is a clean, cheap, objective metric. The taxonomy of AI engineering—vibe coding for prototypes, agentic engineering for production, and AutoResearch for domains with objective metrics—is really a taxonomy of how much you trust the evaluator. Extending this pattern to drug discovery, chip floorplanning, materials science, or algorithmic trading is straightforward *if* you have a fast, cheap, un-gameable evaluator. Most business fields do not. Expect an arms race in cheap surrogate evaluators, and a corresponding rise in embarrassing "the agent gamed the metric" stories.
 
-In our [previous analysis of learning at test time](file:///c:/Users/natur/Downloads/projects/victorangeloblancada.github.io-jekyll/_posts/2026-07-21-test-time-training-dynamic-adaptation.md), we discussed the computational constraints of dynamic weight updates. In our [upcoming analysis of scaling laws](file:///c:/Users/natur/Downloads/projects/victorangeloblancada.github.io-jekyll/_posts/2026-07-28-the-most-expensive-question-in-ml.md), we will see that test-time scaling (such as reasoning chains and verifiers) is redrawing the compute-optimal frontier. Recursive research loops are the training-time analog of this shift.
+In my [previous analysis of learning at test time]({% post_url 2026-07-14-roofline-analysis-communication-bottleneck %}), we discussed the computational constraints of dynamic weight updates. In my upcoming analysis of scaling laws, you will see that test-time scaling (such as reasoning chains and verifiers) is redrawing the compute-optimal frontier. Recursive research loops are the training-time analog of this shift.
 
 The Qu-Lu finding that the outer loop wins by breaking the inner LLM's priors is more important than the headline $$5\times$$ improvement. It suggests that a single model, run at two levels of abstraction with different scaffolding, is genuinely more capable than the same model run at one level. If it generalizes, the frontier-lab playbook shifts from "scale the model" toward "stack more loops on the model you have."
 

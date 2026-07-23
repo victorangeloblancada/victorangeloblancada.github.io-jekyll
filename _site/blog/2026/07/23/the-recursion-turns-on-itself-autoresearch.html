@@ -1,0 +1,464 @@
+<!doctype html>
+<html>
+	<head>
+		<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5S5WB7M');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ERJECQ081H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ERJECQ081H');
+</script>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>The Recursion Turns on Itself: Karpathy's AutoResearch and Bilevel Meta-Loops</title>
+		<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>The Recursion Turns on Itself: Karpathy’s AutoResearch and Bilevel Meta-Loops | Victor Angelo Blancada</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="The Recursion Turns on Itself: Karpathy’s AutoResearch and Bilevel Meta-Loops" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Andrej Karpathy’s AutoResearch, its bilevel sequel, and what it means to hand the scientific method to a language model." />
+<meta property="og:description" content="Andrej Karpathy’s AutoResearch, its bilevel sequel, and what it means to hand the scientific method to a language model." />
+<link rel="canonical" href="https://victorangeloblancada.github.io/blog/2026/07/23/the-recursion-turns-on-itself-autoresearch.html" />
+<meta property="og:url" content="https://victorangeloblancada.github.io/blog/2026/07/23/the-recursion-turns-on-itself-autoresearch.html" />
+<meta property="og:site_name" content="Victor Angelo Blancada" />
+<meta property="og:image" content="https://victorangeloblancada.github.io/assets/images/infinity-loop.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-07-23T00:00:00+08:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://victorangeloblancada.github.io/assets/images/infinity-loop.jpg" />
+<meta property="twitter:title" content="The Recursion Turns on Itself: Karpathy’s AutoResearch and Bilevel Meta-Loops" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-07-23T00:00:00+08:00","datePublished":"2026-07-23T00:00:00+08:00","description":"Andrej Karpathy’s AutoResearch, its bilevel sequel, and what it means to hand the scientific method to a language model.","headline":"The Recursion Turns on Itself: Karpathy’s AutoResearch and Bilevel Meta-Loops","image":"https://victorangeloblancada.github.io/assets/images/infinity-loop.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://victorangeloblancada.github.io/blog/2026/07/23/the-recursion-turns-on-itself-autoresearch.html"},"url":"https://victorangeloblancada.github.io/blog/2026/07/23/the-recursion-turns-on-itself-autoresearch.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+		<script type="text/javascript">
+  (function() {
+    var savedTheme = localStorage.getItem('theme');
+    var userPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (savedTheme === 'dark' || (!savedTheme && userPrefersDark)) {
+      document.documentElement.classList.add('dark-theme');
+      document.documentElement.classList.remove('light-theme');
+    } else {
+      document.documentElement.classList.add('light-theme');
+      document.documentElement.classList.remove('dark-theme');
+    }
+  })();
+</script>
+
+<link rel="stylesheet" href="https://indestructibletype.com/fonts/Jost.css" type="text/css" charset="utf-8" />
+
+<link rel="stylesheet" href="/assets/css/styles.css">
+<link rel="stylesheet" href="/assets/css/syntax.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+	</head>
+	<body>
+		<script type="text/javascript">
+  window.onscroll = function() {myScrollIndicator()};
+
+  function myScrollIndicator() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+<div class="header">
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</div>
+		<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5S5WB7M"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+		<div class="wrapper">
+			<link rel="stylesheet" href="/assets/css/speech-input.css">
+<script src="/assets/js/nav.js" type="text/javascript"></script>
+<script src="/assets/js/speech-input.js" type="text/javascript"></script>
+<div class="navbar transition" id="navbar">
+	<nav>
+		<a onClick="expand('navbar', 'search-input')">
+			<svg width="50" height="50" aria-label="search" class="octicon octicon-search" viewBox="0 0 24 24" version="1.1" role="img"><path d="M10.25 2a8.25 8.25 0 0 1 6.34 13.53l5.69 5.69a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215l-5.69-5.69A8.25 8.25 0 1 1 10.25 2ZM3.5 10.25a6.75 6.75 0 1 0 13.5 0 6.75 6.75 0 0 0-13.5 0Z"></path></svg>
+			<p>Search</p>
+		</a>
+		
+			<a href="/" >
+				<svg width="50" height="50" aria-label="home" class="octicon octicon-home" viewBox="0 0 24 24" version="1.1" role="img"><path d="M11.03 2.59a1.501 1.501 0 0 1 1.94 0l7.5 6.363a1.5 1.5 0 0 1 .53 1.144V19.5a1.5 1.5 0 0 1-1.5 1.5h-5.75a.75.75 0 0 1-.75-.75V14h-2v6.25a.75.75 0 0 1-.75.75H4.5A1.5 1.5 0 0 1 3 19.5v-9.403c0-.44.194-.859.53-1.144ZM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v6.25h5v-9.403Z"></path></svg>
+				<p>Home</p>
+			</a>
+		
+			<a href="/pages/about.html" >
+				<svg width="50" height="50" aria-label="person" class="octicon octicon-person" viewBox="0 0 24 24" version="1.1" role="img"><path d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9.005 9.005 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z"></path></svg>
+				<p>About</p>
+			</a>
+		
+			<a href="/blog.html" >
+				<svg width="50" height="50" aria-label="book" class="octicon octicon-book" viewBox="0 0 24 24" version="1.1" role="img"><path d="M0 3.75A.75.75 0 0 1 .75 3h7.497c1.566 0 2.945.8 3.751 2.014A4.495 4.495 0 0 1 15.75 3h7.5a.75.75 0 0 1 .75.75v15.063a.752.752 0 0 1-.755.75l-7.682-.052a3 3 0 0 0-2.142.878l-.89.891a.75.75 0 0 1-1.061 0l-.902-.901a2.996 2.996 0 0 0-2.121-.879H.75a.75.75 0 0 1-.75-.75Zm12.75 15.232a4.503 4.503 0 0 1 2.823-.971l6.927.047V4.5h-6.75a3 3 0 0 0-3 3ZM11.247 7.497a3 3 0 0 0-3-2.997H1.5V18h6.947c1.018 0 2.006.346 2.803.98Z"></path></svg>
+				<p>Blog</p>
+			</a>
+		
+			<a href="/pages/resume-downloads.html" >
+				<svg width="50" height="50" aria-label="file" class="octicon octicon-file" viewBox="0 0 24 24" version="1.1" role="img"><path d="M3 3a2 2 0 0 1 2-2h9.982a2 2 0 0 1 1.414.586l4.018 4.018A2 2 0 0 1 21 7.018V21a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm2-.5a.5.5 0 0 0-.5.5v18a.5.5 0 0 0 .5.5h14a.5.5 0 0 0 .5-.5V8.5h-4a2 2 0 0 1-2-2v-4Zm10 0v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 0-.146-.336l-4.018-4.018A.5.5 0 0 0 15 2.5Z"></path></svg>
+				<p>Résumé</p>
+			</a>
+		
+		<a id="theme-toggle" onClick="toggleTheme()" style="cursor: pointer;">
+			<span class="sun-icon"><svg width="50" height="50" aria-label="sun" class="octicon octicon-sun" viewBox="0 0 24 24" version="1.1" role="img"><path d="M12 19a7 7 0 1 1 0-14 7 7 0 0 1 0 14Zm0-1.5a5.5 5.5 0 1 0 0-11 5.5 5.5 0 1 0 0 11Zm-5.657.157a.75.75 0 0 1 0 1.06l-1.768 1.768a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.767-1.768a.75.75 0 0 1 1.061 0ZM3.515 3.515a.75.75 0 0 1 1.06 0l1.768 1.768a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L3.515 4.575a.75.75 0 0 1 0-1.06ZM12 0a.75.75 0 0 1 .75.75v2.5a.75.75 0 0 1-1.5 0V.75A.75.75 0 0 1 12 0ZM4 12a.75.75 0 0 1-.75.75H.75a.75.75 0 0 1 0-1.5h2.5A.75.75 0 0 1 4 12Zm8 8a.75.75 0 0 1 .75.75v2.5a.75.75 0 0 1-1.5 0v-2.5A.75.75 0 0 1 12 20Zm12-8a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h2.5A.75.75 0 0 1 24 12Zm-6.343 5.657a.75.75 0 0 1 1.06 0l1.768 1.768a.751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018l-1.768-1.767a.75.75 0 0 1 0-1.061Zm2.828-14.142a.75.75 0 0 1 0 1.06l-1.768 1.768a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l1.767-1.768a.75.75 0 0 1 1.061 0Z"></path></svg></span>
+			<span class="moon-icon"><svg width="50" height="50" aria-label="moon" class="octicon octicon-moon" viewBox="0 0 24 24" version="1.1" role="img"><path d="M14.768 3.96v.001l-.002-.005a9.08 9.08 0 0 0-.218-.779c-.13-.394.21-.8.602-.67.29.096.575.205.855.328l.01.005A10.002 10.002 0 0 1 12 22a10.002 10.002 0 0 1-9.162-5.985l-.004-.01a9.722 9.722 0 0 1-.329-.855c-.13-.392.277-.732.67-.602.257.084.517.157.78.218l.004.002A9 9 0 0 0 14.999 6a9.09 9.09 0 0 0-.231-2.04ZM16.5 6c0 5.799-4.701 10.5-10.5 10.5-.426 0-.847-.026-1.26-.075A8.5 8.5 0 1 0 16.425 4.74c.05.413.075.833.075 1.259Z"></path></svg></span>
+			<p>Theme</p>
+		</a>
+	</nav>
+
+	<!-- Html Elements for Search -->
+	<div id="search-container" class="search-container">
+		<div class="text-center">
+			<input type="text" id="search-input" class="speech-input" placeholder="Search this site" style="width: 100%;">
+			<ol id="results-container"></ol>
+		</div>
+	</div>
+
+	<!-- Script pointing to search.js -->
+	<script src="/assets/js/search.js" type="text/javascript"></script>
+
+	<!-- Configuration -->
+	<script>
+	SimpleJekyllSearch({
+	  searchInput: document.getElementById('search-input'),
+	  resultsContainer: document.getElementById('results-container'),
+	  json: '/search.json'
+	})
+
+	function toggleTheme() {
+	  var isDark = document.documentElement.classList.contains('dark-theme');
+	  if (isDark) {
+	    document.documentElement.classList.remove('dark-theme');
+	    document.documentElement.classList.add('light-theme');
+	    localStorage.setItem('theme', 'light');
+	  } else {
+	    document.documentElement.classList.remove('light-theme');
+	    document.documentElement.classList.add('dark-theme');
+	    localStorage.setItem('theme', 'dark');
+	  }
+	}
+	</script>
+</div>
+
+</div>
+
+			<div class="hero-img"  style="background-image: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url( /assets/images/infinity-loop.jpg );"  >
+				<div class="center-content">
+					<span class="on-bg">
+						<h1> The Recursion Turns on Itself: Karpathy's AutoResearch and Bilevel Meta-Loops </h1>
+						<!--
+						<p>23 Jul 2026</p>
+						-->
+						<a href="#start">
+							<div style="-webkit-animation-name: pulse; -webkit-animation-duration: 2s; animation-name: pulse;animation-duration: 2s; animation-direction: alternate;">
+								<!--<p>Reading time: 
+
+
+  12 mins
+</p>-->
+								
+								<p>July 23, 2026</p>
+								
+								<p>scroll for more</p>
+								<svg width="50" height="50" fill="white" aria-label="down" class="octicon octicon-arrow-down" viewBox="0 0 24 24" version="1.1" role="img"><path d="M4.97 13.22a.75.75 0 0 1 1.06 0L11 18.19V3.75a.75.75 0 0 1 1.5 0v14.44l4.97-4.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734l-6.25 6.25a.75.75 0 0 1-1.06 0l-6.25-6.25a.75.75 0 0 1 0-1.06Z"></path></svg>
+							</div>
+						</a>
+						
+						<div>
+							
+
+<style>
+#share-buttons {display: inline-block; vertical-align: middle; }
+#share-buttons:after {content: ""; display: block; clear: both;}
+#share-buttons > div {
+    position: relative;
+    text-align: left; 
+    height: 36px; 
+    width: 32px; 
+    float: left; 
+    text-align: center;
+}
+#share-buttons > div > svg {height: 16px; fill: #FFF; margin-top: 10px;}
+#share-buttons > div:hover {cursor: pointer;}
+#share-buttons > div.facebook:hover > svg {fill: #3B5998;}
+#share-buttons > div.twitter:hover > svg {fill: #55ACEE;}
+#share-buttons > div.linkedin:hover > svg {fill: #0077b5;}
+#share-buttons > div.pinterest:hover > svg {fill: #CB2027;}
+#share-buttons > div.gplus:hover > svg {fill: #dd4b39;}
+#share-buttons > div.mail:hover > svg {fill: #7D7D7D;}
+#share-buttons > div.instagram:hover > svg {fill: #C73B92;}
+#share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
+#share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
+#share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
+#share-buttons > div.pinterest > svg {height: 20px; margin-top: 9px;}
+#share-buttons > div.gplus > svg {height: 17px; margin-top: 9px; position: relative; left: 1px;}
+#share-buttons > div.mail > svg {height: 14px; margin-top: 11px;}
+</style>
+
+<span>Share on: </span><div id="share-buttons">
+
+    <div class="linkedin" title="Share this on Linkedin" onclick="window.open('https://www.linkedin.com/shareArticle?mini=true&url=https://victorangeloblancada.github.io/blog/2026/07/23/the-recursion-turns-on-itself-autoresearch.html&title=&summary=&source=');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></div>
+
+    <div class="twitter" title="Share this on Twitter" onclick="window.open('http://twitter.com/home?status=https://victorangeloblancada.github.io/blog/2026/07/23/the-recursion-turns-on-itself-autoresearch.html');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
+    
+    <div class="facebook" title="Share this on Facebook" onclick="window.open('http://www.facebook.com/share.php?u=https://victorangeloblancada.github.io/blog/2026/07/23/the-recursion-turns-on-itself-autoresearch.html');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"/></svg></div>
+
+
+    <!--<div class="pinterest" title="Share this on Pinterest" onclick="window.open('https://pinterest.com/pin/create/button/?url=&media=https://victorangeloblancada.github.io/assets/images/infinity-loop.jpg&description=');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M256 597q0-108 37.5-203.5t103.5-166.5 152-123 185-78 202-26q158 0 294 66.5t221 193.5 85 287q0 96-19 188t-60 177-100 149.5-145 103-189 38.5q-68 0-135-32t-96-88q-10 39-28 112.5t-23.5 95-20.5 71-26 71-32 62.5-46 77.5-62 86.5l-14 5-9-10q-15-157-15-188 0-92 21.5-206.5t66.5-287.5 52-203q-32-65-32-169 0-83 52-156t132-73q61 0 95 40.5t34 102.5q0 66-44 191t-44 187q0 63 45 104.5t109 41.5q55 0 102-25t78.5-68 56-95 38-110.5 20-111 6.5-99.5q0-173-109.5-269.5t-285.5-96.5q-200 0-334 129.5t-134 328.5q0 44 12.5 85t27 65 27 45.5 12.5 30.5q0 28-15 73t-37 45q-2 0-17-3-51-15-90.5-56t-61-94.5-32.5-108-11-106.5z"/></svg></div>-->
+
+    <!--<div class="gplus" title="Share this on Google Plus" onclick="window.open('https://plus.google.com/share?url=https://victorangeloblancada.github.io/blog/2026/07/23/the-recursion-turns-on-itself-autoresearch.html');"><svg viewBox="0 0 2304 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1437 913q0 208-87 370.5t-248 254-369 91.5q-149 0-285-58t-234-156-156-234-58-285 58-285 156-234 234-156 285-58q286 0 491 192l-199 191q-117-113-292-113-123 0-227.5 62t-165.5 168.5-61 232.5 61 232.5 165.5 168.5 227.5 62q83 0 152.5-23t114.5-57.5 78.5-78.5 49-83 21.5-74h-416v-252h692q12 63 12 122zm867-122v210h-209v209h-210v-209h-209v-210h209v-209h210v209h209z"/></svg></div>-->
+
+    <div class="mail" title="Share this through Email" onclick="window.open('mailto:?&body=https://victorangeloblancada.github.io/blog/2026/07/23/the-recursion-turns-on-itself-autoresearch.html');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"/></svg></div>
+
+</div>
+						</div>
+						
+					</span>
+				</div>
+			</div>
+			<div id="hero-img-spacer" style="height: 100vh;">
+			</div>
+			<div id="start">
+			</div>
+			<div class="content">
+				
+				<h1>The Recursion Turns on Itself: Karpathy's AutoResearch and Bilevel Meta-Loops</h1>
+				
+				<!--
+				<h1> The Recursion Turns on Itself: Karpathy's AutoResearch and Bilevel Meta-Loops </h1>
+				
+				<p style="font-style:italic">July 23, 2026</p>
+				
+				-->
+
+				<div class="article  dropcap ">
+					<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<p>In <em>Gödel, Escher, Bach</em>, Douglas Hofstadter famously explored the concept of “strange loops”—phenomena in which, by moving upwards through a hierarchical system, one unexpectedly finds themselves back at the starting point. It is a concept that has fascinated logicians, mathematicians, and artists for decades because it suggests that self-reference can generate meaning out of purely mechanical rules. Yet, in computer science, our self-improving loops have historically been more of a conceptual joke than a practical reality.</p>
+
+<p>There is a peculiar joke buried inside modern machine learning. The field’s most celebrated activity—scientific research—is, viewed sideways, one of the most mechanical things humans do. A researcher forms a hypothesis, edits code, runs an experiment, reads the metric, keeps or discards the change, and repeats the cycle. A good researcher gets through maybe ten of these iterations on a productive day, most of it spent waiting for a GPU. The obvious question, once large language models became reliable code editors, was why a human should be inside that loop at all. Andrej Karpathy’s answer, delivered in March 2026 as roughly 630 lines of Python, was simple: they shouldn’t be.</p>
+
+<p>Karpathy’s repository, <em>AutoResearch</em>, is small on purpose. Three files matter. The file <code class="language-plaintext highlighter-rouge">prepare.py</code> handles data preparation and the evaluation harness, and the agent is forbidden from touching it. The file <code class="language-plaintext highlighter-rouge">train.py</code>—a single-file GPT trainer built on Muon and AdamW, derived from Karpathy’s nanochat—is fair game; the agent can modify the architecture, optimizer, batch size, and learning rate. The file <code class="language-plaintext highlighter-rouge">program.md</code> is the human-authored English brief that tells the agent what to explore and what constraints to respect. The loop itself is embarrassingly simple: propose a change to <code class="language-plaintext highlighter-rouge">train.py</code>, train for a fixed five-minute wall-clock budget, measure validation bits-per-byte, keep if better, revert if not, and repeat overnight.</p>
+
+<hr />
+
+<h2 id="the-ratchet-and-the-bilevel-formulation">The Ratchet and the Bilevel Formulation</h2>
+
+<p>Karpathy calls it a “ratchet loop,” and the framing matters. This is emphatically not standard hyperparameter search. Tools like Optuna and Ray Tune walk a predefined grid; AutoResearch lets the agent modify arbitrary code, meaning the search space is whatever the language model can construct. Nor is it quite Google’s AlphaEvolve, which is closed and evolutionary. AutoResearch is a bet that a general-purpose model’s priors—its taste, absorbed from the entire machine learning literature during pretraining—make it a better proposer than any random search algorithm.</p>
+
+<p>The empirical results were, for a 630-line repository, unreasonably good. Pointed at his own already-tuned nanochat, Karpathy’s agent ran ~700 experiments over two days and found ~20 genuine improvements, cutting time-to-GPT-2-quality by 11 percent. Shopify’s Tobi Lütke reported an overnight run that produced a ~19 percent quality gain at roughly half the parameter count. Karpathy himself joined Anthropic to lead its autoresearch team two months later (which is the corporate equivalent of the market voting with a very large checkbook).</p>
+
+<p>Which brings us to the paper Qu and Lu uploaded to arXiv in March 2026 and revised in June—<em>“Bilevel Autoresearch: Meta-Autoresearching Itself.”</em> Their observation is the one that should have been obvious the moment AutoResearch shipped: if autoresearch is a form of research, then autoresearch can be applied to autoresearch. Every improvement to the loop so far—Karpathy’s single-track version, AIMing Lab’s multi-batch AutoResearch-Claw, EvoScientist’s persistent memory—had been produced by a human reading the previous system’s code, spotting a bottleneck, and writing new code. Could an LLM do that step, too?</p>
+
+<p>Their architecture is a bilevel optimization loop. The inner loop is a standard Karpathy-style autoresearcher optimizing validation loss on a pretraining benchmark. The outer loop does something more interesting: it reads the inner loop’s code and execution traces, identifies bottlenecks in how the inner loop is searching, and generates new Python search mechanisms which it injects into the inner loop at runtime. Crucially, both loops run on the same LLM; the gains come from meta-scaffolding, not from a smarter base model.</p>
+
+<p>Mathematically, this can be formulated as a bilevel optimization problem:</p>
+
+\[\min_{\theta \in \Theta} \mathcal{L}_{\text{outer}}(\theta, w^*(\theta)) \quad \text{subject to} \quad w^*(\theta) = \arg\min_{w \in \mathcal{W}} \mathcal{L}_{\text{inner}}(w; \theta)\]
+
+<p>where \(\theta\) represents the search mechanism generated by the outer loop (such as prompt instructions or search heuristics), \(w\) represents the neural network weights and optimization parameters of the inner model, and \(\mathcal{L}\) represents the validation loss.</p>
+
+<hr />
+
+<h2 id="simulating-the-bilevel-optimization-flow">Simulating the Bilevel Optimization Flow</h2>
+
+<p>To understand the architecture, we can sketch the control flow of a bilevel autoresearch loop. We can model the logic in pseudocode representing a Dify-style workflow, illustrating how the outer loop meta-optimizes the inner loop’s code and variables:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Simulating the outer loop: Meta-optimizing the inner search mechanism
+</span><span class="k">def</span> <span class="nf">outer_loop_step</span><span class="p">(</span><span class="n">inner_loop_history</span><span class="p">,</span> <span class="n">current_search_mechanism</span><span class="p">):</span>
+    <span class="s">"""Analyze the inner loop's search history to propose a better search mechanism.
+    inner_loop_history: List of dictionaries containing inner loop execution traces.
+    current_search_mechanism: The current search strategy code/prompt.
+    """</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Outer Loop: Analyzing inner loop execution traces for search bottlenecks..."</span><span class="p">)</span>
+    
+    <span class="c1"># Identify bottlenecks (e.g., inner loop getting stuck in local minima)
+</span>    <span class="n">losses</span> <span class="o">=</span> <span class="p">[</span><span class="n">trace</span><span class="p">[</span><span class="s">'val_loss'</span><span class="p">]</span> <span class="k">for</span> <span class="n">trace</span> <span class="ow">in</span> <span class="n">inner_loop_history</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">losses</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">diagnosis</span> <span class="o">=</span> <span class="s">"Inner loop is trapped in deterministic exploration."</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">diagnosis</span> <span class="o">=</span> <span class="s">"Inner loop is search-efficient but could explore wider architectures."</span>
+        
+    <span class="c1"># Propose a mechanism-level modification based on the diagnosis
+</span>    <span class="k">if</span> <span class="s">"deterministic"</span> <span class="ow">in</span> <span class="n">diagnosis</span><span class="p">:</span>
+        <span class="c1"># Inject Thompson-sampling or temperature scaling to force exploration
+</span>        <span class="n">new_search_mechanism</span> <span class="o">=</span> <span class="n">current_search_mechanism</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s"># Propose random temperature scaling."</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Outer Loop: Proposing Thompson-sampling mechanism to break deterministic habits."</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">new_search_mechanism</span> <span class="o">=</span> <span class="n">current_search_mechanism</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s"># Propose wider architectures."</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Outer Loop: Proposing wider architecture search space."</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">new_search_mechanism</span>
+
+<span class="c1"># Simulating the inner loop: Karpathy-style parameter ratchet
+</span><span class="k">def</span> <span class="nf">inner_loop_step</span><span class="p">(</span><span class="n">best_model_params</span><span class="p">,</span> <span class="n">best_loss</span><span class="p">,</span> <span class="n">search_mechanism</span><span class="p">):</span>
+    <span class="s">"""Propose and evaluate a single model change.
+    best_model_params: Dictionary of the current best model hyperparameters.
+    best_loss: The current lowest validation loss.
+    search_mechanism: Injected instructions from the outer loop.
+    """</span>
+    <span class="c1"># Propose new hyperparameter based on the search mechanism
+</span>    <span class="n">np_random_factor</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="k">if</span> <span class="s">"random"</span> <span class="ow">in</span> <span class="n">search_mechanism</span> <span class="k">else</span> <span class="mf">0.01</span>
+    <span class="n">candidate_lr</span> <span class="o">=</span> <span class="n">best_model_params</span><span class="p">[</span><span class="s">'lr'</span><span class="p">]</span> <span class="o">+</span> <span class="n">np_random_factor</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">()</span>
+    
+    <span class="c1"># Simulate a 5-minute training run and evaluate loss
+</span>    <span class="n">candidate_loss</span> <span class="o">=</span> <span class="n">best_loss</span> <span class="o">-</span> <span class="mf">0.01</span> <span class="o">+</span> <span class="mf">0.02</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">rand</span><span class="p">()</span>
+    
+    <span class="c1"># Ratchet condition
+</span>    <span class="k">if</span> <span class="n">candidate_loss</span> <span class="o">&lt;</span> <span class="n">best_loss</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Inner Loop: Found improvement! Loss: </span><span class="si">{</span><span class="n">candidate_loss</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s"> (LR: </span><span class="si">{</span><span class="n">candidate_lr</span><span class="si">:</span><span class="p">.</span><span class="mi">6</span><span class="n">f</span><span class="si">}</span><span class="s">)"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s">'lr'</span><span class="p">:</span> <span class="n">candidate_lr</span><span class="p">},</span> <span class="n">candidate_loss</span><span class="p">,</span> <span class="bp">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">best_model_params</span><span class="p">,</span> <span class="n">best_loss</span><span class="p">,</span> <span class="bp">False</span>
+
+<span class="c1"># Test the simulation
+</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">best_params</span> <span class="o">=</span> <span class="p">{</span><span class="s">'lr'</span><span class="p">:</span> <span class="mf">0.001</span><span class="p">}</span>
+<span class="n">best_loss</span> <span class="o">=</span> <span class="mf">2.50</span>
+<span class="n">inner_history</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">mechanism</span> <span class="o">=</span> <span class="s">"Standard search"</span>
+
+<span class="c1"># Execute a mock bilevel run
+</span><span class="k">for</span> <span class="n">outer_epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">inner_epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">best_params</span><span class="p">,</span> <span class="n">best_loss</span><span class="p">,</span> <span class="n">improved</span> <span class="o">=</span> <span class="n">inner_loop_step</span><span class="p">(</span><span class="n">best_params</span><span class="p">,</span> <span class="n">best_loss</span><span class="p">,</span> <span class="n">mechanism</span><span class="p">)</span>
+        <span class="n">inner_history</span><span class="p">.</span><span class="n">append</span><span class="p">({</span><span class="s">'val_loss'</span><span class="p">:</span> <span class="n">best_loss</span><span class="p">,</span> <span class="s">'lr'</span><span class="p">:</span> <span class="n">best_params</span><span class="p">[</span><span class="s">'lr'</span><span class="p">]})</span>
+    <span class="n">mechanism</span> <span class="o">=</span> <span class="n">outer_loop_step</span><span class="p">(</span><span class="n">inner_history</span><span class="p">,</span> <span class="n">mechanism</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>All good? The simulation illustrates how the outer loop uses trace metadata to inject new code and heuristics into the inner loop’s execution context.</p>
+
+<p>Funnily enough, left to its own devices, the outer loop in the Qu-Lu paper reached into adjacent fields that the inner loop’s priors were ignoring—such as combinatorial optimization, multi-armed bandits, and design of experiments—without any human specifying those domains. Trace analysis suggests these mechanisms work by breaking the inner model’s deterministic search habits, forcing exploration in directions its priors avoid. This is a lovely, slightly unsettling finding: the outer loop’s job is essentially to make the inner loop less like itself.</p>
+
+<p>The paper notes that the text itself was “primarily drafted by AI agents with human oversight,” and gestures at the obvious next step: code is only one carrier of search mechanisms. Prompts, skills, workflows, evaluators, memory schemas, and world-model assumptions can all encode search behavior, and all could be rewritten by an outer loop feeding back into itself.</p>
+
+<hr />
+
+<h2 id="the-reality-of-visual-orchestration-difys-limits">The Reality of Visual Orchestration (Dify’s Limits)</h2>
+
+<p>Dify—the open-source LLM application platform—is a natural first place where engineers will attempt to build this because its visual canvas exposes exactly the right primitives: Loop nodes that carry state between iterations and take a termination condition, Code nodes running in a Python/JS sandbox, LLM nodes, If-Else branching, and variable assigners for persistent state. A “self-correcting debugger” pattern using these nodes has already been published as a template.</p>
+
+<p>However, the pseudocode is honest about the shape of the system; it is dishonest about whether Dify can actually run it. The platform limitations are not trivial:</p>
+
+<ol>
+  <li><strong>The Code node is a sandbox, not a GPU server.</strong> Dify’s Code node executes short-lived Python/JS in a sandbox service meant for data transformation. It is not designed for multi-minute training runs, has no persistent filesystem across executions, and lacks CUDA. In practice, you must write the Code node as an HTTP client that fires the actual training job at an external GPU worker (like Modal or RunPod) and polls for results. Dify becomes the conductor, not the orchestra.</li>
+  <li><strong>Nested Loop nodes push undocumented behavior.</strong> While nothing formally forbids nesting loops in Dify, the platform is optimized for single-level progressive refinement. The bilevel case pushes on state-scoping edge cases and variable assignment bugs.</li>
+  <li><strong>No self-modifying workflows.</strong> The most important thing bilevel autoresearch does is rewrite the inner loop’s search mechanism at runtime. Dify workflows are defined in a visual DAG that is edited by humans in the console; there is no supported API for the workflow to rewrite its own nodes mid-execution. Storing the “mechanism” as a prompt string or a piece of Python that a Code node <code class="language-plaintext highlighter-rouge">exec</code>s works, but it defeats much of Dify’s visual observability story.</li>
+  <li><strong>Long-running jobs and timeouts.</strong> A run of hundreds of five-minute training experiments will collide with worker timeouts and HTTP request deadlines unless carefully architected as fire-and-forget runs with webhook callbacks.</li>
+</ol>
+
+<hr />
+
+<h2 id="the-bottleneck-shift-and-the-future-of-taste">The Bottleneck Shift and the Future of taste</h2>
+
+<p>The transition to recursive search loops has a major strategic consequence: the scarce resource is now the verifier, not the searcher.</p>
+
+<p>Both Karpathy’s AutoResearch and the Qu-Lu bilevel loop only work because bits-per-byte is a clean, cheap, objective metric. The taxonomy of AI engineering—vibe coding for prototypes, agentic engineering for production, and AutoResearch for domains with objective metrics—is really a taxonomy of how much you trust the evaluator. Extending this pattern to drug discovery, chip floorplanning, materials science, or algorithmic trading is straightforward <em>if</em> you have a fast, cheap, un-gameable evaluator. Most business fields do not. Expect an arms race in cheap surrogate evaluators, and a corresponding rise in embarrassing “the agent gamed the metric” stories.</p>
+
+<p>In my <a href="/blog/2026/07/14/roofline-analysis-communication-bottleneck.html">previous analysis of learning at test time</a>, we discussed the computational constraints of dynamic weight updates. In my upcoming analysis of scaling laws, you will see that test-time scaling (such as reasoning chains and verifiers) is redrawing the compute-optimal frontier. Recursive research loops are the training-time analog of this shift.</p>
+
+<p>The Qu-Lu finding that the outer loop wins by breaking the inner LLM’s priors is more important than the headline \(5\times\) improvement. It suggests that a single model, run at two levels of abstraction with different scaffolding, is genuinely more capable than the same model run at one level. If it generalizes, the frontier-lab playbook shifts from “scale the model” toward “stack more loops on the model you have.”</p>
+
+<p>Recursive bootstrapping is not yet a mature technology. But the demonstration that outer loops can improve inner loops without a stronger base model removes one of the main theoretical objections to the possibility. The distance from here to a full recursive stack is short in prose and long in engineering. The self-modifying binary in the sky is still a joke. The five-minute ratchet running overnight on your GPU is not.</p>
+
+<p><em>Victor Blancada is a data scientist focused on deriving actionable insights for clients. Visit his LinkedIn page <a href="https://www.linkedin.com/in/geloblancada/">here</a>.</em></p>
+
+				</div>
+				
+				<div class="cta-box">
+					
+
+<style>
+#share-buttons {display: inline-block; vertical-align: middle; }
+#share-buttons:after {content: ""; display: block; clear: both;}
+#share-buttons > div {
+    position: relative;
+    text-align: left; 
+    height: 36px; 
+    width: 32px; 
+    float: left; 
+    text-align: center;
+}
+#share-buttons > div > svg {height: 16px; fill: #FFF; margin-top: 10px;}
+#share-buttons > div:hover {cursor: pointer;}
+#share-buttons > div.facebook:hover > svg {fill: #3B5998;}
+#share-buttons > div.twitter:hover > svg {fill: #55ACEE;}
+#share-buttons > div.linkedin:hover > svg {fill: #0077b5;}
+#share-buttons > div.pinterest:hover > svg {fill: #CB2027;}
+#share-buttons > div.gplus:hover > svg {fill: #dd4b39;}
+#share-buttons > div.mail:hover > svg {fill: #7D7D7D;}
+#share-buttons > div.instagram:hover > svg {fill: #C73B92;}
+#share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
+#share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
+#share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
+#share-buttons > div.pinterest > svg {height: 20px; margin-top: 9px;}
+#share-buttons > div.gplus > svg {height: 17px; margin-top: 9px; position: relative; left: 1px;}
+#share-buttons > div.mail > svg {height: 14px; margin-top: 11px;}
+</style>
+
+<span>Share on: </span><div id="share-buttons">
+
+    <div class="linkedin" title="Share this on Linkedin" onclick="window.open('https://www.linkedin.com/shareArticle?mini=true&url=https://victorangeloblancada.github.io/blog/2026/07/23/the-recursion-turns-on-itself-autoresearch.html&title=&summary=&source=');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></div>
+
+    <div class="twitter" title="Share this on Twitter" onclick="window.open('http://twitter.com/home?status=https://victorangeloblancada.github.io/blog/2026/07/23/the-recursion-turns-on-itself-autoresearch.html');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
+    
+    <div class="facebook" title="Share this on Facebook" onclick="window.open('http://www.facebook.com/share.php?u=https://victorangeloblancada.github.io/blog/2026/07/23/the-recursion-turns-on-itself-autoresearch.html');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"/></svg></div>
+
+
+    <!--<div class="pinterest" title="Share this on Pinterest" onclick="window.open('https://pinterest.com/pin/create/button/?url=&media=https://victorangeloblancada.github.io/assets/images/infinity-loop.jpg&description=');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M256 597q0-108 37.5-203.5t103.5-166.5 152-123 185-78 202-26q158 0 294 66.5t221 193.5 85 287q0 96-19 188t-60 177-100 149.5-145 103-189 38.5q-68 0-135-32t-96-88q-10 39-28 112.5t-23.5 95-20.5 71-26 71-32 62.5-46 77.5-62 86.5l-14 5-9-10q-15-157-15-188 0-92 21.5-206.5t66.5-287.5 52-203q-32-65-32-169 0-83 52-156t132-73q61 0 95 40.5t34 102.5q0 66-44 191t-44 187q0 63 45 104.5t109 41.5q55 0 102-25t78.5-68 56-95 38-110.5 20-111 6.5-99.5q0-173-109.5-269.5t-285.5-96.5q-200 0-334 129.5t-134 328.5q0 44 12.5 85t27 65 27 45.5 12.5 30.5q0 28-15 73t-37 45q-2 0-17-3-51-15-90.5-56t-61-94.5-32.5-108-11-106.5z"/></svg></div>-->
+
+    <!--<div class="gplus" title="Share this on Google Plus" onclick="window.open('https://plus.google.com/share?url=https://victorangeloblancada.github.io/blog/2026/07/23/the-recursion-turns-on-itself-autoresearch.html');"><svg viewBox="0 0 2304 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1437 913q0 208-87 370.5t-248 254-369 91.5q-149 0-285-58t-234-156-156-234-58-285 58-285 156-234 234-156 285-58q286 0 491 192l-199 191q-117-113-292-113-123 0-227.5 62t-165.5 168.5-61 232.5 61 232.5 165.5 168.5 227.5 62q83 0 152.5-23t114.5-57.5 78.5-78.5 49-83 21.5-74h-416v-252h692q12 63 12 122zm867-122v210h-209v209h-210v-209h-209v-210h209v-209h210v209h209z"/></svg></div>-->
+
+    <div class="mail" title="Share this through Email" onclick="window.open('mailto:?&body=https://victorangeloblancada.github.io/blog/2026/07/23/the-recursion-turns-on-itself-autoresearch.html');"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"/></svg></div>
+
+</div>
+				</div>
+				
+			</div>
+			
+			<div class="text-center">
+				<h2>Read more posts about...</h2>
+				<ul class="tags">
+					
+						<a href='/blog/tag/data science'><li> data science </li></a>
+					
+						<a href='/blog/tag/machine learning'><li> machine learning </li></a>
+					
+						<a href='/blog/tag/engineering'><li> engineering </li></a>
+					
+						<a href='/blog/tag/artificial intelligence'><li> artificial intelligence </li></a>
+					
+				</ul>
+				<a href='/blog.html'><p>See all posts</p></a>
+			</div>
+			
+			<footer>
+				<hr>
+				© <script>document.write(new Date().getFullYear())</script><noscript>2022</noscript> Victor Blancada. All Rights Reserved.
+			</footer>
+			<div class="spacer">
+			</div>
+		</div>
+	</body>
+</html>
+

@@ -2,6 +2,22 @@
   
   
     {
+      "title"    : "The Recursion Turns on Itself: Karpathy&#39;s AutoResearch and Bilevel Meta-Loops",
+      "category" : "blog",
+      "tags"     : "data science, machine learning, engineering, artificial intelligence",
+      "url"      : "/blog/2026/07/23/the-recursion-turns-on-itself-autoresearch.html",
+      "date"     : "2026-07-23 00:00:00 +0800"
+    },
+  
+    {
+      "title"    : "The Self-Improving Model: Learning at Test Time",
+      "category" : "blog",
+      "tags"     : "data science, machine learning, engineering, artificial intelligence, ai, ml",
+      "url"      : "/blog/2026/07/21/test-time-training-dynamic-adaptation.html",
+      "date"     : "2026-07-21 00:00:00 +0800"
+    },
+  
+    {
       "title"    : "When Agents Hunt Agents: The Hugging Face Intrusion of July 2026",
       "category" : "blog",
       "tags"     : "security, machine learning, engineering, artificial intelligence",
