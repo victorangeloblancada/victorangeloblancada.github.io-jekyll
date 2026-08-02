@@ -1,4 +1,520 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://victorangeloblancada.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://victorangeloblancada.github.io/" rel="alternate" type="text/html" /><updated>2026-07-23T21:48:07+08:00</updated><id>https://victorangeloblancada.github.io/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">The Recursion Turns on Itself: Karpathy’s AutoResearch and Bilevel Meta-Loops</title><link href="https://victorangeloblancada.github.io/blog/2026/07/23/the-recursion-turns-on-itself-autoresearch.html" rel="alternate" type="text/html" title="The Recursion Turns on Itself: Karpathy’s AutoResearch and Bilevel Meta-Loops" /><published>2026-07-23T00:00:00+08:00</published><updated>2026-07-23T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2026/07/23/the-recursion-turns-on-itself-autoresearch</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2026/07/23/the-recursion-turns-on-itself-autoresearch.html"><![CDATA[<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://victorangeloblancada.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://victorangeloblancada.github.io/" rel="alternate" type="text/html" /><updated>2026-08-02T23:13:32+08:00</updated><id>https://victorangeloblancada.github.io/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">When the Bell Curve Bends: Lean Six Sigma in the Age of Machine Intelligence</title><link href="https://victorangeloblancada.github.io/blog/2026/07/31/lean-six-sigma-ai.html" rel="alternate" type="text/html" title="When the Bell Curve Bends: Lean Six Sigma in the Age of Machine Intelligence" /><published>2026-07-31T00:00:00+08:00</published><updated>2026-07-31T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2026/07/31/lean-six-sigma-ai</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2026/07/31/lean-six-sigma-ai.html"><![CDATA[<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<p>In classical physics, Newtonian mechanics described a deterministic universe—a world of point-like certainties, where forces applied to massive bodies yielded predictable, linear trajectories. But when physicists turned their lenses to the subatomic realm, classical equations collapsed. They were forced to transition to quantum mechanics: a framework defined by wave functions, probability distributions, and the unsettling truth that measuring a state alters it.</p>
+
+<p>A similar paradigm shift is quietly unfolding within operational excellence. Twentieth-century Lean Six Sigma was the Newtonian mechanics of business process design. Forged in the high-volume, physical manufacturing lines of Motorola, Toyota, and General Electric, it assumed a world of deterministic, observable tasks. Processes were staffed by human operators whose cycle times followed stable Gaussian distributions, and variations were treated as mechanical errors to be systematically eradicated.</p>
+
+<p>However, the moment we place an artificial intelligence inside the value stream, this classical worldview collapses. AI is not merely faster automation; it is a stochastically operating cognitive agent. The output of an LLM is not a deterministic point on a real line, but a probability distribution over a high-dimensional token space, sampled stochastically. We have transitioned from the Newtonian world of predictable machine tolerances and simple human actions to the quantum world of probabilistic cognitive agents. In this new regime, old heuristics do not just fail; they actively mislead.</p>
+
+<p>This guide is not an obituary for Lean Six Sigma. It is an argument that the discipline must be re-derived from its foundations to accommodate a new kind of worker: one that produces knowledge outputs at a marginal cost measured in tokens rather than hours, fails in probabilistic and sometimes novel ways, decomposes goals into recursive sub-processes when configured as an agent, and forces the binding constraint of any process to migrate from human production to a combination of human verification, machine iteration, and inference spend. The soul of the methodology—reduce variation where it destroys value, eliminate waste where it accrues, respect the customer, and honor the data—remains intact. The mental models used to operationalize it are ripe for reconstruction.</p>
+
+<hr />
+
+<h2 id="part-i-what-lean-six-sigma-actually-was-beneath-the-vocabulary">Part I: What Lean Six Sigma Actually Was, Beneath the Vocabulary</h2>
+
+<p>Before we can identify which rules of thumb have outlived their usefulness, we must recover what the discipline was originally trying to accomplish. Strip away the belts, the acronyms, and the ceremonial DMAIC diagrams, and Lean Six Sigma reduces to a handful of remarkably durable first principles:</p>
+
+<ul>
+  <li><strong>Quality is an economic phenomenon, not a moral one:</strong> Joseph Juran’s cost-of-quality framework decomposed total quality expenditure into prevention, appraisal, internal failure, and external failure. Every managerial choice trades among these buckets, seeking to minimize their sum. Juran’s decomposition survives the transition to AI with almost eerie fidelity—the four buckets simply refill with new contents, and the currency partially shifts from dollars to tokens.</li>
+  <li><strong>Variation is the enemy of predictability:</strong> Predictability is the currency of any promise made to a customer. Walter Shewhart’s control charts and W. Edwards Deming’s focus on distinguishing common-cause from special-cause variation were mechanisms for policing this predictability.</li>
+  <li><strong>Waste is anything the customer would not knowingly pay for:</strong> Taiichi Ohno famously operationalized this through his taxonomy of the seven (later eight) wastes.</li>
+  <li><strong>Improvement is empirical and iterative:</strong> Embodied in the Plan-Do-Study-Act (PDSA) cycle and its industrialized descendant, DMAIC.</li>
+</ul>
+
+<p>Each of these principles was translated, over decades, into practical heuristics. Some were quantitative: aim for 3.4 defects per million opportunities; compute takt time by dividing available production time by customer demand; keep the process capability index (\(C_p\)) above 1.33. Others were qualitative: standardize before you improve; go and see (<em>genchi genbutsu</em>); ask "why" five times.</p>
+
+<p>These heuristics performed magnificently when the underlying process resembled the one in which they were derived. Funnily enough, they begin to mislead when the substrate changes—and the substrate is now changing profoundly, along three axes at once: the producer has become probabilistic; the producer, when configured as an agent, has become a <em>process</em> in its own right, capable of decomposing goals and calling tools in recursive loops; and the marginal cost of production, though small, is neither zero nor uniform, and now traces a variable cost curve that Lean practitioners had almost forgotten how to reason about.</p>
+
+<hr />
+
+<h2 id="part-ii-the-rules-of-thumb-that-have-quietly-expired">Part II: The Rules of Thumb That Have Quietly Expired</h2>
+
+<h3 id="1-reducing-variation-always-improves-quality">1. "Reducing variation always improves quality"</h3>
+
+<p>The Six Sigma quality target of 3.4 defects per million opportunities (DPMO) was calibrated for processes whose outputs were discrete, inspectable, and normally distributed around a specification. A machined shaft is either within tolerance or it is not. The distribution of shaft diameters is well approximated by a Gaussian, and the tails are thin enough that reducing standard deviation reliably reduces the probability of exceeding specification limits.</p>
+
+<p>Artificial intelligence violates every one of these assumptions. The output of a large language model is not a point on a real line but a probability distribution over a vast token space, sampled stochastically by design. The failure modes are heavy-tailed and often novel: a system that behaves competently across a million prompts may produce a catastrophic hallucination on the million-and-first, and that hallucination will not have been drawn from a Gaussian tail because the underlying error distribution is not Gaussian.</p>
+
+<p>Worse, reducing the "variation" of an AI output—for example, by lowering temperature to zero—does not necessarily improve quality; it may collapse the model onto a confidently wrong mode, trading beneficial diversity for consistent error. Statistical process control (SPC) assumed that the process was stationary and that its noise was well-characterized. Neither assumption survives contact with a stochastic function approximator whose behavior on out-of-distribution inputs is, in the strict mathematical sense, undefined.</p>
+
+<p>The situation detoriorates further when the AI is configured as an agent. A single-shot model has one opportunity to err; an agent that decomposes a goal into ten dependent tool calls has ten opportunities. If a single call is trustworthy with probability \(p\), the unmonitored trajectory is trustworthy with probability \(p^n\). A ninety-five-percent-reliable step becomes a fifty-nine-percent-reliable ten-step trajectory, and a thirteen-percent-reliable forty-step one. Variation in the traditional sense—the spread of a single output around its mean—is no longer the object of interest. The object of interest is the reliability of the <em>trajectory</em>, and it decays geometrically in the absence of intermediate verification.</p>
+
+<p>And therein lies the answer: <strong>the objective is expected loss over the entire trajectory, not variance at any single step</strong>. Quality should be measured by an expected-cost function that weights each error class by the harm it inflicts, by calibration metrics such as the Brier score, which ask whether the model’s stated confidence corresponds to its actual accuracy, and by trajectory-level reliability metrics that account for compounding error across dependent inference steps. A well-calibrated agent that stops and escalates when its confidence is low is often more valuable than a high-confidence one that presses forward through mounting uncertainty.</p>
+
+<h3 id="2-takt-time-equals-available-production-time-divided-by-customer-demand">2. "Takt time equals available production time divided by customer demand"</h3>
+
+<p>Takt time is arguably the single most beloved calculation in the Lean canon, and its logic is impeccable for a manufacturing line whose throughput is bounded by the pace at which physical operators can assemble physical parts. The formula tells the line what rhythm it must maintain to satisfy demand without accumulating inventory or falling behind.</p>
+
+<p>The moment an AI is inserted into a knowledge process, the traditional takt calculation collapses, and it collapses in a way that reveals not one but three latent constraints. On the production side of the value stream—where an AI drafts a memorandum, extracts data from a contract, or summarizes a customer interaction—throughput is bounded not by cycle time but by a combination of three quantities: the rate at which the AI can iterate (particularly for agents, whose loop counts are elastic but not free), the human verification capacity required to police probabilistic output, and the inference budget available to spend on tokens. Any of these three can bind, and which one binds depends on the design of the process.</p>
+
+<p>Applying the old takt formula in this environment leads to nonsensical answers—such as demanding a two-second cycle time from a human reviewer, or overlooking that the model itself has been silently limited by a monthly spend cap—and produces the misleading conclusion that the process is either wildly under-resourced or wildly over-capacity.</p>
+
+<p>Rebuilding the formulation from first principles requires recognizing that, in an AI-augmented process, we must compute the <em>sustainable throughput</em> as the minimum of the constraints imposed by human verification, agent iteration, and token budget:</p>
+
+\[\text{Sustainable Throughput} = \min\left(\frac{H}{t_{\text{review}}},\ \frac{L}{\ell_{\text{avg}}},\ \frac{B}{c_{\text{token}}}\right)\]
+
+<p>where \(H\) is available human review time, \(t_{\text{review}}\) is the expected review duration per output, \(L\) is the available agent-loop capacity (bounded by wall-clock latency tolerance and orchestration limits), \(\ell_{\text{avg}}\) is the average number of loops per completed task, \(B\) is the token budget for the period, and \(c_{\text{token}}\) is the token cost of producing one verified output including retries. The human-review term itself must be decomposed to reflect that not every output demands the same scrutiny:</p>
+
+\[t_{\text{review}} = p_{\text{deep}} \cdot t_{\text{deep}} + p_{\text{light}} \cdot t_{\text{light}}\]
+
+<p>where \(p_{\text{deep}}\) is the fraction of outputs requiring substantive adjudication and \(p_{\text{light}}\) is the fraction requiring only a skim.</p>
+
+<p>Let us look at a concrete example to clarify this. In my day job managing container flows and warehouse floor layouts at Maersk Logistics (which underwent a painful acquisition in 2022 that I am still spiritually recovering from), we track bottlenecks relentlessly. Consider an analytics team of five people processing 1,200 customer-inquiry classifications per day. Available review time is \(5 \times 8 \times 60 = 2{,}400\) minutes. Traditional takt would demand a two-minute cycle per inquiry, which is barely feasible for a human working alone.</p>
+
+<p>Introduce an AI classifier whose measured trustworthiness on the task is 95 percent, and let deep review consume five minutes while light review consumes 30 seconds. Effective demand on human time becomes:</p>
+
+\[1{,}200 \times (0.05 \times 5 + 0.95 \times 0.5) = 1{,}200 \times 0.725 = 870\text{ minutes}\]
+
+<p>Utilization has fallen from over 100 percent to roughly 36 percent. But the analysis is not complete: if the classifier is in fact a small agent that calls two retrieval tools and a verifier per inquiry, and each inquiry costs fifteen cents in tokens including retries, then 1,200 inquiries per day cost 180 dollars, and the monthly spend of roughly 4,000 dollars must be reconciled against whatever inference budget the team has been allocated. If the budget is 3,000 dollars, the binding constraint is not the humans but the tokens, and the analysis flips: the leverage points are prompt compression, cheaper-model routing for easy inputs, and caching, rather than headcount.</p>
+
+<p>The strategic question is no longer <em>how do we hire fast enough</em>; it is <em>which of the three constraints is currently binding, and what is the highest-value reallocation of resources across the three</em>, a question the traditional takt calculation never had to confront.</p>
+
+<h3 id="3-aim-for-34-defects-per-million-opportunities">3. "Aim for 3.4 defects per million opportunities"</h3>
+
+<p>The Six Sigma target was a compact way of communicating that six standard deviations should fit between the process mean and the nearest specification limit, allowing for a modest 1.5-sigma drift. It presumes a countable and inspectable notion of a "defect."</p>
+
+<p>Contemporary AI systems typically operate at error rates measured in whole percentage points—one to five percent on well-scoped tasks, and higher on adversarial or out-of-distribution inputs. That represents 10,000 to 50,000 defects per million opportunities (DPMO), roughly four orders of magnitude worse than the traditional Six Sigma target. Yet many of these systems are demonstrably value-creating because the cost of a defect is not always catastrophic and the cost of production is now negligible.</p>
+
+<p>Furthermore, agentic systems complicate the picture because the relevant defect rate is not that of any individual step but that of the composed trajectory, and the composition is multiplicative. A four-step agent chain whose individual step reliability is ninety-nine percent achieves a trajectory reliability of only ninety-six percent, a fact that Six Sigma’s step-wise intuitions systematically obscure.</p>
+
+<p>The first-principles reformulation is that DPMO must be replaced or supplemented with an <strong>expected-loss framework</strong> that weights defect probability by defect severity, that stratifies error rates by severity class, and that composes multiplicatively along agent trajectories. A 5% stylistic infelicity in a first-draft memorandum is not commensurable with a 5% factual error in a legal filing, and no single scalar DPMO can capture this distinction—much less a scalar DPMO applied to only one link in a ten-step chain.</p>
+
+<h3 id="4-eliminate-the-eight-wastes-timwoods">4. "Eliminate the eight wastes: TIMWOODS"</h3>
+
+<p>Ohno’s taxonomy—Transport, Inventory, Motion, Waiting, Over-processing, Over-production, Defects, and Skills—is not so much wrong as strangely inverted when the producer is an AI. Overproduction, once the cardinal sin because unsold inventory tied up capital and revealed demand mis-forecasts, becomes nearly cost-free at the level of a single draft, though it re-emerges at the scale of an operation as token spend on outputs no one will read.</p>
+
+<p>The waste has migrated: what was once the cost of producing an unneeded widget is now the cost of <em>reviewing</em> and <em>paying to generate</em> an unneeded draft, which consumes the two scarcest resources in the system: human attention and inference budget. Overprocessing, once a matter of adding features the customer did not value, has taken on an AI-native form: an agent that spends forty tool calls polishing an answer the customer would have accepted at ten, burning tokens and latency in pursuit of a marginal quality improvement no one asked for. Waiting, which used to describe operators idling between tasks, now describes AI systems idling while awaiting human adjudication, which is neither wasteful nor eliminable if the humans are the guarantors of quality.</p>
+
+<p>Meanwhile, entirely new categories of waste have emerged and demand recognition. Among them:</p>
+
+<ul>
+  <li><strong>Hallucination remediation:</strong> The work of detecting and correcting confidently stated falsehoods.</li>
+  <li><strong>Prompt debt:</strong> The accumulated tax of poorly designed prompts whose brittleness surfaces only under load or after an API update.</li>
+  <li><strong>Verification overhead:</strong> The human labor absorbed by the need to trust but verify.</li>
+  <li><strong>Automation bias:</strong> The insidious tendency of reviewers to rubber-stamp AI outputs, which manifests not as visible waste but as latent defect accrual.</li>
+  <li><strong>Model drift:</strong> The silent degradation of a deployed model as the world it was trained on recedes into the past.</li>
+  <li><strong>Guardrail brittleness:</strong> The maintenance burden of the ever-lengthening list of exceptions and safety filters that surround a production model.</li>
+  <li><strong>Context-window thrash:</strong> The inefficiency of repeatedly stuffing and re-stuffing an AI with the same background material.</li>
+  <li><strong>Sycophancy loss:</strong> The subtle failure of systems trained to please, which agree with erroneous premises and thereby corrupt downstream decisions.</li>
+  <li><strong>Loop thrash:</strong> The agentic waste of iterations that revisit the same reasoning, oscillate between candidate solutions, or pursue instrumentally reasonable but strategically misaligned subgoals until a budget forces termination.</li>
+  <li><strong>Tool-call sprawl:</strong> The tendency of agents to invoke more tools than the task requires, each call adding latency, tokens, and new failure surface.</li>
+  <li><strong>Verifier tax:</strong> The token and latency cost of self-critique passes, self-consistency ensembles, and second-model verifiers, which improve quality but at a cost that must be tallied.</li>
+  <li><strong>Cache neglect:</strong> The failure to memoize deterministic sub-computations, causing the same reasoning to be paid for repeatedly.</li>
+</ul>
+
+<p>A rigorous Lean practitioner in an AI-augmented environment must inventory these new wastes with the same discipline that Ohno once brought to the shop floor. Several of them—loop thrash, tool-call sprawl, cache neglect—are direct analogs of the industrial wastes Ohno cataloged, transposed from the movement of physical goods to the movement of tokens through a computational value stream. The isomorphism is worth savoring: even the most exotic AI-native inefficiencies turn out, on inspection, to be <em>motion</em>, <em>transport</em>, and <em>inventory</em> wearing new clothes.</p>
+
+<h3 id="5-ask-why-five-times">5. "Ask why five times"</h3>
+
+<p>Root-cause analysis in classical Six Sigma presumed that the causal chain was legible to a diligent investigator. When a lathe produces a scratched surface, one can trace the scratch to the tool, the tool to the operator, the operator to the training, and so on. Neural networks are not legible in this mechanical sense. The proximate cause of a particular hallucination may be a subtle, high-dimensional interaction among billions of parameters, none of which is individually accountable for the output. The five whys, applied naively at the token level, will terminate in unsatisfying tautologies: "because the model was trained on data that biased it in this direction."</p>
+
+<p>The problem sharpens when the failing artifact is not a single output but an agent trajectory. Consider an agent that produced the wrong answer after twenty-three tool calls: which call is the root cause? The proximate error may have been introduced at step nineteen, but the misconception that led to step nineteen may have been seeded at step six, where an ambiguous retrieval result was interpreted with unwarranted confidence. Root-cause analysis on agent trajectories therefore requires <em>trajectory replay</em>, in which the sequence of states, tool outputs, and reasoning steps is reconstructed and inspected for the earliest divergence from a well-behaved path.</p>
+
+<p>The reformulation is that the object of root-cause analysis must shift up the stack. One does not ask why the model produced a specific token; one asks why the <em>evaluation harness</em> failed to catch the error class, why the <em>training data</em> contained the misleading pattern, why the <em>deployment context</em> fell outside the validated distribution, why the <em>agent’s planning policy</em> pursued a costly subgoal, or why the <em>loop budget</em> was set high enough to permit the divergence to compound. The whys are simply asked of the system architecture rather than the individual inference.</p>
+
+<h3 id="6-standardize-work-before-you-improve-it">6. "Standardize work before you improve it"</h3>
+
+<p>Standardization was the pre-condition for continuous improvement because without a stable baseline, one could not tell whether a change had helped. In an AI-augmented process, the "work" performed for any two customers may be genuinely different, dynamically re-planned by an agent, and personalized to a degree that would have been impossible for a human operator to sustain.</p>
+
+<p>The standard cannot be the <em>object-level procedure</em>; it must be the <em>meta-procedure</em>—the prompt template, the evaluation harness, the escalation policy, the guardrail configuration, and, in the agentic case, the tool inventory, the planning policy, the loop budget, and the termination criteria. Improvement in the AI age is often the improvement of the process that generates the process, a level of abstraction that traditional standard-work documents were never designed to capture.</p>
+
+<h3 id="7-poka-yoke-prevents-mistakes-at-the-source">7. "Poka-yoke prevents mistakes at the source"</h3>
+
+<p>Mistake-proofing worked because human errors and mechanical failures tend to have discrete, enumerable modes. A jig that only accepts a part in the correct orientation eliminates an entire failure class. AI failure modes are neither discrete nor fully enumerable because the input space is combinatorial and adversarial inputs can be constructed to defeat any static guardrail.</p>
+
+<p>The reformulated principle is that poka-yoke in an AI process must itself be probabilistic and adaptive: guard classifiers, uncertainty thresholds, red-team-generated test suites, and human-in-the-loop escalation for low-confidence outputs.</p>
+
+<p>Agentic systems demand an additional class of poka-yoke that has no clean pre-AI analog: the <em>self-imposed loop budget</em>. An agent that has been granted the authority to iterate must also be granted a rigorously enforced ceiling on iterations, tool calls, and tokens beyond which it must escalate rather than persist. This is the AI-native analog of Toyota’s <em>jidoka</em>—the authority to stop the line—now exercised by the process upon itself. Without it, an agent’s failure mode is not merely to be wrong but to be <em>expensively</em> wrong, having consumed hours of latency and thousands of tokens in pursuit of a completion it was never going to reach. The design problem is no longer merely to prevent a known failure but to detect an unknown one <em>and</em> to bound the cost of the detection process.</p>
+
+<h3 id="8-kaizen-small-continuous-improvements">8. "Kaizen: small, continuous improvements"</h3>
+
+<p>Kaizen assumed a monotonically improving landscape where each small change made things a little better, and the changes composed. AI systems do not always cooperate with this assumption. A minor prompt edit can produce a non-linear shift in behavior across the input distribution. A model upgrade can improve average performance while regressing on a critical subpopulation. A new tool added to an agent’s inventory can be helpful in isolation but disastrous in combination with an existing tool whose behavior it subtly reinterprets. Improvements do not always compose because the model’s behavior on task A is entangled, through shared parameters and shared context, with its behavior on tasks B and C.</p>
+
+<p>The reformulation is that kaizen must be <em>evaluation-driven</em> rather than intuition-driven, and that the evaluation harness itself becomes the improvement’s most important artifact. For agentic systems the harness must judge <em>trajectories</em> rather than <em>outputs</em>, scoring not merely whether the final answer was correct but whether the intermediate steps were parsimonious, honest about uncertainty, appropriately deferential at high-stakes junctures, and economical in their use of tokens and tool calls. Every change must be regression-tested against a stable, adversarially constructed benchmark, or the composition property will silently fail.</p>
+
+<hr />
+
+<h2 id="part-iii-mapping-the-shift-in-practices">Part III: Mapping the Shift in Practices</h2>
+
+<p>Having run through these expirations, we can compile how these changes map onto the daily realities of process improvement. In classical Lean Six Sigma, the focus was on deterministic variables and minimizing physical variance. In the AI-augmented value stream, we manage probabilistic behaviors and optimize lifecycle economics.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Operational Dimension</th>
+      <th style="text-align: left">Classical Lean Six Sigma Practice</th>
+      <th style="text-align: left">AI-Augmented Cognitive Practice</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Primary Target</strong></td>
+      <td style="text-align: left">Process Variance (\(\sigma^2\))</td>
+      <td style="text-align: left">Expected Loss (Weighted by Severity)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Quality Validation</strong></td>
+      <td style="text-align: left">Tolerance limits (\(C_p \ge 1.33\))</td>
+      <td style="text-align: left">Calibration &amp; Reliability (Brier Score)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Pace Setter</strong></td>
+      <td style="text-align: left">Physical Production Takt</td>
+      <td style="text-align: left">Human Verification Takt</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Process Capacity</strong></td>
+      <td style="text-align: left">Machine/Operator Cycle Rate</td>
+      <td style="text-align: left">Sustainable Throughput (constrained by token budgets &amp; loops)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Defect Metric</strong></td>
+      <td style="text-align: left">Scalar DPMO (target: 3.4)</td>
+      <td style="text-align: left">Expected Loss Framework &amp; Multiplicative Trajectory Reliability</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Waste Elimination</strong></td>
+      <td style="text-align: left">TIMWOODS taxonomy</td>
+      <td style="text-align: left">Cognitive Wastes (Loop thrash, prompt debt, verifier tax)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Continuous Improvement</strong></td>
+      <td style="text-align: left">Kaizen &amp; Object-Level Standardization</td>
+      <td style="text-align: left">Evaluation Harness &amp; Meta-Standardization</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Error Prevention</strong></td>
+      <td style="text-align: left">Physical Poka-Yoke (mechanical jigs)</td>
+      <td style="text-align: left">Adaptive Poka-Yoke (classifiers &amp; self-imposed loop budgets)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Root Cause Analysis</strong></td>
+      <td style="text-align: left">The Five Whys (linear causal chains)</td>
+      <td style="text-align: left">Trajectory Replays &amp; Architectural Whys</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Lifecycle Control</strong></td>
+      <td style="text-align: left">Static Control Charts (SPC)</td>
+      <td style="text-align: left">Continuous Monitoring, Drift Detection, and Retraining Loops</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="part-iv-juran-reborn--the-cost-of-quality-in-the-token-economy">Part IV: Juran Reborn — The Cost of Quality in the Token Economy</h2>
+
+<p>Of all the classical Lean Six Sigma frameworks, Juran’s cost-of-quality decomposition survives the transition to AI in the most nearly intact form, and it deserves separate treatment because it is the framework most likely to be misapplied in the near term. Juran taught that total quality cost decomposes into four categories: prevention, appraisal, internal failure, and external failure. The optimum sits where the sum of the four is minimized.</p>
+
+<p>The four buckets refill with almost eerie precision in an AI-augmented operation:</p>
+
+<ul>
+  <li><strong>Prevention:</strong> Now includes prompt engineering, fine-tuning, retrieval-augmented grounding, careful tool selection for agents, and the design of loop budgets and termination criteria.</li>
+  <li><strong>Appraisal:</strong> Now includes verifier tokens, self-critique passes, self-consistency ensembles, guard-classifier calls, and the labor of human reviewers.</li>
+  <li><strong>Internal Failure:</strong> Now includes agent loops that must be aborted, retried outputs, rejected drafts, and the token cost of every reasoning trace that did not survive verification.</li>
+  <li><strong>External Failure:</strong> Now includes the reputational, legal, and customer-satisfaction cost of a hallucination that reached the customer, and it is by far the largest of the four when it materializes.</li>
+</ul>
+
+<p>The strategic point is that these four categories are substitutes for one another across a curve whose shape must be estimated empirically. My finance colleagues at Maersk react to words like "verifier tokens" and "prompt engineering" with the blank stare of someone reading a foreign instruction manual, but the moment you translate them into Juran’s four-bucket vocabulary, the CFO’s eyes light up.</p>
+
+<p>Under-investing in prevention forces higher appraisal spend; under-investing in both makes internal failure explode and eventually leaks into external failure. Over-investing in appraisal—say, by running three verifier passes on every output—reduces external failure to nearly zero but at a per-output cost that may exceed the value of the output itself. The cost-per-verified-output metric is precisely the operational proxy for finding the Juran minimum in the token economy: it measures the total spend across prevention, appraisal, and internal failure per unit of useful yield, and it can be tracked over time as the model, the harness, and the process mature.</p>
+
+<p>A recalibrated cost-of-quality analysis therefore becomes the CFO-facing lingua franca for AI operations. It makes visible a trade-off that is often invisible in ad hoc AI deployments: that money saved by skimping on prevention and appraisal reliably reappears, magnified, in external failure.</p>
+
+<hr />
+
+<h2 id="part-v-a-recalculated-littles-law-and-its-strategic-implication">Part V: A Recalculated Little’s Law and Its Strategic Implication</h2>
+
+<p>Little’s Law—that work in process (WIP) equals throughput multiplied by cycle time—is a mathematical identity and therefore survives the transition to AI intact.</p>
+
+<p>Its <em>strategic</em> interpretation, however, is transformed. In the pre-AI regime, throughput was bounded by headcount, and Little’s Law implied that reducing WIP required either hiring or reducing cycle time. In the AI-augmented regime, throughput on the production side is elastic within limits set by inference budget and agent-loop capacity, which means WIP can accumulate explosively unless the <em>verification</em> side of the process can absorb it.</p>
+
+<p>An LLM can draft ten thousand contracts or customer communications in minutes, creating massive WIP queues that overwhelm downstream teams. The strategic lesson is that leaders must now plan verification capacity, iteration capacity, and token capacity as deliberately as their predecessors planned production capacity. The traditional business intuition—"we need more headcount to produce more output"—has been inverted. We now need headcount, differently trained and differently deployed, to <em>govern</em> what the machines produce.</p>
+
+<p>The bottleneck has not disappeared; it has multiplied and migrated. Where a factory once had one binding constraint at a time and could be managed by identifying and elevating it in the tradition of Goldratt, an AI-augmented operation typically has three latent constraints—human review time, loop limits, and token budgets—and toggles among them as conditions change. This is the single most important operational fact of the coming decade.</p>
+
+<hr />
+
+<h2 id="part-vi-what-endures">Part VI: What Endures</h2>
+
+<p>Nothing in the preceding argument suggests that Lean Six Sigma has been superseded. The first principles—that quality is economic, that variation destroys predictability, that waste is what the customer would not pay for, that improvement is empirical—remain not merely valid but indispensable. Indeed, Juran’s cost-of-quality decomposition, Ohno’s taxonomy of wastes, and Goldratt’s theory of constraints emerge from the AI transition with their conceptual architectures intact and their vocabularies enriched rather than obsolete. What has changed is the derivation layer, the accumulated body of intermediate heuristics that once translated the first principles into daily practice.</p>
+
+<p>The intellectually honest response to this shift is neither to abandon Lean Six Sigma nor to genuflect before its inherited vocabulary. It is to return to the primary sources—Shewhart, Deming, Juran, Ohno, Ishikawa, Goldratt—read them with the awareness that their examples were drawn from the world they knew, and reconstruct the derivation for the world we now inhabit.</p>
+
+<p>In our <a href="file:///c:/Users/natur/Downloads/posts/2026-07-28-the-most-expensive-question-in-ml.md">earlier analysis on scaling laws</a>, we saw how training-time and serving-time economics force us to balance resources between parameter counts and dataset tokens. In our <a href="file:///c:/Users/natur/Downloads/posts/2026-07-23-the-recursion-turns-on-itself-autoresearch.md">analysis of recursive loops</a>, we saw how nested workflows optimize execution paths. In this paper, we see where these computational trade-offs meet the corporate value stream.</p>
+
+<p>The question, in the end, is not whether the bell curve still describes the world. It is whether we have the intellectual courage to notice that it has quietly bent, that the process it once described has become three processes running in parallel and constrained by three different scarcities, and to redraw our maps accordingly.</p>
+
+<p><em>Victor Blancada is a data scientist focused on deriving actionable insights for clients. Visit his LinkedIn page <a href="https://www.linkedin.com/in/geloblancada/">here</a>.</em></p>]]></content><author><name></name></author><category term="blog" /><category term="data science" /><category term="lean six sigma" /><category term="artificial intelligence" /><category term="optimization" /><category term="statistics" /><summary type="html"><![CDATA[Lean Six Sigma was forged in late-twentieth-century manufacturing. Here is how we must re-derive its heuristics for the age of machine intelligence.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/automation.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/automation.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">The Most Expensive Question in Machine Learning: Scaling Laws and the Economics of Scale</title><link href="https://victorangeloblancada.github.io/blog/2026/07/28/the-most-expensive-question-in-ml.html" rel="alternate" type="text/html" title="The Most Expensive Question in Machine Learning: Scaling Laws and the Economics of Scale" /><published>2026-07-28T00:00:00+08:00</published><updated>2026-07-28T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2026/07/28/the-most-expensive-question-in-ml</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2026/07/28/the-most-expensive-question-in-ml.html"><![CDATA[<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<p>The economist Thomas Sowell famously remarked that "there are no solutions, only trade-offs." In no field is this axiom more painfully (and expensively) visible today than in the engineering of frontier artificial intelligence. Before a laboratory turns on its GPU clusters for a multi-million-dollar training run, it must answer what is arguably the most expensive question in computer science: given a fixed budget of compute, should the capital buy a larger model, or should it buy more data to train a smaller one?</p>
+
+<p>An incorrect answer costs tens of millions of dollars and consigns a model to irrelevance. The correct answer has changed twice in the last six years, and understanding why is the closest thing the field has to a general theory of its own economics.</p>
+
+<hr />
+
+<h2 id="the-kaplan-recipe-parameters-over-data">The Kaplan Recipe: Parameters Over Data</h2>
+
+<p>The first attempt at a general theory of scaling came in January 2020, when Jared Kaplan and his colleagues at OpenAI published <em>“Scaling Laws for Neural Language Models.”</em> Sweeping across seven orders of magnitude of compute, they found that a model’s cross-entropy loss followed clean power laws. The architectural details (width, depth, number of heads) were largely irrelevant within a broad range. The critical factors were parameters \(N\), dataset size \(D\), and total compute \(C\).</p>
+
+<p>Kaplan’s most consequential conclusion was operational. For a given compute budget, the optimal allocation of resources favored model size over data volume:</p>
+
+\[N_{\text{optimal}} \propto C^{0.73}, \qquad D_{\text{optimal}} \propto C^{0.27}\]
+
+<p>This relationship translated into a simple industry slogan: larger models are radically more sample-efficient. The operational advice was to buy parameters and stop training well short of convergence. The industry followed this advice. GPT-3 (175B parameters) was trained on roughly 300 billion tokens—a ratio of only 1.7 tokens per parameter. Gopher (280B) and Megatron-Turing NLG (530B) followed the same recipe.</p>
+
+<hr />
+
+<h2 id="the-chinchilla-correction-data-was-under-ordered">The Chinchilla Correction: Data Was Under-Ordered</h2>
+
+<p>In March 2022, Jordan Hoffmann and the DeepMind team challenged this orthodoxy. In their paper, <em>“Training Compute-Optimal Large Language Models,”</em> they held compute budgets constant and swept the ratio of \(N\) to \(D\) using the "IsoFLOP" methodology. Their U-shaped performance curves showed that model size and dataset size should scale in equal proportion:</p>
+
+\[N_{\text{optimal}} \propto C^{0.50}, \qquad D_{\text{optimal}} \propto C^{0.50}\]
+
+<p>This yielded the now-canonical rule of thumb: a compute-optimal model requires roughly 20 tokens per parameter. To prove their thesis, DeepMind trained Chinchilla, a 70B parameter model, on 1.4 trillion tokens using the same compute budget as the 280B Gopher. Chinchilla outperformed Gopher, GPT-3, and other larger models across the board. The implication was clear: the industry had spent billions of dollars training models that were, in Hoffmann’s polite formulation, "significantly undertrained."</p>
+
+<p>Funnily enough, the technical discrepancy between Kaplan and Chinchilla was not resolved by algorithmic breakthroughs, but by a simple correction in counting. In June 2024, Tim Pearce and Jinyeop Song demonstrated that Kaplan’s steeper scaling exponent was a counting artifact. Kaplan had measured $N$ using only non-embedding parameters. At small training runs, embedding tables consume a large fraction of the total parameter count, distorting the slope. Once the embedding parameters are accounted for, both approaches converge on the Chinchilla optimal ratio.</p>
+
+<hr />
+
+<h2 id="interactive-scaling-law-calculator">Interactive Scaling Law Calculator</h2>
+
+<p>To visualize how these scaling regimes allocate compute, and how inference volume shifts the optimal trade-off, use the interactive calculator below. Adjust the training compute budget and the expected query volume to see how the optimal model size and token count adapt.</p>
+
+<div style="background: rgba(30, 41, 59, 0.75); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 24px; color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 24px 0; backdrop-filter: blur(8px);">
+  <h3 style="margin-top: 0; color: #38bdf8; font-size: 1.25rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 8px;">Lifecycle Compute Optimizer</h3>
+  
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+    <div>
+      <label style="display: block; font-size: 0.85rem; color: #94a3b8; margin-bottom: 6px;">Training Compute Budget (log FLOPs)</label>
+      <input type="range" id="computeSlider" min="21" max="26" step="0.1" value="23.8" style="width: 100%; accent-color: #38bdf8;" />
+      <div id="computeVal" style="font-size: 0.9rem; font-weight: bold; margin-top: 4px; color: #e2e8f0;">10^23.8 FLOPs (Llama 3 8B class)</div>
+    </div>
+    
+    <div>
+      <label style="display: block; font-size: 0.85rem; color: #94a3b8; margin-bottom: 6px;">Lifetime Inference Queries (Billions)</label>
+      <input type="range" id="querySlider" min="0" max="1000" step="10" value="100" style="width: 100%; accent-color: #38bdf8;" />
+      <div id="queryVal" style="font-size: 0.9rem; font-weight: bold; margin-top: 4px; color: #e2e8f0;">100 Billion queries</div>
+    </div>
+  </div>
+
+  <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+    <thead>
+      <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.2); color: #38bdf8;">
+        <th style="padding: 8px;">Scaling Regime</th>
+        <th style="padding: 8px;">Model Size (N)</th>
+        <th style="padding: 8px;">Dataset Size (D)</th>
+        <th style="padding: 8px;">Tokens/Param Ratio</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+        <td style="padding: 8px; font-weight: bold; color: #f43f5e;">Kaplan (2020)</td>
+        <td style="padding: 8px;" id="kaplanN">--</td>
+        <td style="padding: 8px;" id="kaplanD">--</td>
+        <td style="padding: 8px;" id="kaplanRatio">--</td>
+      </tr>
+      <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+        <td style="padding: 8px; font-weight: bold; color: #10b981;">Chinchilla (2022)</td>
+        <td style="padding: 8px;" id="chinchillaN">--</td>
+        <td style="padding: 8px;" id="chinchillaD">--</td>
+        <td style="padding: 8px;" id="chinchillaRatio">--</td>
+      </tr>
+      <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1); background: rgba(56, 189, 248, 0.05);">
+        <td style="padding: 8px; font-weight: bold; color: #38bdf8;">Amortized Inference</td>
+        <td style="padding: 8px;" id="amortizedN">--</td>
+        <td style="padding: 8px;" id="amortizedD">--</td>
+        <td style="padding: 8px;" id="amortizedRatio">--</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="font-size: 0.75rem; color: #64748b; margin-top: 12px; line-height: 1.3;">
+    *Calculations assume 6 FLOPs/parameter per token during training and 2 FLOPs/parameter per token (500 tokens/query) during inference.
+  </div>
+</div>
+
+<script>
+(function() {
+  const computeSlider = document.getElementById('computeSlider');
+  const querySlider = document.getElementById('querySlider');
+  const computeVal = document.getElementById('computeVal');
+  const queryVal = document.getElementById('queryVal');
+
+  const k_capN = document.getElementById('kaplanN');
+  const k_capD = document.getElementById('kaplanD');
+  const k_capR = document.getElementById('kaplanRatio');
+
+  const c_chinN = document.getElementById('chinchillaN');
+  const c_chinD = document.getElementById('chinchillaD');
+  const c_chinR = document.getElementById('chinchillaRatio');
+
+  const a_amortN = document.getElementById('amortizedN');
+  const a_amortD = document.getElementById('amortizedD');
+  const a_amortR = document.getElementById('amortizedRatio');
+
+  function update() {
+    const logC = parseFloat(computeSlider.value);
+    const C = Math.pow(10, logC);
+    const Q_queries = parseFloat(querySlider.value) * 1e9;
+    const Q_tokens = Q_queries * 500; // 500 tokens generated per query
+
+    // Label mapping for visual clarity
+    let classLabel = "Custom";
+    if (logC >= 25.5) classLabel = "GPT-4 class";
+    else if (logC >= 24.8) classLabel = "Llama 3 70B class";
+    else if (logC >= 23.5) classLabel = "Llama 3 8B class";
+    else if (logC >= 22.8) classLabel = "GPT-3 class";
+    else classLabel = "Small Prototype";
+
+    computeVal.innerText = `10^${logC.toFixed(1)} FLOPs (${classLabel})`;
+    queryVal.innerText = `${querySlider.value} Billion queries`;
+
+    // 1. Kaplan Allocation
+    // Calibrated so that C = 5.04e23 FLOPs gives N = 280B, D = 300B
+    const kaplanRefC = 5.04e23;
+    const N_kaplan = 280e9 * Math.pow(C / kaplanRefC, 0.73);
+    const D_kaplan = 300e9 * Math.pow(C / kaplanRefC, 0.27);
+
+    // 2. Chinchilla Allocation
+    // Calibrated so that C = 5.88e23 FLOPs gives N = 70B, D = 1400B
+    const chinchillaRefC = 5.88e23;
+    const N_chinchilla = 70e9 * Math.sqrt(C / chinchillaRefC);
+    const D_chinchilla = 1400e9 * Math.sqrt(C / chinchillaRefC);
+
+    // 3. Amortized Inference Allocation
+    // Solves the resource allocation shifting under inference cost.
+    // Total lifecycle budget C_total = C_train + C_infer.
+    // We hold Training Compute fixed at C = 6ND.
+    // We find N that minimizes total loss including inference burden.
+    // Fixed point solver: N_new = N_chinchilla * (1 + Q / 3D)^(-0.28)
+    let N_amort = N_chinchilla;
+    let D_amort = D_chinchilla;
+    if (Q_tokens > 0) {
+      let low_N = 1e6;
+      let high_N = C / 6;
+      for (let iter = 0; iter < 40; iter++) {
+        N_amort = (low_N + high_N) / 2;
+        D_amort = C / (6 * N_amort);
+        let lhs = 138.176 * Math.pow(N_amort, -0.34);
+        let rhs = 114.996 * Math.pow(D_amort, -0.28) * (1 + Q_tokens / (3 * D_amort));
+        if (lhs > rhs) {
+          low_N = N_amort;
+        } else {
+          high_N = N_amort;
+        }
+      }
+    }
+
+    // Formatting helper
+    function formatParams(num) {
+      if (num >= 1e12) return (num / 1e12).toFixed(2) + ' T';
+      if (num >= 1e9) return (num / 1e9).toFixed(1) + ' B';
+      return (num / 1e6).toFixed(1) + ' M';
+    }
+
+    function formatTokens(num) {
+      if (num >= 1e12) return (num / 1e12).toFixed(2) + ' T';
+      if (num >= 1e9) return (num / 1e9).toFixed(1) + ' B';
+      return (num / 1e6).toFixed(1) + ' M';
+    }
+
+    k_capN.innerText = formatParams(N_kaplan);
+    k_capD.innerText = formatTokens(D_kaplan);
+    k_capR.innerText = (D_kaplan / N_kaplan).toFixed(1) + ' : 1';
+
+    c_chinN.innerText = formatParams(N_chinchilla);
+    c_chinD.innerText = formatTokens(D_chinchilla);
+    c_chinR.innerText = (D_chinchilla / N_chinchilla).toFixed(1) + ' : 1';
+
+    a_amortN.innerText = formatParams(N_amort);
+    a_amortD.innerText = formatTokens(D_amort);
+    a_amortR.innerText = (D_amort / N_amort).toFixed(1) + ' : 1';
+  }
+
+  computeSlider.addEventListener('input', update);
+  querySlider.addEventListener('input', update);
+  update();
+})();
+</script>
+
+<hr />
+
+<h2 id="the-amortized-inference-shift">The Amortized Inference Shift</h2>
+
+<p>Yet, if you look at the open-weights landscape today, almost nobody obeys the Chinchilla-optimal 20:1 ratio.</p>
+
+<ul>
+  <li><strong>Meta’s Llama 3 8B</strong> was trained on over 15 trillion tokens—a ratio of 1,875 tokens per parameter.</li>
+  <li><strong>Alibaba’s Qwen 2.5 7B</strong> saw 18 trillion tokens—a ratio of over 2,570 tokens per parameter.</li>
+  <li><strong>DeepSeek V3</strong> pretrained on 14.8 trillion tokens, representing roughly 400 tokens per active parameter.</li>
+</ul>
+
+<p>This deliberate "overtraining" does not contradict Chinchilla. Rather, it optimizes for a different objective function. Hoffmann’s equations minimized the compute required to <em>train</em> a model. They ignored the cost of running that model in production after training ends.</p>
+
+<p>Once a model is deployed to millions of users, the lifetime cost of serving inference dwarfs the upfront cost of training. A smaller, overtrained model requires fewer GPUs to run, saving millions in serving infrastructure (which is why our own supply chain algorithms are constantly being pruned for execution speed). Overtraining is training-compute suboptimal, but it is highly compute-rational over the model’s operational lifespan.</p>
+
+<p>A recent Wisconsin–Stanford paper, <em>Test-Time Scaling Makes Overtraining Compute-Optimal</em>, has formalized this by adding a third axis—inference-time samples—and finds that when reasoning models like o1 or DeepSeek-R1 will be sampled hundreds of times per query, the optimum shifts radically into the overtrained regime, beyond the range most pretraining studies even measure. In our <a href="file:///c:/Users/natur/Downloads/projects/victorangeloblancada.github.io-jekyll/_posts/2026-07-23-the-recursion-turns-on-itself-autoresearch.md">analysis of recursive AutoResearch loops</a>, we saw how stacking reasoning loops at inference time routes around model constraints, reinforcing the value of highly optimized base models.</p>
+
+<hr />
+
+<h2 id="the-densing-law-and-capability-density">The Densing Law and Capability Density</h2>
+
+<p>This structural efficiency is validated by what researchers call <strong>capability density</strong>—the ratio of the "effective parameter size" (how large an older model would need to be to match a modern model’s benchmarks) to the actual parameter size.</p>
+
+<p>In late 2024, a team from Tsinghua and OpenBMB introduced the <strong>Densing Law</strong>, documenting that the capability density of open-weights models has doubled roughly every 3.5 months.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Model</th>
+      <th style="text-align: center">Release Date</th>
+      <th style="text-align: center">Parameter Count</th>
+      <th style="text-align: center">MMLU Score</th>
+      <th style="text-align: center">Relative Capability Density</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>LLaMA 1</strong></td>
+      <td style="text-align: center">Feb 2023</td>
+      <td style="text-align: center">65B</td>
+      <td style="text-align: center">68.9%</td>
+      <td style="text-align: center">1.0x (Baseline)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Qwen 2.5</strong></td>
+      <td style="text-align: center">Sep 2024</td>
+      <td style="text-align: center">72B</td>
+      <td style="text-align: center">85.3%</td>
+      <td style="text-align: center">4.8x</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Llama 3.1</strong></td>
+      <td style="text-align: center">Jul 2024</td>
+      <td style="text-align: center">70B</td>
+      <td style="text-align: center">86.0%</td>
+      <td style="text-align: center">5.1x</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This exponential increase explains why a modern 72B model can match or exceed a 405B model trained just a year prior. It is not luck; it is the compounding impact of superior data curation, better tokenizers, and structural architectural refinements like Grouped-Query Attention (GQA) and SwiGLU activations.</p>
+
+<hr />
+
+<h2 id="the-shrinking-fine-tuning-headroom">The Shrinking Fine-Tuning Headroom</h2>
+
+<p>This density shift has practical implications for enterprise adaptation. Base models today arrive already saturated with post-training. Qwen 2.5 underwent supervised fine-tuning on over a million instruction samples, followed by multi-stage reinforcement learning with both offline DPO and online GRPO.</p>
+
+<p>Because the base model has already had its low-hanging fruit harvested, generic instruction fine-tuning now yields diminishing marginal returns. Downstream teams should focus their efforts away from general fluency and toward domain-specific adaptation (e.g., specialized legal reasoning, medical coding, or unique brand voices) where the general-purpose pretraining distribution remains sparse. Fortunately, parameter-efficient fine-tuning (PEFT) methods like LoRA have reduced these costs to the point where the business question is no longer whether to fine-tune, but what domain data to prioritize.</p>
+
+<p>In our <a href="file:///c:/Users/natur/Downloads/projects/victorangeloblancada.github.io-jekyll/_posts/2026-07-31-lean-six-sigma-ai.md">upcoming analysis of Lean Six Sigma in AI</a>, we will explore how these overtrained models redefine the cost of quality in the corporate value stream.</p>
+
+<p>Ultimately, scaling laws are not immutable laws of physics. They are contingent, empirical, and sensitive to what we count, how we measure it, and how we plan to deploy the system. The labs winning the market today are not those with the largest compute clusters, but those who read the trajectory of these trade-offs the fastest.</p>
+
+<p><em>Victor Blancada is a data scientist focused on deriving actionable insights for clients. Visit his LinkedIn page <a href="https://www.linkedin.com/in/geloblancada/">here</a>.</em></p>]]></content><author><name></name></author><category term="blog" /><category term="data science" /><category term="machine learning" /><category term="business strategy" /><category term="economics" /><summary type="html"><![CDATA[The optimal allocation of compute between model parameters and dataset size has changed twice in six years. Modern inference economics and the Densing Law are redrawing the map of AI competitiveness.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/spiral.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/spiral.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">The Recursion Turns on Itself: Karpathy’s AutoResearch and Bilevel Meta-Loops</title><link href="https://victorangeloblancada.github.io/blog/2026/07/23/the-recursion-turns-on-itself-autoresearch.html" rel="alternate" type="text/html" title="The Recursion Turns on Itself: Karpathy’s AutoResearch and Bilevel Meta-Loops" /><published>2026-07-23T00:00:00+08:00</published><updated>2026-07-23T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2026/07/23/the-recursion-turns-on-itself-autoresearch</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2026/07/23/the-recursion-turns-on-itself-autoresearch.html"><![CDATA[<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
 </script>
 
 <p>In <em>Gödel, Escher, Bach</em>, Douglas Hofstadter famously explored the concept of “strange loops”—phenomena in which, by moving upwards through a hierarchical system, one unexpectedly finds themselves back at the starting point. It is a concept that has fascinated logicians, mathematicians, and artists for decades because it suggests that self-reference can generate meaning out of purely mechanical rules. Yet, in computer science, our self-improving loops have historically been more of a conceptual joke than a practical reality.</p>
@@ -1299,136 +1815,4 @@ An agentic workflow gives a model the machinery to act.</p>
       <td>“What loop, tools, state, and controls let the model complete the task?”</td>
     </tr>
   </tbody>
-</table>]]></content><author><name></name></author><category term="blog" /><category term="ai" /><category term="agent" /><category term="agentic ai" /><category term="claude" /><category term="copilot" /><category term="featured" /><summary type="html"><![CDATA[Everyone talks about AI agents, but very few people mean the same thing when they do.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/robot-piano.webp" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/robot-piano.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Dissecting a Power BI Dashboard</title><link href="https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html" rel="alternate" type="text/html" title="Dissecting a Power BI Dashboard" /><published>2024-12-13T00:00:00+08:00</published><updated>2024-12-13T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2024/12/13/dissect-pbix.html"><![CDATA[<p>In this article, we will thoroughly explore the structure and contents of a Power BI dashboard (PBIX) file. Like most Microsoft Office file formats, a PBIX file is actually a zipped folder containing various directories and files which work together to form the dashboard we see. Understanding the underlying architecture of a Power BI report is crucial for both users and developers, as it enables a deeper appreciation of how data is structured, processed, and displayed.</p>
-
-<p>This guide will break down the various directories and files found inside the zipped folder of a PBIX file, explain their purpose, and show how these elements work together to create the final dashboard. We will also delve into the core <code class="language-plaintext highlighter-rouge">Layout</code> file, which plays a key role in defining how data is translated into charts, tables, and other visualizations within the dashboard.</p>
-
-<h2 id="overview-of-a-power-bi-report-package-structure">Overview of a Power BI Report Package Structure</h2>
-
-<p>A PBIX file is typically organized in a package with a clearly defined directory structure. This structure can be exposed by changing the file extension from PBIX to ZIP, then unzipping the resulting zipped folder to reveal its contents.</p>
-
-<p>Each folder and file within this structure serves a specific purpose in making the dashboard work the way it does. Below is an overview of the key directories and files in the report package:</p>
-
-<p><em>rels<br />
-|</em> .rels<br />
-docProps<br />
-|_ custom.xml<br />
-Report<br />
-|_ Layout<br />
-|_ StaticResources\SharedResources\BaseThemes<br />
-   |_ CY24SU08.json<br />
-[Content_Types].xml<br />
-DataModel<br />
-DiagramLayout<br />
-Metadata<br />
-SecurityBindings<br />
-Settings<br />
-Version</p>
-
-<p>Each of these components plays a vital role in ensuring that the report is displayed and interacts as intended. We will break down each section to understand what it contains and how it contributes to the functionality of the dashboard.</p>
-
-<h3 id="the_relsdirectory">The <code class="language-plaintext highlighter-rouge">_rels</code> Directory</h3>
-
-<p>The <code class="language-plaintext highlighter-rouge">_rels</code> directory is one of the most critical directories in the Power BI report package. It contains the <code class="language-plaintext highlighter-rouge">.rels</code> file, which manages the relationships between different parts of the report.</p>
-
-<p>The <code class="language-plaintext highlighter-rouge">.rels</code> file stores the relationships between various elements of the report. For example, it could define how the layout file is connected to the static resources or how the report interacts with external data models. The <code class="language-plaintext highlighter-rouge">.rels</code> file ensures that when the report is opened, the application knows how to load and render the different parts of the report package correctly.</p>
-
-<h3 id="thedocpropsdirectory">The <code class="language-plaintext highlighter-rouge">docProps</code> Directory</h3>
-
-<p>The <code class="language-plaintext highlighter-rouge">docProps</code> directory contains metadata files that provide additional information about the report. Metadata is essential for defining the context and properties of the report, which can be helpful for tracking and reporting purposes.</p>
-
-<p>The <code class="language-plaintext highlighter-rouge">custom.xml</code> file stores user-defined properties, such as the author of the report, version number, or other custom attributes relevant to the report. For example, it could store details about the report’s creation date, the business unit it pertains to, or custom fields that help categorize and filter the report.</p>
-
-<h3 id="thereportdirectory">The <code class="language-plaintext highlighter-rouge">Report</code> Directory</h3>
-
-<p>The <code class="language-plaintext highlighter-rouge">Report</code> directory is where the majority of the report’s configuration and layout components are found. It contains the layout file, static resources, and any base themes that are used to define the visual look and feel of the report. These elements are key in defining how the data is visually presented.</p>
-
-<h4 id="layout">Layout</h4>
-
-<p>The layout file is the core of the report. It defines the visual structure of the report, specifying how the data will be displayed in charts, tables, and other visual elements. The layout file determines the positions of various components on the report canvas and ensures that the visual elements are placed and sized correctly.</p>
-
-<p>As an example, the <code class="language-plaintext highlighter-rouge">Layout</code> file may define the report’s main visual container, which could hold a chart, such as a column chart. The chart may be configured to display data from a table named <code class="language-plaintext highlighter-rouge">Table1</code>, and the layout also specifies how the data is grouped by different time periods (such as year, quarter, month, and day). It also defines how specific measures, like the quantity of items sold, are aggregated and visualized in the chart.</p>
-
-<p>The layout file also specifies the data projections (i.e., the data elements to be displayed in the chart), the filters that should be applied to restrict the data, and how different data roles (such as categories, series, and rows) are mapped to the visual components.</p>
-
-<h4 id="staticresourcessharedresourcesbasethemes">StaticResources\SharedResources\BaseThemes</h4>
-
-<p>The <code class="language-plaintext highlighter-rouge">CY24SU08.json</code> file defines the visual theme for the report. Themes are used to maintain consistency in design across different reports and dashboards. This JSON file stores information about color schemes, fonts, and other stylistic choices that apply throughout the report. By using a theme like <code class="language-plaintext highlighter-rouge">CY24SU08.json</code>, the report ensures that all visual elements are cohesive and adhere to a specific design aesthetic, whether for brand consistency or user experience.</p>
-
-<h3 id="other-key-files-in-the-report-package">Other Key Files in the Report Package</h3>
-
-<p>In addition to the layout and theme resources, there are several other important files that contribute to the functionality of the report.</p>
-
-<h3 id="content_typesxml">[Content_Types].xml</h3>
-
-<p>The <code class="language-plaintext highlighter-rouge">[Content_Types].xml</code> file is essential for defining the MIME types for the various parts of the report package. It helps the report-rendering system determine how to process different file types within the package, such as XML files, images, or JSON files. This file serves as a map for the content and ensures that each component is handled correctly.</p>
-
-<h3 id="datamodel">DataModel</h3>
-
-<p>The <code class="language-plaintext highlighter-rouge">DataModel</code> binary contains the underlying schema and data definitions that drive the report. It includes details such as tables, columns, and relationships between different datasets. This folder is vital because it defines the data structure that feeds into the visual components, allowing the dashboard to present relevant and accurate information. This file usually cannot be read because its encoding is not supported by most text editors.</p>
-
-<h3 id="diagramlayout">DiagramLayout</h3>
-
-<p>The <code class="language-plaintext highlighter-rouge">DiagramLayout</code> directory may contain files that define additional visual elements, such as diagrams, flowcharts, or other graphical representations that complement the report’s main data visuals. While the core report may focus on charts and tables, diagram layouts can help explain complex data relationships or workflows visually.</p>
-
-<h3 id="metadata">Metadata</h3>
-
-<p>Metadata files store information about the report itself, such as the author, version history, creation date, and other contextual information. These files are crucial for tracking changes and updates to the report, ensuring that the correct version is always used and providing information about the report’s lifecycle.</p>
-
-<h3 id="securitybindings">SecurityBindings</h3>
-
-<p>The <code class="language-plaintext highlighter-rouge">SecurityBindings</code> binary handles the security aspects of the report, ensuring that sensitive data is protected. It defines access control and permissions, specifying which users or groups can view certain sections or interact with specific data points within the report. This is particularly important for reports containing sensitive or confidential information. This file usually cannot be read because its encoding is not supported by most text editors.</p>
-
-<h3 id="settings">Settings</h3>
-
-<p>The <code class="language-plaintext highlighter-rouge">Settings</code> directory contains configuration files that manage preferences or environment-specific settings for the report. These settings ensure that the report behaves as expected across different platforms and environments, whether it’s running locally or being accessed via a web service.</p>
-
-<h3 id="version">Version</h3>
-
-<p>The <code class="language-plaintext highlighter-rouge">Version</code> file indicates the current version of the report or report package. This is important for version control, ensuring that users are working with the most up-to-date version of the report and helping to prevent the use of outdated or deprecated files.</p>
-
-<h3 id="parsing-and-interpreting-the-layout-file">Parsing and Interpreting the Layout File</h3>
-
-<p>Let’s take a closer look at the <code class="language-plaintext highlighter-rouge">Layout</code> file, which is at the heart of how the report’s visual elements are configured. The layout file is a configuration file, often in JSON format, that dictates the presentation and interaction of the data in the report.</p>
-
-<h3 id="key-aspects-of-the-layout-file">Key Aspects of the Layout File</h3>
-
-<ol>
-  <li><strong>Visual Containers</strong>: The layout file defines a visual container (e.g., a chart or table) that holds the report’s data. For example, in this case, the container holds a column chart, and the file specifies its position, size, and dimensions on the report canvas.</li>
-  <li><strong>Projections and Querying</strong>: The <code class="language-plaintext highlighter-rouge">projections</code> section in the layout file specifies which data elements should be displayed. This includes categories, series, and rows, as well as aggregation functions (e.g., sum, count). This section ensures that the right data is selected and formatted for visualization.</li>
-  <li><strong>Filters</strong>: Filters are used to limit which data points are shown in the report. These filters can be based on specific criteria (e.g., dates, categories, or regions) to ensure that the report displays only relevant information.</li>
-  <li><strong>Data Role Mapping</strong>: The <code class="language-plaintext highlighter-rouge">Layout</code> file maps the data roles to the visual components. For instance, categories might be mapped to the x-axis, while series could be used for color-coding the data. These mappings help translate raw data into meaningful visualizations.</li>
-  <li><strong>Execution Metrics</strong>: The layout file may also include execution metrics that track how efficiently the report is rendering, especially when dealing with large datasets. This ensures that the report performs well and loads quickly.</li>
-</ol>
-
-<h2 id="summary">Summary</h2>
-
-<p>Understanding the inner workings of a Power BI report requires more than just familiarity with the visual components. The underlying structure, including the directories and files that make up the report package, plays a crucial role in ensuring that the report functions correctly. Each file, from the layout to metadata and security settings, contributes to the overall experience of the report, ensuring that the data is presented clearly, accurately, and securely.</p>
-
-<p>The <code class="language-plaintext highlighter-rouge">Layout</code> file, in particular, is essential for defining how data is visualized. By carefully structuring the report’s visuals and ensuring that the data is aggregated and displayed correctly, the layout file is a key component in transforming raw data into actionable insights. When working with or developing Power BI reports, understanding these elements will help you navigate and optimize the report for both users and analysts alike.</p>]]></content><author><name></name></author><category term="blog" /><category term="power bi" /><category term="dashboard" /><category term="microsoft" /><summary type="html"><![CDATA[PBIX files are zipped folders and examining their contents can shed light on how Power BI translates data into visualizations.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/dissect.webp" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/dissect.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">The Negative Effect of Pruning Large Language Models on Finetuning</title><link href="https://victorangeloblancada.github.io/blog/2024/05/31/llm-pruning-finetuning.html" rel="alternate" type="text/html" title="The Negative Effect of Pruning Large Language Models on Finetuning" /><published>2024-05-31T00:00:00+08:00</published><updated>2024-05-31T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2024/05/31/llm-pruning-finetuning</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2024/05/31/llm-pruning-finetuning.html"><![CDATA[<p>Large language models (LLMs) such as Llama and Falcon often serve as foundational models, the bedrock upon which more specialized AI applications are built through finetuning. However, the computational demands of these models pose a significant challenge for both inference and finetuning. Techniques in optimizing neural networks, particularly pruning, may offer a solution by reducing the number of model parameters for more efficient inference without a consequent large negative effect on accuracy. However, while pruning reduces computational requirements for inference, it also reduces a model’s ability to be finetuned, as will be explained in this article. This poses a challenge for organizations wishing to leverage AI language models for specialized use.</p>
-
-<p>Pruning aims to make neural networks more efficient by removing unnecessary connections within the model. Common pruning methods include:</p>
-
-<ul>
-  <li>Magnitude-based pruning: Eliminates connections with weights below a certain threshold.</li>
-  <li>Structured pruning: Removes entire groups of neurons or connections.</li>
-</ul>
-
-<p>Pruning is effective in reducing the size of different models, but given the recent gold rush to deploy language models, it is important to look at its effect on these language models.</p>
-
-<p>For large language models like GPT, Llama, and Falcon, pruning offers inference efficiency gains. However, pruning may potentially compromise adaptability during fine-tuning. Redundant neurons are often useful for encoding new information from finetuning, but they are often removed during the pruning process, thus hindering the model’s capacity to learn new information.</p>
-
-<p>To illustrate, consider a language model pre-trained on a diverse corpus of text. The redundancies in the model allow it to store the same information across different layers and weights. During finetuning for a sentiment analysis, the model may learn to differentiate words or phrases with the same denotation (explicit meaning) but different connotation (culturally-specific nuance) based on the provided training data and can use the neural network’s redundancies to store these differences. However, if these redundancies had been pruned, the model loses the flexibility to encode these more nuanced relationships, leading to suboptimal performance.</p>
-
-<p>Organizations therefore face a strategic decision regarding pruning:</p>
-
-<ul>
-  <li>Resource Constraints: Pruned FLMs offer efficiency benefits, suitable for resource-constrained environments where computational resources are limited. Despite potential limitations in fine-tuning, efficiency gains may outweigh adaptability concerns.</li>
-  <li>Task Complexity: For intricate tasks demanding precise adaptation, unpruned language models with full learning capacity are desired. These models will excel in capturing complex relationships from new information, essential for nuanced tasks like legal document analysis.</li>
-</ul>
-
-<p>Pruning large language models presents a trade-off, optimizing efficiency at the expense of adaptability later on. Striking the right balance is paramount as organizations seek to leverage AI in an evolving business environment.</p>
-
-<p>My advice would be to use the largest language model which an organization’s hardware permits as a foundational model for finetuning, then only start pruning the model after finetuning is finished.</p>
-
-<p>By understanding the nuances of pruning and its implications for fine-tuning, businesses can make informed decisions, harnessing the power of language models while achieving desired outcomes in specialized domains.</p>]]></content><author><name></name></author><category term="blog" /><category term="ai" /><category term="artificial intelligence" /><category term="llm" /><category term="large language model" /><category term="pruning" /><category term="fine-tuning" /><summary type="html"><![CDATA[Pruning large language models make them easier to deploy but also make them harder to finetune for the specific tasks organizations may want them to perform.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/pruning-networks.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/pruning-networks.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+</table>]]></content><author><name></name></author><category term="blog" /><category term="ai" /><category term="agent" /><category term="agentic ai" /><category term="claude" /><category term="copilot" /><category term="featured" /><summary type="html"><![CDATA[Everyone talks about AI agents, but very few people mean the same thing when they do.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/robot-piano.webp" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/robot-piano.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

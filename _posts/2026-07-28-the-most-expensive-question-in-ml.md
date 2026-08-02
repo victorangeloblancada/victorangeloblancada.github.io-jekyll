@@ -8,7 +8,7 @@ tags:
 - business strategy
 - economics
 date: 2026-07-28
-image: /assets/images/datacenter.jpg
+image: /assets/images/spiral.jpg
 description: The optimal allocation of compute between model parameters and dataset size has changed twice in six years. Modern inference economics and the Densing Law are redrawing the map of AI competitiveness.
 dropcap: True
 draft: false

@@ -9,7 +9,7 @@ tags:
 - optimization
 - statistics
 date: 2026-07-31
-image: /assets/images/model-t.jpg
+image: /assets/images/automation.jpg
 description: Lean Six Sigma was forged in late-twentieth-century manufacturing. Here is how we must re-derive its heuristics for the age of machine intelligence.
 dropcap: True
 draft: false

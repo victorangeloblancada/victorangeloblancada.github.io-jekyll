@@ -2,6 +2,22 @@
   
   
     {
+      "title"    : "When the Bell Curve Bends: Lean Six Sigma in the Age of Machine Intelligence",
+      "category" : "blog",
+      "tags"     : "data science, lean six sigma, artificial intelligence, optimization, statistics",
+      "url"      : "/blog/2026/07/31/lean-six-sigma-ai.html",
+      "date"     : "2026-07-31 00:00:00 +0800"
+    },
+  
+    {
+      "title"    : "The Most Expensive Question in Machine Learning: Scaling Laws and the Economics of Scale",
+      "category" : "blog",
+      "tags"     : "data science, machine learning, business strategy, economics",
+      "url"      : "/blog/2026/07/28/the-most-expensive-question-in-ml.html",
+      "date"     : "2026-07-28 00:00:00 +0800"
+    },
+  
+    {
       "title"    : "The Recursion Turns on Itself: Karpathy&#39;s AutoResearch and Bilevel Meta-Loops",
       "category" : "blog",
       "tags"     : "data science, machine learning, engineering, artificial intelligence",
