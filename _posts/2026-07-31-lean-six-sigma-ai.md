@@ -76,7 +76,7 @@ $$t_{\text{review}} = p_{\text{deep}} \cdot t_{\text{deep}} + p_{\text{light}} \
 
 where $$p_{\text{deep}}$$ is the fraction of outputs requiring substantive adjudication and $$p_{\text{light}}$$ is the fraction requiring only a skim.
 
-Let us look at a concrete example to clarify this. In my day job managing container flows and warehouse floor layouts at Maersk Logistics (which underwent a painful acquisition in 2022 that I am still spiritually recovering from), we track bottlenecks relentlessly. Consider an analytics team of five people processing 1,200 customer-inquiry classifications per day. Available review time is $$5 \times 8 \times 60 = 2{,}400$$ minutes. Traditional takt would demand a two-minute cycle per inquiry, which is barely feasible for a human working alone. 
+Let us look at a concrete example to clarify this. Consider an analytics team of five people processing 1,200 customer-inquiry classifications per day. Available review time is $$5 \times 8 \times 60 = 2{,}400$$ minutes. Traditional takt would demand a two-minute cycle per inquiry, which is barely feasible for a human working alone. 
 
 Introduce an AI classifier whose measured trustworthiness on the task is 95 percent, and let deep review consume five minutes while light review consumes 30 seconds. Effective demand on human time becomes:
 
@@ -179,7 +179,7 @@ The four buckets refill with almost eerie precision in an AI-augmented operation
 *   **Internal Failure:** Now includes agent loops that must be aborted, retried outputs, rejected drafts, and the token cost of every reasoning trace that did not survive verification.
 *   **External Failure:** Now includes the reputational, legal, and customer-satisfaction cost of a hallucination that reached the customer, and it is by far the largest of the four when it materializes.
 
-The strategic point is that these four categories are substitutes for one another across a curve whose shape must be estimated empirically. My finance colleagues at Maersk react to words like \"verifier tokens\" and \"prompt engineering\" with the blank stare of someone reading a foreign instruction manual, but the moment you translate them into Juran's four-bucket vocabulary, the CFO's eyes light up. 
+The strategic point is that these four categories are substitutes for one another across a curve whose shape must be estimated empirically.
 
 Under-investing in prevention forces higher appraisal spend; under-investing in both makes internal failure explode and eventually leaks into external failure. Over-investing in appraisal—say, by running three verifier passes on every output—reduces external failure to nearly zero but at a per-output cost that may exceed the value of the output itself. The cost-per-verified-output metric is precisely the operational proxy for finding the Juran minimum in the token economy: it measures the total spend across prevention, appraisal, and internal failure per unit of useful yield, and it can be tracked over time as the model, the harness, and the process mature.
 

@@ -2,10 +2,26 @@
   
   
     {
+      "title"    : "The Seams Are the Strategy",
+      "category" : "blog",
+      "tags"     : "data science, power bi, software development",
+      "url"      : "/blog/2026/08/06/power-bi-arch-not-macos.html",
+      "date"     : "2026-08-06 00:00:00 +0800"
+    },
+  
+    {
       "title"    : "When the Bell Curve Bends: Lean Six Sigma in the Age of Machine Intelligence",
       "category" : "blog",
       "tags"     : "data science, lean six sigma, artificial intelligence, optimization, statistics",
       "url"      : "/blog/2026/07/31/lean-six-sigma-ai.html",
+      "date"     : "2026-07-31 00:00:00 +0800"
+    },
+  
+    {
+      "title"    : "Lean Six Sigma Ai   copy.md:zone",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/2026/07/31/lean-six-sigma-ai-Copy.md-Zone.Identifier",
       "date"     : "2026-07-31 00:00:00 +0800"
     },
   

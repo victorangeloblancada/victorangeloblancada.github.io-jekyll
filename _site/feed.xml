@@ -1,4 +1,154 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://victorangeloblancada.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://victorangeloblancada.github.io/" rel="alternate" type="text/html" /><updated>2026-08-02T23:13:32+08:00</updated><id>https://victorangeloblancada.github.io/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">When the Bell Curve Bends: Lean Six Sigma in the Age of Machine Intelligence</title><link href="https://victorangeloblancada.github.io/blog/2026/07/31/lean-six-sigma-ai.html" rel="alternate" type="text/html" title="When the Bell Curve Bends: Lean Six Sigma in the Age of Machine Intelligence" /><published>2026-07-31T00:00:00+08:00</published><updated>2026-07-31T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2026/07/31/lean-six-sigma-ai</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2026/07/31/lean-six-sigma-ai.html"><![CDATA[<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://victorangeloblancada.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://victorangeloblancada.github.io/" rel="alternate" type="text/html" /><updated>2026-08-06T15:50:53+08:00</updated><id>https://victorangeloblancada.github.io/feed.xml</id><title type="html">Victor Angelo Blancada</title><subtitle>Victor Angelo Blancada is a data scientist, AI developer, and strategy consultant with proven experience in improving operational efficiency through predictive modeling and AI-powered automation.</subtitle><entry><title type="html">The Seams Are the Strategy</title><link href="https://victorangeloblancada.github.io/blog/2026/08/06/power-bi-arch-not-macos.html" rel="alternate" type="text/html" title="The Seams Are the Strategy" /><published>2026-08-06T00:00:00+08:00</published><updated>2026-08-06T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2026/08/06/power-bi-arch-not-macos</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2026/08/06/power-bi-arch-not-macos.html"><![CDATA[<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<p>There is a small, stupid, perfect bug in Power BI Desktop that explains almost everything about Microsoft.</p>
+
+<p>Put two fingers on a trackpad and pinch. The interface obligingly zooms — not the report canvas, which would be sensible, but the <em>chrome</em>: the ribbon, the panes, the furniture of the application itself. Keep going and the window’s own close button drifts serenely past the edge of the window and vanishes. You have zoomed the application out of its own frame. The escape hatch has escaped.</p>
+
+<p>This is not a defect in the ordinary sense. Nobody specified it. Nobody chose it. It is an <em>emergent property</em> — the observable consequence of two layout systems occupying one window with no treaty governing which of them is in charge. The native Windows shell measures in device-independent units and negotiates DPI with the operating system. The embedded Chromium runtime measures in CSS pixels and regards a pinch gesture as a page zoom it is fully entitled to apply. When you pinch, Chromium scales its content, the host window does not resize, and the surplus is simply clipped at a boundary neither party knew was contested.</p>
+
+<p>Microsoft did not build a seamless application with an unfortunate crack in it. Microsoft built a federation and shipped the treaty negotiations to production.</p>
+
+<p>Once you see this, you cannot unsee it, and the entire product reorganizes itself in your mind. Every idiosyncrasy that felt like neglect turns out to be a load-bearing wall.</p>
+
+<hr />
+
+<h2 id="i-an-archaeology-of-the-exe">I. An archaeology of the .exe</h2>
+
+<p>Power BI Desktop is commonly described as an application. It is more accurate to describe it as a <em>building</em> — one erected over fifteen years by four contractors who never met, on foundations poured for an entirely different structure.</p>
+
+<p>The oldest stratum is the engine. Around 2006, a project codenamed <strong>Gemini</strong> under Amir Netz set out to take SQL Server Analysis Services and make it run in memory. It surfaced publicly in 2010 as Power Pivot, a free Excel add-in, and it brought two things with it that remain the load-bearing pillars of the entire Microsoft analytics business: <strong>VertiPaq</strong>, a columnar compression engine of genuinely remarkable efficiency, and <strong>DAX</strong>, a formula language that resembles Excel’s the way a submarine resembles a bathtub.</p>
+
+<p>The second stratum is the canvas. <strong>Project Crescent</strong>, previewed at PASS Summit in 2010 and shipped as Power View inside SQL Server 2012, was Microsoft’s answer to Tableau: interactive filtering, cross-highlighting, animated scatter plots. Its DNA is still visible every time a visual cross-filters its neighbours.</p>
+
+<p>The third is the plumbing. <strong>Data Explorer</strong>, another Excel add-in, arrived in 2013 and was renamed Power Query. It brought M, a functional language for data preparation, and the Mashup engine that executes it.</p>
+
+<p>Three separate add-ins, three separate teams, three separate release cadences. In 2014 Microsoft put them in a single window, called it Power BI Designer Preview, renamed it Power BI Desktop, and shipped GA on 24 July 2015.</p>
+
+<p>Here is the crucial detail, and it is the one that explains the next decade: <strong>they were never merged. They were co-located.</strong> Power BI Desktop is a shared window with a shared ribbon over three engines that remain, to this day, architecturally distinct processes and codebases with distinct protocols. Launch Desktop and it silently spins up a local instance of <code class="language-plaintext highlighter-rouge">msmdsrv.exe</code> — an actual Analysis Services server, listening on a random port, hosting your model under a random GUID. Every visual you render fires a DAX query at it. Your laptop is running a database server and neither of you talks about it.</p>
+
+<p>The report canvas, meanwhile, is Chromium. Microsoft migrated it from CefSharp to WebView2 across 2021–22, for reasons that were entirely defensible: inherit the Edge team’s security patches automatically, stop hand-carrying browser updates, redirect the saved engineering hours into features.</p>
+
+<p>The bill for that decision came due in January 2026, when an external WebView2 update — shipped by a different team, on a different schedule, to machines that had not updated Power BI at all — rendered a swathe of Desktop’s icons as solid black blobs. Marco Russo’s published workaround was to pin an older WebView2 build via an environment variable, with a note reminding readers to check weekly whether they could stop. Part of your business intelligence tool is versioned by the browser team, and you find out on a Tuesday.</p>
+
+<hr />
+
+<h2 id="ii-the-map-menu-is-an-org-chart">II. The map menu is an org chart</h2>
+
+<p>Conway’s Law — organizations ship their communication structure — is usually invoked as gentle sociological color. In Power BI it is closer to a forensic tool. You can read the org chart directly off the visualization pane.</p>
+
+<p>Open the map options and count. There is <strong>Map</strong> and <strong>Filled Map</strong>, descendants of Power View, geocoded by Bing. There is <strong>Azure Maps</strong>, built by the Azure Maps team, which requires a tenant administrator to enable it under Integration settings, because of course it does. There is <strong>ArcGIS for Power BI</strong>, built by Esri, governed by Esri’s terms and privacy policy, with its own consent dialog and its own release changelog on Esri’s community forum. And there is <strong>Shape Map</strong>, which renders TopoJSON without touching a service at all and which reached general availability in June 2026, roughly a decade after it entered preview.</p>
+
+<p>Four ways to put a dot on a map. They differ almost entirely in <em>who wrote them</em>.</p>
+
+<p>The obvious question is why not simply consolidate? The answer is instructive, and it is not laziness. Bing Maps is officially scheduled for deprecation — with, in Microsoft’s own careful phrasing, a timeline that has not yet been determined. It cannot be switched off, because Azure Maps does not yet serve China, Korea, or government clouds, and Microsoft’s documentation explicitly instructs users in those regions to <em>stay on the deprecated visual</em>. A visual can be simultaneously dead and mandatory. It can be sunset and load-bearing.</p>
+
+<p>So the four maps persist, and Microsoft does what a large organization with a backward-compatibility covenant does instead of deleting things: it ships a migration dialog. Open a report with legacy maps and Desktop offers to upgrade them all at once, carrying settings across, with a gentle note that some circles may come out smaller because Azure Maps caps marker size lower than Bing capped bubble size. This is the physical sensation of technical debt being serviced rather than repaid.</p>
+
+<hr />
+
+<h2 id="iii-redundancy-that-isnt">III. Redundancy that isn’t</h2>
+
+<p>The complaint that Power BI offers too many ways to do the same thing is nearly universal and almost entirely wrong. It is a category error, and the category is <em>time</em>.</p>
+
+<p>You can build a table in Power Query, or you can build one in DAX. These look interchangeable and are not, because they execute at different moments in a pipeline and therefore see different worlds. Power Query runs at refresh, before the data lands, speaking to the source — which means it can push work back into your SQL server, and which means it cannot see a relationship that does not exist yet. DAX runs at query time, inside the model, with full visibility of relationships and filter context — which means it can do time intelligence and context transition, and which means it cannot fold a predicate into your source.</p>
+
+<p>The rule that falls out of this is elegant, and SQLBI has been repeating it for years: use a DAX calculated column only when the answer depends on <em>other rows or other tables</em>; otherwise use Power Query and pay the cost once. Everything else — dataflows, lakehouse SQL, visual calculations, and the DAX user-defined functions that reached GA in June 2026 — is the same principle at additional altitudes.</p>
+
+<p>The redundancy is not in the engine. It is in the <em>pedagogy</em>. Microsoft has never told anyone this clearly, because telling people clearly would require admitting that the seamless application is actually a pipeline with stages, and the stages have rules, and knowing the rules is now your job.</p>
+
+<hr />
+
+<h2 id="iv-the-annexed-province">IV. The annexed province</h2>
+
+<p>Paginated reports feel bolted on because they are, in the most literal available sense, a different product wearing the same lanyard.</p>
+
+<p>RDL — Report Definition Language — has been part of the Microsoft stack since SQL Server 2000 Reporting Services. When Microsoft says “paginated reports in Power BI,” it means .rdl files executing inside a cloud workspace instead of an on-premises SSRS server. <strong>The infrastructure changed. The rendering engine did not.</strong> Different file format, different authoring tool, different expression language, different data model, different licensing gate.</p>
+
+<p>And it exists for an entirely respectable reason. The interactive canvas is a fixed-size, screen-first surface that fundamentally cannot paginate, and some reporting genuinely is not a dashboard: the forty-page invoice, the financial statement where every decimal lands in a fixed column, the regulatory filing where the auditor needs identical pagination across quarters. Microsoft needed that capability, already owned a mature engine for it, and had decided that SQL Server 2022 would be SSRS’s last release. Annexation was the rational move.</p>
+
+<p>But annexation leaves borders, and the borders are where migration teams bleed. Document Map does not render in the service. SSRS subscriptions do not transfer and must be rebuilt. Linked reports must live in the same workspace. Convergence is real but incremental — Power Query Online reached GA in Report Builder in 2024, browser-based paginated authoring has landed, a Power Query discovery UI arrived in June 2026, CRUD REST APIs in July. This is not neglect. It is a border being slowly dissolved by a team that must not break a single one of the ten thousand invoices already running across it.</p>
+
+<hr />
+
+<h2 id="v-i-use-arch-power-bi-btw">V. I use <del>Arch</del> Power BI, BTW</h2>
+
+<p>Here is where the story turns, because the obvious prescription — <em>Microsoft should expose the modularity instead of pretending it’s one seamless app</em> — turns out to have already happened. Almost nobody noticed.</p>
+
+<p>The model layer is not merely open; it has been open for a quarter century. Semantic models speak <strong>XMLA</strong>, a specification Microsoft published jointly with Hyperion in 2001. That is why a third-party ecosystem worked on day one without anyone’s permission. The External Tools ribbon exists for the sole purpose of handing a registered tool the port number and model name of that local Analysis Services instance — registration being a JSON file dropped in a folder. In the cloud, the XMLA endpoint does the same for published models, and since 9 June 2025 all Fabric capacities default to read/write.</p>
+
+<p>Tabular Editor, connected through this door, can configure object-level security, calculation groups, and partition strategies that <strong>Power BI Desktop’s own interface cannot</strong>. The community tool is more capable than the first-party one, at the layer where capability matters most.</p>
+
+<p>The report layer got the same treatment, belatedly and deliberately: TMDL for the model as plain text, PBIR storing every visual and page and bookmark as an individually schema’d JSON file — <em>publicly documented, explicitly designed to be modified by non-Power BI applications</em> — and PBIP as the project container. The Fabric CLI was open-sourced under MIT in October 2025 with a filesystem metaphor. <code class="language-plaintext highlighter-rouge">semantic-link-labs</code> lives under the <code class="language-plaintext highlighter-rouge">microsoft/</code> GitHub organization. In June 2026 Microsoft shipped a <strong>Desktop Bridge</strong>: a JSON-RPC server running inside the Desktop process, over a named pipe, so agents can read report state, reload from disk, and screenshot themselves for verification.</p>
+
+<p>So the modularity is real, documented, and in several places open source. Which raises the actual question: why does nobody know?</p>
+
+<p>Consider a scene reported by a consultant in Australia: a senior analyst at a bank, hand-authoring eighty measures one at a time through the Desktop properties pane — roughly an hour’s work in Tabular Editor’s scripting console — because she had never heard of Tabular Editor. Neither had anyone on her team. They had all completed a five-day official Power BI course in which external tools were not mentioned.</p>
+
+<p>That is not an accident of curriculum. It is the strategy, expressed as an omission.</p>
+
+<p>Microsoft’s own documentation states plainly that it does not provide support or documentation for external tools except where an issue reproduces in Microsoft’s own. The ecosystem is <em>permitted</em>, not <em>warranted</em>. And the sharpest tell of all: a model modified through the XMLA endpoint <strong>can no longer be downloaded to Power BI Desktop</strong>. Walk through the open door and it locks behind you. There is no clearer statement of institutional ambivalence than an interface you are welcome to use exactly once.</p>
+
+<p>The pattern, once stated, is almost embarrassingly legible. <strong>Microsoft opens what drives consumption and closes what drives acquisition.</strong> The model engine, the CLIs, the REST APIs — all of these increase capacity utilization, which is metered, which is revenue. The Windows-only Desktop, the visual gallery, the drag-and-drop onboarding — these are the funnel, and funnels are not for opening.</p>
+
+<p>It is not that Power BI is a monolith masquerading as modular. It is closer to a Linux distribution that ships a locked-down desktop environment while the package manager sits fully functional, fully documented, and entirely unmentioned in the getting-started guide. The remedy was never re-architecture. It was a sentence in the docs.</p>
+
+<hr />
+
+<h2 id="vi-we-have-power-bi-at-home">VI. We have Power BI at home</h2>
+
+<p>Which invites the natural experiment: if the components are separable, can you separate them entirely? Assemble a stack from open-source parts and see how much of Power BI reappears?</p>
+
+<p>The answer is roughly eighty-five to ninety percent, and the shape of the residual is the interesting part.</p>
+
+<p>Ingestion falls immediately — dlt, Meltano, Airbyte, hundreds of connectors. Transformation doesn’t just fall, it <em>improves</em>: dbt and SQLMesh give you tested, version-controlled, lineage-aware logic, which is more than M has ever offered. Compute is DuckDB, MIT-licensed, columnar-vectorized, embedded, no server, reads Parquet directly, and — the detail that quietly matters most — compiles to WebAssembly and runs in a browser tab. Orchestration is Dagster, which makes Power BI’s refresh scheduler look like a kitchen timer. Paginated output is WeasyPrint or Typst driving CSS Paged Media, a layout system both better documented and more expressive than RDL. Interactive reporting is Superset or Metabase or Lightdash; narrative reporting is Evidence.dev, which is frankly what Power BI should have shipped for anything requiring a paragraph.</p>
+
+<p>The semantic layer is Cube, and Cube is the load-bearing choice, because it is the only open-source option that both <em>defines and serves</em> metrics: standalone server, its own pre-aggregation store, native row-level security and multi-tenancy, and endpoints for REST, GraphQL, SQL, MDX — and DAX.</p>
+
+<p>Hold that last one. It matters in a moment.</p>
+
+<p>Because there is exactly one thing in this stack that cannot be reconstructed, and it is not the file format. Reverse engineering has, remarkably, gotten <em>inside</em> VertiPaq: <code class="language-plaintext highlighter-rouge">pbixray</code> decodes the full chain — XPRESS9 into an Analysis Services backup file, then Huffman dictionaries, then run-length encoding, then bit-packing — and reads .pbix, PowerPivot .xlsx, and .abf files under an MIT license with no Microsoft software installed. The vault is open.</p>
+
+<p>What nobody has built is an engine that <em>evaluates DAX</em>. The best available parser announces in its own documentation that it is designed for introspection and analysis, <strong>not execution</strong>. A DAX-to-SQL translator handles <code class="language-plaintext highlighter-rouge">FILTER</code> and <code class="language-plaintext highlighter-rouge">SUMMARIZE</code> and <code class="language-plaintext highlighter-rouge">CALCULATETABLE</code> and then stops, because the thing it would need to cross is not a function.</p>
+
+<p><code class="language-plaintext highlighter-rouge">CALCULATE</code> is not a function. It is a context-manipulation primitive, and filter context, row context, and context transition have no SQL analogue. Twenty years of Microsoft’s compounding investment sits in that one keyword, and it is the reason a company can open its file format, its wire protocol, its CLI, its report schema, and its process boundary without losing anything that matters.</p>
+
+<p><strong>The moat was never the software. It was the semantics.</strong></p>
+
+<p>The other irreducible gap is less technical and more humbling: self-service authoring. Power BI’s genuine achievement — the one no FOSS stack replicates — is that a supply chain planner with no engineering background can build a working report between lunch and the four o’clock. Metabase’s question builder is the closest analogue and it is not as good. Power BI’s real product is not capability. It is <em>accessibility</em>, and accessibility is extraordinarily expensive to manufacture.</p>
+
+<hr />
+
+<h2 id="vii-portability-is-not-a-separate-project">VII. Portability is not a separate project</h2>
+
+<p>Ask whether Power BI can be ported to Linux or macOS and you receive an unusually unambiguous no. Desktop is WPF plus WebView2 plus a local Analysis Services instance, and Analysis Services has never shipped for Linux at all. Wine and CrossOver do not carry it. A Mac feature request accumulated something on the order of four thousand votes and was formally declined. Parallels, VMware, or a cloud Windows desktop are the entire menu. The mobile apps are consumption-only. The Windows UWP app was retired at the end of 2023, which means the most Microsoft-native client of all is the one that died first.</p>
+
+<p>Now note what happened to that question when the stack was decomposed. DuckDB, dbt, dlt, Cube, Superset, Metabase, Evidence, WeasyPrint, Dagster — every one of them runs natively on Linux, macOS, and Windows. Most are containerized. Several run in a browser.</p>
+
+<p>The portability problem and the emulation problem are not two problems. <strong>They are one problem, and it is solved by the same act.</strong> Nobody needs to port Power BI. They need to replace the single layer that refuses to be portable, and that layer is the Windows shell — which is to say, the funnel.</p>
+
+<hr />
+
+<h2 id="viii">VIII.</h2>
+
+<p>Everything above converges on a single strategic observation, and it inverts the usual framing.</p>
+
+<p>The instinctive response to a platform whose seams show is to demand that the vendor fix the seams. That demand will not be met, and it should not be. Microsoft’s incentives are legible and stable: open what is metered, close what acquires, freeze what is published, and never, under any circumstance, break the invoice that has been running since 2016. A firm optimizing for those constraints produces exactly the artifact we have — a federation with excellent bones, honest protocols, and no narrative.</p>
+
+<p>The better response is to stop treating Power BI as a platform and start treating it as <strong>a client</strong>.</p>
+
+<p>This is what the Cube DAX endpoint is quietly for. Stand up a semantic layer you control, define your metrics there in text under version control, and then point Power BI <em>at it</em>. Your analysts keep the authoring experience that took them four years to learn. Your metric definitions leave the binary and enter Git, where they can be reviewed, tested, diffed, and argued about in a pull request like every other consequential piece of business logic. And the front end becomes what it should always have been: a rendering choice, revisable next quarter, rather than an architecture decision you made in 2017 and have been living inside ever since.</p>
+
+<p>Notice what this does to the DAX moat. You cannot cross it — nobody can — but you can <em>decline to build your city on the far bank</em>. The irreplaceable thing about DAX is its evaluation semantics, not the business logic those semantics happen to encode. Move the logic; leave the language.</p>
+
+<p>The five idiosyncrasies we started with are therefore not a list of defects. They are a map of where a very large organization has drawn its boundaries, and boundaries drawn by someone else’s incentives are precisely the boundaries you should not organize your own work around. The pinch-to-zoom bug is not a metaphor for anything. It is simply what happens when two systems share a window and neither one owns the frame.</p>
+
+<hr />
+
+<p>It remains the case that the close button is still, technically, out there somewhere. Alt+F4 works. It always has. That is arguably the most Microsoft sentence in this entire piece: the escape hatch exists, it is fully documented, it has worked identically since 1985, and nobody thought to mention it.</p>
+
+<p><em>Victor Blancada is a data scientist focused on deriving actionable insights for clients. Visit his LinkedIn page <a href="https://www.linkedin.com/in/geloblancada/">here</a>.</em></p>]]></content><author><name></name></author><category term="blog" /><category term="data science" /><category term="power bi" /><category term="software development" /><summary type="html"><![CDATA[What Power BI's weirdest bugs reveal about how Microsoft actually builds things — and why the fix isn't a better product, it's a better posture.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/pbi-window.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/pbi-window.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Lean Six Sigma Ai copy.md:zone</title><link href="https://victorangeloblancada.github.io/2026/07/31/lean-six-sigma-ai-Copy.md-Zone.Identifier" rel="alternate" type="text/html" title="Lean Six Sigma Ai copy.md:zone" /><published>2026-07-31T00:00:00+08:00</published><updated>2026-07-31T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/2026/07/31/lean-six-sigma-ai%20-%20Copy.md:Zone</id><content type="html" xml:base="https://victorangeloblancada.github.io/2026/07/31/lean-six-sigma-ai-Copy.md-Zone.Identifier"><![CDATA[[ZoneTransfer]
+ZoneId=3]]></content><author><name></name></author><summary type="html"><![CDATA[[ZoneTransfer] ZoneId=3]]></summary></entry><entry><title type="html">When the Bell Curve Bends: Lean Six Sigma in the Age of Machine Intelligence</title><link href="https://victorangeloblancada.github.io/blog/2026/07/31/lean-six-sigma-ai.html" rel="alternate" type="text/html" title="When the Bell Curve Bends: Lean Six Sigma in the Age of Machine Intelligence" /><published>2026-07-31T00:00:00+08:00</published><updated>2026-07-31T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2026/07/31/lean-six-sigma-ai</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2026/07/31/lean-six-sigma-ai.html"><![CDATA[<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
 </script>
 
 <p>In classical physics, Newtonian mechanics described a deterministic universe—a world of point-like certainties, where forces applied to massive bodies yielded predictable, linear trajectories. But when physicists turned their lenses to the subatomic realm, classical equations collapsed. They were forced to transition to quantum mechanics: a framework defined by wave functions, probability distributions, and the unsettling truth that measuring a state alters it.</p>
@@ -60,7 +210,7 @@
 
 <p>where \(p_{\text{deep}}\) is the fraction of outputs requiring substantive adjudication and \(p_{\text{light}}\) is the fraction requiring only a skim.</p>
 
-<p>Let us look at a concrete example to clarify this. In my day job managing container flows and warehouse floor layouts at Maersk Logistics (which underwent a painful acquisition in 2022 that I am still spiritually recovering from), we track bottlenecks relentlessly. Consider an analytics team of five people processing 1,200 customer-inquiry classifications per day. Available review time is \(5 \times 8 \times 60 = 2{,}400\) minutes. Traditional takt would demand a two-minute cycle per inquiry, which is barely feasible for a human working alone.</p>
+<p>Let us look at a concrete example to clarify this. Consider an analytics team of five people processing 1,200 customer-inquiry classifications per day. Available review time is \(5 \times 8 \times 60 = 2{,}400\) minutes. Traditional takt would demand a two-minute cycle per inquiry, which is barely feasible for a human working alone.</p>
 
 <p>Introduce an AI classifier whose measured trustworthiness on the task is 95 percent, and let deep review consume five minutes while light review consumes 30 seconds. Effective demand on human time becomes:</p>
 
@@ -216,7 +366,7 @@
   <li><strong>External Failure:</strong> Now includes the reputational, legal, and customer-satisfaction cost of a hallucination that reached the customer, and it is by far the largest of the four when it materializes.</li>
 </ul>
 
-<p>The strategic point is that these four categories are substitutes for one another across a curve whose shape must be estimated empirically. My finance colleagues at Maersk react to words like "verifier tokens" and "prompt engineering" with the blank stare of someone reading a foreign instruction manual, but the moment you translate them into Juran’s four-bucket vocabulary, the CFO’s eyes light up.</p>
+<p>The strategic point is that these four categories are substitutes for one another across a curve whose shape must be estimated empirically.</p>
 
 <p>Under-investing in prevention forces higher appraisal spend; under-investing in both makes internal failure explode and eventually leaks into external failure. Over-investing in appraisal—say, by running three verifier passes on every output—reduces external failure to nearly zero but at a per-output cost that may exceed the value of the output itself. The cost-per-verified-output metric is precisely the operational proxy for finding the Juran minimum in the token economy: it measures the total spend across prevention, appraisal, and internal failure per unit of useful yield, and it can be tracked over time as the model, the harness, and the process mature.</p>
 
@@ -1183,636 +1333,4 @@
 
 <p>For cognitive science, the Jacobian lens offers a fully observable, intervenable system to study the functional signatures of access consciousness. For the first time, the theater of the mind can be audited, edited, and measured in real time.</p>
 
-<p><em>Victor Blancada is a data scientist focused on deriving actionable insights for clients. Visit his LinkedIn page <a href="https://www.linkedin.com/in/geloblancada/">here</a>.</em></p>]]></content><author><name></name></author><category term="blog" /><category term="data science" /><category term="machine learning" /><category term="interpretability" /><category term="cognitive science" /><summary type="html"><![CDATA[Anthropic’s new Jacobian lens reveals that frontier language models maintain a centralized global workspace—a compact cognitive space where silent reasoning occurs before it is spoken.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/lens.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/lens.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">The Prompt Template Is Part of the Runtime Now</title><link href="https://victorangeloblancada.github.io/blog/2026/07/06/gemma-4.html" rel="alternate" type="text/html" title="The Prompt Template Is Part of the Runtime Now" /><published>2026-07-06T00:00:00+08:00</published><updated>2026-07-06T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2026/07/06/gemma-4</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2026/07/06/gemma-4.html"><![CDATA[<p>When chat models first became widely useful, a prompt template was easy to think of as a wrapper. You had a system message, a user message, and an assistant response. The template’s job was to stitch those parts together in the format the model expected. If the formatting was a little off, the model might sound awkward, ignore an instruction, or print an extra <code class="language-plaintext highlighter-rouge">Assistant:</code> prefix. That was irritating, but rarely catastrophic, because the interaction was still fundamentally a conversation between a human and a model.</p>
-
-<p>Gemma 4 showed why that mental model is now out of date. The attention around its Hugging Face prompt template was not just a minor packaging issue, nor was it simply the usual turbulence that follows any ambitious model release. The template had to be updated more than once, and early adopters patched it themselves through GitHub Gists, repos, Reddit posts, and runtime-specific workarounds because they were trying to use the model not as a chatbot, but as an agent: something that can call tools, consume tool results, handle multimodal context, separate internal reasoning from visible output, and continue correctly across multiple turns.</p>
-
-<p>That is the important shift. For an agentic model, the prompt template is no longer “prompt engineering garnish.” It is closer to a protocol definition. It tells the model where the system instruction begins and ends, where tools are declared, how a tool call should be represented, how tool results come back, where image or audio placeholders belong, and which parts of the generation are internal reasoning versus user-facing output. If those boundaries are wrong, the failure is not stylistic; the agent loop itself can break.</p>
-
-<p>A simple Gemma-style chat exchange might look something like this:</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;bos&gt;
-&lt;|turn&gt;system
-You are a helpful assistant.
-&lt;turn|&gt;
-
-&lt;|turn&gt;user
-Explain container orchestration.
-&lt;turn|&gt;
-
-&lt;|turn&gt;model
-</code></pre></div></div>
-
-<p>This still resembles a normal chat format. There are roles, turn delimiters, and an assistant continuation point. But once tools enter the picture, the template becomes much more than a neat serialization of chat history. It becomes a structured message passed between the model and the runtime.</p>
-
-<p>For example, a tool declaration might be rendered as:</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;|turn&gt;system
-You are a helpful assistant.
-
-&lt;|tool&gt;
-declaration:get_current_temperature{
-  description:&lt;|"|&gt;Gets the current temperature for a given location.&lt;|"|&gt;,
-  parameters:{
-    properties:{
-      location:{
-        description:&lt;|"|&gt;The city name, e.g. London&lt;|"|&gt;,
-        type:&lt;|"|&gt;STRING&lt;|"|&gt;
-      }
-    },
-    required:[&lt;|"|&gt;location&lt;|"|&gt;],
-    type:&lt;|"|&gt;OBJECT&lt;|"|&gt;
-  }
-}
-&lt;tool|&gt;
-&lt;turn|&gt;
-</code></pre></div></div>
-
-<p>A model tool call might then appear as:</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;|turn&gt;model
-&lt;|tool_call&gt;
-get_current_temperature{
-  location:&lt;|"|&gt;London&lt;|"|&gt;
-}
-&lt;tool_call|&gt;
-&lt;turn|&gt;
-</code></pre></div></div>
-
-<p>And the runtime may return the result like this:</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;|turn&gt;user
-&lt;|tool_response&gt;
-get_current_temperature{
-  temperature:&lt;|"|&gt;18°C&lt;|"|&gt;,
-  condition:&lt;|"|&gt;Cloudy&lt;|"|&gt;
-}
-&lt;tool_response|&gt;
-&lt;turn|&gt;
-
-&lt;|turn&gt;model
-The current temperature in London is 18°C and cloudy.
-&lt;turn|&gt;
-</code></pre></div></div>
-
-<p>The exact tokens may vary by model and serving stack, but the underlying point is the same: the template is now carrying state. It is not only formatting prose; it is preserving boundaries between tool definitions, tool invocations, tool results, user messages, assistant messages, hidden reasoning, and assistant continuation points. A misplaced delimiter can mean the difference between a functioning agent and one that refuses to call a tool, leaks internal scaffolding, or loses track of the previous step.</p>
-
-<h3 id="the-failures-were-small-but-the-consequences-were-not">The Failures Were Small, but The Consequences Were Not</h3>
-
-<p>The fixes and community patches around Gemma 4 clustered around a few categories. One class involved system-instruction and tool-call handling. That sounds mundane until you remember what a system instruction often contains in an agentic setting: when to use tools, how to handle destructive actions, how to report execution results, whether to ask for confirmation, and how to avoid pretending that a tool ran when it did not. If the tool declarations are rendered outside the expected control region, or if the assistant continuation is placed incorrectly, the model may not reliably see the operating contract it is supposed to follow.</p>
-
-<p>A fragile rendering might separate the tool declaration from the system instruction in a way the model did not learn well:</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;|turn&gt;system
-You are a helpful assistant.
-&lt;turn|&gt;
-
-&lt;|tool&gt;
-declaration:bash{...}
-&lt;tool|&gt;
-</code></pre></div></div>
-
-<p>A more appropriate rendering may need to keep the tool declaration in the system-managed portion of the prompt, so the model receives the instruction and the available tools as one coherent operating context:</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;|turn&gt;system
-You are a helpful assistant. Use tools when needed, but do not claim that a command has run until the tool response is returned.
-
-&lt;|tool&gt;
-declaration:bash{
-  description:&lt;|"|&gt;Execute a shell command.&lt;|"|&gt;,
-  parameters:{
-    properties:{
-      command:{
-        description:&lt;|"|&gt;The shell command to execute.&lt;|"|&gt;,
-        type:&lt;|"|&gt;STRING&lt;|"|&gt;
-      }
-    },
-    required:[&lt;|"|&gt;command&lt;|"|&gt;],
-    type:&lt;|"|&gt;OBJECT&lt;|"|&gt;
-  }
-}
-&lt;tool|&gt;
-&lt;turn|&gt;
-</code></pre></div></div>
-
-<p>This kind of difference can look small in a pull request, but it is large in behavior. To the model, the template is part of the language of interaction. If the language changes, the model may still produce fluent text, but it may no longer produce the machine-readable action the runtime expects.</p>
-
-<p>Another class of failures involved reasoning-channel leakage. Gemma 4-style agentic workflows can distinguish between internal reasoning and external output. Conceptually, a model might produce something like this:</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;|channel&gt;thought
-The user is asking for a live directory listing, so I should use the shell tool rather than answer from memory.
-&lt;channel|&gt;
-
-&lt;|tool_call&gt;
-bash{
-  command:&lt;|"|&gt;ls /tmp&lt;|"|&gt;
-}
-&lt;tool_call|&gt;
-</code></pre></div></div>
-
-<p>In a well-integrated stack, the runtime would separate the reasoning from the tool call and expose only the appropriate fields to the application:</p>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"reasoning_content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The user is asking for a live directory listing, so I should use the shell tool rather than answer from memory."</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"tool_calls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bash"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"arguments"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ls /tmp"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-<p>But in some setups, reasoning markers or reasoning text appeared in the visible assistant output. Sometimes special tokens were stripped before the parser saw them; sometimes the template replayed reasoning fields in a runtime that did not know how to hide them. The result could be output like:</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thought
-The user is asking for a live directory listing, so I should use the shell tool rather than answer from memory.
-
-I will now list the files.
-</code></pre></div></div>
-
-<p>For a chatbot, this is embarrassing. For an agent, it is worse, because downstream parsers may interpret the leaked text as normal assistant content, the user interface may display internal scaffolding, and the system may lose the distinction between deliberation, action, and final answer. Some community patches handled this pragmatically by suppressing reasoning replay in environments that did not support reasoning channels correctly:</p>
-
-<div class="language-jinja highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="c">{# Avoid replaying reasoning fields in runtimes that leak them #}</span>
-<span class="cp">{%</span> <span class="k">if</span> <span class="nv">message.role</span> <span class="o">==</span> <span class="s2">"assistant"</span> <span class="cp">%}</span>
-  <span class="cp">{%</span> <span class="k">if</span> <span class="nv">message.content</span> <span class="cp">%}</span>
-    <span class="cp">{{</span> <span class="nv">message.content</span> <span class="cp">}}</span>
-  <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
-  <span class="cp">{%</span> <span class="k">if</span> <span class="nv">message.tool_calls</span> <span class="cp">%}</span>
-    <span class="cp">{{</span> <span class="nv">render_tool_calls</span><span class="p">(</span><span class="nv">message.tool_calls</span><span class="p">)</span> <span class="cp">}}</span>
-  <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
-<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
-
-</code></pre></div></div>
-
-<p>That kind of patch is sensible, but it also shows the deeper ambiguity: who owns reasoning separation? Is it the chat template, the tokenizer, the inference server, the OpenAI-compatible shim, or the agent framework? In practice, it is a cross-layer contract, and when the layers disagree, the user sees a broken agent rather than a distributed systems problem.</p>
-
-<p>A third class involved multimodal placeholders inside tool responses. This is easy to underestimate until you imagine an agent that calls a screenshot tool. The tool might return structured content:</p>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tool"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"take_screenshot"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Screenshot captured."</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-<p>A template that only extracts text could render the response as:</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;|tool_response&gt;
-take_screenshot{
-  result:&lt;|"|&gt;Screenshot captured.&lt;|"|&gt;
-}
-&lt;tool_response|&gt;
-</code></pre></div></div>
-
-<p>The image has not merely been ignored; it has been disconnected from the prompt. The multimodal processor may still have an image tensor ready, but the prompt contains no placeholder telling the model where that image belongs. The corrected rendering needs to preserve the placeholder:</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;|tool_response&gt;
-take_screenshot{
-  result:&lt;|"|&gt;Screenshot captured.&lt;|"|&gt;
-}
-&lt;|image|&gt;
-&lt;tool_response|&gt;
-</code></pre></div></div>
-
-<p>This is the kind of issue that makes clear why prompt templates are now infrastructure. In a text-only chatbot, dropping a non-text part might degrade an answer. In a multimodal agent, it can break alignment between the serialized prompt and the model inputs.</p>
-
-<p>Streaming created its own class of problems. A non-streaming tool call is often easy to parse because the runtime receives the whole object at once:</p>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"finish_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tool_calls"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"tool_calls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"function"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bash"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"arguments"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{</span><span class="se">\"</span><span class="s2">command</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">ls /tmp</span><span class="se">\"</span><span class="s2">}"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-<p>In streaming mode, however, the same call may arrive in pieces:</p>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"choices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"delta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"tool_calls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"function"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bash"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-<p>Then:</p>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"choices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"delta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"tool_calls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"function"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="nl">"arguments"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{</span><span class="se">\"</span><span class="s2">command</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">ls"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-<p>Then:</p>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"choices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"delta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"tool_calls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"function"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="nl">"arguments"</span><span class="p">:</span><span class="w"> </span><span class="s2">" /tmp</span><span class="se">\"</span><span class="s2">}"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nl">"finish_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tool_calls"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-<p>If the client or agent framework does not reconstruct those fragments correctly, the model may appear to have failed to use tools even though the tool call was produced. The bug is then not in the model’s capability, but in the protocol bridge between model output and agent action.</p>
-
-<h3 id="the-old-template-was-prose-the-new-template-is-an-interface">The Old Template was Prose; The New Template is an Interface</h3>
-
-<p>The easiest way to frame this is to borrow a concept from systems programming. An ABI defines how compiled components call each other: which values go where, how arguments are passed, how return values are represented, and which conventions both sides must obey. If the ABI is wrong, two correct components can fail together.</p>
-
-<p>Agentic LLMs now have a similar boundary. The model has learned a control language. The serving runtime has parsers. The tool framework has schemas. The client may expect OpenAI-style tool calls. The UI may expect visible content and hidden reasoning to be separated. The chat template sits in the middle, translating conversation state into the model’s expected language and back again.</p>
-
-<p>A typical agent loop depends on this sequence being exact: the runtime renders the system instruction, renders available tools, appends the user request, waits for either a final answer or a tool call, parses the tool call, executes the tool, renders the tool result, and prompts the model to continue. If the tool declaration is malformed, the model may not know what it can call. If the reasoning boundary is mishandled, hidden text can leak. If the tool response is rendered incorrectly, the model may not understand the result. If the assistant continuation marker is wrong, the model may continue the wrong turn.</p>
-
-<p>This is why early adopters patched templates themselves. They were not arguing about punctuation. They were repairing the interface between the model and the rest of the system.</p>
-
-<h3 id="so-what">So What?</h3>
-
-<p>The practical lesson is straightforward: if you are building agents, treat the chat template as part of the model artifact. Do not treat it as sample code, documentation, or a convenience snippet copied from a model card. It is part of the runtime contract, and it should be pinned, tested, reviewed, and versioned along with the weights, tokenizer, serving engine, tool parser, reasoning parser, client SDK, and agent framework.</p>
-
-<p>A serious agent deployment should know exactly which versions of these components belong together:</p>
-<ul>
-  <li>model weights;</li>
-  <li>tokenizer;</li>
-  <li>chat template;</li>
-  <li>serving runtime;</li>
-  <li>tool parser;</li>
-  <li>reasoning parser;</li>
-  <li>structured-output backend;</li>
-  <li>client SDK;</li>
-  <li>agent framework; and</li>
-  <li>frontend or IDE integration.</li>
-</ul>
-
-<p>Changing any one of them can break the others. A new runtime may strip special tokens earlier than before. A new template may render tool responses differently. A client SDK may alter streaming reconstruction. A model conversion may preserve weights but lose the original template. A quantized local package may work for chat but fail in multi-turn tool use. These are not theoretical worries; they are the ordinary failure modes of agentic systems.</p>
-
-<p>The test plan should change accordingly. It is not enough to ask whether the model gives a good answer to a prompt. Teams should test whether the full loop works:</p>
-
-<ul>
-  <li>Single-turn chat renders correctly.</li>
-  <li>Multi-turn chat preserves roles and turn boundaries.</li>
-  <li>System instructions remain in the expected control region.</li>
-  <li>Tool declarations render with valid schemas.</li>
-  <li>The model emits a valid tool call when a tool is needed.</li>
-  <li>The runtime parses that tool call correctly.</li>
-  <li>Streaming tool calls are reconstructed correctly.</li>
-  <li>Tool responses are rendered back into the conversation correctly.</li>
-  <li>The model resumes after a tool response instead of starting over.</li>
-  <li>Reasoning content is separated from user-visible content.</li>
-  <li>Thinking-off mode does not break structured output.</li>
-  <li>Multimodal user input preserves image/audio placeholders.</li>
-  <li>Multimodal tool responses preserve image/audio placeholders.</li>
-  <li>JSON schema constraints are actually enforced.</li>
-  <li>A five-turn tool-using workflow survives without format drift.</li>
-</ul>
-
-<p>The important question is not merely, “Can the model answer?” It is, “Can the system act, observe, continue, and stay inside the contract?”</p>
-
-<h3 id="why-this-episode-matters-beyond-gemma-4">Why This Episode Matters Beyond Gemma 4</h3>
-
-<p>The Gemma 4 template issue is interesting because it captures a broader transition in LLM engineering. The industry is moving from chat to action. In chat, the human is the parser of last resort; if the model says something slightly odd, the user can infer what it meant. In agentic workflows, the next consumer is often code. Code is less forgiving. It needs typed calls, reliable delimiters, valid schemas, and predictable stop conditions.</p>
-
-<p>That difference raises the engineering standard. A model may have strong reasoning ability, long context, good multimodal understanding, and impressive benchmark results, yet still feel unreliable if the protocol around it is loose. The reverse is also true: a smaller model with a clean, well-tested tool interface can feel more useful in production than a stronger model wrapped in a brittle integration layer.</p>
-
-<p>This is the quiet lesson behind the prompt-template fiasco. We often talk about prompts as if they are natural language instructions, and sometimes they are. But in modern agent systems, the most important parts of the prompt are often not natural language at all. They are delimiters, schemas, placeholders, channel markers, continuation tokens, and parser assumptions. They are the parts humans barely notice and machines cannot forgive.</p>
-
-<p>The final takeaway is not “be careful with Gemma 4,” nor is it “large model releases are hard.” The takeaway is more general and more useful: as LLM applications become agents, the interface between model and runtime becomes a first-class engineering surface. The prompt template is one of those interfaces. Treat it with the same seriousness you would give to an API contract, because in an agentic system, that is what it has become.</p>]]></content><author><name></name></author><category term="blog" /><category term="ai" /><category term="agent" /><category term="agentic ai" /><category term="gemma" /><category term="google" /><summary type="html"><![CDATA[The Gemma 4 prompt-template dust-up was not really about Jinja syntax or special tokens. It was about a deeper shift in AI systems - as LLMs move from chatbots to agents, the prompt template becomes part of the runtime contract. When that contract is even slightly wrong, tools fail, reasoning leaks, multimodal inputs fall out of alignment, and a capable model can look broken.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/puzzle.webp" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/puzzle.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">What Even is an Agent?</title><link href="https://victorangeloblancada.github.io/blog/2026/06/30/what-even-is-an-agent.html" rel="alternate" type="text/html" title="What Even is an Agent?" /><published>2026-06-30T00:00:00+08:00</published><updated>2026-06-30T00:00:00+08:00</updated><id>https://victorangeloblancada.github.io/blog/2026/06/30/what-even-is-an-agent</id><content type="html" xml:base="https://victorangeloblancada.github.io/blog/2026/06/30/what-even-is-an-agent.html"><![CDATA[<p>Microsoft Copilot uses the word “agent” to name assistants inside Microsoft 365: Researcher, Word Agent, Excel Agent, PowerPoint Agent, and others. The usage is reasonable. A user deciding how to draft a document, analyze a workbook, build a deck, or produce a research brief needs a clear product label, not an architecture diagram. Microsoft’s term works well at that layer: it tells the user which kind of help to invoke.</p>
-
-<p>Engineers, however, need a stricter definition. In current frontier practice, an agent is not merely a named assistant. An agent is an language model-driven execution loop: a system that can reason about a goal, choose tools, act on an environment, observe the result, update state, and continue until the work is done or stopped. OpenAI’s agent documentation describes agents around models, instructions, tools, guardrails, handoffs, MCP servers, and structured outputs; its broader framing treats agents as applications that plan, call tools, collaborate, and maintain state for multi-step work.</p>
-
-<p>The difference is not a quarrel over words. It changes what engineers can build, evaluate, govern, and trust. A Copilot agent is usually a packaged productivity capability. An agentic workflow is an architecture for delegated work.</p>
-
-<h2 id="the-original-definition-of-an-agent-was-useful-but-incomplete">The Original Definition of an Agent was Useful but Incomplete</h2>
-
-<p>The original LLM-era definition of an agent was simple: an agent is a language model prompted with a persona that modifies its behavior.</p>
-
-<p>Under that definition, an agent was a model prompted to behave as something: a researcher, analyst, planner, tutor, engineer, or critic. The system prompt gave the model its role, tone, goals, and boundaries. A “data engineering agent” would respond like a data engineer. A “research agent” would reply like a researcher.</p>
-
-<p>In hindsight, that definition was useful but would turn out to be incomplete.</p>
-
-<p>A persona changes the model’s stance. It does not give the system hands. A model with a researcher persona can write in the style of a researcher.</p>
-
-<p>A true agentic workflow, however, can search, retrieve, compare, cite, draft, revise, call tools, inspect files, execute code, and decide whether another step is needed.</p>
-
-<p>The old definition described behavior at the language layer, but the modern definition describes behavior at the system layer.</p>
-
-<h2 id="a-modern-agent-is-a-loop">A Modern Agent is a Loop</h2>
-
-<p>A more precise working definition for an agent would be:</p>
-
-<blockquote>
-  <p>An agent is an LLM-centered control system that uses instructions, tools, state, and an execution loop to make progress toward a goal under constraints.</p>
-</blockquote>
-
-<p>The decisive word here in this definition of an agent is <strong>loop</strong>.</p>
-
-<p>Modern agentic workflows follow the following rhythm:</p>
-
-<ol>
-  <li>The user supplies a goal</li>
-  <li>The model interprets the goal</li>
-  <li>The system exposes tools and context</li>
-  <li>The model chooses an action</li>
-  <li>The environment feedbacks an observation</li>
-  <li>The model updates its plan</li>
-  <li>The loop continues until the system reaches a stopping condition such as meeting the goal</li>
-</ol>
-
-<p>The illustrious Claude Code is a useful, well-known, concrete example. Anthropic describes Claude Code as an agent that reads a codebase, edits files, and runs commands across a terminal, IDE, desktop app, and browser.  Anthropic also describes it as an agentic coding system that searches codebases, edits across files, executes through the toolchain, runs tests, and handles CI failures.</p>
-
-<p>Claude Code as an example marks a useful boundary: a chatbot can discuss a repository, but an agentic coding system can work inside one.</p>
-
-<p>The model supplies judgment, but the harness supplies agency.</p>
-
-<h2 id="microsofts-usage-is-not-wrong-but-it-is-product-oriented">Microsoft’s Usage is Not Wrong, but it is Product-Oriented</h2>
-
-<p>Microsoft’s use of “agent” is best viewed as a product abstraction for marketing purposes.</p>
-
-<p>Researcher in Microsoft 365 Copilot is described as an intelligent assistant for complex, multi-step research that can draw from work content and the web and produce source-cited reports.  Microsoft also describes Word, Excel, and PowerPoint Agents as chat-first co-creators that help create documents, spreadsheets, and presentations inside Microsoft 365 Copilot.</p>
-
-<p>This naming convention makes sense for non-technical users. Someone choosing between standard Copilot chat and Researcher does not need a lecture on orchestration. The product label instead says, in effect, “Use this assistant for this kind of work.”</p>
-
-<p>A problem, however, appears when engineers carry that product meaning into architecture discussions.</p>
-
-<p>A Copilot agent may potentially contain agentic techniques internally. It may possibly retrieve context, reason over sources, use internal tools, ask clarifying questions, generate artifacts, and operate within Microsoft 365’s security and compliance boundaries. Researcher, for example, is positioned as deeper and more multi-step than standard Copilot chat.</p>
-
-<p>The user-facing name, however, does not specify the machinery: it does not tell the engineer what tools are exposed, which actions are possible, how state is represented, whether the loop is inspectable, what approvals are enforced, how failures are retried, or whether the workflow can be extended with custom skills, MCP servers, sub-agents, or sandboxes.</p>
-
-<p>Microsoft’s term is useful. It is also not exactly wrong, but it is simply broader and looser than the technical term.</p>
-
-<h2 id="a-better-metaphor-for-agents-are-workcells">A Better Metaphor for Agents are Workcells</h2>
-
-<p>If a persona is a costume and a Copilot agent is a specialist desk, then an agentic workflow is a workcell.</p>
-
-<p>In lean manufacturing, a workcell has tools, inputs, procedures, safety rules, inspection points, escalation paths, and output criteria. Its behavior comes not from the name on the station but from the system built around it.</p>
-
-<p>The same logic from lean manufacturing also applies to agents. A serious agentic workflow needs:</p>
-
-<ul>
-  <li>a model selected for the task</li>
-  <li>instructions that define role, constraints, and output contract</li>
-  <li>tools that let the system read, write, compute, search, execute, or delegate</li>
-  <li>state that records progress, intermediate artifacts, and prior observations</li>
-  <li>permissions that decide what the model may do</li>
-  <li>guardrails that block unsafe or low-confidence actions</li>
-  <li>checkpoints and rollback for recoverability</li>
-  <li>traces and logs for inspection</li>
-  <li>evaluations that judge completed work, not fluent prose</li>
-</ul>
-
-<p>OpenAI’s tooling makes these concerns explicit through tools, guardrails, handoffs, sessions, tracing, sandbox agents, and human-in-the-loop mechanisms.  Anthropic’s Claude Code work similarly emphasizes IDE integration, checkpointing, subagents, hooks, and SDK-level customization for more autonomous operation.</p>
-
-<p>An agent is therefore less like a clever yet isolated employee and more like a governed machine with a model in the control center.</p>
-
-<h2 id="mcp-makes-the-boundary-visible">MCP Makes the Boundary Visible</h2>
-
-<p>The Model Context Protocol helps explain why modern agentic systems feel different from application assistants.</p>
-
-<p>Anthropic introduced MCP as an open standard for connecting AI assistants to systems where data lives, including repositories, business tools, and development environments.  The MCP specification describes a standard way for LLM applications to integrate with external data sources and tools, with servers exposing resources, prompts, and tools to clients.</p>
-
-<p>MCP turns an agent from a prompt into a participant in an ecosystem.</p>
-
-<p>Before MCP and MCP-like patterns, each tool connection tended to be bespoke. After MCP, an agentic system can attach to standardized capabilities: repositories, databases, ticketing systems, filesystems, browsers, internal APIs, business tools, etc.</p>
-
-<p>MCP is not the agent, but MCP is its plumbing. The agent is the controller that decides which pipe to use, when to use it, and what to do with the result.</p>
-
-<p>The shift to MCP changes the engineering questions. The interesting questions are no longer limited to what the assistant should say, what tone it should use, or what content it should generate. The more important questions are now:</p>
-
-<ul>
-  <li>What can the system read?</li>
-  <li>What can the system change?</li>
-  <li>Which tools are available at each step?</li>
-  <li>What state persists across steps?</li>
-  <li>What actions require approval?</li>
-  <li>How are tool calls logged?</li>
-  <li>How does the loop recover from error?</li>
-  <li>What proves that the task is complete?</li>
-</ul>
-
-<p>Those are questions that define agentic work.</p>
-
-<h2 id="why-does-this-distinction-even-matter">Why Does This Distinction Even Matter?</h2>
-
-<p>Teams that live in enterprise platforms such as Microsoft 365, Teams, SharePoint, Power Platform, Fabric, Azure, Purview, and Graph can easily conclude that they already understand agents because Copilot exposes an Agents menu. That conclusion is partly true but also partly limiting.</p>
-
-<p>Copilot agents are useful for work that naturally ends in a Microsoft 365 artifact: a report, deck, spreadsheet, meeting summary, email, or structured answer. They are purpose-built for the productivity surface.</p>
-
-<p>Agents, in the context of agentic workflows, address a different class of problem: tasks where the system must operate across tools, inspect intermediate results, repair mistakes, and continue. Examples include:</p>
-
-<ul>
-  <li>refactoring a codebase</li>
-  <li>migrating a data pipeline</li>
-  <li>debugging CI failures</li>
-  <li>reconciling semantic model changes</li>
-  <li>generating and testing SQL transformations</li>
-  <li>validating data quality rules</li>
-  <li>repairing orchestration jobs</li>
-  <li>creating pull requests</li>
-  <li>querying multiple operational systems</li>
-  <li>coordinating several specialized workers</li>
-</ul>
-
-<p>A Copilot agent may help with pieces of these tasks, but an actual agentic workflow is designed to own the loop.</p>
-
-<p>For engineers, the risk is not that the terminology is wrong. The risk is category error: agents as a product label and a runtime architecture answer different questions.</p>
-
-<p>The product question is: <strong>Which assistant should the user invoke?</strong><br />
-The engineering question is: <strong>What system can safely perform this work?</strong></p>
-
-<h2 id="a-practical-test">A Practical Test</h2>
-
-<p>A simple test separates the two meanings:</p>
-
-<blockquote>
-  <p>If the system mainly gives a named assistant for a bounded user task, “agent” is being used in the product sense.<br />
-If the system can choose tools, act on an environment, observe results, update state, and iterate toward a goal, “agent” is being used in the technical sense.</p>
-</blockquote>
-
-<p>This test is mechanical by design: it avoids arguments about branding and focuses on capability.</p>
-
-<p>A model with a persona is not enough, a chat interface is not enough, a menu item called “Agent” is not enough - a truly agentic workflow only exists when the model participates in a governed action loop.</p>
-
-<h2 id="a-glossary-of-cleaner-vocabulary">A Glossary of Cleaner Vocabulary</h2>
-
-<p>The precise vocabulary below prevents confusion without forcing anyone to abandon useful product terms.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Term</th>
-      <th>Meaning</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Persona</td>
-      <td>The role, tone, and behavioral frame given to a model through instructions.</td>
-    </tr>
-    <tr>
-      <td>Assistant</td>
-      <td>A conversational system that helps a user produce an answer or artifact.</td>
-    </tr>
-    <tr>
-      <td>Copilot agent</td>
-      <td>A Microsoft-branded, task-oriented Copilot capability inside a product surface.</td>
-    </tr>
-    <tr>
-      <td>Tool</td>
-      <td>A callable capability that lets the system read, write, compute, retrieve, execute, or delegate.</td>
-    </tr>
-    <tr>
-      <td>MCP server</td>
-      <td>A standardized provider of context, prompts, or tools to an AI application.</td>
-    </tr>
-    <tr>
-      <td>Harness</td>
-      <td>The runtime code that manages tools, state, permissions, retries, approvals, and stopping rules.</td>
-    </tr>
-    <tr>
-      <td>Sub-agent</td>
-      <td>A specialized agent or worker invoked by another agent or orchestrator.</td>
-    </tr>
-    <tr>
-      <td>Agentic workflow</td>
-      <td>The full loop in which an LLM uses tools and state to act iteratively toward a goal.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>This glossary keeps both meanings intact.</p>
-
-<p>Copilot agents are agents in the Microsoft product sense. Agents in agentic workflows are agents in the engineering-system sense. The second meaning is the one engineers should use when designing systems.</p>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>The word “agent” began as a light abstraction: a language model with a persona. Enterprise software such as Microsoft then made the word accessible by applying it to named Copilot experiences that help users perform specific kinds of work inside Microsoft 365. That product usage is understandable and often helpful.</p>
-
-<p>The technical frontier has made the word stricter.</p>
-
-<p>A modern agent is not defined by its name, persona, or chat surface. A modern agent is defined by a loop: model, tools, state, action, observation, control, and termination.</p>
-
-<p>Copilot agents package assistance, while agentic workflows execute governed work.</p>
-
-<p>Both these definitions matter and they should not be conflated.</p>
-
-<p>The cleanest formulation today is:</p>
-
-<blockquote>
-  <p>A persona tells a model how to behave.<br />
-A Copilot agent tells a user which assistant to use.<br />
-An agentic workflow gives a model the machinery to act.</p>
-</blockquote>
-
-<p>This is the bridge between the two worlds of product and engineering.</p>
-
-<h2 id="summary-comparison-table">Summary Comparison Table</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>Dimension</th>
-      <th>Microsoft Copilot “Agent”</th>
-      <th>Agentic Workflow</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Primary meaning</td>
-      <td>A named Microsoft 365 Copilot experience for a bounded class of work.</td>
-      <td>A system in which a model acts through an iterative loop.</td>
-    </tr>
-    <tr>
-      <td>Best mental model</td>
-      <td>A specialist inside a productivity suite.</td>
-      <td>A controlled execution loop.</td>
-    </tr>
-    <tr>
-      <td>User experience</td>
-      <td>Copilot Chat, Word, Excel, PowerPoint, Researcher, or another Microsoft 365 surface.</td>
-      <td>Terminal, IDE, sandbox, MCP client, workflow engine, browser, CI system, or custom application.</td>
-    </tr>
-    <tr>
-      <td>Core abstraction</td>
-      <td>Product capability.</td>
-      <td>Runtime architecture.</td>
-    </tr>
-    <tr>
-      <td>Tool use</td>
-      <td>Often present but hidden behind the product boundary.</td>
-      <td>Explicit, inspectable, extensible, and governed.</td>
-    </tr>
-    <tr>
-      <td>Autonomy</td>
-      <td>Scoped to the Microsoft 365 task and application model.</td>
-      <td>Scoped by tools, permissions, state, approvals, sandboxing, and stopping rules.</td>
-    </tr>
-    <tr>
-      <td>Extensibility</td>
-      <td>Mostly through Microsoft-provided surfaces and enterprise integrations.</td>
-      <td>Through harnesses, MCP servers, skills, sub-agents, code sandboxes, structured outputs, guardrails, and orchestration logic.</td>
-    </tr>
-    <tr>
-      <td>Correct technical sense of “agent”</td>
-      <td>A useful product term, but not the strict engineering definition.</td>
-      <td>The strict engineering definition: an LLM-driven system that can act, observe, and iterate toward a goal.</td>
-    </tr>
-    <tr>
-      <td>Practical test</td>
-      <td>“Which Copilot capability should I use?”</td>
-      <td>“What loop, tools, state, and controls let the model complete the task?”</td>
-    </tr>
-  </tbody>
-</table>]]></content><author><name></name></author><category term="blog" /><category term="ai" /><category term="agent" /><category term="agentic ai" /><category term="claude" /><category term="copilot" /><category term="featured" /><summary type="html"><![CDATA[Everyone talks about AI agents, but very few people mean the same thing when they do.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/robot-piano.webp" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/robot-piano.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+<p><em>Victor Blancada is a data scientist focused on deriving actionable insights for clients. Visit his LinkedIn page <a href="https://www.linkedin.com/in/geloblancada/">here</a>.</em></p>]]></content><author><name></name></author><category term="blog" /><category term="data science" /><category term="machine learning" /><category term="interpretability" /><category term="cognitive science" /><summary type="html"><![CDATA[Anthropic’s new Jacobian lens reveals that frontier language models maintain a centralized global workspace—a compact cognitive space where silent reasoning occurs before it is spoken.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://victorangeloblancada.github.io/assets/images/lens.jpg" /><media:content medium="image" url="https://victorangeloblancada.github.io/assets/images/lens.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
